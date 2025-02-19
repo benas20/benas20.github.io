@@ -110,19 +110,19 @@ body p {
   padding: 25px;
   border-radius: 15px;
   gap: 30px;
-  width: fit-content; /* Ajustar el ancho al contenido */
+  width: fit-content; 
   max-width: 700px;
-  font-size: 20px; /* Aumenta el tamaño del texto */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  font-size: 20px; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Sección 1 y 3 alineadas a la izquierda */
+
 .content:nth-child(odd) {
   align-self: flex-start;
   margin-left: 0px;
 }
 
-/* Sección 2 alineada a la derecha */
+
 .content:nth-child(even) {
   align-self: flex-end;
   margin-right: 0px;
@@ -133,15 +133,15 @@ body p {
   max-height: 400px;
   border-radius: 15px;
   object-fit: cover;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra a la imagen */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
 }
 
 .text {
   background-color: #3c434d;
-  color: #1e2126; /* Color oscuro para el texto */
+  color: #1e2126; 
   width: 55%;
   text-align: left;
-  font-size: 18px; /* Aumenta el tamaño de la fuente */
+  font-size: 18px; 
   filter: blur(0.6);
 }
 
@@ -152,9 +152,9 @@ body p {
 .secondtext {
   background-color: #3c434d;
   text-align: center;
-  color: #d5d3c7; /* Asegurar color claro */
-  filter: blur(0,5); /* Eliminar el desenfoque si no lo quieres */
-  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* Sombra blanca suave */
+  color: #d5d3c7; 
+  filter: blur(0,5); 
+  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
 }
 
 
@@ -171,14 +171,14 @@ body p {
 /* Footer things*/
 
 .footer {
-  background: linear-gradient(to top, #1e2126, #d5d3c7); /* Gradiente oscuro a claro */
-  color: #e8dfce; /* Color de texto claro */
+  background: linear-gradient(to top, #1e2126, #d5d3c7);
+  color: #e8dfce; 
   padding: 50px 0;
   text-align: center;
 }
 
 .footer-container {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -188,27 +188,27 @@ body p {
 }
 
 .footer-content {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
   flex: 1;
   font-size: 14px;
 }
 
 .footer-content p {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
   font-size: 16px;
   margin: 0;
   font-weight: 300;
 }
 
 .footer-links {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
 
 .footer-links ul {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -217,18 +217,18 @@ body p {
 }
 
 .footer-links li {
-  background: transparent; /* Eliminar fondo */
+  background: transparent; 
 }
 
 .footer-links li a {
-  background: transparent; /* Eliminar fondo */
-  color: #e8dfce; /* Enlace claro */
+  background: transparent; 
+  color: #e8dfce; 
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease-in-out;
 }
 
 .footer-links li a:hover {
-  color: #1e2126; /* Color oscuro al pasar el ratón */
+  color: #1e2126; 
   text-decoration: underline;
 }
