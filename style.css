@@ -44,10 +44,21 @@ section h2 {
 }
 
 section p {
+    text-align: center;
     font-size: 1.1 rem;
     margin-bottom: 20 px;
 }
 
+section ul {
+    align: center;
+}
+
+section img {
+    width: 100 px;
+}
+
+
+    
 /* Estilo para enlaces */
 a {
     color: #3498db;
@@ -60,12 +71,5 @@ a:hover {
 }
 
 /* Responsividad */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
 
-    section h2 {
-        font-size: 1.6rem;
-    }
 }
