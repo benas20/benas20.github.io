@@ -1,28 +1,36 @@
 * {
   background-color: #1e2126;
   color: #e8dfce;
-  margin: 0 px;
-  padding: 0 px;
+  margin: 0px;
+  padding: 0px;
 }
 
 body h1 {
   font-family: black, Arial;
   text-align: center;
-  font-size: 75 px;
-  filter: blur (2 px);
-  margin-top: 25 px;
+  font-size: 200px;
+  filter: blur(5px);
+  margin-top: 300px;
 }
 
 body p {
   text-align: center;
-  filter: blur (0.8 px);
-  margin-top: 25 px;
+  filter: blur(0.7px);
+  margin-top: 50px;
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  color:  #e8dfce;
+}
+.copirait {
+  color: #1e2126;
+  margin-top: 500px;
 }
 
 .menu-container {
   position: absolute;
-  top: 20 px;
-  right: 20 px;
+  top: 20px;
+  right: 20px;
    z-index: 10;
 }
 
@@ -31,8 +39,13 @@ body p {
 }
 
 .menu-icon {
-  font-size: 30 px;
+  font-size: 30px;
   cursor: pointer;
+  filter: blur(2px);
+}
+
+.menu-icon:hover {
+  filter: blur(0.75px);
 }
 
 .menu-list {
@@ -43,18 +56,19 @@ body p {
   background-color: #333;
   position: absolute;
   right: 0;
-  top: 40 px;
+  top: 40px;
 }
 
 .menu-list li {
-  border-bottom: 1 px solid #fff;
+  border-bottom: 1px solid #fff;
 }
 
 .menu-list li a {
   color: white;
   text-decoration: none;
-  padding: 10 px;
+  padding: 10px;
   display: block;
+  filter: blur(0.75px);
 }
 
 .menu-list li a:hover {
@@ -64,3 +78,158 @@ body p {
 .menu-toggle:checked + .menu-icon + .menu-list {
   display: block;
 }
+.section1 {
+  background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
+  height: 940px;
+}
+
+.section2 {
+  background-color: #d5d3c7;  
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.content-wrapper {
+  background-color: #d5d3c7;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 80%;
+  max-width: 1200px;
+  
+}
+
+.content {
+  background-color: #3c434d;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  border-radius: 15px;
+  gap: 30px;
+  width: fit-content; /* Ajustar el ancho al contenido */
+  max-width: 700px;
+  font-size: 20px; /* Aumenta el tamaño del texto */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Sección 1 y 3 alineadas a la izquierda */
+.content:nth-child(odd) {
+  align-self: flex-start;
+  margin-left: 0px;
+}
+
+/* Sección 2 alineada a la derecha */
+.content:nth-child(even) {
+  align-self: flex-end;
+  margin-right: 0px;
+}
+.content img {
+  width: auto;
+  height: 500px;
+  max-height: 400px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra a la imagen */
+}
+
+.text {
+  background-color: #3c434d;
+  color: #1e2126; /* Color oscuro para el texto */
+  width: 55%;
+  text-align: left;
+  font-size: 18px; /* Aumenta el tamaño de la fuente */
+  filter: blur(0.6);
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.secondtext {
+  background-color: #3c434d;
+  text-align: center;
+  color: #d5d3c7; /* Asegurar color claro */
+  filter: blur(0,5); /* Eliminar el desenfoque si no lo quieres */
+  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* Sombra blanca suave */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer things*/
+
+.footer {
+  background: linear-gradient(to top, #1e2126, #d5d3c7); /* Gradiente oscuro a claro */
+  color: #e8dfce; /* Color de texto claro */
+  padding: 50px 0;
+  text-align: center;
+}
+
+.footer-container {
+  background: transparent; /* Eliminar fondo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  background: transparent; /* Eliminar fondo */
+  flex: 1;
+  font-size: 14px;
+}
+
+.footer-content p {
+  background: transparent; /* Eliminar fondo */
+  font-size: 16px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.footer-links {
+  background: transparent; /* Eliminar fondo */
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-links ul {
+  background: transparent; /* Eliminar fondo */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.footer-links li {
+  background: transparent; /* Eliminar fondo */
+}
+
+.footer-links li a {
+  background: transparent; /* Eliminar fondo */
+  color: #e8dfce; /* Enlace claro */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-links li a:hover {
+  color: #1e2126; /* Color oscuro al pasar el ratón */
+  text-decoration: underline;
+}
+
