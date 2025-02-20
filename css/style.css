@@ -178,7 +178,7 @@ body p {
   font-family: black, Arial;
   text-align: center;
   color: #d5d3c7;
-  background: transparent;
+  background-color: transparent;
   filter: blur(0.2);
 }
 
