@@ -7,8 +7,8 @@ document.addEventListener("scroll", function () {
     opacity = Math.max(opacity, 0);
 
     let header = document.querySelector("h1");
-    let paragraph = document.querySelector("h1 + p"); // Selecciona el primer <p> después del <h1>
+    let paragraph = document.querySelector("h1 + p");
 
-    header.style.opacity = opacity;
-    paragraph.style.opacity = opacity;
+    if (header) header.style.opacity = opacity;
+    if (paragraph) paragraph.style.opacity = opacity;
 });
