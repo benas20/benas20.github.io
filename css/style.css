@@ -5,6 +5,13 @@
   padding: 0px;
 }
 
+a img {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+
 body h1 {
   font-family: black, Arial;
   text-align: center;
