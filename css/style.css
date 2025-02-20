@@ -161,7 +161,7 @@ body p {
 
 
 
-.policytittle {
+.policytittle h1 {
   margin-top: -100px;
   margin-bottom: 250px;
 }
@@ -264,7 +264,6 @@ body p {
 
 
 
-/* Móviles */
 @media screen and (max-width: 767px) {
   body h1 {
     font-size: 80px; 
