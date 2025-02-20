@@ -235,23 +235,25 @@ body p {
   padding: 20px;
   border-radius: 15px;
   gap: 30px;
-  width: fit-content; /* Ajustar el ancho al contenido */
+  width: fit-content; 
   max-width: 300px;
-  font-size: 20px; /* Aumenta el tamaño del texto */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  font-size: 20px; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
 
-/* Sección 1 y 3 alineadas a la izquierda */
+
+
+
 .designcontent:nth-child(odd) {
   align-self: flex-start;
   margin-left: 0px;
 }
 
-/* Sección 2 alineada a la derecha */
+
 .designcontent:nth-child(even) {
   align-self: flex-end;
   margin-right: 0px;
@@ -262,15 +264,15 @@ body p {
   max-height: 400px;
   border-radius: 15px;
   object-fit: cover;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra a la imagen */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .designtext {
   background-color: #3c434d;
-  color: #1e2126; /* Color oscuro para el texto */
+  color: #1e2126;
   width: 80%;
   padding-left: 35px;
-  font-size: 18px; /* Aumenta el tamaño de la fuente */
+  font-size: 18px; 
   filter: blur(0.6);
   z-index: 10;
   
@@ -294,18 +296,18 @@ body p {
 
 .designsecondtext {
   background-color: #3c434d;
-  color: #d5d3c7; /* Asegurar color claro */
-  filter: blur(0,5); /* Eliminar el desenfoque si no lo quieres */
-  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* Sombra blanca suave */
+  color: #d5d3c7;
+  filter: blur(0,5); 
+  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
 }
 
 .slide-container {
   position: absolute;
   top: 0;
-  left: -100%; /* Comienza fuera de la pantalla */
+  left: -100%; 
   opacity: 0;
   transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  width: 975px; /* Ancho del contenedor deslizante */
+  width: 975px; 
   height: 600px;
   background-color: #3a3b3f;
   padding: 5px;
@@ -314,7 +316,7 @@ body p {
 }
 
 .designcontent:hover .slide-container {
-  left: 100%; /* Se desliza a la derecha */
+  left: 100%; 
   opacity: 1;
 }
 
@@ -330,7 +332,6 @@ body p {
   margin-top: 10px;
   color: #e8dfce;
 }
-
 
 
 
