@@ -181,30 +181,6 @@ body p {
     line-height: 1.6;
 }
 
-.privacypage footer {
-  filter: blur(0.7px);
-    text-align: center;
-    padding: 15px;
-    background: linear-gradient(to top, #1e2126, #d5d3c7);
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 50px;
-}
-
-.privacypage footer a {
-  filter: blur(0.7px);
-  font-family: black, Arial;
-    color: #d5d3c7;
-    text-decoration: none;
-}
-
-.privacypage footer a:hover {
-    text-decoration: underline;
-}
-
-
 
 
 
