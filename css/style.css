@@ -166,6 +166,41 @@ body p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.privacy-page h1, h2 {
+  font-family: black, Arial;
+    color: #d5d3c7;
+}
+
+.privacy-page p {
+  font-family: black, Arial;
+    color: #d5d3c7;
+    line-height: 1.6;
+}
+
+/* Footer */
+.privacy-page footer {
+  filter: blur(0.7px);
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(to top, #1e2126, #d5d3c7);
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.privacy-page footer a {
+  filter: blur(0.7px);
+  font-family: black, Arial;
+    color: #d5d3c7;
+    text-decoration: none;
+}
+
+.privacy-page footer a:hover {
+    text-decoration: underline;
+}
+
 
 
 
