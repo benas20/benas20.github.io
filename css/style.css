@@ -157,6 +157,14 @@ body p {
   ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
 }
 
+.policycontainer {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
 
 
 
@@ -165,10 +173,6 @@ body p {
 
 
 
-
-
-
-/* Footer things*/
 
 .footer {
   background: linear-gradient(to top, #1e2126, #d5d3c7);
@@ -235,13 +239,11 @@ body p {
 
 
 
-
-
 /* Móviles */
 @media screen and (max-width: 767px) {
   body h1 {
-    font-size: 80px; /* Reducir tamaño de fuente en móviles */
-    margin-top: 100px; /* Ajustar margen superior */
+    font-size: 80px; 
+    margin-top: 100px;
   }
 
   .section1, .section2 {
@@ -257,12 +259,12 @@ body p {
 
   .content {
     padding: 15px;
-    width: 90%; /* Ajustar el ancho en pantallas pequeñas */
+    width: 90%; 
     font-size: 16px;
   }
 
   .content img {
-    max-height: 250px; /* Reducir altura de las imágenes */
+    max-height: 250px; 
   }
 
   .footer-container {
@@ -288,8 +290,8 @@ body p {
 
 @media screen and (max-width: 767px) {
   body h1 {
-    font-size: 80px; /* Reducir tamaño de fuente en móviles */
-    margin-top: 100px; /* Ajustar margen superior */
+    font-size: 80px; 
+    margin-top: 100px; 
   }
 
   .section1, .section2 {
@@ -305,12 +307,12 @@ body p {
 
   .content {
     padding: 15px;
-    width: 90%; /* Ajustar el ancho en pantallas pequeñas */
+    width: 90%; 
     font-size: 16px;
   }
 
   .content img {
-    max-height: 250px; /* Reducir altura de las imágenes */
+    max-height: 250px; 
   }
 
   .footer-container {
