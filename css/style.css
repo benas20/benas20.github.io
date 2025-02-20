@@ -161,26 +161,37 @@ body p {
 
 
 
+.policytittle {
+  margin-top: -100px;
+  margin-bottom: 250px;
+}
+
 .policycontainer {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: #3c434d;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .privacypage h1, h2 {
   font-family: black, Arial;
-    color: #d5d3c7;
+  text-align: center;
+  color: #d5d3c7;
+  background: transparent;
+  filter: blur(0.2);
 }
 
 .privacypage p {
+  text-align: center;
   font-family: black, Arial;
-    color: #d5d3c7;
-    line-height: 1.6;
+  background: transparent;
+  color: #d5d3c7;
+  line-height: 1.6;
+  filter: blur(0.2);
+  padding-bottom: 25px;
 }
-
 
 
 
