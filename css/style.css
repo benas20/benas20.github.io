@@ -5,15 +5,6 @@
   padding: 0px;
 }
 
-img {
-  border: none;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  background-color: transparent;
-}
-
-
 body h1 {
   font-family: black, Arial;
   text-align: center;
@@ -31,6 +22,7 @@ body p {
   background-color: transparent;
   color:  #e8dfce;
 }
+
 .copirait {
   color: #1e2126;
   margin-top: 500px;
@@ -87,6 +79,7 @@ body p {
 .menu-toggle:checked + .menu-icon + .menu-list {
   display: block;
 }
+
 .section1 {
   background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
   height: 940px;
@@ -109,7 +102,6 @@ body p {
   gap: 50px;
   width: 80%;
   max-width: 1200px;
-  
 }
 
 .content {
@@ -125,17 +117,16 @@ body p {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-
 .content:nth-child(odd) {
   align-self: flex-start;
   margin-left: 0px;
 }
 
-
 .content:nth-child(even) {
   align-self: flex-end;
   margin-right: 0px;
 }
+
 .content img {
   width: auto;
   height: 500px;
@@ -166,9 +157,7 @@ body p {
   ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
 }
 
-
-
-
+/*Policy Privacy*/
 
 .policytittle {
   margin-top: 100px;
@@ -202,11 +191,7 @@ body p {
   padding-bottom: 25px;
 }
 
-
-
-
-
-
+/*Graphic Design*/
 
 .sectiondesign {
   background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
@@ -234,7 +219,6 @@ body p {
   gap: 50px;
   width: 80%;
   max-width: 1200px;
-  
 }
 
 .designcontent {
@@ -253,20 +237,16 @@ body p {
   cursor: pointer;
 }
 
-
-
-
-
 .designcontent:nth-child(odd) {
   align-self: flex-start;
   margin-left: 0px;
 }
 
-
 .designcontent:nth-child(even) {
   align-self: flex-end;
   margin-right: 0px;
 }
+
 .designcontent img {
   width: auto;
   height: 500px;
@@ -284,8 +264,8 @@ body p {
   font-size: 18px; 
   filter: blur(0.6);
   z-index: 10;
-  
 }
+
 .designtext h2 {
   text-align: center;
   margin-top: 15px;
@@ -296,8 +276,6 @@ body p {
   margin-left: 15px;
   padding_bottom: 30px;
 }
-
-
 
 .reverse {
   flex-direction: row-reverse;
@@ -350,7 +328,7 @@ body p {
 
 
 
-
+/*Footer*/
 
 .footer {
   background: linear-gradient(to top, #1e2126, #d5d3c7);
