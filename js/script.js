@@ -1,11 +1,14 @@
 document.addEventListener("scroll", function () {
-  let scrollTop = window.scrollY; // Get the scroll position
-  let fadeStart = 50; // Start fading after 50px of scrolling
-  let fadeEnd = 300; // Fully disappear at 300px
+    let scrollTop = window.scrollY;
+    let fadeStart = 5;
+    let fadeEnd = 200;
 
-  let opacity = 1 - Math.min((scrollTop - fadeStart) / (fadeEnd - fadeStart), 1);
-  opacity = Math.max(opacity, 0); // Ensure it never goes below 0
+    let opacity = 1 - Math.min((scrollTop - fadeStart) / (fadeEnd - fadeStart), 1);
+    opacity = Math.max(opacity, 0);
 
-  let header = document.querySelector("h1");
-  header.style.opacity = opacity;
+    let header = document.querySelector("h1");
+    let paragraph = document.querySelector("h1 + p"); // Selecciona el primer <p> después del <h1>
+
+    header.style.opacity = opacity;
+    paragraph.style.opacity = opacity;
 });
