@@ -5,35 +5,7 @@
   padding: 0px;
 }
 
-body h1 {
-  font-family: black, Arial;
-  text-align: center;
-  font-size: 200px;
-  filter: blur(5px);
-  margin-top: 300px;
-}
-
-p {
-  text-align: center;
-  font-size: 15px;
-  background: none; 
-  background-color: transparent;
-  color:  #e8dfce;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.copirait {
-  color: #1e2126;
-  margin-top: 400px;
-  filter: blur(0,7px);
-}
-
-.copirait2 {
-  color: #e8dfce;
-  margin-top: 50px;
-  filter: blur(0,7px);
-}
+/* Menu Interactivo */
 
 .menu-container {
   position: absolute;
@@ -87,10 +59,33 @@ p {
   display: block;
 }
 
+/* Section 1 */
+
 .section1 {
   background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
   height: 940px;
+  font-family: black, Arial;
+  text-align: center;
 }
+
+.section1 h1 {
+  font-size: 200px;
+  filter: blur(5px);
+  margin-top: 300px;
+  color:  #e8dfce;
+}
+
+.section1 p {
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  color:  #e8dfce;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  filter: blur(0,7px);
+}
+
+/* Section 2 */
 
 .section2 {
   background-color: #d5d3c7;  
@@ -124,15 +119,6 @@ p {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-.content:nth-child(odd) {
-  align-self: flex-start;
-  margin-left: 0px;
-}
-
-.content:nth-child(even) {
-  align-self: flex-end;
-  margin-right: 0px;
-}
 
 .content img {
   width: auto;
@@ -143,38 +129,32 @@ p {
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
 }
 
+.text {
+  background-color: #3c434d;
+  height: 80%;
+  width: 80%;
+  padding: 5px;
+}
+
 .secondtext {
   background-color: #3c434d;
   text-align: center;
   color: #e8dfce; 
-  filter: blur(0,7); 
-  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
-  
+  filter: blur(0,7);
 }
 
-/*Policy Privacy*/
-
-.policytittle {
-  margin-top: 100px;
-  margin-bottom: 200px;
+.secondtext h2 {
+  margin-bottom: 10px;
 }
 
-.policycontainer {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #3c434d;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
 
-.privacypage h1, h2 {
-  font-family: black, Arial;
-  text-align: center;
-  color: #d5d3c7;
-  background-color: transparent;
-  filter: blur(0.2);
-}
+
+
+
+
+
+
+
 
 
 /*Graphic Design*/
@@ -303,6 +283,33 @@ p {
 
 
 
+
+
+
+
+/*Policy Privacy*/
+
+.policytittle {
+  margin-top: 100px;
+  margin-bottom: 200px;
+}
+
+.policycontainer {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #3c434d;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.privacypage h1, h2 {
+  font-family: black, Arial;
+  text-align: center;
+  color: #d5d3c7;
+  background-color: transparent;
+  filter: blur(0.2);
+}
 
 
 
