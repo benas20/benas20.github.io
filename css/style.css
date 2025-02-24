@@ -211,6 +211,7 @@ body p {
   max-width: 1200px;
 
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 20px; 
 }
@@ -223,11 +224,12 @@ body p {
   border-radius: 15px;
   gap: 30px;
   width: 100%; 
-  max-width: 500px; 
+  max-width: 300px; 
   font-size: 20px; 
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
 }
 
