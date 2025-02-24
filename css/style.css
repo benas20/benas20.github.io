@@ -189,23 +189,29 @@ body p {
   font-size: 130px;
 }
 
+
+
 .sectiondesign2 {
   background-color: #d5d3c7;  
   width: 100%;
   height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 50px 0;
+  
+  display: flex;
+  flex-direction: row; /* Asegura que las secciones estén en línea horizontal */
+  justify-content: space-between; /* Espacia las secciones */
+  align-items: flex-start; /* Alinea las secciones en la parte superior */
+  flex-wrap: wrap; /* Permite que las secciones se ajusten si no caben en una línea */
 }
 
 .designcontent-wrapper {
   background-color: #d5d3c7;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
   width: 80%;
   max-width: 1200px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre secciones */
 }
 
 .designcontent {
@@ -215,24 +221,28 @@ body p {
   padding: 20px;
   border-radius: 15px;
   gap: 30px;
-  width: fit-content; 
+  width: 45%; /* Hace que la sección 1 y 2 ocupen casi la mitad del ancho */
   max-width: 300px;
   font-size: 20px; 
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
   position: relative;
   display: inline-block;
   cursor: pointer;
+  
 }
 
-.designcontent:nth-child(odd) {
-  align-self: flex-start;
-  margin-left: 0px;
+.designcontent:first-child, 
+.designcontent:nth-child(2) {
+  width: 45%; /* Sección 1 y 2 ocupan casi la mitad */
 }
 
-.designcontent:nth-child(even) {
-  align-self: flex-start;
-  margin-right: 0px;
+.designcontent:nth-child(3) {
+  width: 30%; /* Sección 3 (Intensity Skateshop) ocupa menos espacio */
+  order: -1; /* La mueve a la izquierda */
 }
+
+
+
 
 .designcontent img {
   width: auto;
