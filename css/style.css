@@ -213,7 +213,7 @@ body p {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 50px; 
 }
 
 .designcontent {
@@ -259,9 +259,9 @@ body p {
   margin: 0px;
 } 
 
-.secondtext p {
+.designtext .secondtext p {
   text-align: center;
-  margin-top: 0px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
