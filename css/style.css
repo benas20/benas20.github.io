@@ -287,7 +287,7 @@ body p {
 }
 
 .designcontent:hover .slide-container {
-  left: 1000%; 
+  left: 100%; 
   opacity: 1;
 }
 
