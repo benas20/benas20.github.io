@@ -16,11 +16,12 @@ body h1 {
 p {
   text-align: center;
   filter: blur(0,7px);
-  margin-top: 50px;
   font-size: 15px;
   background: none; 
   background-color: transparent;
   color:  #e8dfce;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .copirait {
