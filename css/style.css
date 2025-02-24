@@ -25,7 +25,13 @@ p {
 
 .copirait {
   color: #1e2126;
-  margin-top: 500px;
+  margin-top: 400px;
+  filter: blur(0,7px);
+}
+
+.copirait2 {
+  color: #e8dfce;
+  margin-top: 50px;
   filter: blur(0,7px);
 }
 
