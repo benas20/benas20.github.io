@@ -144,11 +144,12 @@ p {
 }
 
 .secondtext {
-  background-color: #3c434d;
+  background-color: none;
   text-align: center;
   color: #d5d3c7; 
   filter: blur(0,5); 
   ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
+  
 }
 
 /*Policy Privacy*/
