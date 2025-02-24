@@ -1,7 +1,7 @@
 document.addEventListener("scroll", function () {
     let scrollTop = window.scrollY;
     let fadeStart = 5;
-    let fadeEnd = 200;
+    let fadeEnd = 300;
 
     let opacity = 1 - Math.min((scrollTop - fadeStart) / (fadeEnd - fadeStart), 1);
     opacity = Math.max(opacity, 0);
