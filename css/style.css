@@ -15,7 +15,7 @@ body h1 {
 
 body h3 {
   text-align: center;
-  filter: blur(0.7px);
+  filter: blur(1px);
   margin-top: 50px;
   font-size: 15px;
   background: none; 
@@ -259,10 +259,14 @@ body h3 {
   margin: 0px;
 } 
 
-.designtext .secondtext p {
+.secondtext p {
   text-align: center;
   margin-top: 5px;
   margin-bottom: 10px;
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  color:  #e8dfce;
 }
 
 
