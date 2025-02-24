@@ -101,7 +101,8 @@
 .section2 {
   background-color: #d5d3c7;  
   width: 100%;
-  max-width: 1024px;
+  max-width: 100%;
+  overflow: hidden;
   height: auto;
   display: flex;
   justify-content: center;
