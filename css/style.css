@@ -136,6 +136,10 @@
   padding: 5px;
 }
 
+.text h2 {
+  margin-bottom: 15px;
+}
+
 .secondtext {
   background-color: #3c434d;
   text-align: center;
@@ -143,9 +147,7 @@
   filter: blur(0,7);
 }
 
-.secondtext h2 {
-  margin-bottom: 10px;
-}
+
 
 
 
