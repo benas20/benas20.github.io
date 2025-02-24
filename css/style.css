@@ -299,6 +299,13 @@ body p {
   display: inline;
 }
 
+.slide-container video {
+  width: auto;
+  height: 250px;
+  max-height: 251px;
+  object-fit: cover;
+}
+
 .slide-text {
   font-size: 14px;
   margin-top: 10px;
