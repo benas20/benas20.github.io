@@ -3,16 +3,16 @@ document.addEventListener("scroll", function () {
     let fadeStart = 50;  // El primer párrafo comienza a desvanecerse más temprano
     let fadeEnd = 200;   // El primer párrafo termina su desvanecimiento antes
 
-    // Segundo párrafo empieza más tarde
-    let fadeStart2 = 100;  // Comienza a desvanecerse después del primer párrafo
-    let fadeEnd2 = 400;    // Termina el desvanecimiento más tarde
+    // Segundo párrafo empieza a aparecer más tarde
+    let fadeStart2 = 100;  // Comienza a aparecer después del primer párrafo
+    let fadeEnd2 = 400;    // Termina de aparecer más tarde
 
     // Calculamos la opacidad del primer párrafo
     let opacity = 1 - Math.min((scrollTop - fadeStart) / (fadeEnd - fadeStart), 1);
     opacity = Math.max(opacity, 0);
 
-    // Calculamos la opacidad del segundo párrafo
-    let opacity2 = 1 - Math.min((scrollTop - fadeStart2) / (fadeEnd2 - fadeStart2), 1);
+    // Calculamos la opacidad del segundo párrafo (aparece gradualmente)
+    let opacity2 = Math.min((scrollTop - fadeStart2) / (fadeEnd2 - fadeStart2), 1);
     opacity2 = Math.max(opacity2, 0);
 
     // Selección de los elementos
