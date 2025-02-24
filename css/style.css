@@ -248,7 +248,7 @@ body p {
   background-color: #3c434d;
   color: #1e2126;
   width: 80%;
-  padding: 10px;
+  padding: 0px;
   font-size: 18px; 
   filter: blur(0.6);
   z-index: 10;
@@ -256,12 +256,12 @@ body p {
 
 .designtext h2 {
   text-align: center;
-  margin: 5px;
+  margin: 0px;
 } 
 
 .secondtext p {
   text-align: center;
-  margin: 10px;
+  margin: 0px;
 }
 
 
