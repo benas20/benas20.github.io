@@ -63,6 +63,7 @@
 
 .section1 {
   background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
+  min-height: 900px;
   height: auto;
   width: 100%;
   font-family: black, Arial;
