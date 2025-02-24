@@ -277,9 +277,6 @@ body p {
   padding_bottom: 30px;
 }
 
-.reverse {
-  flex-direction: row-reverse;
-}
 
 .designsecondtext {
   background-color: #3c434d;
