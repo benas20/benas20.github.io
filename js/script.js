@@ -7,8 +7,11 @@ document.addEventListener("scroll", function () {
     opacity = Math.max(opacity, 0);
 
     let header = document.querySelector("h1");
-    let paragraph = document.querySelector("h1 + p");
+    let paragraph1 = document.querySelector("h1 + p"); // Primer párrafo
+    let paragraph2 = document.querySelector("h1 + p + p"); // Segundo párrafo
 
     if (header) header.style.opacity = opacity;
-    if (paragraph) paragraph.style.opacity = opacity;
+    if (paragraph1) paragraph1.style.opacity = opacity;
+    
+    if (paragraph2) paragraph2.style.opacity = 1 - opacity; // Inverso del primero
 });
