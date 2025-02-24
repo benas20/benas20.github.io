@@ -105,7 +105,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px 100px 0px;
+  padding: 20px;
+  margin: 100px 0px;
 }
 
 .content-wrapper {
