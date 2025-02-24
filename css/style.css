@@ -146,8 +146,8 @@ p {
 .secondtext {
   background-color: #3c434d;
   text-align: center;
-  color: #1e2126; 
-  filter: blur(0,5); 
+  color: #e8dfce; 
+  filter: blur(0,7); 
   ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
   
 }
