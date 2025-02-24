@@ -85,7 +85,7 @@
   filter: blur(0,7px);
 }
 
-.section1 .phrasedown p {
+.phrasedown {
   font-size: 15px;
   background: none; 
   background-color: transparent;
