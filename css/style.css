@@ -136,19 +136,6 @@ body p {
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
 }
 
-.text {
-  background-color: #3c434d;
-  color: #1e2126; 
-  width: 55%;
-  text-align: left;
-  font-size: 18px; 
-  filter: blur(0.6);
-}
-
-.reverse {
-  flex-direction: row-reverse;
-}
-
 .secondtext {
   background-color: #3c434d;
   text-align: center;
