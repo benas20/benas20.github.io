@@ -197,11 +197,12 @@ body p {
   height: auto;
   padding: 50px 0;
   
-  display: flex;
-  flex-direction: row; /* Asegura que las secciones estén en línea horizontal */
   justify-content: space-between; /* Espacia las secciones */
-  align-items: flex-start; /* Alinea las secciones en la parte superior */
   flex-wrap: wrap; /* Permite que las secciones se ajusten si no caben en una línea */
+  display: flex;
+  flex-direction: column; /* Asegura que las secciones estén en columna */
+  align-items: center; /* Centra el contenido si es necesario */
+  gap: 20px; /* Espacio entre cada sección */
 }
 
 .designcontent-wrapper {
@@ -221,14 +222,13 @@ body p {
   padding: 20px;
   border-radius: 15px;
   gap: 30px;
-  width: 45%; /* Hace que la sección 1 y 2 ocupen casi la mitad del ancho */
-  max-width: 300px;
+  width: 100%; /* Cada sección ocupa todo el ancho disponible */
+  max-width: 800px; /* Opcional, limita el tamaño para que no sea demasiado ancho */
   font-size: 20px; 
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
   position: relative;
   display: inline-block;
   cursor: pointer;
-  
 }
 
 .designcontent:first-child, 
