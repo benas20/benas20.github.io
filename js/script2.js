@@ -1,21 +1,20 @@
 document.addEventListener("scroll", function () {
-    // Obtén la altura de la ventana y la posición de desplazamiento
-    let scrollTop = window.scrollY;
-    let windowHeight = window.innerHeight;
+  let scrollTop = window.scrollY;
+  let windowHeight = window.innerHeight;
+  let sections = document.querySelectorAll(".content");
 
-    // Selección de todas las secciones
-    let sections = document.querySelectorAll(".content");
+  sections.forEach(function (section, index) {
+    // Si es la última sección, no aplicamos el desvanecimiento
+    if (index === sections.length - 1) {
+      return; // Salir de la función para no aplicar opacidad
+    }
 
-    // Para cada sección, calculamos la opacidad en función de su posición
-    sections.forEach(function (section) {
-        let sectionTop = section.getBoundingClientRect().top + scrollTop; // Posición superior de la sección
-        let sectionHeight = section.offsetHeight;
+    let sectionTop = section.getBoundingClientRect().top + scrollTop;
+    let sectionHeight = section.offsetHeight;
 
-        // Calculamos la opacidad en función de la posición
-        let opacity = 1 - (scrollTop - sectionTop + windowHeight) / (sectionHeight + windowHeight);
-        opacity = Math.max(opacity, 0); // Aseguramos que la opacidad no sea menor que 0
+    let opacity = 1 - (scrollTop - sectionTop + windowHeight) / (sectionHeight + windowHeight);
+    opacity = Math.max(opacity, 0);
 
-        // Aplicamos la opacidad a la sección
-        section.style.opacity = opacity;
-    });
+    section.style.opacity = opacity;
+  });
 });
