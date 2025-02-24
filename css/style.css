@@ -23,6 +23,16 @@ body h3 {
   color:  #e8dfce;
 }
 
+body p {
+  text-align: center;
+  filter: blur(1px);
+  margin-top: 50px;
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  color:  #e8dfce;
+}
+
 .copirait {
   color: #1e2126;
   margin-top: 500px;
