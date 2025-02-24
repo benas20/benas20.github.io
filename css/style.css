@@ -85,6 +85,16 @@
   filter: blur(0,7px);
 }
 
+.section1 .phrasedown p {
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  color:  #e8dfce;
+  margin-top: 250px;
+  margin-bottom: 10px;
+  filter: blur(0,7px);
+}
+
 /* Section 2 */
 
 .section2 {
@@ -138,7 +148,7 @@
 }
 
 .text h2 {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .secondtext {
