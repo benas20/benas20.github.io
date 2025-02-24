@@ -230,7 +230,7 @@ body p {
 }
 
 .designcontent:nth-child(even) {
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 0px;
 }
 
