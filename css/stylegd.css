@@ -200,7 +200,7 @@ body p {
   top: 0;
   left: 100%;
   width: 100%;
-  height: 100%; /* El contenedor llenará todo el espacio del padre */
+  height: 600px; /* El contenedor llenará todo el espacio del padre */
   background-color: #3c434d; /* Fondo de todo el contenido */
   opacity: 0;
   visibility: hidden;
@@ -225,7 +225,7 @@ body p {
 /* Estilo de las imágenes */
 .slide-container img {
   width: 100%; /* La imagen ocupa el 100% del espacio de la celda */
-  height: 100%; /* La imagen ocupa todo el espacio disponible en altura */
+  height: 200px; /* La imagen ocupa todo el espacio disponible en altura */
   object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
   border-radius: 15px;
   max-width: 100%; /* La imagen no se estirará más de su tamaño original */
@@ -241,6 +241,7 @@ body p {
   background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
   border-radius: 10px;
   max-width: 100%; /* El texto ocupará todo el espacio disponible */
+  max-height: 50px;
   display: flex;
   justify-content: center; /* Centra el texto horizontalmente */
   align-items: center; /* Centra el texto verticalmente */
