@@ -17,7 +17,8 @@ document.addEventListener("scroll", function () {
     if (scrollTop > sectionTop) {
       opacity = (scrollTop - sectionTop + windowHeight) / (sectionHeight + windowHeight);
     } else {
-      opacity = 1 - (sectionTop - scrollTop) / (sectionHeight + windowHeight);
+      // Aumentar la opacidad más rápido cuando se hace scroll hacia arriba
+      opacity = 1 - (sectionTop - scrollTop) / (sectionHeight + windowHeight / 2); // Reduce el denominador
     }
 
     opacity = Math.max(opacity, 0); // Asegura que la opacidad no sea negativa
@@ -25,6 +26,7 @@ document.addEventListener("scroll", function () {
     section.style.opacity = opacity;
   });
 });
+
 
 
 /*document.addEventListener("scroll", function () {
