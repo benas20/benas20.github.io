@@ -18,7 +18,7 @@ document.addEventListener("scroll", function () {
       opacity = (scrollTop - sectionTop + windowHeight) / (sectionHeight + windowHeight);
     } else {
       // Aumentar la opacidad más rápido cuando se hace scroll hacia arriba
-      opacity = 1 - (sectionTop - scrollTop) / (sectionHeight + windowHeight / 2); // Reduce el denominador
+      opacity = 1 - (sectionTop - scrollTop) / (sectionHeight + windowHeight / 4); // Reduce el denominador
     }
 
     opacity = Math.max(opacity, 0); // Asegura que la opacidad no sea negativa
