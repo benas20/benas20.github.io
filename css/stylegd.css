@@ -238,15 +238,13 @@ body p {
   text-align: center;
   color: #e8dfce;
   font-size: 18px;
-  padding: 10px;
+  margin: 2px;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
   border-radius: 10px;
   max-width: 100%; /* El texto ocupará todo el espacio disponible */
-  max-height: 50px;
   display: flex;
   justify-content: center; /* Centra el texto horizontalmente */
   align-items: center; /* Centra el texto verticalmente */
-  height: 100%; /* Hace que el texto ocupe todo el espacio disponible */
 }
 
 
