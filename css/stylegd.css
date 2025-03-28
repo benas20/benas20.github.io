@@ -228,7 +228,6 @@ body p {
   width: 100%; /* La imagen ocupa el 100% del espacio de la celda */
   height: 200px; /* La imagen ocupa todo el espacio disponible en altura */
   object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
-  border-radius: 15px;
   max-width: 100%; /* La imagen no se estirará más de su tamaño original */
 }
 
