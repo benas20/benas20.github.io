@@ -191,33 +191,32 @@ body p {
 .secondtext {
   background-color: #3c434d;
   color: #d5d3c7;
-  filter: blur(0.5); 
+  filter: blur(0.5);
   text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
 }
 
 .slide-container {
   position: absolute;
-  top: 100%; /* Cambié para que se coloque debajo del contenido */
+  top: 100%; /* Lo coloca debajo del contenido */
   left: 0;
   width: 100%;
-  height: 500px; /* Ajusté la altura */
+  height: 500px; /* Ajuste de altura */
   background-color: #3a3b3f;
   opacity: 0;
-  visibility: hidden; /* Inicia oculto */
-  transform: translateY(-30px); /* Agrego un pequeño desplazamiento para hacerla visible */
+  visibility: hidden; /* Inicialmente oculto */
+  transform: translateY(-30px); /* Desplazamiento suave inicial */
   padding: 10px;
   border-radius: 30px;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .content:hover .slide-container {
-  left: 100%;
   opacity: 1;
-  transform: translateY(0); /* Se mueve a su posición original */
+  visibility: visible; /* Hacemos visible el contenedor al hacer hover */
+  transform: translateY(0); /* Regresa a la posición original */
 }
 
 .slide-container img {
-  
   width: auto;
   height: 250px;
   margin: 18px 30px;
@@ -225,7 +224,6 @@ body p {
 }
 
 .slide-container .text {
-  grid-column: span 4; /* El texto ocupa toda la fila (4 columnas) */
   text-align: center;
   padding: 10px;
 }
