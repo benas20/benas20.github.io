@@ -245,9 +245,18 @@ body p {
   align-items: center; /* Centra el texto verticalmente */
 }
 
+.slide-trigger-image {
+  position: absolute;
+  top: 50%;  /* Centrado vertical */
+  right: 0; /* Posición a la derecha */
+  transform: translateY(-50%); /* Ajustamos para que quede perfectamente centrada verticalmente */
+  transition: opacity 0.3s ease-in-out; /* Transición suave para desaparición */
+}
 
-
-
+/* Cuando se active la animación del slide (hover o click) */
+.content:hover .slide-trigger-image {
+  opacity: 0; /* Desaparece la imagen */
+}
 
 
 
