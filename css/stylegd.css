@@ -203,7 +203,9 @@ body p {
   transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
   width: auto;
   max-width: 100%;
+  min-height: 590px;
   height: auto;
+  max-height: 590px;
   aspect-ratio: 16 / 9; /* Proporción rectangular */
   background-color: #3a3b3f;
   padding: 5px;
@@ -217,14 +219,14 @@ body p {
 }
 
 .content:hover .slide-container {
-  left: 0%;
+  left: 100%;
   opacity: 1;
 }
 
 .slide-container img {
-  min-height: 100px;
+  min-height: 200px;
   width: 100%; /* Las imágenes ocupan todo el espacio del grid */
-  height: auto; /* Mantener proporción de las imágenes */
+  height: 200; /* Mantener proporción de las imágenes */
   border-radius: 15px;
 }
 
