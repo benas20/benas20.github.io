@@ -247,15 +247,12 @@ body p {
 
 /* Estilo para la nueva imagen fuera del contenedor */
 .slide-trigger-image {
-  position: fixed;
-  top: 37%;  /* Centrado vertical en la pantalla */
-  right: 150px; /* Colocada a la derecha */
-  transform: translateY(-50%); /* Ajusta para centrarse completamente */
+  transform: translateY(-115%); /* Ajusta para centrarse completamente */
   height: 600px;  /* Altura fija de 600px */
   width: auto;  /* Anchura automática para mantener la proporción */
   transition: opacity 0.7s ease-in-out; /* Transición suave para desaparecer */
-  z-index: 10; /* Asegura que esté por encima de otros elementos */
   border-radius: 15px;
+  margin-left: auto;
 }
 
 /* Cuando se active la animación del slide (por ejemplo, hover en content) */
