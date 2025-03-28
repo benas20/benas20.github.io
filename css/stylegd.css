@@ -204,6 +204,7 @@ body p {
   width: auto; /* Hace que el tamaño sea automático */
   max-width: 100%; /* Se ajusta al contenedor */
   height: auto;
+  max-height: 500px;
   aspect-ratio: 16 / 9; /* Proporción intermedia entre cuadrado y rectángulo */
   background-color: #3a3b3f;
   padding: 5px;
