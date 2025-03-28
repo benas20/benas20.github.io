@@ -184,12 +184,12 @@ body p {
   z-index: 10;
 }
 
-text h2 {
+.text h2 {
   text-align: center;
   margin: 0px;
 } 
 
-secondtext {
+.secondtext {
   background-color: #3c434d;
   color: #d5d3c7;
   filter: blur(0.5); 
