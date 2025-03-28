@@ -212,7 +212,7 @@ body p {
 }
 
 .content:hover .slide-container {
-  left: 0%; /* Desliza hacia la derecha cuando se hace hover */
+  left: 200%; /* Desliza hacia la derecha cuando se hace hover */
   opacity: 1;
 }
 
