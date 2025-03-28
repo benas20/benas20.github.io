@@ -200,8 +200,8 @@ body p {
   top: 0;
   left: 100%;
   width: 100%;
-  min-width: 700px;
-  height: 600px; /* El contenedor llenará todo el espacio del padre */
+  min-width: 900px;
+  height: 590px; /* El contenedor llenará todo el espacio del padre */
   background-color: #3c434d; /* Fondo de todo el contenido */
   opacity: 0;
   visibility: hidden;
