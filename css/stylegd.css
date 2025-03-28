@@ -198,7 +198,7 @@ body p {
 .slide-container {
   position: absolute;
   top: 0;
-  left: 0%;
+  left: -100%; /* Comienza fuera de la vista a la izquierda */
   opacity: 0;
   transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
   width: 100%;
@@ -212,7 +212,7 @@ body p {
 }
 
 .content:hover .slide-container {
-  left: 0%; /* Mueve el slide-container al 0% al hacer hover */
+  left: 0%; /* Desliza hacia la derecha cuando se hace hover */
   opacity: 1;
 }
 
@@ -228,6 +228,7 @@ body p {
   margin: 10px;
   color: #e8dfce;
 }
+
 
 
 
