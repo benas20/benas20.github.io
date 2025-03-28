@@ -220,7 +220,7 @@ body p {
 .content:hover .slide-container {
   opacity: 1;
   visibility: visible;
-  transform: translateX(0); /* El contenedor se mueve a su posición original */
+  transform: translateX(30); /* El contenedor se mueve a su posición original */
 }
 
 /* Estilo de las imágenes */
