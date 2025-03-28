@@ -3,7 +3,11 @@
   color: #e8dfce;
   margin: 0px;
   padding: 0px;
-  max-width: 1920px;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Para evitar que haya desplazamiento horizontal */
 }
 
 body h1 {
