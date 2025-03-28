@@ -226,8 +226,8 @@ body p {
 .slide-container img {
   
   width: auto; /* Las imágenes ocupan todo el espacio del grid */
-  height: 150; /* Mantener proporción de las imágenes */
-  min-height: 150px;
+  height: 75px; /* Mantener proporción de las imágenes */
+  min-height: 75px;
   border-radius: 15px;
 }
 
