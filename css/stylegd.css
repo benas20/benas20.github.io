@@ -195,52 +195,51 @@ body p {
   text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
 }
 
-/* Modificación del slide-container para orientarlo horizontalmente y centrado */
 .slide-container {
   position: absolute;
-  top: 0; /* Cambié para que se alinee con la parte superior */
-  left: 100%; /* Comienza fuera de la vista a la derecha */
+  top: 0;
+  left: 100%;
   width: 100%;
-  height: 500px; /* Altura para el slide */
-  background-color: #3a3b3f;
+  height: 500px; /* Ajusta la altura del slide */
+  background-color: #3c434d; /* Fondo de todo el contenido */
   opacity: 0;
-  visibility: hidden; /* Inicialmente oculto */
-  transform: translateX(30px); /* Desplazamiento inicial fuera de la vista */
+  visibility: hidden;
+  transform: translateX(30px); /* Desplazamiento inicial */
   padding: 10px;
   border-radius: 30px;
-  display: grid; 
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  display: grid; /* Usamos grid para el diseño */
   grid-template-columns: repeat(4, 1fr); /* 4 columnas para las imágenes */
   grid-template-rows: auto auto; /* Dos filas */
-  justify-content: center; /* Centrado horizontal */
-  align-items: center; /* Centrado vertical */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  flex-wrap: nowrap;
-  margin-left: 400px;
+  gap: 10px; /* Espacio entre las imágenes */
+  justify-items: center; /* Alinea las imágenes al centro horizontalmente */
+  align-items: center; /* Alinea las imágenes al centro verticalmente */
 }
 
 .content:hover .slide-container {
   opacity: 1;
-  visibility: visible; /* Se hace visible */
-  transform: translateX(0); /* Mueve el contenedor a su posición original */
+  visibility: visible;
+  transform: translateX(0); /* El contenedor se mueve a su posición original */
 }
 
+/* Estilo de las imágenes */
 .slide-container img {
-  width: auto;
-  height: 250px;
-  margin: 18px 30px;
-  display: inline-block;
+  width: 100%; /* La imagen ocupa el 100% del espacio de la celda */
+  height: auto;
+  max-height: 200px; /* Máxima altura de la imagen */
+  object-fit: cover; /* Ajuste de la imagen */
+  border-radius: 15px;
 }
 
-.slide-container .text {
-  text-align: center;
-  padding: 10px;
-  grid-column: span 4; /* El párrafo ocupa toda la fila */
-}
-
+/* Estilo del párrafo entre las filas */
 .slide-text {
-  font-size: 14px;
-  margin: 10px;
+  grid-column: span 4; /* El párrafo ocupa toda la fila */
+  text-align: center;
   color: #e8dfce;
+  font-size: 18px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  border-radius: 10px;
 }
 
 
