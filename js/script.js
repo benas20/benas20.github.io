@@ -1,4 +1,33 @@
 document.addEventListener("scroll", function () {
+  let scrollTop = window.scrollY;
+  let windowHeight = window.innerHeight;
+  let sections = document.querySelectorAll(".content");
+
+  sections.forEach(function (section, index) {
+    // Si es la última sección, no aplicamos el desvanecimiento
+    if (index === sections.length - 1) {
+      return; // Salir de la función para no aplicar opacidad
+    }
+
+    let sectionTop = section.getBoundingClientRect().top + scrollTop;
+    let sectionHeight = section.offsetHeight;
+
+    // Calcular la opacidad dependiendo de la dirección del scroll
+    let opacity;
+    if (scrollTop > sectionTop) {
+      opacity = (scrollTop - sectionTop + windowHeight) / (sectionHeight + windowHeight);
+    } else {
+      opacity = 1 - (sectionTop - scrollTop) / (sectionHeight + windowHeight);
+    }
+
+    opacity = Math.max(opacity, 0); // Asegura que la opacidad no sea negativa
+
+    section.style.opacity = opacity;
+  });
+});
+
+
+/*document.addEventListener("scroll", function () {
     let scrollTop = window.scrollY;
     let fadeStart = 50;  // El primer párrafo comienza a desvanecerse más temprano
     let fadeEnd = 200;   // El primer párrafo termina su desvanecimiento antes
@@ -25,3 +54,4 @@ document.addEventListener("scroll", function () {
     if (paragraph1) paragraph1.style.opacity = opacity;
     if (paragraph2) paragraph2.style.opacity = opacity2;
 });
+*/
