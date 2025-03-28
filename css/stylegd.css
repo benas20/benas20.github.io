@@ -213,6 +213,7 @@ body p {
   align-items: center; /* Centrado vertical */
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
   flex-wrap: nowrap;
+  margin-left: 400px;
 }
 
 .content:hover .slide-container {
