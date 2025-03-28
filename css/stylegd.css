@@ -116,46 +116,6 @@ body p {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
-/* Sección 1 y 3 alineadas a la izquierda */
-.content:nth-child(odd) {
-  align-self: flex-start;
-  margin-left: 0px;
-}
-
-/* Sección 2 alineada a la derecha */
-.content:nth-child(even) {
-  align-self: flex-end;
-  margin-right: 0px;
-}
-.content img {
-  width: auto;
-  height: 500px;
-  max-height: 400px;
-  border-radius: 15px;
-  object-fit: cover;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra a la imagen */
-}
-
-.text {
-  background-color: #3c434d;
-  color: #1e2126; /* Color oscuro para el texto */
-  width: 55%;
-  text-align: left;
-  font-size: 18px; /* Aumenta el tamaño de la fuente */
-  filter: blur(0.6);
-}
-
-.reverse {
-  flex-direction: row-reverse;
-}
-
-.secondtext {
-  background-color: #3c434d;
-  text-align: center;
-  color: #d5d3c7; /* Asegurar color claro */
-  filter: blur(0,5); /* Eliminar el desenfoque si no lo quieres */
-  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* Sombra blanca suave */
-}
 
 
 
