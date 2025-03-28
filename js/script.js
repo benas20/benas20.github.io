@@ -4,7 +4,7 @@ document.addEventListener("scroll", function () {
   let sections = document.querySelectorAll(".content");
 
   // Solo comenzar a aplicar el desvanecimiento después de 900px de desplazamiento
-  if (scrollTop < 900) {
+  if (scrollTop < 1300) {
     return; // No hacer nada si el desplazamiento es menor que 900px
   }
 
