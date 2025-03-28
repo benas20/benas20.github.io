@@ -97,7 +97,7 @@ body p {
 }
 
 .section1 h1 {
-  font-size: 200px;
+  font-size: 175px;
   filter: blur(5px);
   margin-top: 200px;
   color:  #e8dfce;
@@ -111,7 +111,7 @@ body p {
 }
 
 .section1 p:nth-of-type(1) {
-  margin-top: 250px;
+  margin-top: 175px;
   color: #1e2126;
 }
 
