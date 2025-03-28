@@ -208,7 +208,7 @@ body p {
   transform: translateX(30px); /* Desplazamiento inicial */
   padding: 10px;
   border-radius: 30px;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out, visibility 0.7s ease-in-out;
   display: grid; /* Usamos grid para el diseño */
   grid-template-columns: repeat(4, 1fr); /* 4 columnas para las imágenes */
   grid-template-rows: auto auto; /* Dos filas */
