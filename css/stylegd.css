@@ -82,7 +82,7 @@ body p {
 /* Section 1 */
 
 .section1 {
-  background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
+  background: linear-gradient(to bottom, #1e2126 25%, #5a5850 50%, #d5d3c7 75%);
   min-height: 1200px;
   height: auto;
   width: 100%;
