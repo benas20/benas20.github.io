@@ -73,21 +73,39 @@
             }
         }
 
-        // Movimiento constante del botón para evitar al ratón
+        // Seleccionamos el botón
         const button = document.querySelector('.see-more-btn');
-        
-        function moveButton() {
-            const maxX = 500; // Distancia máxima de movimiento en X
-            const maxY = 500; // Distancia máxima de movimiento en Y
-            const randomX = Math.random() * maxX - maxX / 2; // Movimiento aleatorio en X
-            const randomY = Math.random() * maxY - maxY / 2; // Movimiento aleatorio en Y
-            
-            // Aplicamos el nuevo movimiento al botón
-            button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+        // Función para mover el botón lejos del ratón
+        function moveButtonAway(event) {
+            const maxX = 200; // Distancia máxima de movimiento en X
+            const maxY = 200; // Distancia máxima de movimiento en Y
+
+            // Calculamos la distancia entre el ratón y el botón
+            const buttonRect = button.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+
+            // Calculamos el vector de dirección para mover el botón lejos del ratón
+            const deltaX = mouseX - buttonCenterX;
+            const deltaY = mouseY - buttonCenterY;
+
+            // Calculamos el ángulo de desplazamiento
+            const angle = Math.atan2(deltaY, deltaX);
+
+            // Calculamos el movimiento en base al ángulo
+            const distance = 150; // Distancia que el botón se aleja
+            const randomOffsetX = Math.cos(angle) * distance;
+            const randomOffsetY = Math.sin(angle) * distance;
+
+            // Aplicamos el movimiento calculado al botón
+            button.style.transform = `translate(${randomOffsetX}px, ${randomOffsetY}px)`;
         }
 
-        // Crear un intervalo para mover el botón cada 1 segundo
-        setInterval(moveButton, 1000); // Mueve el botón cada 1000 ms (1 segundo)
+        // Escuchamos el evento mousemove para mover el botón
+        document.addEventListener('mousemove', moveButtonAway);
     </script>
 </body>
 </html>
