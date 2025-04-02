@@ -183,6 +183,7 @@ html, body {
   justify-content: center; 
   align-items: center; 
   text-align: center; 
+  animation: balance 3s ease-in-out infinite; /* Balanceo para el texto */
 }
 
 .text:hover {
