@@ -34,6 +34,10 @@
             color: #e8dfce;
         }
 
+        input.incorrect {
+            border: 1px solid red;
+        }
+
         button {
             padding: 10px;
             font-size: 16px;
@@ -68,6 +72,9 @@
             display: none;
             color: #fff;
             text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -92,9 +99,11 @@
         function checkPassword() {
             var password = document.getElementById('password').value;
             var correctPassword = "ReallyNasty69"; // Cambia esto por la contraseña que quieras
+            var inputField = document.getElementById('password');
             if (password === correctPassword) {
                 window.location.href = "paginaprincipal.html"; // Redirige a la página principal
             } else {
+                inputField.classList.add('incorrect');
                 alert("Contraseña incorrecta");
             }
         }
@@ -109,16 +118,12 @@
                 imagesOnScreen = []; // Vaciar la lista de imágenes
                 
                 // Mostrar el mensaje después del delay
-                if (!isMessageDisplayed) {
-                    setTimeout(() => {
-                        const message = document.querySelector('.message');
-                        message.style.display = 'block';
-                        message.style.left = '50%';
-                        message.style.top = '50%';
-                        message.style.transform = 'translate(-50%, -50%)';
-                        isMessageDisplayed = true;
-                    }, 3000); // 3 segundos de retraso antes de mostrar el mensaje
-                }
+                setTimeout(() => {
+                    const message = document.querySelector('.message');
+                    message.style.display = 'block';
+                    messageShown = true;
+                }, 3000); // 3 segundos de retraso antes de mostrar el mensaje
+
                 return; // Detiene la función
             }
 
@@ -147,8 +152,8 @@
             // Genera posiciones aleatorias dentro de la ventana
             const maxX = window.innerWidth - 150;
             const maxY = window.innerHeight - 75;
-            image.style.left = ${Math.random() * maxX}px;
-            image.style.top = ${Math.random() * maxY}px;
+            image.style.left = `${Math.random() * maxX}px`;
+            image.style.top = `${Math.random() * maxY}px`;
 
             document.body.appendChild(image);
             imagesOnScreen.push(image);
