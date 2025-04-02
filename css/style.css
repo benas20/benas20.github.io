@@ -203,15 +203,8 @@ html, body {
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 2s ease-in-out 1s 100; /* Repetir 3 veces */
-  animation-delay: 10s;
 } 
 
-
-@keyframes light {
-  0% { background-position: -200%; }
-  100% { background-position: 200%; }
-}
 
 .see-more-btn {
   display: inline-block;
