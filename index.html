@@ -86,6 +86,7 @@
         let imagesOnScreen = []; // Lista de imágenes activas
         let imagesGenerated = 0; // Contador de imágenes generadas
         let imageGenerationInterval; // Variable para el intervalo de imágenes
+        let messageShown = false; // Variable para controlar si el mensaje ya fue mostrado
 
         // Función para verificar la contraseña
         function checkPassword() {
@@ -100,7 +101,9 @@
 
         // Función para generar imágenes aleatorias
         function createRandomImage() {
-            if (imagesOnScreen.length >= 50) {
+            if (messageShown) return; // No generar imágenes después de mostrar el mensaje
+
+            if (imagesOnScreen.length >= 15) {
                 // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
                 imagesOnScreen.forEach(img => img.remove());
                 imagesOnScreen = []; // Vaciar la lista de imágenes
@@ -111,7 +114,10 @@
                 message.style.left = '50%';
                 message.style.top = '50%';
                 message.style.transform = 'translate(-50%, -50%)';
-                return; // Detiene la función
+                messageShown = true; // Marcar que el mensaje ha sido mostrado
+
+                clearInterval(imageGenerationInterval); // Detener el intervalo para generar imágenes
+                return; // Detener la función
             }
 
             const imageSources = [
@@ -149,8 +155,8 @@
 
         // Comienza a generar imágenes cuando se escribe algo en el input
         function startImageGeneration() {
-            if (imagesGenerated === 0) {
-                // Si no se han generado imágenes todavía, empieza a generar imágenes cada 1 segundos
+            if (imagesGenerated === 0 && !messageShown) {
+                // Si no se han generado imágenes todavía y el mensaje no se mostró, comienza a generar imágenes
                 imageGenerationInterval = setInterval(createRandomImage, 1000);
             }
         }
