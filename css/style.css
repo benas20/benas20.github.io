@@ -201,7 +201,7 @@ html, body {
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: light 5s linear infinite, shine 1s ease-in-out 0s infinite; /* Duración de 5s para la repetición y 1s para el brillo */
+  animation: light 50s linear infinite, shine 3s ease-in-out 3s infinite; /* Duración de 5s para la repetición y 1s para el brillo */
 }
 
 @keyframes light {
