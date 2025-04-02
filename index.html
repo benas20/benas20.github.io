@@ -104,20 +104,22 @@
             if (messageShown) return; // No generar imágenes después de mostrar el mensaje
 
             if (imagesOnScreen.length >= 50) {
-                // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
+                // Si hay 50 imágenes, eliminar todas y mostrar el mensaje
                 imagesOnScreen.forEach(img => img.remove());
                 imagesOnScreen = []; // Vaciar la lista de imágenes
-
-                // Mostrar el mensaje en el centro
-                const message = document.querySelector('.message');
-                message.style.display = 'block';
-                message.style.left = '50%';
-                message.style.top = '50%';
-                message.style.transform = 'translate(-50%, -50%)';
-                messageShown = true; // Marcar que el mensaje ha sido mostrado
-
-                clearInterval(imageGenerationInterval); // Detener el intervalo para generar imágenes
-                return; // Detener la función
+                
+                // Mostrar el mensaje después del delay
+                if (!isMessageDisplayed) {
+                    setTimeout(() => {
+                        const message = document.querySelector('.message');
+                        message.style.display = 'block';
+                        message.style.left = '50%';
+                        message.style.top = '50%';
+                        message.style.transform = 'translate(-50%, -50%)';
+                        isMessageDisplayed = true;
+                    }, 3000); // 3 segundos de retraso antes de mostrar el mensaje
+                }
+                return; // Detiene la función
             }
 
             const imageSources = [
@@ -143,8 +145,8 @@
             image.classList.add("random-image");
 
             // Genera posiciones aleatorias dentro de la ventana
-            const maxX = window.innerWidth - 100;
-            const maxY = window.innerHeight - 100;
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 75;
             image.style.left = ${Math.random() * maxX}px;
             image.style.top = ${Math.random() * maxY}px;
 
@@ -157,7 +159,7 @@
         function startImageGeneration() {
             if (imagesGenerated === 0 && !messageShown) {
                 // Si no se han generado imágenes todavía y el mensaje no se mostró, comienza a generar imágenes
-                imageGenerationInterval = setInterval(createRandomImage, 2090);
+                imageGenerationInterval = setInterval(createRandomImage, 3000);
             }
         }
     </script>
