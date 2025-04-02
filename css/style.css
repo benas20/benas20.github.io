@@ -114,19 +114,8 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 50px 0px 200px 50px;
-  animation: moveBackground 10s linear infinite;
 }
 
-@keyframes moveBackground {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-}
 
 .content-wrapper {
   background-color: #d5d3c7;
@@ -229,12 +218,12 @@ html, body {
   background-color: #e8dfce;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  animation: pulse 2s infinite;
+  animation: pulse 3s infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
 
