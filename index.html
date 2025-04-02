@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso</title>
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="data:,"> <!-- Evita el error del favicon -->
     <style>
         body {
             display: flex;
@@ -20,33 +20,10 @@
         .container {
             text-align: center;
         }
-        input {
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
+        input, button {
             padding: 10px;
             font-size: 16px;
             margin-top: 10px;
-            background-color: #e8dfce;
-            border: none;
-            cursor: pointer;
-        }
-        h2 {
-            margin-bottom: 200px;
-        }
-        .see-more-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #3c434d;
-            background-color: #e8dfce;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            position: absolute;
-            transition: all 0.3s ease;
         }
         .random-image {
             position: absolute;
@@ -70,48 +47,53 @@
     <div class="container" id="login-container">
         <h2>Introduce la puta contraseña joder</h2>
         <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
+        <button onclick="checkPassword()">Go Crazy!</button>
     </div>
-    <div class="message">Era broma bro</div>
+
+    <div class="message" id="final-message">Era broma bro</div>
+
     <script>
+        const imageSources = [
+            "img/shitpost1.jpeg", "img/shitpost2.jpeg", "img/shitpost3.jpeg", 
+            "img/shitpost4.jpg", "img/shitpost5.jpeg", "img/shitpost6.jpg", 
+            "img/shitpost7.jpg", "img/shitpost8.jpeg", "img/shitpost9.jpeg", 
+            "img/shitpost10.jpeg", "img/shitpost11.jpeg", "img/shitpost12.jpeg", 
+            "img/shitpost13.jpeg", "img/shitpost14.jpeg", "img/shitpost15.jpeg"
+        ];
+
+        let imagesOnScreen = [];
+        let intervalId = null;
+        const message = document.getElementById("final-message");
+        const loginContainer = document.getElementById("login-container");
+
         function checkPassword() {
-            var password = document.getElementById('password').value;
-            var correctPassword = "ReallyNasty69";
-            if (password === correctPassword) {
-                document.getElementById('login-container').style.display = 'none';
-                startVisualLayer();
+            const password = document.getElementById('password').value;
+            if (password === "ReallyNasty69") {
+                loginContainer.style.display = "none"; // Oculta el login
+                intervalId = setInterval(createRandomImage, 2000); // Inicia animación
             } else {
                 alert("Contraseña incorrecta");
             }
         }
-        function startVisualLayer() {
-            setInterval(createRandomImage, 2000);
-        }
-        const imageSources = [
-            "img/shitpost1.jpeg", "img/shitpost2.jpeg", "img/shitpost3.jpeg", "img/shitpost4.jpg",
-            "img/shitpost5.jpeg", "img/shitpost6.jpg", "img/shitpost7.jpg", "img/shitpost8.jpeg",
-            "img/shitpost9.jpeg", "img/shitpost10.jpeg", "img/shitpost11.jpeg", "img/shitpost12.jpeg",
-            "img/shitpost13.jpeg", "img/shitpost14.jpeg", "img/shitpost15.jpeg"
-        ];
-        let imagesOnScreen = [];
-        const message = document.querySelector(".message");
+
         function createRandomImage() {
             if (imagesOnScreen.length >= 15) {
                 imagesOnScreen.forEach(img => img.remove());
                 imagesOnScreen = [];
+                clearInterval(intervalId); // Detiene la animación
                 message.style.display = "block";
                 message.style.left = "50%";
                 message.style.top = "50%";
                 message.style.transform = "translate(-50%, -50%)";
                 return;
             }
+            
             const image = document.createElement("img");
             image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
             image.classList.add("random-image");
-            const maxX = window.innerWidth - 100;
-            const maxY = window.innerHeight - 100;
-            image.style.left = `${Math.random() * maxX}px`;
-            image.style.top = `${Math.random() * maxY}px`;
+            image.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+            image.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            
             document.body.appendChild(image);
             imagesOnScreen.push(image);
         }
