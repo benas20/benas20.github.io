@@ -136,8 +136,21 @@ html, body {
   max-width: 700px;
   font-size: 20px; 
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
-  transition: opacity 3s ease-out;
+  transition: opacity 3s ease-out, box-shadow 0.5s ease-in-out;
   transition-delay: 0.2s;
+  transform-style: preserve-3d;
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .content img {
@@ -147,6 +160,17 @@ html, body {
   border-radius: 15px;
   object-fit: cover;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
+  animation: slideImage 5s infinite alternate ease-in-out;
+}
+
+@keyframes slideImage {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(15px); }
+}
+
+.content:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.4);
 }
 
 .text {
@@ -154,16 +178,28 @@ html, body {
   height: 80%;
   width: 80%;
   padding: 5px;
-  filter: blur(0,7px);
+  filter: blur(5px);
   display: flex;
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
   text-align: center; 
-}   
+  transition: filter 0.5s ease-in-out;
+}
+
+.text:hover {
+  filter: blur(0);
+}
 
 .text h2 {
   margin-bottom: 50px;
+  animation: glitch 0.2s infinite alternate;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 2px red, -2px -2px blue; }
+  50% { text-shadow: -2px -2px red, 2px 2px blue; }
+  100% { text-shadow: 2px -2px red, -2px 2px blue; }
 }
 
 .secondtext {
@@ -171,34 +207,42 @@ html, body {
   text-align: center;
   color: #e8dfce; 
   filter: blur(0.7);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #e8dfce 50%, rgba(255,255,255,0) 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: light 3s linear infinite;
 }
 
-
-
+@keyframes light {
+  0% { background-position: -200%; }
+  100% { background-position: 200%; }
+}
 
 .see-more-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 50px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #3c434d;
-    background-color: #e8dfce;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    animation: pulse 2s infinite;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #3c434d;
+  background-color: #e8dfce;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .see-more-btn:hover {
-    background-color: #d5d3c7;
+  background-color: #d5d3c7;
 }
+
 
 
 
