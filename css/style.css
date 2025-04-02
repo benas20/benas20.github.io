@@ -84,6 +84,13 @@ html, body {
   color:  #e8dfce;
 }
 
+.tittletext h1 {
+  font-size: 200px;
+  filter: blur(5px);
+  margin-top: 200px;
+  color:  #e8dfce;
+}
+
 .section1 p {
   font-size: 15px;
   background: none; 
