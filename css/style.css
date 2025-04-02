@@ -202,8 +202,6 @@ html, body {
   color: #e8dfce; 
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #e8dfce 50%, rgba(255,255,255,0) 100%);
   background-size: 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 } 
 
 
