@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Introduce la contraseña</h2>
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            var correctPassword = "1234"; // Cambia esto por la contraseña que quieras
+            if (password === correctPassword) {
+                window.location.href = "home.html"; // Redirige a la página principal
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        }
+    </script>
+</body>
+</html>
