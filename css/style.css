@@ -1,45 +1,130 @@
-/* Efecto de cielo estrellado */
-@keyframes starsAnimation {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
+* {
+  background-color: #1e2126;
+  color: #e8dfce;
+  margin: 0px;
+  padding: 0px;
 }
 
-/* Efecto de neón parpadeante para el fondo */
-@keyframes neonGlow {
-  0% {
-    background-color: #ff0080;
-  }
-  50% {
-    background-color: #ff69b4;
-  }
-  100% {
-    background-color: #ff0080;
-  }
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Para evitar que haya desplazamiento horizontal */
 }
 
-/* Fondo parallax (desplazamiento fijo) */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
+/* Menu Interactivo */
+
+.menu-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+   z-index: 10;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
+  filter: blur(2px);
+}
+
+.menu-icon:hover {
+  filter: blur(0.75px);
+}
+
+.menu-list {
+  display: none;
+  list-style-type: none;
   padding: 0;
-  overflow-x: hidden;
-  background: url('stars.jpg') repeat; /* Usando la imagen de estrellas */
-  background-attachment: fixed;
-  background-size: cover;
-  animation: starsAnimation 30s linear infinite; /* Movimiento de las estrellas */
-  animation-delay: 0s; /* Sin retraso */
+  margin: 0;
+  background-color: #333;
+  position: absolute;
+  right: 0;
+  top: 40px;
 }
 
-/* Efecto de neón solo para el fondo */
-body {
-  animation: neonGlow 5s ease-in-out infinite; /* Efecto de neón en el fondo */
+.menu-list li {
+  border-bottom: 1px solid #fff;
 }
 
-/* Animación para el contenido */
+.menu-list li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  filter: blur(0.75px);
+}
+
+.menu-list li a:hover {
+  background-color: #555;
+}
+
+.menu-toggle:checked + .menu-icon + .menu-list {
+  display: block;
+}
+
+/* Section 1 */
+
+.section1 {
+  background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
+  min-height: 900px;
+  height: auto;
+  width: 100%;
+  font-family: black, Arial;
+  text-align: center;
+}
+
+.section1 h1 {
+  font-size: 200px;
+  filter: blur(5px);
+  margin-top: 200px;
+  color:  #e8dfce;
+}
+
+.section1 p {
+  font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  filter: blur(0.7px);
+}
+
+.section1 p:nth-of-type(1) {
+  margin-top: 250px;
+  color: #1e2126;
+}
+
+.section1 p:nth-of-type(2) {
+  margin-top: 300px;
+  color: #1e2126;
+  margin-bottom: 100px;
+}
+
+
+/* Section 2 */
+
+.section2 {
+  background-color: #d5d3c7;  
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px 200px 50px;
+}
+
+.content-wrapper {
+  background-color: #d5d3c7;
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+  width: 80%;
+  max-width: 1200px;
+  margin-left: 350px;
+}
+
 .content {
   background-color: #3c434d;
   display: flex;
@@ -47,64 +132,84 @@ body {
   padding: 25px;
   border-radius: 15px;
   gap: 30px;
-  width: fit-content;
+  width: fit-content; 
   max-width: 700px;
-  font-size: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-  transition: opacity 3s ease-out;
+  font-size: 20px; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+  transition: opacity 3s ease-out, box-shadow 0.5s ease-in-out;
   transition-delay: 0.2s;
-  position: relative;  /* Añadido para aplicar efectos de parallax */
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  transform-style: preserve-3d;
+  animation: fadeIn 1.5s ease-out forwards;
 }
 
-/* Efecto de parpadeo para la imagen */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .content img {
   width: auto;
   height: 500px;
   max-height: 400px;
   border-radius: 15px;
   object-fit: cover;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-  animation: shine 2s ease-in-out 1s infinite; /* Efecto de brillo para la imagen */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
+  animation: slideImage 5s infinite alternate ease-in-out;
 }
 
-/* Efecto de brillo */
-@keyframes shine {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+@keyframes slideImage {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(15px); }
 }
 
-/* Animación para el texto */
+.content:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.4);
+}
+
 .text {
   background-color: #3c434d;
   height: 80%;
   width: 80%;
   padding: 5px;
-  filter: blur(0.7px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  /* No tiene efecto de neón */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  animation: slideImage 5s infinite alternate ease-in-out; /* Balanceo para el texto */
+}
+
+.text:hover {
+  filter: none;  /* Eliminamos el blur al hacer hover */
 }
 
 .text h2 {
   margin-bottom: 50px;
 }
 
-/* Segundo texto (sin neón) */
 .secondtext {
   background-color: #3c434d;
   text-align: center;
-  color: #e8dfce;
-  filter: blur(0.7);
-  /* No tiene efecto de neón */
+  color: #e8dfce; 
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #e8dfce 50%, rgba(255,255,255,0) 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s ease-in-out 1s 100; /* Repetir 3 veces */
+  animation-delay: 10s;
+} 
+
+
+@keyframes light {
+  0% { background-position: -200%; }
+  100% { background-position: 200%; }
 }
 
 .see-more-btn {
@@ -122,27 +227,378 @@ body {
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .see-more-btn:hover {
   background-color: #d5d3c7;
 }
 
-/* Fondo con parpadeo de neón */
-body {
-  animation: neonGlow 5s ease-in-out infinite;
+
+
+
+
+
+
+
+
+
+
+
+/*Graphic Design*/
+
+.sectiondesign {
+  background: linear-gradient(to bottom, #1e2126 35%, #d5d3c7 65%);
+  height: 940px;
 }
 
-/* Fondo parpadeante para el menu */
-.menu-container {
-  animation: neonGlow 5s ease-in-out infinite;
+.sectiondesign h1 {
+  font-size: 160px;
 }
+
+
+
+.sectiondesign2 {
+  background-color: #d5d3c7;  
+  width: 100%;
+  height: auto;
+  padding: 100px 0;
+  
+  justify-content: space-between; 
+  flex-wrap: wrap; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 20px;
+}
+
+.designcontent-wrapper {
+  background-color: #d5d3c7;
+  width: 80%;
+  max-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 50px; 
+}
+
+.designcontent {
+  background-color: #3c434d;
+  text-align: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  gap: 30px;
+  width: 100%; 
+  max-width: 300px; 
+  font-size: 20px; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  filter: blur(0.7);
+}
+
+
+
+.designcontent img {
+  width: auto;
+  height: 500px;
+  max-height: 400px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.designtext {
+  background-color: #3c434d;
+  color: #1e2126;
+  width: 100%;
+  padding: 0px;
+  font-size: 18px; 
+  filter: blur(0.7);
+  z-index: 10;
+}
+
+.designtext h2 {
+  text-align: center;
+  margin: 0px;
+} 
+
+
+
+.designsecondtext {
+  background-color: #3c434d;
+  color: #d5d3c7;
+  filter: blur(0.5); 
+  ext-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); 
+}
+
+.slide-container {
+  position: absolute;
+  top: 0;
+  left: 0%; 
+  opacity: 0;
+  transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  width: 975px; 
+  height: 610px;
+  background-color: #3a3b3f;
+  padding: 5px;
+  border-radius: 30px;
+  margin-left: 30px;
+}
+
+.designcontent:hover .slide-container {
+  left: 100%; 
+  opacity: 1;
+}
+
+.slide-container img {
+  width: auto;
+  height: 250px;
+  margin: 18px 30px;
+  display: inline;
+}
+
+.slide-text {
+  font-size: 14px;
+  margin: 10px;
+  color: #e8dfce;
+}
+
+
+
+
+
+
+
+
+/*Policy Privacy*/
+
+.policytittle {
+  margin-top: 100px;
+  margin-bottom: 200px;
+}
+
+.policycontainer {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #3c434d;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.privacypage h1, h2 {
+  font-family: black, Arial;
+  text-align: center;
+  color: #d5d3c7;
+  background-color: transparent;
+  filter: blur(0.2);
+}
+
+
+
+
+
+/*Footer*/
+
+.footer {
+  background: linear-gradient(to top, #1e2126, #d5d3c7);
+  color: #e8dfce; 
+  padding: 50px 0;
+  text-align: center;
+}
+
+.footer-container {
+  background: transparent; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  background: transparent; 
+  flex: 1;
+  font-size: 14px;
+}
+
+.footer-content p {
+  background: transparent; 
+  font-size: 16px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.footer-links {
+  background: transparent; 
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-links ul {
+  background: transparent; 
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.footer-links li {
+  background: transparent; 
+}
+
+.footer-links li a {
+  background: transparent; 
+  color: #e8dfce; 
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-links li a:hover {
+  color: #1e2126; 
+  text-decoration: underline;
+}
+
+
+
+@media screen and (max-width: 767px) {
+  body h1 {
+    font-size: 80px; 
+    margin-top: 100px;
+  }
+
+  .section1, .section2 {
+    height: auto;
+    padding: 20px;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .content {
+    padding: 15px;
+    width: 90%; 
+    font-size: 16px;
+  }
+
+  .content img {
+    max-height: 250px; 
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links li a {
+    font-size: 14px;
+  }
+}
+
+
+
+@media screen and (max-width: 767px) {
+  body h1 {
+    font-size: 80px; 
+    margin-top: 100px; 
+  }
+
+  .section1, .section2 {
+    height: auto;
+    padding: 20px;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .content {
+    padding: 15px;
+    width: 90%; 
+    font-size: 16px;
+  }
+
+  .content img {
+    max-height: 250px; 
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links li a {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  body h1 {
+    font-size: 120px;
+  }
+
+  .content {
+    font-size: 18px;
+  }
+
+  .footer-links li a {
+    font-size: 16px;
+  }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  body h1 {
+    font-size: 120px;
+  }
+
+  .content {
+    font-size: 18px;
+  }
+
+  .footer-links li a {
+    font-size: 16px;
+  }
+}
+
+
+
