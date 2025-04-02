@@ -202,7 +202,8 @@ html, body {
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: light 2s ease-in-out 8s infinite;
+  animation: shine 2s ease-in-out 1s 100; /* Repetir 3 veces */
+  animation-delay: 10s;
 } 
 
 
