@@ -32,13 +32,40 @@
         h2 {
             margin-bottom: 200px;
         }
+        
+        /* Estilos para el botón */
+.see-more-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #3c434d;
+  background-color: #e8dfce;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: none; /* Quitar borde por defecto de los botones */
+  cursor: pointer; /* Cambiar el cursor cuando pasa sobre el botón */
+}
+
+/* Efecto para cuando el ratón se acerca */
+.see-more-btn:hover {
+  transform: translate(15px, -15px); /* El botón se moverá hacia la derecha y arriba */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Agregar una sombra para hacer más visible el movimiento */
+.see-more-btn {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Introduce la puta contraseña joder</h2>
         <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button onclick="checkPassword()">Go Crazy!</button>
+        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
     <script>
