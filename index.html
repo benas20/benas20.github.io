@@ -86,7 +86,7 @@
         <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
-    <!-- Mensaje final que se mostrará después de generar 15 imágenes -->
+    <!-- Mensaje final que se mostrará después de generar 50 imágenes -->
     <div class="message">Era broma bro</div> 
 
     <script>
@@ -110,21 +110,18 @@
 
         // Función para generar imágenes aleatorias
         function createRandomImage() {
-            if (messageShown) return; // No generar imágenes después de mostrar el mensaje
-
             if (imagesOnScreen.length >= 50) {
-                // Si hay 50 imágenes, eliminar todas y mostrar el mensaje
-                imagesOnScreen.forEach(img => img.remove());
-                imagesOnScreen = []; // Vaciar la lista de imágenes
-                
-                // Mostrar el mensaje después del delay
+                // Si hay 50 imágenes, eliminarlas todas después de 5 segundos
                 setTimeout(() => {
+                    imagesOnScreen.forEach(img => img.remove());
+                    imagesOnScreen = []; // Vaciar la lista de imágenes
+                    
+                    // Mostrar el mensaje después de eliminar las imágenes
                     const message = document.querySelector('.message');
                     message.style.display = 'block';
-                    messageShown = true;
-                }, 3000); // 3 segundos de retraso antes de mostrar el mensaje
+                }, 5000); // Espera de 5 segundos antes de eliminar las imágenes
 
-                return; // Detiene la función
+                return; // Detiene la función para no seguir generando imágenes
             }
 
             const imageSources = [
