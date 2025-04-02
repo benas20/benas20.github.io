@@ -41,15 +41,15 @@
             color: #3c434d;
             background-color: #e8dfce;
             border-radius: 5px;
-            position: relative;
+            position: absolute; /* Cambiar a absolute para que pueda moverse por todo el área */
             transition: all 0.3s ease;
             border: none; /* Quitar borde por defecto de los botones */
             cursor: pointer; /* Cambiar el cursor cuando pasa sobre el botón */
         }
 
-        /* Agregar una sombra para hacer más visible el movimiento */
-        .see-more-btn {
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        /* Efecto de desplazamiento cuando se acerca el ratón */
+        .see-more-btn:hover {
+            transform: translate(0px, 0px); /* No se mueve al pasar el ratón */
         }
 
     </style>
@@ -58,11 +58,11 @@
     <div class="container">
         <h2>Introduce la puta contraseña joder</h2>
         <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button class="see-more-btn" id="goCrazyBtn" onclick="checkPassword()">Go Crazy!</button>
+        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
     <script>
-        // Función para comprobar la contraseña
+        // Función que verifica la contraseña
         function checkPassword() {
             var password = document.getElementById('password').value;
             var correctPassword = "ReallyNasty69"; // Cambia esto por la contraseña que quieras
@@ -73,25 +73,21 @@
             }
         }
 
-        // Función para mover el botón aleatoriamente
-        const button = document.getElementById("goCrazyBtn");
-
-        button.addEventListener("mouseenter", function() {
-            const maxX = 200; // Máximo desplazamiento horizontal
-            const maxY = 200; // Máximo desplazamiento vertical
-            const randomX = Math.random() * maxX - maxX / 2; // Movimiento aleatorio en X
-            const randomY = Math.random() * maxY - maxY / 2; // Movimiento aleatorio en Y
-
-            // Aplicar el movimiento aleatorio al botón
-            button.style.transition = "transform 0.3s ease-in-out";
+        // Movimiento constante del botón para evitar al ratón
+        const button = document.querySelector('.see-more-btn');
+        
+        function moveButton() {
+            const maxX = 1000; // Distancia máxima de movimiento en X
+            const maxY = 1000; // Distancia máxima de movimiento en Y
+            const randomX = Math.random() * maxX - maxX / 4; // Movimiento aleatorio en X
+            const randomY = Math.random() * maxY - maxY / 4; // Movimiento aleatorio en Y
+            
+            // Aplicamos el nuevo movimiento al botón
             button.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        });
+        }
 
-        // Resetear la posición cuando el ratón sale del botón
-        button.addEventListener("mouseleave", function() {
-            button.style.transition = "transform 0.3s ease-in-out";
-            button.style.transform = "translate(0, 0)";
-        });
+        // Crear un intervalo para mover el botón cada 1 segundo
+        setInterval(moveButton, 1000); // Mueve el botón cada 1000 ms (1 segundo)
     </script>
 </body>
 </html>
