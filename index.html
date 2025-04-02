@@ -94,6 +94,7 @@
         let imagesGenerated = 0; // Contador de imágenes generadas
         let imageGenerationInterval; // Variable para el intervalo de imágenes
         let messageShown = false; // Variable para controlar si el mensaje ya fue mostrado
+        let stopImageGeneration = false; // Controla si la generación de imágenes debe detenerse
 
         // Función para verificar la contraseña
         function checkPassword() {
@@ -110,8 +111,12 @@
 
         // Función para generar imágenes aleatorias
         function createRandomImage() {
+            if (stopImageGeneration) return; // Detener la generación si ya se alcanzaron 50 imágenes
+
             if (imagesOnScreen.length >= 50) {
-                // Si hay 50 imágenes, eliminarlas todas después de 5 segundos
+                // Si ya se generaron 50 imágenes, eliminar todas y detener la generación
+                stopImageGeneration = true; // Detener la generación de imágenes
+
                 setTimeout(() => {
                     imagesOnScreen.forEach(img => img.remove());
                     imagesOnScreen = []; // Vaciar la lista de imágenes
@@ -119,9 +124,6 @@
                     // Mostrar el mensaje después de eliminar las imágenes
                     const message = document.querySelector('.message');
                     message.style.display = 'block';
-
-                    // Detener la generación de nuevas imágenes
-                    clearInterval(imageGenerationInterval);
 
                 }, 5000); // Espera de 5 segundos antes de eliminar las imágenes
 
@@ -163,9 +165,9 @@
 
         // Comienza a generar imágenes cuando se escribe algo en el input
         function startImageGeneration() {
-            if (imagesGenerated === 0 && !messageShown) {
-                // Si no se han generado imágenes todavía y el mensaje no se mostró, comienza a generar imágenes
-                imageGenerationInterval = setInterval(createRandomImage, 1500);
+            if (imagesGenerated === 0 && !stopImageGeneration) {
+                // Si no se han generado imágenes todavía y no se detuvo la generación, comienza a generar imágenes
+                imageGenerationInterval = setInterval(createRandomImage, 1500); // Intervalo de 1500 ms
             }
         }
     </script>
