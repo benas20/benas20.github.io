@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso</title>
+    <link rel="icon" href="data:,"> <!-- Esto evita el error del favicon -->
     <style>
         body {
             display: flex;
@@ -44,25 +45,25 @@
     <script>
         // Lista de imágenes disponibles
         const imageSources = [
-            'img/shitpost1.jpeg',
-            'img/shitpost2.jpeg',
-            'img/shitpost3.jpeg',
-            'img/shitpost4.jpg',
-            'img/shitpost5.jpeg',
-            'img/shitpost6.jpg',
-            'img/shitpost7.jpg',
-            'img/shitpost8.jpeg',
-            'img/shitpost9.jpeg',
-            'img/shitpost10.jpeg',
-            'img/shitpost11.jpeg',
-            'img/shitpost12.jpeg',
-            'img/shitpost13.jpeg',
-            'img/shitpost14.jpeg',
-            'img/shitpost15.jpeg'
+            "img/shitpost1.jpeg",
+            "img/shitpost2.jpeg",
+            "img/shitpost3.jpeg",
+            "img/shitpost4.jpg",
+            "img/shitpost5.jpeg",
+            "img/shitpost6.jpg",
+            "img/shitpost7.jpg",
+            "img/shitpost8.jpeg",
+            "img/shitpost9.jpeg",
+            "img/shitpost10.jpeg",
+            "img/shitpost11.jpeg",
+            "img/shitpost12.jpeg",
+            "img/shitpost13.jpeg",
+            "img/shitpost14.jpeg",
+            "img/shitpost15.jpeg"
         ];
 
         let imagesOnScreen = []; // Lista de imágenes activas
-        const message = document.querySelector('.message');
+        const message = document.querySelector(".message");
 
         function createRandomImage() {
             if (imagesOnScreen.length >= 15) {
@@ -71,16 +72,16 @@
                 imagesOnScreen = []; // Vaciar la lista de imágenes
 
                 // Mostrar el mensaje en el centro
-                message.style.display = 'block';
-                message.style.left = '50%';
-                message.style.top = '50%';
-                message.style.transform = 'translate(-50%, -50%)';
+                message.style.display = "block";
+                message.style.left = "50%";
+                message.style.top = "50%";
+                message.style.transform = "translate(-50%, -50%)";
                 return; // Detiene la función
             }
 
-            const image = document.createElement('img');
+            const image = document.createElement("img");
             image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
-            image.classList.add('random-image');
+            image.classList.add("random-image");
 
             // Genera posiciones aleatorias dentro de la ventana
             const maxX = window.innerWidth - 100;
@@ -93,7 +94,7 @@
         }
 
         // Llama a la función cada 4 segundos
-        setInterval(createRandomImage, 4000);
+        setInterval(createRandomImage, 2000);
     </script>
 </body>
 </html>
