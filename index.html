@@ -13,99 +13,82 @@
             background-color: #1e2126;
             font-family: Arial, sans-serif;
             color: #e8dfce;
-        }
-        .container {
-            text-align: center;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
-            border-padding: 15px;
-            background-color: #e8dfce;
-        }
-        h2 {
-            margin-bottom: 200px;
+            overflow: hidden;
+            position: relative;
         }
         
-        /* Estilos para el botón */
-        .see-more-btn {
-            padding: 10px 20px;
-            font-size: 16px;
+        .random-image {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .random-image:hover {
+            opacity: 1;
+        }
+
+        /* Estilo para el mensaje final */
+        .message {
+            position: absolute;
+            font-size: 40px;
             font-weight: bold;
-            text-decoration: none;
-            color: #3c434d;
-            background-color: #e8dfce;
-            border-radius: 5px;
-            position: absolute; /* Cambiar a absolute para que pueda moverse por todo el área */
-            transition: all 0.3s ease;
-            border: none; /* Quitar borde por defecto de los botones */
-            cursor: pointer; /* Cambiar el cursor cuando pasa sobre el botón */
+            display: none; /* Oculto por defecto */
         }
-
-        /* Efecto de desplazamiento cuando se acerca el ratón */
-        .see-more-btn:hover {
-            transform: translate(0px, 0px); /* No se mueve al pasar el ratón */
-        }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Introduce la puta contraseña joder</h2>
-        <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
-    </div>
+    <div class="message">Era broma bro</div> <!-- Mensaje oculto -->
 
     <script>
-        // Función que verifica la contraseña
-        function checkPassword() {
-            var password = document.getElementById('password').value;
-            var correctPassword = "ReallyNasty69"; // Cambia esto por la contraseña que quieras
-            if (password === correctPassword) {
-                window.location.href = "paginaprincipal.html"; // Redirige a la página principal
-            } else {
-                alert("Contraseña incorrecta");
+        // Lista de imágenes disponibles
+        const imageSources = [
+            'https://www.example.com/image1.jpg',
+            'https://www.example.com/image2.jpg',
+            'https://www.example.com/image3.jpg',
+            'https://www.example.com/image4.jpg',
+            'https://www.example.com/image5.jpg',
+            'https://www.example.com/image6.jpg',
+            'https://www.example.com/image7.jpg',
+            'https://www.example.com/image8.jpg',
+            'https://www.example.com/image9.jpg',
+            'https://www.example.com/image10.jpg'
+        ];
+
+        let imagesOnScreen = []; // Lista de imágenes activas
+        const message = document.querySelector('.message');
+
+        function createRandomImage() {
+            if (imagesOnScreen.length >= 15) {
+                // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
+                imagesOnScreen.forEach(img => img.remove());
+                imagesOnScreen = []; // Vaciar la lista de imágenes
+
+                // Mostrar el mensaje en el centro
+                message.style.display = 'block';
+                message.style.left = '50%';
+                message.style.top = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                return; // Detiene la función
             }
+
+            const image = document.createElement('img');
+            image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
+            image.classList.add('random-image');
+
+            // Genera posiciones aleatorias dentro de la ventana
+            const maxX = window.innerWidth - 100;
+            const maxY = window.innerHeight - 100;
+            image.style.left = `${Math.random() * maxX}px`;
+            image.style.top = `${Math.random() * maxY}px`;
+
+            document.body.appendChild(image);
+            imagesOnScreen.push(image);
         }
 
-        // Seleccionamos el botón
-        const button = document.querySelector('.see-more-btn');
-
-        // Función para mover el botón lejos del ratón
-        function moveButtonAway(event) {
-            const maxX = 300; // Aumentamos la distancia máxima de movimiento en X
-            const maxY = 300; // Aumentamos la distancia máxima de movimiento en Y
-
-            // Calculamos la distancia entre el ratón y el botón
-            const buttonRect = button.getBoundingClientRect();
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
-
-            // Calculamos el vector de dirección para mover el botón lejos del ratón
-            const deltaX = mouseX - buttonCenterX;
-            const deltaY = mouseY - buttonCenterY;
-
-            // Calculamos el ángulo de desplazamiento
-            const angle = Math.atan2(deltaY, deltaX);
-
-            // Calculamos el movimiento en base al ángulo, para que se aleje
-            const distance = 300; // Aumentamos la distancia que el botón se aleja
-            const randomOffsetX = -Math.cos(angle) * distance; // Invertimos el signo para alejar
-            const randomOffsetY = -Math.sin(angle) * distance; // Invertimos el signo para alejar
-
-            // Aplicamos el movimiento calculado al botón
-            button.style.transform = `translate(${randomOffsetX}px, ${randomOffsetY}px)`;
-        }
-
-        // Escuchamos el evento mousemove para mover el botón
-        document.addEventListener('mousemove', moveButtonAway);
+        // Llama a la función cada 4 segundos
+        setInterval(createRandomImage, 4000);
     </script>
 </body>
 </html>
