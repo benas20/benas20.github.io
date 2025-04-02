@@ -154,13 +154,19 @@ html, body {
   height: 80%;
   width: 80%;
   padding: 5px;
-  filter: blur(0.7);
+  filter: blur(1px);
   display: flex;
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
   text-align: center; 
+  transition: filter 0.5s ease-in-out;
+}   
+
+.content:hover .text {
+    filter: blur(0);
 }
+
 
 .text h2 {
   margin-bottom: 50px;
@@ -171,7 +177,18 @@ html, body {
   text-align: center;
   color: #e8dfce; 
   filter: blur(0.7);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #e8dfce;
+  width: 0;
+  animation: typing 2s steps(40, end) forwards;
 }
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
 
 .see-more-btn {
     display: inline-block;
@@ -184,6 +201,13 @@ html, body {
     background-color: #e8dfce;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .see-more-btn:hover {
