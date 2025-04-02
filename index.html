@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso</title>
-    <link rel="icon" href="data:,"> <!-- Evita el error del favicon -->
+    <link rel="icon" href="data:,"> <!-- Esto evita el error del favicon -->
     <style>
         body {
             display: flex;
@@ -17,14 +17,38 @@
             overflow: hidden;
             position: relative;
         }
+
         .container {
             text-align: center;
+            z-index: 10; /* Asegura que el contenido de la contraseña esté por encima de las imágenes */
+            position: relative;
         }
-        input, button {
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #e8dfce;
+            margin-top: 20px;
+            background-color: #333;
+            color: #e8dfce;
+        }
+
+        button {
             padding: 10px;
             font-size: 16px;
             margin-top: 10px;
+            background-color: #e8dfce;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 10; /* Asegura que el botón esté por encima de las imágenes */
         }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
         .random-image {
             position: absolute;
             width: 100px;
@@ -32,71 +56,46 @@
             opacity: 0.8;
             transition: opacity 1s ease-in-out;
         }
+
         .random-image:hover {
             opacity: 1;
         }
+
         .message {
             position: absolute;
             font-size: 40px;
             font-weight: bold;
             display: none;
+            color: #fff;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="login-container">
+    <!-- Contenedor para la contraseña -->
+    <div class="container">
         <h2>Introduce la puta contraseña joder</h2>
-        <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button onclick="checkPassword()">Go Crazy!</button>
+        <input type="password" id="password" placeholder="La puta contraseña ya!" oninput="startImageGeneration()">
+        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
-    <div class="message" id="final-message">Era broma bro</div>
+    <!-- Mensaje final que se mostrará después de generar 15 imágenes -->
+    <div class="message">Era broma bro</div> 
 
     <script>
-        const imageSources = [
-            "img/shitpost1.jpeg", "img/shitpost2.jpeg", "img/shitpost3.jpeg", 
-            "img/shitpost4.jpg", "img/shitpost5.jpeg", "img/shitpost6.jpg", 
-            "img/shitpost7.jpg", "img/shitpost8.jpeg", "img/shitpost9.jpeg", 
-            "img/shitpost10.jpeg", "img/shitpost11.jpeg", "img/shitpost12.jpeg", 
-            "img/shitpost13.jpeg", "img/shitpost14.jpeg", "img/shitpost15.jpeg"
-        ];
+        let imagesOnScreen = []; // Lista de imágenes activas
+        let imagesGenerated = 0; // Contador de imágenes generadas
+        let imageGenerationInterval; // Variable para el intervalo de imágenes
 
-        let imagesOnScreen = [];
-        let intervalId = null;
-        const message = document.getElementById("final-message");
-        const loginContainer = document.getElementById("login-container");
-
+        // Función para verificar la contraseña
         function checkPassword() {
-            const password = document.getElementById('password').value;
-            if (password === "ReallyNasty69") {
-                loginContainer.style.display = "none"; // Oculta el login
-                intervalId = setInterval(createRandomImage, 2000); // Inicia animación
+            var password = document.getElementById('password').value;
+            var correctPassword = "ReallyNasty69"; // Cambia esto por la contraseña que quieras
+            if (password === correctPassword) {
+                window.location.href = "paginaprincipal.html"; // Redirige a la página principal
             } else {
                 alert("Contraseña incorrecta");
             }
         }
 
-        function createRandomImage() {
-            if (imagesOnScreen.length >= 15) {
-                imagesOnScreen.forEach(img => img.remove());
-                imagesOnScreen = [];
-                clearInterval(intervalId); // Detiene la animación
-                message.style.display = "block";
-                message.style.left = "50%";
-                message.style.top = "50%";
-                message.style.transform = "translate(-50%, -50%)";
-                return;
-            }
-            
-            const image = document.createElement("img");
-            image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
-            image.classList.add("random-image");
-            image.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
-            image.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
-            
-            document.body.appendChild(image);
-            imagesOnScreen.push(image);
-        }
-    </script>
-</body>
-</html>
+        // Función para generar imágenes aleatorias
