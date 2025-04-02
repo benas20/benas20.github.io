@@ -105,7 +105,7 @@ html, body {
 /* Section 2 */
 
 .section2 {
-  background-color: #d5d3c7;  
+  background: #d5d3c7;  
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -114,6 +114,18 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 50px 0px 200px 50px;
+  animation: moveBackground 10s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
 }
 
 .content-wrapper {
