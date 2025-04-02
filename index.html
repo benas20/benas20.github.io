@@ -99,3 +99,61 @@
         }
 
         // Función para generar imágenes aleatorias
+        function createRandomImage() {
+            if (imagesOnScreen.length >= 15) {
+                // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
+                imagesOnScreen.forEach(img => img.remove());
+                imagesOnScreen = []; // Vaciar la lista de imágenes
+
+                // Mostrar el mensaje en el centro
+                const message = document.querySelector('.message');
+                message.style.display = 'block';
+                message.style.left = '50%';
+                message.style.top = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                return; // Detiene la función
+            }
+
+            const imageSources = [
+                "img/shitpost1.jpeg",
+                "img/shitpost2.jpeg",
+                "img/shitpost3.jpeg",
+                "img/shitpost4.jpg",
+                "img/shitpost5.jpeg",
+                "img/shitpost6.jpg",
+                "img/shitpost7.jpg",
+                "img/shitpost8.jpeg",
+                "img/shitpost9.jpeg",
+                "img/shitpost10.jpeg",
+                "img/shitpost11.jpeg",
+                "img/shitpost12.jpeg",
+                "img/shitpost13.jpeg",
+                "img/shitpost14.jpeg",
+                "img/shitpost15.jpeg"
+            ];
+
+            const image = document.createElement("img");
+            image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
+            image.classList.add("random-image");
+
+            // Genera posiciones aleatorias dentro de la ventana
+            const maxX = window.innerWidth - 100;
+            const maxY = window.innerHeight - 100;
+            image.style.left = `${Math.random() * maxX}px`;
+            image.style.top = `${Math.random() * maxY}px`;
+
+            document.body.appendChild(image);
+            imagesOnScreen.push(image);
+            imagesGenerated++;
+        }
+
+        // Comienza a generar imágenes cuando se escribe algo en el input
+        function startImageGeneration() {
+            if (imagesGenerated === 0) {
+                // Si no se han generado imágenes todavía, empieza a generar imágenes cada 2 segundos
+                imageGenerationInterval = setInterval(createRandomImage, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
