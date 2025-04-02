@@ -201,7 +201,7 @@ html, body {
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: light 6s linear infinite; /* Lento y suave */
+  animation: light 20s linear infinite; /* Lento y suave */
 }
 
 @keyframes light {
