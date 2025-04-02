@@ -78,8 +78,8 @@
 
         // Función para mover el botón lejos del ratón
         function moveButtonAway(event) {
-            const maxX = 200; // Distancia máxima de movimiento en X
-            const maxY = 200; // Distancia máxima de movimiento en Y
+            const maxX = 300; // Aumentamos la distancia máxima de movimiento en X
+            const maxY = 300; // Aumentamos la distancia máxima de movimiento en Y
 
             // Calculamos la distancia entre el ratón y el botón
             const buttonRect = button.getBoundingClientRect();
@@ -95,10 +95,10 @@
             // Calculamos el ángulo de desplazamiento
             const angle = Math.atan2(deltaY, deltaX);
 
-            // Calculamos el movimiento en base al ángulo
-            const distance = 150; // Distancia que el botón se aleja
-            const randomOffsetX = Math.cos(angle) * distance;
-            const randomOffsetY = Math.sin(angle) * distance;
+            // Calculamos el movimiento en base al ángulo, para que se aleje
+            const distance = 300; // Aumentamos la distancia que el botón se aleja
+            const randomOffsetX = -Math.cos(angle) * distance; // Invertimos el signo para alejar
+            const randomOffsetY = -Math.sin(angle) * distance; // Invertimos el signo para alejar
 
             // Aplicamos el movimiento calculado al botón
             button.style.transform = `translate(${randomOffsetX}px, ${randomOffsetY}px)`;
