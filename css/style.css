@@ -206,7 +206,7 @@ html, body {
 } 
 
 
-@keyframes shine {
+@keyframes light {
   0% { background-position: -200%; }
   100% { background-position: 200%; }
 }
