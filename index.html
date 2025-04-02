@@ -119,6 +119,10 @@
                     // Mostrar el mensaje después de eliminar las imágenes
                     const message = document.querySelector('.message');
                     message.style.display = 'block';
+
+                    // Detener la generación de nuevas imágenes
+                    clearInterval(imageGenerationInterval);
+
                 }, 5000); // Espera de 5 segundos antes de eliminar las imágenes
 
                 return; // Detiene la función para no seguir generando imágenes
