@@ -202,6 +202,7 @@ html, body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: light 500s linear infinite, shine 3s ease-in-out 1.5s infinite; /* Duración de 5s para la repetición y 1s para el brillo */
+  animation-delay: 8s, 0s;
 }
 
 @keyframes light {
