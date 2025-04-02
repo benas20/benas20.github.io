@@ -201,10 +201,15 @@ html, body {
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: light 6s steps(1) infinite;
+  animation: light 5s linear infinite, shine 1s ease-in-out 0s infinite; /* Duración de 5s para la repetición y 1s para el brillo */
 }
 
 @keyframes light {
+  0% { background-position: -200%; }
+  100% { background-position: 200%; }
+}
+
+@keyframes shine {
   0% { background-position: -200%; }
   100% { background-position: 200%; }
 }
