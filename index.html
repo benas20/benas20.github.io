@@ -79,7 +79,7 @@
         <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
-    <!-- Mensaje final que se mostrará después de generar 50 imágenes -->
+    <!-- Mensaje final que se mostrará después de generar 15 imágenes -->
     <div class="message">Era broma bro</div> 
 
     <script>
@@ -104,20 +104,19 @@
             if (messageShown) return; // No generar imágenes después de mostrar el mensaje
 
             if (imagesOnScreen.length >= 50) {
-                // Si se han generado 50 imágenes, eliminar todas y mostrar el mensaje con retraso
+                // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
                 imagesOnScreen.forEach(img => img.remove());
                 imagesOnScreen = []; // Vaciar la lista de imágenes
-                clearInterval(imageGenerationInterval); // Detener el intervalo de imágenes
 
-                // Mostrar el mensaje con retraso de 3 segundos
-                setTimeout(() => {
-                    const message = document.querySelector('.message');
-                    message.style.display = 'block';
-                    message.style.left = '50%';
-                    message.style.top = '50%';
-                    message.style.transform = 'translate(-50%, -50%)';
-                    messageShown = true; // Marcar que el mensaje ha sido mostrado
-                }, 3000); // Retraso de 3 segundos
+                // Mostrar el mensaje en el centro
+                const message = document.querySelector('.message');
+                message.style.display = 'block';
+                message.style.left = '50%';
+                message.style.top = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                messageShown = true; // Marcar que el mensaje ha sido mostrado
+
+                clearInterval(imageGenerationInterval); // Detener el intervalo para generar imágenes
                 return; // Detener la función
             }
 
@@ -146,8 +145,8 @@
             // Genera posiciones aleatorias dentro de la ventana
             const maxX = window.innerWidth - 100;
             const maxY = window.innerHeight - 100;
-            image.style.left = `${Math.random() * maxX}px`;
-            image.style.top = `${Math.random() * maxY}px`;
+            image.style.left = ${Math.random() * maxX}px;
+            image.style.top = ${Math.random() * maxY}px;
 
             document.body.appendChild(image);
             imagesOnScreen.push(image);
