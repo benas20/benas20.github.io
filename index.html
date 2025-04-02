@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso</title>
-    <link rel="icon" href="data:,"> <!-- Esto evita el error del favicon -->
+    <link rel="icon" href="data:,">
     <style>
         body {
             display: flex;
@@ -17,7 +17,37 @@
             overflow: hidden;
             position: relative;
         }
-        
+        .container {
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            background-color: #e8dfce;
+            border: none;
+            cursor: pointer;
+        }
+        h2 {
+            margin-bottom: 200px;
+        }
+        .see-more-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #3c434d;
+            background-color: #e8dfce;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
         .random-image {
             position: absolute;
             width: 100px;
@@ -25,76 +55,66 @@
             opacity: 0.8;
             transition: opacity 1s ease-in-out;
         }
-
         .random-image:hover {
             opacity: 1;
         }
-
-        /* Estilo para el mensaje final */
         .message {
             position: absolute;
             font-size: 40px;
             font-weight: bold;
-            display: none; /* Oculto por defecto */
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="message">Era broma bro</div> <!-- Mensaje oculto -->
-
+    <div class="container" id="login-container">
+        <h2>Introduce la puta contraseña joder</h2>
+        <input type="password" id="password" placeholder="La puta contraseña ya!">
+        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
+    </div>
+    <div class="message">Era broma bro</div>
     <script>
-        // Lista de imágenes disponibles
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            var correctPassword = "ReallyNasty69";
+            if (password === correctPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                startVisualLayer();
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        }
+        function startVisualLayer() {
+            setInterval(createRandomImage, 2000);
+        }
         const imageSources = [
-            "img/shitpost1.jpeg",
-            "img/shitpost2.jpeg",
-            "img/shitpost3.jpeg",
-            "img/shitpost4.jpg",
-            "img/shitpost5.jpeg",
-            "img/shitpost6.jpg",
-            "img/shitpost7.jpg",
-            "img/shitpost8.jpeg",
-            "img/shitpost9.jpeg",
-            "img/shitpost10.jpeg",
-            "img/shitpost11.jpeg",
-            "img/shitpost12.jpeg",
-            "img/shitpost13.jpeg",
-            "img/shitpost14.jpeg",
-            "img/shitpost15.jpeg"
+            "img/shitpost1.jpeg", "img/shitpost2.jpeg", "img/shitpost3.jpeg", "img/shitpost4.jpg",
+            "img/shitpost5.jpeg", "img/shitpost6.jpg", "img/shitpost7.jpg", "img/shitpost8.jpeg",
+            "img/shitpost9.jpeg", "img/shitpost10.jpeg", "img/shitpost11.jpeg", "img/shitpost12.jpeg",
+            "img/shitpost13.jpeg", "img/shitpost14.jpeg", "img/shitpost15.jpeg"
         ];
-
-        let imagesOnScreen = []; // Lista de imágenes activas
+        let imagesOnScreen = [];
         const message = document.querySelector(".message");
-
         function createRandomImage() {
             if (imagesOnScreen.length >= 15) {
-                // Si hay 15 imágenes, eliminar todas y mostrar el mensaje
                 imagesOnScreen.forEach(img => img.remove());
-                imagesOnScreen = []; // Vaciar la lista de imágenes
-
-                // Mostrar el mensaje en el centro
+                imagesOnScreen = [];
                 message.style.display = "block";
                 message.style.left = "50%";
                 message.style.top = "50%";
                 message.style.transform = "translate(-50%, -50%)";
-                return; // Detiene la función
+                return;
             }
-
             const image = document.createElement("img");
             image.src = imageSources[Math.floor(Math.random() * imageSources.length)];
             image.classList.add("random-image");
-
-            // Genera posiciones aleatorias dentro de la ventana
             const maxX = window.innerWidth - 100;
             const maxY = window.innerHeight - 100;
             image.style.left = `${Math.random() * maxX}px`;
             image.style.top = `${Math.random() * maxY}px`;
-
             document.body.appendChild(image);
             imagesOnScreen.push(image);
         }
-
-        // Llama a la función cada 4 segundos
-        setInterval(createRandomImage, 2000);
     </script>
 </body>
 </html>
