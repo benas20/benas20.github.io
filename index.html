@@ -104,9 +104,10 @@
             if (messageShown) return; // No generar imágenes después de mostrar el mensaje
 
             if (imagesOnScreen.length >= 50) {
-                // Si se han generado 50 imágenes, eliminar todas y mostrar el mensaje
+                // Si se han generado 50 imágenes, eliminar todas y mostrar el mensaje con retraso
                 imagesOnScreen.forEach(img => img.remove());
                 imagesOnScreen = []; // Vaciar la lista de imágenes
+                clearInterval(imageGenerationInterval); // Detener el intervalo de imágenes
 
                 // Mostrar el mensaje con retraso de 3 segundos
                 setTimeout(() => {
@@ -117,8 +118,6 @@
                     message.style.transform = 'translate(-50%, -50%)';
                     messageShown = true; // Marcar que el mensaje ha sido mostrado
                 }, 3000); // Retraso de 3 segundos
-
-                clearInterval(imageGenerationInterval); // Detener el intervalo para generar imágenes
                 return; // Detener la función
             }
 
