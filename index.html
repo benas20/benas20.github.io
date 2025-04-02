@@ -51,9 +51,9 @@
 
         .random-image {
             position: absolute;
-            width: 100px;
+            width: 400px;
             height: auto;
-            opacity: 0.8;
+            opacity: 0.9;
             transition: opacity 1s ease-in-out;
         }
 
@@ -150,8 +150,8 @@
         // Comienza a generar imágenes cuando se escribe algo en el input
         function startImageGeneration() {
             if (imagesGenerated === 0) {
-                // Si no se han generado imágenes todavía, empieza a generar imágenes cada 2 segundos
-                imageGenerationInterval = setInterval(createRandomImage, 2000);
+                // Si no se han generado imágenes todavía, empieza a generar imágenes cada 1 segundos
+                imageGenerationInterval = setInterval(createRandomImage, 1000);
             }
         }
     </script>
