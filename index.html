@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso</title>
     <style>
-      
         body {
             display: flex;
             justify-content: center;
@@ -34,30 +33,24 @@
         }
         
         /* Estilos para el botón */
-.see-more-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #3c434d;
-  background-color: #e8dfce;
-  border-radius: 5px;
-  position: relative;
-  transition: all 0.3s ease;
-  border: none; /* Quitar borde por defecto de los botones */
-  cursor: pointer; /* Cambiar el cursor cuando pasa sobre el botón */
-}
+        .see-more-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #3c434d;
+            background-color: #e8dfce;
+            border-radius: 5px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: none; /* Quitar borde por defecto de los botones */
+            cursor: pointer; /* Cambiar el cursor cuando pasa sobre el botón */
+        }
 
-/* Efecto para cuando el ratón se acerca */
-.see-more-btn:hover {
-  transform: translate(15px, -15px); /* El botón se moverá hacia la derecha y arriba */
-  transition: all 0.2s ease-in-out;
-}
-
-/* Agregar una sombra para hacer más visible el movimiento */
-.see-more-btn {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
+        /* Agregar una sombra para hacer más visible el movimiento */
+        .see-more-btn {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
     </style>
 </head>
@@ -65,10 +58,11 @@
     <div class="container">
         <h2>Introduce la puta contraseña joder</h2>
         <input type="password" id="password" placeholder="La puta contraseña ya!">
-        <button class="see-more-btn" onclick="checkPassword()">Go Crazy!</button>
+        <button class="see-more-btn" id="goCrazyBtn" onclick="checkPassword()">Go Crazy!</button>
     </div>
 
     <script>
+        // Función para comprobar la contraseña
         function checkPassword() {
             var password = document.getElementById('password').value;
             var correctPassword = "ReallyNasty69"; // Cambia esto por la contraseña que quieras
@@ -78,6 +72,26 @@
                 alert("Contraseña incorrecta");
             }
         }
+
+        // Función para mover el botón aleatoriamente
+        const button = document.getElementById("goCrazyBtn");
+
+        button.addEventListener("mouseenter", function() {
+            const maxX = 200; // Máximo desplazamiento horizontal
+            const maxY = 200; // Máximo desplazamiento vertical
+            const randomX = Math.random() * maxX - maxX / 2; // Movimiento aleatorio en X
+            const randomY = Math.random() * maxY - maxY / 2; // Movimiento aleatorio en Y
+
+            // Aplicar el movimiento aleatorio al botón
+            button.style.transition = "transform 0.3s ease-in-out";
+            button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        // Resetear la posición cuando el ratón sale del botón
+        button.addEventListener("mouseleave", function() {
+            button.style.transition = "transform 0.3s ease-in-out";
+            button.style.transform = "translate(0, 0)";
+        });
     </script>
 </body>
 </html>
