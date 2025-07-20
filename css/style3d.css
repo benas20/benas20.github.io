@@ -234,7 +234,7 @@ body p {
   max-width: 100%; /* La imagen no se estirará más de su tamaño original */
 }
 
-.slide-container video {
+.video-size {
   width: auto; /* La imagen ocupa el 100% del espacio de la celda */
   height: 250px; /* La imagen ocupa todo el espacio disponible en altura */
   object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
