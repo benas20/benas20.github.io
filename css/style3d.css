@@ -234,9 +234,9 @@ body p {
   max-width: 100%; /* La imagen no se estirará más de su tamaño original */
 }
 
-.video-size {
-  width: 200px;
-  height: 300px;
+.video-size src {
+  max-width: 200px;
+  max-height: 300px;
   object-fit: cover;
   object-position: center;
   border-radius: 8px;
