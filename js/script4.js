@@ -1,17 +1,32 @@
 <script>
-  document.querySelectorAll('.media-thumb').forEach(item => {
-    item.addEventListener('click', () => {
-      if (item.tagName === 'VIDEO') {
-        // Solicita pantalla completa
-        if (item.requestFullscreen) {
-          item.requestFullscreen();
-        } else if (item.webkitRequestFullscreen) {
-          item.webkitRequestFullscreen();
-        } else if (item.msRequestFullscreen) {
-          item.msRequestFullscreen();
-        }
+  const pairs = document.querySelectorAll('.video-pair');
 
-        item.play(); // Reproduce el video al abrir
+  pairs.forEach(pair => {
+    const thumb = pair.querySelector('.video-thumb');
+    const video = pair.querySelector('.fullscreen-video');
+
+    video.style.display = "none";
+
+    thumb.addEventListener('click', () => {
+      video.style.display = "block";
+
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+
+      video.play();
+    });
+
+    // Ocultar y resetear video al salir de pantalla completa
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        video.pause();
+        video.currentTime = 0;
+        video.style.display = "none";
       }
     });
   });
