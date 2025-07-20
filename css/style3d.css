@@ -234,15 +234,6 @@ body p {
   max-width: 100%; /* La imagen no se estirará más de su tamaño original */
 }
 
-.video-size src {
-  max-width: 200px;
-  max-height: 300px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-}
-
 
 
 /* Estilo del párrafo entre las filas */
