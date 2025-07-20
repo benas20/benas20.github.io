@@ -223,6 +223,23 @@ body p {
   transform: translateX(30); /* El contenedor se mueve a su posición original */
 }
 
+
+
+/* Estilo de los videos */
+.media-thumb {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.media-thumb:hover {
+  transform: scale(1.05);
+}
+
+
+
 /* Estilo de las imágenes */
 .slide-container img {
   width: auto; /* La imagen ocupa el 100% del espacio de la celda */
