@@ -225,36 +225,6 @@ body p {
 
 /* Estilo de los videos */
 
-.video-pair {
-  position: relative;
-  display: inline-block;
-  margin: 10px;
-}
-
-.video-thumb {
-  width: 300px;
-  height: auto;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.video-thumb:hover {
-  transform: scale(1.03);
-}
-
-.fullscreen-video {
-  display: none; /* Oculto por defecto */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
-  z-index: 9999;
-  background: black;
-}
-
 
 /* Estilo de las imágenes */
 .slide-container img {
