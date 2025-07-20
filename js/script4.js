@@ -1,10 +1,11 @@
 <script>
-  const pairs = document.querySelectorAll('.video-pair');
+  const videoPairs = document.querySelectorAll('.video-pair');
 
-  pairs.forEach(pair => {
+  videoPairs.forEach(pair => {
     const thumb = pair.querySelector('.video-thumb');
     const video = pair.querySelector('.fullscreen-video');
 
+    // Asegúrate de que el video esté oculto al principio
     video.style.display = "none";
 
     thumb.addEventListener('click', () => {
@@ -21,7 +22,7 @@
       video.play();
     });
 
-    // Ocultar y resetear video al salir de pantalla completa
+    // Cuando se cierra pantalla completa, ocultar el video
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement) {
         video.pause();
