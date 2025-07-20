@@ -227,18 +227,14 @@ body p {
 
 /* Estilo de los videos */
 .media-thumb {
-  max-width: 150px;
-  max-height: 100px;
-  object-fit: contain;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  background: black;
-  display: block;
-  margin: auto;
+  width: auto; /* La imagen ocupa el 100% del espacio de la celda */
+  height: 250px; /* La imagen ocupa todo el espacio disponible en altura */
+  object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
+  max-width: 100%; /* La imagen no se estirará más de su tamaño original */
 }
 
 .media-thumb:hover {
-  transform: scale(1.05);
+  transform: scale(.3);
 }
 
 
