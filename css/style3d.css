@@ -144,6 +144,7 @@ body p {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 100px;
+  margin-left: 450px;
 }
 
 .content {
