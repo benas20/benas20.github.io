@@ -191,6 +191,7 @@ body p {
 .see-more-btn {
   background-color: #04AA6D;
   border: none;
+  border-radius: 12px;
   color: white;
   padding: 15px 32px;
   text-align: center;
