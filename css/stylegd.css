@@ -21,7 +21,8 @@ body h1 {
 body p {
   text-align: center;
   filter: blur(0.7px);
-  margin-top: 25px;
+  margin-top: 15px;
+  margin-bottom: 20px;
   font-size: 15px;
   background: none; 
   background-color: transparent;
@@ -162,7 +163,7 @@ section1 p .hoverp {
   align-items: center;
   padding: 20px;
   border-radius: 15px;
-  gap: 30px;
+  gap: 0px;
   width: 100%;
   max-width: 300px;
   font-size: 20px;
