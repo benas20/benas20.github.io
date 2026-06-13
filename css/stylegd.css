@@ -109,7 +109,13 @@ body p {
   background-color: transparent;
   filter: blur(0.7px);
 }
-
+section1 p .hoverp{
+   font-size: 15px;
+  background: none; 
+  background-color: transparent;
+  filter: blur(0.7px)
+  margin-top: -125px;
+}
 .section1 p:nth-of-type(1) {
   margin-top: 150px;
   color: #1e2126;
