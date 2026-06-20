@@ -1,4 +1,4 @@
-<script>
+
 const cards = document.querySelectorAll(".card");
 
 cards.forEach(card => {
@@ -34,4 +34,4 @@ cards.forEach(card => {
     card.style.zIndex = Math.floor(Math.random() * 10) + 1;
   });
 });
-</script>
+
