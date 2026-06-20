@@ -67,8 +67,12 @@ html, body {
 
 .InteractiveTest {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 75%;
+  height: 700px;
+  margin-top: 150px;
+  margin-left: 150px;
+  margin-bottom: 150px;
+  min-height: 600px;
 }
 
 .card {
