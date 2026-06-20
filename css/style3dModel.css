@@ -3,11 +3,12 @@
   color: #e8dfce;
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 html, body {
     width: 100%;
-    overflow-x: hidden; /* Para evitar que haya desplazamiento horizontal */
+    overflow: hidden; /* Para evitar que haya desplazamiento horizontal */
 }
 
 /* Menu Interactivo */
@@ -62,4 +63,29 @@ html, body {
 
 .menu-toggle:checked + .menu-icon + .menu-list {
   display: block;
+}
+
+.InteractiveTest {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.card {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 220px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, z-index 0s;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  z-index: 1;
+}
+
+.card:hover {
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1.08);
 }
