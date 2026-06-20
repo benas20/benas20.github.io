@@ -1,0 +1,65 @@
+* {
+  background-color: #1e2126;
+  color: #e8dfce;
+  margin: 0px;
+  padding: 0px;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Para evitar que haya desplazamiento horizontal */
+}
+
+/* Menu Interactivo */
+
+.menu-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+   z-index: 10;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
+  filter: blur(2px);
+}
+
+.menu-icon:hover {
+  filter: blur(0.75px);
+}
+
+.menu-list {
+  display: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #333;
+  position: absolute;
+  right: 0;
+  top: 40px;
+}
+
+.menu-list li {
+  border-bottom: 1px solid #fff;
+}
+
+.menu-list li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  filter: blur(0.75px);
+}
+
+.menu-list li a:hover {
+  background-color: #555;
+}
+
+.menu-toggle:checked + .menu-icon + .menu-list {
+  display: block;
+}
