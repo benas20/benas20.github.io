@@ -1,7 +1,6 @@
 <script>
 const cards = document.querySelectorAll(".card");
 
-// Rotación aleatoria inicial
 cards.forEach(card => {
   card.style.setProperty("--r", (Math.random() * 20 - 10).toFixed(1));
   card.style.zIndex = Math.floor(Math.random() * 10) + 1;
@@ -25,7 +24,7 @@ document.addEventListener("mousemove", e => {
   });
 });
 
-  cards.forEach(card => {
+cards.forEach(card => {
   card.addEventListener("mouseenter", () => {
     card.style.zIndex = 9999;
     card.style.transform = "translate(-50%, -50%) scale(1.08)";
