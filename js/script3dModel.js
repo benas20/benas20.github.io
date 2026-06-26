@@ -1,14 +1,14 @@
 const cards = document.querySelectorAll(".card");
 
 const ringRadiusX = 320;
-const ringRadiusY = 130;
+const ringRadiusY = 180;
 const centerX = 50;
 const centerY = 50;
 
 cards.forEach((card, index) => {
   const angle = (index / cards.length) * Math.PI * 2;
-  const x = centerX + Math.cos(angle) * ringRadiusX / 10;
-  const y = centerY + Math.sin(angle) * ringRadiusY / 10;
+  const x = centerX + Math.cos(angle) * ringRadiusX;
+  const y = centerY + Math.sin(angle) * ringRadiusY;
 
   card.style.setProperty("--r", `${(Math.random() * 20 - 10).toFixed(1)}`);
   card.style.setProperty("--x", `${x}%`);
