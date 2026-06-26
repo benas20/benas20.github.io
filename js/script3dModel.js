@@ -1,7 +1,7 @@
 const cards = document.querySelectorAll(".card");
 
-const ringRadiusX = 320;
-const ringRadiusY = 180;
+const ringRadiusX = 28;
+const ringRadiusY = 18;
 const centerX = 50;
 const centerY = 50;
 
