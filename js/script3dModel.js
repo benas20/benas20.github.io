@@ -1,8 +1,18 @@
-
 const cards = document.querySelectorAll(".card");
 
-cards.forEach(card => {
-  card.style.setProperty("--r", (Math.random() * 20 - 10).toFixed(1));
+const ringRadiusX = 320;
+const ringRadiusY = 130;
+const centerX = 50;
+const centerY = 50;
+
+cards.forEach((card, index) => {
+  const angle = (index / cards.length) * Math.PI * 2;
+  const x = centerX + Math.cos(angle) * ringRadiusX / 10;
+  const y = centerY + Math.sin(angle) * ringRadiusY / 10;
+
+  card.style.setProperty("--r", `${(Math.random() * 20 - 10).toFixed(1)}`);
+  card.style.setProperty("--x", `${x}%`);
+  card.style.setProperty("--y", `${y}%`);
   card.style.zIndex = Math.floor(Math.random() * 10) + 1;
   card.style.transform = `translate(-50%, -50%) rotate(${card.style.getPropertyValue("--r")}deg)`;
 });
@@ -34,4 +44,3 @@ cards.forEach(card => {
     card.style.zIndex = Math.floor(Math.random() * 10) + 1;
   });
 });
-
