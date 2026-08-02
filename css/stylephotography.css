@@ -1,13 +1,11 @@
-html,body {
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#ffffff;
+body {
+  margin: 0;
+  background-color: #000;
 }
-
-.3dBook canvas {
-    display:block;
-    width:100%;
-    height:100%;
+ .container3D canvas {
+  width: 100vw !important;
+  height: 100vh !important;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
