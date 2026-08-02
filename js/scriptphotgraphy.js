@@ -1,10 +1,11 @@
 import * as THREE from "three";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 
+
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-    45,
+    75,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -32,49 +33,37 @@ scene.add(directional);
 
 // Libro
 let book;
-
 const loader = new FBXLoader();
-
 loader.load(
-
+    
     "livre.fbx",
-
     function(fbx){
-
+        
         book = fbx;
-
         // Ajusta la escala según tu modelo
         book.scale.set(0.01,0.01,0.01);
-
         // Centrar el modelo
         const box = new THREE.Box3().setFromObject(book);
         const center = box.getCenter(new THREE.Vector3());
-
         book.position.sub(center);
-
         scene.add(book);
-
     },
-
+    
     undefined,
-
     function(error){
         console.error(error);
     }
-
 );
+
 
 // Animación
 function animate(){
 
     requestAnimationFrame(animate);
-
     if(book){
         book.rotation.y += 0.01;
     }
-
     renderer.render(scene,camera);
-
 }
 
 animate();
