@@ -1,52 +1,90 @@
 import * as THREE from "three";
+import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-    75,
+    45,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
 );
 
-camera.position.set(0, 0, 0.1);
+camera.position.set(0, 1.5, 6);
 
 const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector("#bg"),
-    antialias: true
+    canvas: document.getElementById("canvas"),
+    antialias: true,
+    alpha: true
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-const loader = new THREE.TextureLoader();
+// Luz ambiental
+const ambient = new THREE.AmbientLight(0xffffff, 2);
+scene.add(ambient);
 
-let sphere = null;
+// Luz principal
+const directional = new THREE.DirectionalLight(0xffffff, 3);
+directional.position.set(5, 10, 7);
+scene.add(directional);
 
-loader.load("fondo360.jpg", (texture) => {
-    const geometry = new THREE.SphereGeometry(500, 64, 64);
-    geometry.scale(-1, 1, 1);
+// Libro
+let book;
 
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    sphere = new THREE.Mesh(geometry, material);
+const loader = new FBXLoader();
 
-    scene.add(sphere);
-});
+loader.load(
 
-function animate() {
-    requestAnimationFrame(animate);
+    "livre.fbx",
 
-    if (sphere) {
-        sphere.rotation.y += 0.0002;
+    function(fbx){
+
+        book = fbx;
+
+        // Ajusta la escala según tu modelo
+        book.scale.set(0.01,0.01,0.01);
+
+        // Centrar el modelo
+        const box = new THREE.Box3().setFromObject(book);
+        const center = box.getCenter(new THREE.Vector3());
+
+        book.position.sub(center);
+
+        scene.add(book);
+
+    },
+
+    undefined,
+
+    function(error){
+        console.error(error);
     }
 
-    renderer.render(scene, camera);
+);
+
+// Animación
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    if(book){
+        book.rotation.y += 0.01;
+    }
+
+    renderer.render(scene,camera);
+
 }
 
 animate();
 
-window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+// Responsive
+window.addEventListener("resize",()=>{
+
+    camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    renderer.setSize(window.innerWidth,window.innerHeight);
+
 });
