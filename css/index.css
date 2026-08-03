@@ -5,14 +5,23 @@
 }
 
 html, body {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  background-image: url("img/IndexBg.png"), url("img/IndexBg2.png");
-  background-position: left top, right top;
-  background-repeat: no-repeat, no-repeat;
-  background-size: 50% 100%, 50% 100%;
-  color: #48535c;
+    width: 100%;
+    min-height: 2160px;
+    margin: 0;
+    overflow-x: hidden;
+    background-image:
+        url("/img/IndexBg.png"),
+        url("/img/IndexBg2.png");
+    background-repeat:
+        no-repeat,
+        no-repeat;
+    background-position:
+        center top,
+        center 1080px;
+    background-size:
+        100% 1080px,
+        100% 1080px;
+    color: #48535c;
 }
 
 body {
