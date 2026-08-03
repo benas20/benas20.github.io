@@ -188,7 +188,7 @@ body p {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 10px;
-  margin-top: 150px;
+  margin-top: 145px;
 }
 
 .card:hover {
@@ -328,7 +328,7 @@ hr {
   font-size: 16px;
   margin: 0;
   font-weight: 300;
-  color: #48535c;
+  color: #e7e0d1;
 }
 
 .footer-links {
@@ -353,7 +353,7 @@ hr {
 
 .footer-links li a {
   background: transparent;
-  color: #48535c;
+  color: #e7e0d1;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease-in-out;
