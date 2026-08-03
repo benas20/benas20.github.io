@@ -33,12 +33,12 @@ body {
 /* Texto */
 .title {
     color: white;
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: Arial, sans-serif;
     text-decoration: none;
-    letter-spacing: 10px;
-    font-weight: 700;
-
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-top: 600px;
     transition: .3s;
 }
 
