@@ -1,5 +1,5 @@
 * {
-  background-color: #1e2126;
+  background-color: #3c434d;
   color: #e8dfce;
   margin: 0px;
   padding: 0px;
@@ -87,7 +87,7 @@ body p {
 /* Section 1 */
 
 .section1 {
-  background: linear-gradient(to bottom, #1e2126 10%, #1e2126 20%, #d5d3c7 80%, #d5d3c7 90%);
+  background: #3c434d;
   min-height: 900px;
   height: auto;
   width: 100%;
@@ -98,7 +98,7 @@ body p {
 
 .section1 h1 {
   font-size: 150px;
-  filter: blur(5px);
+  filter: blur(1px);
   margin-top: 300px;
   color:  #e8dfce;
 }
@@ -127,7 +127,7 @@ body p {
 /* Section 2 */
 
 .section2 {
-  background-color: #d5d3c7;
+  background-color: #3c434d;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -139,7 +139,7 @@ body p {
 }
 
 .content-wrapper {
-  background-color: #d5d3c7;
+  background-color: #3c434d;
   width: 80%;
   max-width: 1200px;
   display: flex;
