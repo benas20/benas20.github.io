@@ -67,7 +67,7 @@ body p {
 .menu-icon {
   font-size: 30px;
   cursor: pointer;
-  filter: blur(2px);
+  filter: blur(1px);
   color: #48535c;
 }
 
@@ -305,6 +305,7 @@ hr {
   color: #48535c;
   padding: 50px 0;
   text-align: center;
+  margin-top: 75px;
 }
 
 .footer-container {
