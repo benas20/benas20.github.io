@@ -122,9 +122,9 @@ body p {
 .section1 h1 {
   font-size: 150px;
   filter: blur(1px);
-  margin-top: 0;
   color: #48535c;
-  margin-top: 50px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .menu-list2 {
@@ -188,7 +188,7 @@ body p {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 10px;
-  margin-top: 145px;
+  margin-top: 100px;
 }
 
 .card:hover {
