@@ -6,8 +6,12 @@
 
 html, body {
   width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
-  background: #9c968a;
+  background-image: url("img/IndexBg.png"), url("img/IndexBg2.png");
+  background-position: left top, right top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 50% 100%, 50% 100%;
   color: #48535c;
 }
 
@@ -96,7 +100,7 @@ body p {
 /* Section 1 */
 
 .section1 {
-  background: #9c968a;
+  background: transparent;
   min-height: 250px;
   height: auto;
   width: 100%;
@@ -153,7 +157,7 @@ body p {
 /* Section 2 */
 
 .section2 {
-  background-color: #9c968a;
+  background-color: transparent;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -174,7 +178,7 @@ body p {
   transition: .35s;
   margin-bottom: 20px;
   padding: 15px;
-  border-radius: 18px;
+  border-radius: 10px;
 }
 
 .card:hover {
@@ -238,11 +242,11 @@ body p {
 
 .card-info {
   text-align: left;
-  padding: 30px 100px 10px 20px;
+  padding: 5px 100px 10px 75px;
 }
 
 .card-info h2 {
-  margin: 0;
+  margin-bottom: 30px;
   color: #48535c;
   font-family: "Cormorant Garamond", serif;
   font-size: 34px;
@@ -251,7 +255,7 @@ body p {
 }
 
 .card-info p {
-  margin: 15px 0 25px;
+  margin: 5px 0px;
   color: #48535c;
   font-family: "Cormorant Garamond", serif;
   font-size: 17px;
@@ -268,7 +272,6 @@ body p {
   font-size: 20px;
   text-transform: uppercase;
   transition: .35s;
-  padding: 15px;
 }
 
 .card-info a:hover {
@@ -288,7 +291,7 @@ hr {
 /* Footer */
 
 .footer {
-  background: #9c968a;
+  background: transparent;
   color: #48535c;
   padding: 50px 0;
   text-align: center;
