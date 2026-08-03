@@ -154,7 +154,7 @@ body p {
 }
 
 .card {
-    width:600px;
+    width:550px;
     height:260px;
     display:flex;
     background:#af9c77;
@@ -162,6 +162,7 @@ body p {
     overflow:hidden;
     transition:.35s;
     margin-bottom: 20px;
+    padding:15px;
 }
 
 .card:hover {
@@ -250,12 +251,11 @@ body p {
     display:inline-block;
     color:#454640;
     text-decoration:none;
-    border:1px solid #454640;
-    padding:10px 34px;
     letter-spacing:3px;
-    font-size:13px;
+    font-size:20px;
     text-transform:uppercase;
     transition:.35s;
+    padding:15px;
 }
 
 .card-info a:hover {
@@ -263,7 +263,13 @@ body p {
     color:#efe8d9;
 }
 
-
+hr {
+    width: 70px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: #4b4942;
 
 
 
