@@ -7,10 +7,13 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  background: #9c968a;
+  color: #48535c;
 }
 
 body {
   margin: 0;
+  color: #48535c;
 }
 
 body h1 {
@@ -19,6 +22,7 @@ body h1 {
   font-size: 200px;
   filter: blur(5px);
   margin-top: 0;
+  color: #48535c;
 }
 
 body p {
@@ -28,11 +32,11 @@ body p {
   font-size: 15px;
   background: none;
   background-color: transparent;
-  color: #e8dfce;
+  color: #48535c;
 }
 
 .copirait {
-  color: #1e2126;
+  color: #48535c;
   margin-top: 500px;
 }
 
@@ -51,6 +55,7 @@ body p {
   font-size: 30px;
   cursor: pointer;
   filter: blur(2px);
+  color: #48535c;
 }
 
 .menu-icon:hover {
@@ -62,18 +67,18 @@ body p {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  background-color: #333;
+  background-color: #e7e0d1;
   position: absolute;
   right: 0;
   top: 40px;
 }
 
 .menu-list li {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #48535c;
 }
 
 .menu-list li a {
-  color: white;
+  color: #48535c;
   text-decoration: none;
   padding: 10px;
   display: block;
@@ -81,7 +86,7 @@ body p {
 }
 
 .menu-list li a:hover {
-  background-color: #555;
+  background-color: #e7e0d1;
 }
 
 .menu-toggle:checked + .menu-icon + .menu-list {
@@ -91,7 +96,7 @@ body p {
 /* Section 1 */
 
 .section1 {
-  background: #3c434d;
+  background: #9c968a;
   min-height: 250px;
   height: auto;
   width: 100%;
@@ -105,7 +110,7 @@ body p {
   font-size: 150px;
   filter: blur(1px);
   margin-top: 0;
-  color: #e8dfce;
+  color: #48535c;
 }
 
 .menu-list2 {
@@ -126,11 +131,11 @@ body p {
   content: "/";
   position: absolute;
   right: -12px;
-  color: #7b7467;
+  color: #48535c;
 }
 
 .menu-list2 a {
-  color: #3f433d;
+  color: #48535c;
   text-decoration: none;
   font-family: "Cormorant Garamond", serif;
   font-size: 0.95rem;
@@ -140,14 +145,14 @@ body p {
 }
 
 .menu-list2 a:hover {
-  color: #8c6b47;
+  color: #48535c;
   letter-spacing: 5px;
 }
 
 /* Section 2 */
 
 .section2 {
-  background-color: #3c434d;
+  background-color: #9c968a;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -162,12 +167,13 @@ body p {
   width: 550px;
   height: 260px;
   display: flex;
-  background: #af9c77;
-  border: 1px solid #776a50;
+  background: #e7e0d1;
+  border: 1px solid #e7e0d1;
   overflow: hidden;
   transition: .35s;
   margin-bottom: 20px;
   padding: 15px;
+  border-radius: 18px;
 }
 
 .card:hover {
@@ -185,6 +191,7 @@ body p {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 14px;
 }
 
 .card-content {
@@ -201,23 +208,23 @@ body p {
   font-family: "Cormorant Garamond", serif;
   font-weight: 500;
   letter-spacing: 4px;
-  color: #43453d;
+  color: #48535c;
 }
 
 .card-content p {
   margin: 20px 0 30px;
   font-size: 18px;
   line-height: 1.7;
-  color: #6d675d;
+  color: #48535c;
   font-style: italic;
   font-family: "Cormorant Garamond", serif;
 }
 
 .card-content a {
   align-self: flex-start;
-  color: #43453d;
+  color: #48535c;
   text-decoration: none;
-  border-bottom: 1px solid #43453d;
+  border-bottom: 1px solid #48535c;
   padding-bottom: 4px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -235,7 +242,7 @@ body p {
 
 .card-info h2 {
   margin: 0;
-  color: #454640;
+  color: #48535c;
   font-family: "Cormorant Garamond", serif;
   font-size: 34px;
   font-weight: 500;
@@ -244,7 +251,7 @@ body p {
 
 .card-info p {
   margin: 15px 0 25px;
-  color: #6d695f;
+  color: #48535c;
   font-family: "Cormorant Garamond", serif;
   font-size: 17px;
   line-height: 1.6;
@@ -254,7 +261,7 @@ body p {
 
 .card-info a {
   display: inline-block;
-  color: #454640;
+  color: #48535c;
   text-decoration: none;
   letter-spacing: 3px;
   font-size: 20px;
@@ -264,8 +271,8 @@ body p {
 }
 
 .card-info a:hover {
-  background: #454640;
-  color: #efe8d9;
+  background: #e7e0d1;
+  color: #48535c;
 }
 
 hr {
@@ -274,14 +281,14 @@ hr {
   margin: 0;
   padding: 0;
   border: none;
-  background: #4b4942;
+  background: #48535c;
 }
 
 /* Footer */
 
 .footer {
-  background: #3c434d;
-  color: #e8dfce;
+  background: #9c968a;
+  color: #48535c;
   padding: 50px 0;
   text-align: center;
 }
@@ -307,6 +314,7 @@ hr {
   font-size: 16px;
   margin: 0;
   font-weight: 300;
+  color: #48535c;
 }
 
 .footer-links {
@@ -331,13 +339,13 @@ hr {
 
 .footer-links li a {
   background: transparent;
-  color: #e8dfce;
+  color: #48535c;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease-in-out;
 }
 
 .footer-links li a:hover {
-  color: #1e2126;
+  color: #48535c;
   text-decoration: underline;
 }
