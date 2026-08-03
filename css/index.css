@@ -106,10 +106,8 @@ body p {
     justify-content: center;
     align-items: center;
     gap: 18px;
-
     margin: 25px 0 0;
     padding: 0;
-
     list-style: none;
 }
 
@@ -128,12 +126,10 @@ body p {
 .menu-list2 a {
     color: #3f433d;
     text-decoration: none;
-
     font-family: "Cormorant Garamond", serif;
     font-size: 0.95rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-
     transition: .3s ease;
 }
 
@@ -165,6 +161,7 @@ body p {
     border:1px solid #776a50;
     overflow:hidden;
     transition:.35s;
+    margin-bottom: 20px;
 }
 
 .card:hover {
@@ -226,7 +223,7 @@ body p {
 }
 
 .card-info {
-    text-align:center;
+    text-align: left;
     padding: 30px 100px 10px 20px;
 }
 
@@ -246,6 +243,7 @@ body p {
     font-size:17px;
     line-height:1.6;
     font-style:italic;
+    text-align: left;
 }
 
 .card-info a {
