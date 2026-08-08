@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="css/index.css">
     
     <script>
+    if (sessionStorage.getItem("accessGranted") !== "true") {
         window.location.replace("password.html");
-    </script>
+    }
+</script>
 
   </head>
   
