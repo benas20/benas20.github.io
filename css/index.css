@@ -408,3 +408,118 @@ hr {
   color: #48535c;
   text-decoration: underline;
 }
+
+/* ========================================
+   CUSTOM CURSOR
+======================================== */
+
+body {
+    cursor: none;
+}
+
+
+/* ========================================
+   RETÍCULA
+======================================== */
+
+.custom-cursor {
+    position: fixed;
+
+    width: 32px;
+    height: 32px;
+
+    left: 0;
+    top: 0;
+
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 99999;
+    filter: drop-shadow(0 0 3px #7CFF6B);
+}
+
+
+/* Círculo central */
+
+.cursor-circle {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border: 1px solid #7CFF6B;
+
+    border-radius: 50%;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+/* Línea horizontal */
+
+.cursor-horizontal {
+    position: absolute;
+
+    width: 32px;
+    height: 1px;
+
+    background: #7CFF6B;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+/* Línea vertical */
+
+.cursor-vertical {
+    position: absolute;
+
+    width: 1px;
+    height: 32px;
+
+    background: #7CFF6B;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+/* ========================================
+   COORDENADAS
+======================================== */
+
+.cursor-info {
+    position: fixed;
+
+    left: 30px;
+    bottom: 25px;
+
+    color: #7CFF6B;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.8;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    z-index: 99998;
+
+    opacity: 0.65;
+
+     text-shadow: 0 0 4px #7CFF6B;
+}
