@@ -11,9 +11,7 @@ body {
   width: 100%;
   min-height: 2160px;
   overflow-x: hidden;
-  background-image: url("/img/IndexBGPrueba.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #bdb8af;
   background-size: 2080px;
   color: #48535c;
   cursor: none;
