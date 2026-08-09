@@ -8,24 +8,50 @@
   <link rel="stylesheet" href="css/index.css">
     
     <script>
+      
     if (sessionStorage.getItem("accessGranted") !== "true") {
         window.location.replace("password.html");
     }
-</script>
+      
+    </script>
 
   </head>
   
   <body>
     <div class="menu-container">
-      <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="menu-icon">☰</label>
-      <ul class="menu-list">
-        <li><a href="graphicdesign.html">FILE 001</a></li>
-        <li><a href="3dmodel.html">FILE 002</a></li>
-        <li><a href="photography.html">FILE 003</a></li>
-        <li><a href="#">FILE 004</a></li>
-      </ul>
-    </div>
+    <input
+        type="checkbox"
+        id="menu-toggle"
+        class="menu-toggle">
+
+    <label
+        for="menu-toggle"
+        class="menu-icon"
+        aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+      
+    <ul class="menu-list">
+        <li>
+            <span class="menu-number">001</span>
+            <a href="graphicdesign.html">GRAPHIC DESIGN</a>
+        </li>
+        <li>
+            <span class="menu-number">002</span>
+            <a href="3dmodel.html">3D MODELING</a>
+        </li>
+        <li>
+            <span class="menu-number">003</span>
+            <a href="photography.html">PHOTOGRAPHY</a>
+        </li>
+        <li>
+            <span class="menu-number">004</span>
+            <a href="#">MUSIC</a>
+        </li>
+    </ul>
+</div>
 
     <div class="section1">
       
