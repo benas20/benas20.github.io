@@ -56,23 +56,69 @@ a:hover {
   cursor: none !important;
 }
 
-/* Línea de escaneo decorativa */
-.scan-line {
+/* Líneas de escaneo decorativas */
+.scan-line,
+.scan-line-reverse,
+.scan-line-horizontal,
+.scan-line-horizontal-reverse {
   position: fixed;
+  pointer-events: none;
+  z-index: 3;
+  background: #7CFF6B;
+  opacity: 0.35;
+}
+
+/* Vertical de arriba abajo */
+.scan-line,
+.scan-line-reverse {
   left: 0;
   top: 0;
   width: 100%;
   height: 1px;
-  background: #7CFF6B;
-  opacity: 0.035;
-  pointer-events: none;
-  z-index: 3;
-  animation: scanMove 12s linear infinite;
+}
+
+.scan-line {
+  animation: scanMove 6s linear infinite alternate;
+}
+
+.scan-line-reverse {
+  animation: scanMoveReverse 6s linear infinite alternate;
 }
 
 @keyframes scanMove {
   0% { top: 0%; }
   100% { top: 100%; }
+}
+
+@keyframes scanMoveReverse {
+  0% { top: 100%; }
+  100% { top: 0%; }
+}
+
+/* Horizontal de izquierda a derecha */
+.scan-line-horizontal,
+.scan-line-horizontal-reverse {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  animation: scanMoveHorizontal 6s linear infinite alternate;
+}
+
+.scan-line-horizontal-reverse {
+  right: 0;
+  left: auto;
+  animation: scanMoveHorizontalReverse 6s linear infinite alternate;
+}
+
+@keyframes scanMoveHorizontal {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+
+@keyframes scanMoveHorizontalReverse {
+  0% { left: 100%; }
+  100% { left: 0%; }
 }
 
 /* Bloques transparentes compartidos */
