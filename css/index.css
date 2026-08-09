@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  caret-color: transparent;
 }
 
 a,a:hover {
@@ -26,6 +27,9 @@ html, body {
         100% 1080px,
         100% 1080px;
     color: #48535c;
+    cursor: none;
+    caret-color: transparent;
+    user-select: none;
 }
 
 body {
