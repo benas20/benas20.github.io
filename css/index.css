@@ -5,6 +5,19 @@
   caret-color: transparent;
 }
 
+h1 {
+    
+    color:#29251F !important;
+}
+h2 {
+    color:#E8D9B8 !important;
+}
+h3 {
+    color:#e3dfd6 !important;
+}
+p {
+    color:#91A49A !important;
+}
 a,a:hover {
     cursor: none !important;
 }
