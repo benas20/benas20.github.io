@@ -19,31 +19,39 @@
   
   <body>
 
+  
+  <!-- Línea de escaneo decorativa -->
   <div class="scan-line"></div>
 
+  <!-- Cabecera del sistema -->
   <div class="system-header">
     <span>SYSTEM (INDEX) 01</span>
     <span>VISUAL ARCHIVE</span>
     <span class="system-online"><i></i> ONLINE</span>
   </div>
 
+  <!-- Ubicación / referencia del archivo -->
   <div class="archive-location">
     <div>BAV / INDEX</div>
     <div>VISUAL ARCHIVE</div>
     <div>UNIT 01</div>
   </div>
 
+  <!-- Números guía horizontales -->
   <div class="measurement-x">
     <span>000</span><span>250</span><span>500</span><span>750</span><span>1000</span>
   </div>
 
+  <!-- Números guía verticales -->
   <div class="measurement-y">
     <span>000</span><span>250</span><span>500</span><span>750</span><span>1000</span>
   </div>
 
+  <!-- Líneas guía que siguen al cursor -->
   <div class="cursor-measure-x"></div>
   <div class="cursor-measure-y"></div>
 
+  <!-- Menú hamburguesa principal -->
   <div class="menu-container">
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <label for="menu-toggle" class="menu-icon" aria-label="Open menu">
@@ -52,6 +60,7 @@
       <span></span>
     </label>
 
+    <!-- Lista desplegable del menú -->
     <ul class="menu-list">
       <li><span class="menu-number">001</span><a href="graphicdesign.html">GRAPHIC DESIGN</a></li>
       <li><span class="menu-number">002</span><a href="3dmodel.html">3D MODELING</a></li>
@@ -60,6 +69,7 @@
     </ul>
   </div>
 
+  <!-- Título principal de la portada -->
   <div class="section1">
     <h1 class="typing-title">
       <span>B</span><span>e</span><span>e</span><span>n</span>
@@ -69,6 +79,7 @@
       <span>V</span><span>i</span><span>s</span><span>i</span><span>o</span><span>n</span>
     </h1>
 
+    <!-- Enlaces rápidos a cada archivo -->
     <ul class="menu-list2">
       <li><a href="graphicdesign.html">FILE 001</a></li>
       <li><a href="3dmodel.html">FILE 002</a></li>
@@ -77,6 +88,7 @@
     </ul>
   </div>
 
+  <!-- Sección de tarjetas / proyectos -->
   <div class="section2">
     <div class="content-wrapper">
       <div class="card">
@@ -125,6 +137,7 @@
     </div>
   </div>
 
+  <!-- Pie de página -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
@@ -141,6 +154,7 @@
     </div>
   </footer>
 
+  <!-- Cursor personalizado -->
   <div class="custom-cursor">
     <div class="cursor-horizontal"></div>
     <div class="cursor-vertical"></div>
@@ -155,6 +169,7 @@
     <div class="tick tick-diagonal-4"></div>
   </div>
 
+  <!-- Panel de información del cursor -->
   <div class="cursor-info">
     <div class="observation-title">OBSERVATION / 01</div>
 
@@ -174,6 +189,7 @@
     </div>
   </div>
 
+  <!-- Script para movimiento del cursor e información dinámica -->
   <script>
     const cursor = document.querySelector('.custom-cursor');
     const cursorX = document.getElementById('cursor-x');
