@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+a,a:hover {
+    cursor: none !important;
+}
+
 html, body {
     width: 100%;
     min-height: 2160px;
