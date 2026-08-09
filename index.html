@@ -108,6 +108,69 @@
         </div>
       </div>
     </footer>
+
+          <!-- CUSTOM CURSOR -->
+          <div class="custom-cursor">
+              <div class="cursor-horizontal"></div>
+              <div class="cursor-vertical"></div>
+              <div class="cursor-circle"></div>
+          </div>
+          
+          <!-- COORDENADAS -->
+          <div class="cursor-info">
+              X <span id="cursor-x">0000</span>
+              &nbsp;&nbsp;
+              Y <span id="cursor-y">0000</span>
+          </div>
+
+          <script>
+
+const cursor = document.querySelector('.custom-cursor');
+
+const cursorX = document.getElementById('cursor-x');
+const cursorY = document.getElementById('cursor-y');
+
+
+document.addEventListener('mousemove', function(event) {
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+
+    /* Mover retícula */
+
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+
+
+    /* Coordenadas */
+
+    cursorX.textContent = String(x).padStart(4, '0');
+    cursorY.textContent = String(y).padStart(4, '0');
+
+});
+
+
+/* Ocultar la retícula cuando el ratón sale de la página */
+
+document.addEventListener('mouseleave', function() {
+
+    cursor.style.opacity = '0';
+
+});
+
+
+/* Mostrarla de nuevo */
+
+document.addEventListener('mouseenter', function() {
+
+    cursor.style.opacity = '1';
+
+});
+
+</script>
+    
+    
   </body>
 
 
