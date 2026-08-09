@@ -26,6 +26,8 @@
   <div class="scan-line-horizontal"></div>
   <div class="scan-line-horizontal-reverse"></div>
 
+  <div class="cursor-flash"></div>
+    
   <!-- Cabecera del sistema -->
   <div class="system-header">
     <span>SYSTEM (INDEX) 01</span>
@@ -261,6 +263,29 @@
       cursor.style.opacity = '1';
       cursorStatus.textContent = 'TRACKING';
     });
+
+    /* ========================================
+    CLICK FLASH
+    ======================================== */
+
+    document.addEventListener(
+      'click',
+      function(event) {
+        cursorFlash.style.left =
+          event.clientX + 'px';  
+        
+        cursorFlash.style.top =
+          event.clientY + 'px';   
+        
+        cursorFlash.classList.remove('active');
+    
+        /* Reinicia la animación */
+        
+        void cursorFlash.offsetWidth;
+        cursorFlash.classList.add('active');
+
+  
+);
   </script>
     
   </body>
