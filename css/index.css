@@ -421,20 +421,23 @@ hr {
    CUSTOM CURSOR
 ======================================== */
 
+html,
 body {
     cursor: none;
+    caret-color: transparent;
 }
 
 
 /* ========================================
-   RETÍCULA
+   RETICLE
 ======================================== */
 
 .custom-cursor {
+
     position: fixed;
 
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
 
     left: 0;
     top: 0;
@@ -444,17 +447,63 @@ body {
     transform: translate(-50%, -50%);
 
     z-index: 99999;
-    filter: drop-shadow(0 0 3px #7CFF6B);
+
+    color: #7CFF6B;
+
+    transition:
+        opacity 0.3s ease;
+
 }
 
 
-/* Círculo central */
+/* ========================================
+   MAIN CROSS
+======================================== */
 
-.cursor-circle {
+.cursor-horizontal {
+
     position: absolute;
 
-    width: 7px;
-    height: 7px;
+    width: 34px;
+    height: 1px;
+
+    background: #7CFF6B;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+
+
+.cursor-vertical {
+
+    position: absolute;
+
+    width: 1px;
+    height: 34px;
+
+    background: #7CFF6B;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+
+
+/* ========================================
+   CENTRAL CIRCLE
+======================================== */
+
+.cursor-circle {
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
 
     border: 1px solid #7CFF6B;
 
@@ -464,52 +513,140 @@ body {
     top: 50%;
 
     transform: translate(-50%, -50%);
-}
 
-
-/* Línea horizontal */
-
-.cursor-horizontal {
-    position: absolute;
-
-    width: 32px;
-    height: 1px;
-
-    background: #7CFF6B;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-}
-
-
-/* Línea vertical */
-
-.cursor-vertical {
-    position: absolute;
-
-    width: 1px;
-    height: 32px;
-
-    background: #7CFF6B;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
 }
 
 
 /* ========================================
-   COORDENADAS
+   TECHNICAL TICKS
+======================================== */
+
+.tick {
+
+    position: absolute;
+
+    width: 5px;
+    height: 1px;
+
+    background: #7CFF6B;
+
+}
+
+
+/* TOP */
+
+.tick-top {
+
+    left: 50%;
+    top: 2px;
+
+    transform:
+        translateX(-50%)
+        rotate(90deg);
+
+}
+
+
+/* BOTTOM */
+
+.tick-bottom {
+
+    left: 50%;
+    bottom: 2px;
+
+    transform:
+        translateX(-50%)
+        rotate(90deg);
+
+}
+
+
+/* LEFT */
+
+.tick-left {
+
+    left: 2px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+}
+
+
+/* RIGHT */
+
+.tick-right {
+
+    right: 2px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+}
+
+
+/* ========================================
+   DIAGONAL TICKS
+======================================== */
+
+.tick-diagonal-1 {
+
+    left: 7px;
+    top: 7px;
+
+    transform: rotate(45deg);
+
+}
+
+
+.tick-diagonal-2 {
+
+    right: 7px;
+    top: 7px;
+
+    transform: rotate(-45deg);
+
+}
+
+
+.tick-diagonal-3 {
+
+    left: 7px;
+    bottom: 7px;
+
+    transform: rotate(-45deg);
+
+}
+
+
+.tick-diagonal-4 {
+
+    right: 7px;
+    bottom: 7px;
+
+    transform: rotate(45deg);
+
+}
+
+
+/* ========================================
+   OBSERVATION PANEL
 ======================================== */
 
 .cursor-info {
+
     position: fixed;
 
     left: 30px;
     bottom: 25px;
+
+    z-index: 99998;
+
+    pointer-events: none;
+
+    user-select: none;
 
     color: #7CFF6B;
 
@@ -521,13 +658,75 @@ body {
 
     line-height: 1.8;
 
-    pointer-events: none;
+    text-transform: uppercase;
 
-    user-select: none;
+    opacity: 0.72;
 
-    z-index: 99998;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.observation-title {
+
+    font-size: 11px;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 7px;
+
+}
+
+
+/* ========================================
+   COORDINATES
+======================================== */
+
+.observation-coordinates {
+
+    opacity: 0.9;
+
+    margin-bottom: 7px;
+
+}
+
+
+/* ========================================
+   VECTOR + SPEED
+======================================== */
+
+.observation-data {
 
     opacity: 0.65;
 
-     text-shadow: 0 0 4px #7CFF6B;
+    margin-bottom: 7px;
+
+}
+
+
+/* ========================================
+   SYSTEM
+======================================== */
+
+.observation-system {
+
+    opacity: 0.5;
+
+}
+
+
+/* ========================================
+   NUMBERS
+======================================== */
+
+#cursor-x,
+#cursor-y,
+#cursor-vector,
+#cursor-speed,
+#cursor-sector {
+
+    font-variant-numeric: tabular-nums;
+
 }
