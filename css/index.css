@@ -5,6 +5,7 @@
   caret-color: transparent;
 }
 
+/* Base */
 html,
 body {
   width: 100%;
@@ -23,6 +24,7 @@ body {
   margin: 0;
 }
 
+/* Overlay general sobre el fondo */
 body::before {
   content: "";
   position: fixed;
@@ -32,6 +34,7 @@ body::before {
   z-index: 1;
 }
 
+/* Tipografía global */
 h1 {
   color: #29251F !important;
 }
@@ -53,6 +56,7 @@ a:hover {
   cursor: none !important;
 }
 
+/* Línea de escaneo decorativa */
 .scan-line {
   position: fixed;
   left: 0;
@@ -71,6 +75,7 @@ a:hover {
   100% { top: 100%; }
 }
 
+/* Bloques transparentes compartidos */
 .system-header,
 .archive-location,
 .measurement-x,
@@ -99,6 +104,7 @@ a:hover {
   font-family: Arial, sans-serif;
 }
 
+/* Header superior */
 .system-header {
   position: fixed;
   top: 25px;
@@ -137,6 +143,7 @@ a:hover {
   50% { opacity: 1; }
 }
 
+/* Ubicación del archivo */
 .archive-location {
   position: fixed;
   top: 85px;
@@ -151,6 +158,7 @@ a:hover {
   text-shadow: 0 1px 6px rgba(232, 217, 184, 0.3);
 }
 
+/* Medidas horizontales y verticales */
 .measurement-x {
   position: fixed;
   top: 55px;
@@ -180,6 +188,7 @@ a:hover {
   pointer-events: none;
 }
 
+/* Guías del cursor */
 .cursor-measure-x {
   position: fixed;
   top: 0;
@@ -200,6 +209,7 @@ a:hover {
   pointer-events: none;
 }
 
+/* Títulos y textos generales */
 body h1 {
   font-family: black, Arial;
   text-align: center;
@@ -223,6 +233,7 @@ body p {
   margin-top: 500px;
 }
 
+/* Menú hamburguesa */
 .menu-container {
   position: absolute;
   top: 25px;
@@ -357,6 +368,7 @@ body p {
   transform: scaleY(1);
 }
 
+/* Sección principal */
 .section1 {
   min-height: 250px;
   width: 100%;
@@ -448,6 +460,7 @@ body p {
   letter-spacing: 5px;
 }
 
+/* Sección de tarjetas */
 .section2 {
   width: 100%;
   max-width: 100%;
@@ -479,6 +492,7 @@ body p {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
+/* Contenido interno de la card */
 .card-image {
   width: 42%;
   height: 100%;
@@ -533,6 +547,7 @@ body p {
   letter-spacing: 6px;
 }
 
+/* Versión actual usada por el HTML */
 .card-info {
   text-align: left;
   padding: 5px 100px 10px 75px;
@@ -581,6 +596,7 @@ hr {
   background: #48535c;
 }
 
+/* Footer */
 .footer {
   color: #48535c;
   padding: 50px 0;
@@ -636,6 +652,7 @@ hr {
   text-decoration: underline;
 }
 
+/* Cursor personalizado */
 .custom-cursor {
   position: fixed;
   width: 42px;
@@ -735,6 +752,7 @@ hr {
   transform: rotate(45deg);
 }
 
+/* Panel de observación */
 .cursor-info {
   position: fixed;
   left: 28px;
