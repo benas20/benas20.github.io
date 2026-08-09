@@ -1,132 +1,927 @@
 <!DOCTYPE html>
-<html lang="en">
-  
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Been Some Graphics</title>
-  <link rel="stylesheet" href="css/stylegd.css">  
-  </head>
-  
-  <body>
-    
-    <div class="menu-container">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">☰</label>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FILE 001 / GRAPHIC DESIGN</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- ========================================
+       SYSTEM HEADER
+  ======================================== -->
+
+  <div class="system-header">
+
+    <div>
+      SYSTEM / BEN A VISION
+    </div>
+
+    <div class="system-online">
+      <i></i>
+      ONLINE
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       ARCHIVE LOCATION
+  ======================================== -->
+
+  <div class="archive-location">
+
+    <div>
+      ARCHIVE / FILE 001
+    </div>
+
+    <div>
+      LOCATION / GRAPHIC DESIGN
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       MEDICIONES DE PANTALLA
+  ======================================== -->
+
+  <div class="measurement-x">
+    <span>000</span>
+    <span>250</span>
+    <span>500</span>
+    <span>750</span>
+    <span>1000</span>
+    <span>1250</span>
+    <span>1500</span>
+  </div>
+
+
+  <div class="measurement-y">
+    <span>000</span>
+    <span>250</span>
+    <span>500</span>
+    <span>750</span>
+    <span>1000</span>
+    <span>1250</span>
+    <span>1500</span>
+  </div>
+
+
+  <!-- ========================================
+       SCAN LINES
+  ======================================== -->
+
+  <div class="scan-line"></div>
+  <div class="scan-line-reverse"></div>
+
+  <div class="scan-line-horizontal"></div>
+  <div class="scan-line-horizontal-reverse"></div>
+
+
+  <!-- ========================================
+       MENÚ HAMBURGUESA
+  ======================================== -->
+
+  <div class="menu-container">
+
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      class="menu-toggle"
+    >
+
+    <label
+      for="menu-toggle"
+      class="menu-icon"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </label>
+
+
+    <!-- Lista desplegable del menú -->
+
     <ul class="menu-list">
-      <li><a href="graphicdesign.html">FILE 001</a></li>
-      <li><a href="3dmodel.html">FILE 002</a></li>
-      <li><a href="photography.html">FILE 003</a></li>
-      <li><a href="#">FILE 004</a></li>
-      <li><a href="index.html">Inicio</a></li>
+
+      <li>
+        <span class="menu-number">001</span>
+        <a href="graphicdesign.html">
+          GRAPHIC DESIGN
+        </a>
+      </li>
+
+      <li>
+        <span class="menu-number">002</span>
+        <a href="3dmodel.html">
+          3D MODELING
+        </a>
+      </li>
+
+      <li>
+        <span class="menu-number">003</span>
+        <a href="photography.html">
+          PHOTOGRAPHY
+        </a>
+      </li>
+
+      <li>
+        <span class="menu-number">004</span>
+        <a href="#">
+          MUSIC
+        </a>
+      </li>
+
     </ul>
-  </div>
-    
-    
-  <div class="section1">
-      
-  <h1>From Idea to Reality</h1>
-  <p>"Every great creation starts with an idea, explore how my visions take shape and turn into reality."</p>
-    
-  <p>"Visions of Benas20, where creativity ignites and boundaries disappear."</p>
-    
-  </div>  
-   
-    <div class="section2">
-      
-     <div class="content-wrapper">
-       
-    <!-- Primera Sección -->
-  <div class="content">
-      <img src="img/PuffyOvni.jpg" alt="Puffy Ovni">
-    <div class="text">
-      <p>Hover Image ⬆</p>
-      <h2 class="secondtext">Puffy</h2>
-      <p class="secondtext">"What started as a shared idea, a spark between two, remains a part of us, even though the journey didn’t continue."</p>
-    </div>
-    <div class="slide-container">
-      <img src="img/PuffyJulsDesign.jpg" alt="Puffy Design">
-      <img src="img/Puffy Cartel Espacio 600.jpg" alt="Espacio 600">
-      <img src="img/PuffyLogos.jpg" alt="Puffy Logos">
-      <img src="img/PuffyDrop1.png" alt="Drop #1">
-      <p class="slide-text">Some designs and ideas from Puffy...</p>
-      <img src="img/PuffyStickerPhote.jpg" alt="Puffy">
-      <img src="img/PuffyDiseño.png" alt="PuffyOG">
-      <img src="img/PuffySudaderasPlancha.jpg" alt="Sudaderas Plancha">
-      <img src="img/PuffyJointLogos.jpg" alt="Puffy">
-   </div>
-</div>
-       
- <!-- Nueva imagen que se ocultará y estará a la derecha -->
- <!--  <img class="slide-trigger-image" src="img/Men Ovni Puffy CMYK.jpg" alt="Imagen a ocultar"> -->
- 
 
-   
-    <!-- Segunda Sección -->
-<div class="content">
-      <img src="img/WGCompany Cromado.jpg" alt="WG Design">
-    <div class="text">
-      <p>Hover Image ⬆</p>
-      <h2 class="secondtext">WG Company</h2>
-      <p class="secondtext">"A 3D model developed from scratch for a friendly project."</p>
-    </div>
-    <div class="slide-container">
-      <img src="img/WGHouse.jpg" alt="WG House">
-      <img src="img/WGHands.jpg" alt="WG Hands">
-      <img src="img/WGCar.jpg" alt="WG Car">
-      <img src="img/WGAniversario.jpg" alt="WG Aniversario">
-      <p class="slide-text">Some designs for WG Comapny</p>
-      <img src="img/WGLogosBordados.jpg" alt="Logos Efecto Bordado">
-      <img src="img/WGLogoFutbol.jpg" alt="WG Football">
-      <img src="img/WGLogoSilicona.jpg" alt="WG Logo Silicona">
-      <img src="img/WGEventoAnden.jpg" alt="WG Poster">
-   </div>
-</div>
-
-       
-    <!-- Tercera Sección -->
-    <div class="content">
-      <img src="img/vigotapes.jpg" alt="Vigo Tapes">
-    <div class="text">
-      <p>Hover Image ⬆</p>
-      <h2 class="secondtext">Intensity Skateshop</h2>
-      <p class="secondtext">"Intense designs and events for a very chill shop and people."</p>
-    </div>
-    <div class="slide-container">
-      <img src="img/InteLogo.jpg" alt="Inte Logo">
-      <img src="img/InteLogoMockUp.jpg" alt="Inte MockUp">
-      <img src="img/InteDj2.jpg" alt="InteAnniversary">
-      <img src="img/InteDiseño3.jpg" alt="InteFarola">
-      <p class="slide-text">Some designs and memories from the IntensCity...</p>
-      <img src="img/InteLogoChile.jpg" alt="Inte Logo">
-      <img src="img/InteDjBenas.jpg" alt="InteDj">
-      <img src="img/InteLiquidLogo.jpg" alt="Inte">
-      <img src="img/InteRebajasInvierno.jpg" alt="InteRebajas">
-   </div>
-</div>
-      
-    </div>
   </div>
-     
-   
- <script src="js/script3.js"></script>
-  </body>
-  
-  <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-content">
-      <p>&copy; 2026 BenAVision. All rights reserved.</p>
-    </div>
-    <div class="footer-links">
-      <ul>
-        <li><a  href="#">About</a></li>
-        <li><a  href="#">Contact</a></li>
-        <li><a  href="privacypolicy.html">Privacy Policy</a></li>
-        <li><a  href="#">Terms of Service</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
 
+  <!-- ========================================
+       GUÍAS DEL CURSOR
+  ======================================== -->
+
+  <div class="cursor-measure-x"></div>
+  <div class="cursor-measure-y"></div>
+
+
+  <!-- ========================================
+       CURSOR PERSONALIZADO
+  ======================================== -->
+
+  <div class="custom-cursor">
+
+    <div class="cursor-horizontal"></div>
+
+    <div class="cursor-vertical"></div>
+
+    <div class="cursor-circle"></div>
+
+    <div class="tick tick-top"></div>
+    <div class="tick tick-bottom"></div>
+    <div class="tick tick-left"></div>
+    <div class="tick tick-right"></div>
+
+    <div class="tick tick-diagonal-1"></div>
+    <div class="tick tick-diagonal-2"></div>
+    <div class="tick tick-diagonal-3"></div>
+    <div class="tick tick-diagonal-4"></div>
+
+  </div>
+
+
+  <!-- ========================================
+       OBSERVATION PANEL
+  ======================================== -->
+
+  <div class="cursor-info">
+
+    <div class="observation-title">
+      OBSERVATION / 01
+    </div>
+
+
+    <div class="observation-coordinates">
+
+      <div>
+        X
+        <span id="cursor-x">
+          0000.00
+        </span>
+      </div>
+
+      <div>
+        Y
+        <span id="cursor-y">
+          0000.00
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="observation-data">
+
+      <div>
+        VECTOR
+        <span id="cursor-vector">
+          000°
+        </span>
+      </div>
+
+      <div>
+        SPEED&nbsp;&nbsp;
+        <span id="cursor-speed">
+          00.00
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="observation-system">
+
+      <div>
+        SECTOR
+        <span id="cursor-sector">
+          A-01
+        </span>
+      </div>
+
+      <div>
+        STATUS /
+        <span id="cursor-status">
+          IDLE
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       GRAPHIC DESIGN
+       MAIN CONTENT
+  ======================================== -->
+
+  <main class="design-page">
+
+
+    <!-- ======================================
+         DESIGN HEADER
+    ====================================== -->
+
+    <header class="design-header">
+
+      <div class="design-header-left">
+
+        <span>
+          FILE 001
+        </span>
+
+        <span>
+          GRAPHIC DESIGN
+        </span>
+
+      </div>
+
+
+      <div class="design-header-right">
+
+        <span>
+          VISUAL ARCHIVE
+        </span>
+
+        <span>
+          STATUS / ONLINE
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <!-- ======================================
+         INTRO
+    ====================================== -->
+
+    <section class="design-intro">
+
+      <div class="design-index">
+
+        <span>
+          ARCHIVE / 001
+        </span>
+
+        <span>
+          SUBJECTS / 03
+        </span>
+
+      </div>
+
+
+      <h1 class="design-title">
+        GRAPHIC DESIGN
+      </h1>
+
+
+      <p class="design-description">
+        SELECTED VISUAL WORKS, BRAND IDENTITIES
+        AND GRAPHIC SYSTEMS.
+      </p>
+
+    </section>
+
+
+    <!-- ======================================
+         PROJECT 001
+    ====================================== -->
+
+    <article class="design-project">
+
+
+      <div class="project-number">
+        PROJECT 001
+      </div>
+
+
+      <div class="project-main">
+
+
+        <div class="project-image">
+
+          <img
+            src="img/proyecto001.jpg"
+            alt="Project 001"
+          >
+
+        </div>
+
+
+        <div class="project-info">
+
+
+          <div class="project-code">
+            BAV / GD-001
+          </div>
+
+
+          <h2>
+            BRAND NAME
+          </h2>
+
+
+          <div class="project-category">
+
+            BRAND IDENTITY<br>
+            ART DIRECTION<br>
+            GRAPHIC DESIGN
+
+          </div>
+
+
+          <div class="project-description">
+
+            <p>
+              VISUAL IDENTITY AND GRAPHIC DEVELOPMENT
+              FOR A CLOTHING BRAND.
+            </p>
+
+          </div>
+
+
+          <div class="project-data">
+
+            <span>
+              YEAR / 2025
+            </span>
+
+            <span>
+              ROLE / DESIGN
+            </span>
+
+            <span>
+              STATUS / ARCHIVED
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ======================================
+         PROJECT 002
+    ====================================== -->
+
+    <article class="design-project project-offset">
+
+
+      <div class="project-number">
+        PROJECT 002
+      </div>
+
+
+      <div class="project-main">
+
+
+        <div class="project-info">
+
+
+          <div class="project-code">
+            BAV / GD-002
+          </div>
+
+
+          <h2>
+            BRAND NAME
+          </h2>
+
+
+          <div class="project-category">
+
+            BRAND IDENTITY<br>
+            GRAPHIC DESIGN<br>
+            VISUAL SYSTEM
+
+          </div>
+
+
+          <div class="project-description">
+
+            <p>
+              SELECTED GRAPHIC MATERIAL AND VISUAL
+              DEVELOPMENT FOR A CLOTHING PROJECT.
+            </p>
+
+          </div>
+
+
+          <div class="project-data">
+
+            <span>
+              YEAR / 2025
+            </span>
+
+            <span>
+              ROLE / DESIGN
+            </span>
+
+            <span>
+              STATUS / ARCHIVED
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="project-image">
+
+          <img
+            src="img/proyecto002.jpg"
+            alt="Project 002"
+          >
+
+        </div>
+
+
+      </div>
+
+    </article>
+
+
+    <!-- ======================================
+         PROJECT 003
+         SKATE SHOP
+    ====================================== -->
+
+    <article class="design-project skate-project">
+
+
+      <div class="project-number">
+        PROJECT 003
+      </div>
+
+
+      <div class="project-main">
+
+
+        <div class="project-image project-image-large">
+
+          <img
+            src="img/proyecto003.jpg"
+            alt="Skate shop design"
+          >
+
+        </div>
+
+
+        <div class="project-info">
+
+
+          <div class="project-code">
+            BAV / GD-003
+          </div>
+
+
+          <h2>
+            SKATE SHOP
+          </h2>
+
+
+          <div class="project-category">
+
+            BRANDING<br>
+            GRAPHIC DESIGN<br>
+            ART DIRECTION<br>
+            PRINT
+
+          </div>
+
+
+          <div class="project-description">
+
+            <p>
+              GRAPHIC WORK DEVELOPED FOR A SKATE
+              SHOP AND ITS VISUAL COMMUNICATION.
+            </p>
+
+          </div>
+
+
+          <div class="project-data">
+
+            <span>
+              YEAR / 2025
+            </span>
+
+            <span>
+              ROLE / DESIGNER
+            </span>
+
+            <span>
+              LOCATION / DONOSTIA
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ======================================
+         MATERIAL ARCHIVE
+    ====================================== -->
+
+    <section class="material-archive">
+
+
+      <div class="project-number">
+        MATERIAL ARCHIVE / 004
+      </div>
+
+
+      <div class="material-header">
+
+
+        <h2>
+          ADDITIONAL MATERIAL
+        </h2>
+
+
+        <span>
+          VISUAL FRAGMENTS / UNCATALOGUED
+        </span>
+
+
+      </div>
+
+
+      <div class="material-grid">
+
+
+        <div class="material-item">
+
+          <img
+            src="img/material01.jpg"
+            alt=""
+          >
+
+        </div>
+
+
+        <div class="material-item">
+
+          <img
+            src="img/material02.jpg"
+            alt=""
+          >
+
+        </div>
+
+
+        <div class="material-item">
+
+          <img
+            src="img/material03.jpg"
+            alt=""
+          >
+
+        </div>
+
+
+        <div class="material-item">
+
+          <img
+            src="img/material04.jpg"
+            alt=""
+          >
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================
+         END OF FILE
+    ====================================== -->
+
+    <footer class="design-footer">
+
+
+      <span>
+        FILE 001 / END OF ARCHIVE
+      </span>
+
+
+      <span>
+        NEXT FILE → 002
+      </span>
+
+
+    </footer>
+
+
+  </main>
+
+
+  <!-- ========================================
+       JAVASCRIPT
+  ======================================== -->
+
+  <script>
+
+const cursor =
+  document.querySelector('.custom-cursor');
+
+const cursorX =
+  document.getElementById('cursor-x');
+
+const cursorY =
+  document.getElementById('cursor-y');
+
+const cursorVector =
+  document.getElementById('cursor-vector');
+
+const cursorSpeed =
+  document.getElementById('cursor-speed');
+
+const cursorSector =
+  document.getElementById('cursor-sector');
+
+const cursorStatus =
+  document.getElementById('cursor-status');
+
+const measureX =
+  document.querySelector('.cursor-measure-x');
+
+const measureY =
+  document.querySelector('.cursor-measure-y');
+
+
+let previousX = 0;
+let previousY = 0;
+
+let previousTime =
+  performance.now();
+
+let mouseMoving = false;
+
+let idleTimer;
+
+
+document.addEventListener(
+  'mousemove',
+  function(event) {
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const currentTime =
+      performance.now();
+
+
+    /* CURSOR */
+
+    cursor.style.left =
+      x + 'px';
+
+    cursor.style.top =
+      y + 'px';
+
+
+    /* GUÍAS */
+
+    measureX.style.left =
+      x + 'px';
+
+    measureY.style.top =
+      y + 'px';
+
+
+    /* COORDENADAS */
+
+    cursorX.textContent =
+      x.toFixed(2).padStart(7, '0');
+
+    cursorY.textContent =
+      y.toFixed(2).padStart(7, '0');
+
+
+    /* DISTANCIA */
+
+    const deltaX =
+      x - previousX;
+
+    const deltaY =
+      y - previousY;
+
+    const distance =
+      Math.sqrt(
+        deltaX * deltaX +
+        deltaY * deltaY
+      );
+
+
+    /* TIEMPO */
+
+    const deltaTime =
+      currentTime -
+      previousTime;
+
+
+    /* VELOCIDAD */
+
+    let speed = 0;
+
+    if (deltaTime > 0) {
+
+      speed =
+        distance /
+        deltaTime *
+        10;
+
+    }
+
+    speed =
+      Math.min(speed, 99.99);
+
+    cursorSpeed.textContent =
+      speed
+        .toFixed(2)
+        .padStart(5, '0');
+
+
+    /* VECTOR */
+
+    if (distance > 0.5) {
+
+      let angle =
+        Math.atan2(
+          deltaY,
+          deltaX
+        ) *
+        180 /
+        Math.PI;
+
+      angle =
+        (angle + 360) % 360;
+
+      cursorVector.textContent =
+        Math.round(angle)
+          .toString()
+          .padStart(3, '0') +
+        '°';
+
+    }
+
+
+    /* SECTOR */
+
+    const columns = 6;
+    const rows = 4;
+
+    const column =
+      Math.min(
+        columns - 1,
+        Math.floor(
+          x /
+          window.innerWidth *
+          columns
+        )
+      );
+
+    const row =
+      Math.min(
+        rows - 1,
+        Math.floor(
+          y /
+          window.innerHeight *
+          rows
+        )
+      );
+
+    const letters =
+      ['A', 'B', 'C', 'D', 'E', 'F'];
+
+    cursorSector.textContent =
+      letters[column] +
+      '-' +
+      String(row + 1)
+        .padStart(2, '0');
+
+
+    /* ESTADO */
+
+    cursorStatus.textContent =
+      'TRACKING';
+
+    mouseMoving = true;
+
+    clearTimeout(idleTimer);
+
+    idleTimer =
+      setTimeout(
+        function() {
+
+          cursorStatus.textContent =
+            'IDLE';
+
+          mouseMoving = false;
+
+        },
+        400
+      );
+
+
+    /* ACTUALIZAR */
+
+    previousX = x;
+    previousY = y;
+    previousTime = currentTime;
+
+  }
+);
+
+
+/* SALE DE LA VENTANA */
+
+document.addEventListener(
+  'mouseleave',
+  function() {
+
+    cursor.style.opacity = '0';
+
+    cursorStatus.textContent =
+      'LOST';
+
+  }
+);
+
+
+/* ENTRA EN LA VENTANA */
+
+document.addEventListener(
+  'mouseenter',
+  function() {
+
+    cursor.style.opacity = '1';
+
+    cursorStatus.textContent =
+      'TRACKING';
+
+  }
+);
+
+</script>
+
+
+</body>
 
 </html>
