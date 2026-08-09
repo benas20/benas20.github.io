@@ -119,6 +119,72 @@ a:hover {
   100% { left: 0%; }
 }
 
+
+
+/* ========================================
+   FLASH DEL CURSOR
+======================================== */
+
+.cursor-flash {
+  position: fixed;
+
+  width: 5px;
+  height: 5px;
+
+  left: 0;
+  top: 0;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #7CFF6B;
+
+  pointer-events: none;
+
+  z-index: 99998;
+
+  opacity: 0;
+
+  box-shadow:
+    0 0 5px #7CFF6B,
+    0 0 14px rgba(124, 255, 107, 0.7);
+}
+
+
+.cursor-flash.active {
+  animation:
+    cursorFlash
+    0.35s
+    ease-out;
+}
+
+
+@keyframes cursorFlash {
+
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  20% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(3);
+  }
+
+}
+
 /* Bloques transparentes compartidos */
 .system-header,
 .archive-location,
