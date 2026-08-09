@@ -65,7 +65,7 @@ a:hover {
   pointer-events: none;
   z-index: 3;
   background: #7CFF6B;
-  opacity: 0.35;
+  opacity: 0.05;
 }
 
 /* Vertical de arriba abajo */
@@ -78,11 +78,11 @@ a:hover {
 }
 
 .scan-line {
-  animation: scanMove 6s linear infinite alternate;
+  animation: scanMove 12s ease-in-out infinite alternate;
 }
 
 .scan-line-reverse {
-  animation: scanMoveReverse 6s linear infinite alternate;
+  animation: scanMoveReverse 6s ease-in-out infinite alternate;
 }
 
 @keyframes scanMove {
