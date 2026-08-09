@@ -42,54 +42,34 @@ body {
 ======================================== */
 
 .scan-line {
-
     position: fixed;
-
     left: 0;
-
     top: 0;
-
     width: 100%;
-
     height: 1px;
-
     background: #7CFF6B;
-
     opacity: 0.035;
-
     pointer-events: none;
-
     z-index: 3;
-
     animation:
         scanMove 12s linear infinite;
-
-}
-
-
+  }
 @keyframes scanMove {
 
-    0% {
-
-        top: 0%;
-
+    0% { 
+     top: 0%;
     }
-
     100% {
-
-        top: 100%;
-
+      top: 100%;
     }
-
 }
-
 
 /* ========================================
    SYSTEM HEADER
 ======================================== */
 
 .system-header {
-
+  
     position: fixed;
     top: 25px;
     left: 30px;
@@ -105,15 +85,18 @@ body {
     opacity: 0.65;
     pointer-events: none;
 }
-/* ONLINE */
 
+/* ONLINE */
 .system-online {
+  
     display: flex;
     align-items: center;
     gap: 6px;
 }
+
 /* GREEN STATUS */
 .system-online i {
+  
     display: block;
     width: 4px;
     height: 4px;
@@ -127,7 +110,6 @@ body {
     0%, 100% {
         opacity: 0.35;
     }
-
     50% {
         opacity: 1;
     }
@@ -136,7 +118,6 @@ body {
 /* ========================================
    ARCHIVE LOCATION
 ======================================== */
-
 .archive-location {
     position: fixed;
     top: 85px;
@@ -154,104 +135,67 @@ body {
 /* ========================================
    MEASUREMENT SYSTEM
 ======================================== */
-
 .measurement-x {
 
     position: fixed;
-
     top: 55px;
     left: 0;
     right: 0;
-
     display: flex;
-
     justify-content: space-around;
-
     color: #48535c;
-
     font-family: Arial, sans-serif;
-
     font-size: 7px;
-
     letter-spacing: 1px;
-
     opacity: 0.22;
-
     pointer-events: none;
-
 }
-
 
 .measurement-y {
 
     position: fixed;
-
     top: 0;
     bottom: 0;
-
     left: 12px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-around;
-
     color: #48535c;
-
     font-family: Arial, sans-serif;
-
     font-size: 7px;
-
     letter-spacing: 1px;
-
     opacity: 0.22;
-
     pointer-events: none;
-
 }
-
 
 /* Cursor horizontal measurement */
 
 .cursor-measure-x {
-
+  
     position: fixed;
-
     top: 0;
-
     width: 1px;
     height: 100vh;
-
     background: #7CFF6B;
-
     opacity: 0.10;
-
     pointer-events: none;
-
 }
-
 
 /* Cursor vertical measurement */
 
 .cursor-measure-y {
 
     position: fixed;
-
     left: 0;
-
     width: 100vw;
     height: 1px;
-
     background: #7CFF6B;
-
     opacity: 0.10;
-
     pointer-events: none;
-
 }
 
 body h1 {
+  
   font-family: black, Arial;
   text-align: center;
   font-size: 200px;
@@ -259,7 +203,9 @@ body h1 {
   margin-top: 0;
   color: #48535c;
 }
+
 body p {
+  
   text-align: center;
   filter: blur(0.7px);
   margin-top: 20px;
@@ -279,15 +225,19 @@ body p {
 ======================================== */
 
 .menu-container {
+  
     position: absolute;
     top: 25px;
     right: 30px;
     z-index: 10000;
 }
+
 /* ========================================
    HIDDEN CHECKBOX
 ======================================== */
+
 .menu-toggle {
+  
     display: none;
 }
 /* ========================================
@@ -295,6 +245,7 @@ body p {
 ======================================== */
 
 .menu-icon {
+  
     width: 30px;
     height: 30px;
     display: flex;
@@ -309,6 +260,7 @@ body p {
    MENU LINES
 ======================================== */
 .menu-icon span {
+  
     display: block;
     width: 22px;
     height: 1px;
@@ -318,6 +270,7 @@ body p {
         width 0.35s ease,
         opacity 0.35s ease;
 }
+
 /* ========================================
    HOVER
 ======================================== */
@@ -325,15 +278,19 @@ body p {
 .menu-icon:hover span:nth-child(1) {
     width: 16px;
 }
+
 .menu-icon:hover span:nth-child(2) {
     width: 22px;
 }
+
 .menu-icon:hover span:nth-child(3) {
     width: 16px;
 }
+
 /* ========================================
    OPEN STATE
 ======================================== */
+
 .menu-toggle:checked + .menu-icon span:nth-child(1) {
     transform:
         translateY(6px)
@@ -349,9 +306,11 @@ body p {
         translateY(-6px)
         rotate(-45deg);
 }
+
 /* ========================================
    MENU LIST
 ======================================== */
+
 .menu-list {
     position: absolute;
     top: 42px;
@@ -371,14 +330,17 @@ body p {
         transform 0.3s ease,
         visibility 0.3s ease;
 }
+
 /* ========================================
    OPEN MENU
 ======================================== */
+
 .menu-toggle:checked + .menu-icon + .menu-list {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
+
 /* ========================================
    MENU ITEMS
 ======================================== */
@@ -392,6 +354,7 @@ body p {
     border-bottom: 1px solid rgba(72, 83, 92, 0.25);
 
 }
+
 .menu-list li:last-child {
     border-bottom: none;
 }
@@ -406,6 +369,7 @@ body p {
     color: #7CFF6B;
     opacity: 0.75;
 }
+
 /* ========================================
    LINKS
 ======================================== */
@@ -424,6 +388,7 @@ body p {
         transform 0.3s ease;
 
 }
+
 /* ========================================
    LINK HOVER
 ======================================== */
@@ -450,9 +415,11 @@ body p {
     transform-origin: center;
     transition: transform 0.3s ease;
 }
+
 .menu-list li:hover::before {
     transform: scaleY(1);
 }
+
 /* Section 1 */
 
 .section1 {
@@ -473,6 +440,7 @@ body p {
   margin-top: 100px;
   margin-bottom: 100px;
 }
+
 .typing-title {
     display: flex;
     justify-content: center;
@@ -503,7 +471,6 @@ body p {
 .typing-title span:nth-child(12) { animation-delay: 0.88s; }
 .typing-title span:nth-child(13) { animation-delay: 0.96s; }
 
-
 @keyframes letterReveal {
     from {
         opacity: 0;
@@ -517,6 +484,7 @@ body p {
 }
 
 .menu-list2 {
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -527,10 +495,12 @@ body p {
 }
 
 .menu-list2 li {
+  
   position: relative;
 }
 
 .menu-list2 li:not(:last-child)::after {
+  
   content: "/";
   position: absolute;
   right: -12px;
@@ -538,6 +508,7 @@ body p {
 }
 
 .menu-list2 a {
+  
   color: #48535c;
   text-decoration: none;
   font-family: "Cormorant Garamond", serif;
@@ -548,6 +519,7 @@ body p {
 }
 
 .menu-list2 a:hover {
+  
   color: #48535c;
   letter-spacing: 5px;
 }
@@ -555,6 +527,7 @@ body p {
 /* Section 2 */
 
 .section2 {
+  
   background-color: transparent;
   width: 100%;
   max-width: 100%;
@@ -567,6 +540,7 @@ body p {
 }
 
 .card {
+  
   width: 550px;
   height: 260px;
   display: flex;
@@ -581,16 +555,19 @@ body p {
 }
 
 .card:hover {
+  
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0,0,0,.18);
 }
 
 .card-image {
+  
   width: 42%;
   height: 100%;
 }
 
 .card-image img {
+  
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -599,6 +576,7 @@ body p {
 }
 
 .card-content {
+  
   width: 58%;
   padding: 35px;
   display: flex;
@@ -607,6 +585,7 @@ body p {
 }
 
 .card-content h2 {
+  
   margin: 0;
   font-size: 38px;
   font-family: "Cormorant Garamond", serif;
@@ -616,6 +595,7 @@ body p {
 }
 
 .card-content p {
+  
   margin: 20px 0 30px;
   font-size: 18px;
   line-height: 1.7;
@@ -625,6 +605,7 @@ body p {
 }
 
 .card-content a {
+  
   align-self: flex-start;
   color: #48535c;
   text-decoration: none;
@@ -636,15 +617,18 @@ body p {
 }
 
 .card-content a:hover {
+  
   letter-spacing: 6px;
 }
 
 .card-info {
+  
   text-align: left;
   padding: 5px 100px 10px 75px;
 }
 
 .card-info h2 {
+  
   margin-bottom: 30px;
   color: #48535c;
   font-family: "Cormorant Garamond", serif;
@@ -654,6 +638,7 @@ body p {
 }
 
 .card-info p {
+  
   margin: 5px 0px;
   color: #48535c;
   font-family: "Cormorant Garamond", serif;
@@ -664,6 +649,7 @@ body p {
 }
 
 .card-info a {
+  
   display: inline-block;
   color: #48535c;
   text-decoration: none;
@@ -674,11 +660,13 @@ body p {
 }
 
 .card-info a:hover {
+  
   background: #e7e0d1;
   color: #48535c;
 }
 
 hr {
+  
   width: 70px;
   height: 1px;
   margin: 0;
@@ -690,6 +678,7 @@ hr {
 /* Footer */
 
 .footer {
+  
   background: transparent;
   color: #48535c;
   padding: 50px 0;
@@ -698,6 +687,7 @@ hr {
 }
 
 .footer-container {
+  
   background: transparent;
   display: flex;
   justify-content: space-between;
@@ -708,12 +698,14 @@ hr {
 }
 
 .footer-content {
+  
   background: transparent;
   flex: 1;
   font-size: 14px;
 }
 
 .footer-content p {
+  
   background: transparent;
   font-size: 16px;
   margin: 0;
@@ -722,6 +714,7 @@ hr {
 }
 
 .footer-links {
+  
   background: transparent;
   flex: 1;
   display: flex;
@@ -729,6 +722,7 @@ hr {
 }
 
 .footer-links ul {
+  
   background: transparent;
   list-style-type: none;
   padding: 0;
@@ -738,10 +732,12 @@ hr {
 }
 
 .footer-links li {
+  
   background: transparent;
 }
 
 .footer-links li a {
+  
   background: transparent;
   color: #e7e0d1;
   text-decoration: none;
@@ -750,6 +746,7 @@ hr {
 }
 
 .footer-links li a:hover {
+  
   color: #48535c;
   text-decoration: underline;
 }
@@ -758,16 +755,17 @@ hr {
    CUSTOM CURSOR
 ======================================== */
 
-html,
-body {
+html,body {
     cursor: none;
     caret-color: transparent;
 }
+
 /* =======================================
    RETICLE
 ======================================== */
 
 .custom-cursor {
+  
     position: fixed;
     width: 42px;
     height: 42px;
@@ -780,11 +778,13 @@ body {
     transition:
         opacity 0.3s ease;
 }
+
 /* ========================================
    MAIN CROSS
 ======================================== */
 
 .cursor-horizontal {
+  
     position: absolute;
     width: 34px;
     height: 1px;
@@ -793,7 +793,9 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 .cursor-vertical {
+  
     position: absolute;
     width: 1px;
     height: 34px;
@@ -808,6 +810,7 @@ body {
 ======================================== */
 
 .cursor-circle {
+  
     position: absolute;
     width: 8px;
     height: 8px;
@@ -823,6 +826,7 @@ body {
 ======================================== */
 
 .tick {
+  
     position: absolute;
     width: 5px;
     height: 1px;
@@ -850,6 +854,7 @@ body {
         translateX(-50%)
         rotate(90deg);
 }
+
 /* LEFT */
 
 .tick-left {
@@ -879,18 +884,21 @@ body {
 }
 
 .tick-diagonal-2 {
+  
     right: 7px;
     top: 7px;
     transform: rotate(-45deg);
 }
 
 .tick-diagonal-3 {
+  
     left: 7px;
     bottom: 7px;
     transform: rotate(-45deg);
 }
 
 .tick-diagonal-4 {
+  
     right: 7px;
     bottom: 7px;
     transform: rotate(45deg);
@@ -900,6 +908,7 @@ body {
 ======================================== */
 
 .cursor-info {
+  
     position: fixed;
     left: 28px;
     bottom: 25px;
@@ -928,11 +937,12 @@ body {
 
     /* Very subtle glow */
   
-    box-shadow:
-        0 0 18px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
     opacity: 0.9;
 }
+
 .cursor-info::before {
+  
     content: "";
     position: absolute;
     top: -1px;
@@ -942,7 +952,9 @@ body {
     background: #7CFF6B;
     opacity: 0.8;
 }
+
 .cursor-info::after {
+  
     content: "SYS";
     position: absolute;
     right: 12px;
@@ -951,29 +963,38 @@ body {
     letter-spacing: 2px;
     opacity: 0.35;
 }
+
 .observation-title {
+  
     font-size: 9px;
     letter-spacing: 2.5px;
     margin-bottom: 10px;
     opacity: 0.95;
 }
+
 .observation-coordinates {
+  
     padding-bottom: 8px;
     margin-bottom: 8px;
     border-bottom:
         1px solid rgba(124, 255, 107, 0.12);
     opacity: 0.9;
 }
+
 .observation-data {
+  
     padding-bottom: 8px;
     margin-bottom: 8px;
     border-bottom:
         1px solid rgba(124, 255, 107, 0.12);
     opacity: 0.65;
 }
+
 .observation-system {
+  
     opacity: 0.5;
 }
+
 /* ========================================
    NUMBERS
 ======================================== */
