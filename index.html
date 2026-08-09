@@ -195,98 +195,305 @@
   </div>
 
   <!-- Script para movimiento del cursor e información dinámica -->
-  <script>
-    const cursor = document.querySelector('.custom-cursor');
-    const cursorX = document.getElementById('cursor-x');
-    const cursorY = document.getElementById('cursor-y');
-    const cursorVector = document.getElementById('cursor-vector');
-    const cursorSpeed = document.getElementById('cursor-speed');
-    const cursorSector = document.getElementById('cursor-sector');
-    const cursorStatus = document.getElementById('cursor-status');
-    const measureX = document.querySelector('.cursor-measure-x');
-    const measureY = document.querySelector('.cursor-measure-y');
-
-    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-
-    let previousX = 0;
-    let previousY = 0;
-    let previousTime = performance.now();
-    let idleTimer;
-
-    document.addEventListener('mousemove', (event) => {
-      const x = event.clientX;
-      const y = event.clientY;
-      const currentTime = performance.now();
-
-      measureX.style.left = `${x}px`;
-      measureY.style.top = `${y}px`;
-      cursor.style.left = `${x}px`;
-      cursor.style.top = `${y}px`;
-
-      cursorX.textContent = x.toFixed(2).padStart(7, '0');
-      cursorY.textContent = y.toFixed(2).padStart(7, '0');
-
-      const deltaX = x - previousX;
-      const deltaY = y - previousY;
-      const distance = Math.hypot(deltaX, deltaY);
-      const deltaTime = currentTime - previousTime;
-
-      const speed = Math.min(deltaTime > 0 ? (distance / deltaTime) * 10 : 0, 99.99);
-      cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
-
-      if (distance > 0.5) {
-        const angle = (Math.atan2(deltaY, deltaX) * 180 / Math.PI + 360) % 360;
-        cursorVector.textContent = `${Math.round(angle).toString().padStart(3, '0')}°`;
-      }
-
-      const column = Math.min(5, Math.floor((x / window.innerWidth) * 6));
-      const row = Math.min(3, Math.floor((y / window.innerHeight) * 4));
-      cursorSector.textContent = `${letters[column]}-${String(row + 1).padStart(2, '0')}`;
-
-      cursorStatus.textContent = 'TRACKING';
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => {
-        cursorStatus.textContent = 'IDLE';
-      }, 400);
-
-      previousX = x;
-      previousY = y;
-      previousTime = currentTime;
-    });
-
-    document.addEventListener('mouseleave', () => {
-      cursor.style.opacity = '0';
-      cursorStatus.textContent = 'LOST';
-    });
-
-    document.addEventListener('mouseenter', () => {
-      cursor.style.opacity = '1';
-      cursorStatus.textContent = 'TRACKING';
-    });
-
-    /* ========================================
-    CLICK FLASH
-    ======================================== */
-
-    document.addEventListener(
-      'click',
-      function(event) {
-        cursorFlash.style.left =
-          event.clientX + 'px';  
+          <script>
         
-        cursorFlash.style.top =
-          event.clientY + 'px';   
+        const cursor =
+          document.querySelector('.custom-cursor');
         
-        cursorFlash.classList.remove('active');
-    
-        /* Reinicia la animación */
+        const cursorX =
+          document.getElementById('cursor-x');
         
-        void cursorFlash.offsetWidth;
-        cursorFlash.classList.add('active');
-
-  
-);
-  </script>
+        const cursorY =
+          document.getElementById('cursor-y');
+        
+        const cursorVector =
+          document.getElementById('cursor-vector');
+        
+        const cursorSpeed =
+          document.getElementById('cursor-speed');
+        
+        const cursorSector =
+          document.getElementById('cursor-sector');
+        
+        const cursorStatus =
+          document.getElementById('cursor-status');
+        
+        const measureX =
+          document.querySelector('.cursor-measure-x');
+        
+        const measureY =
+          document.querySelector('.cursor-measure-y');
+        
+        
+        /* ========================================
+           CURSOR FLASH
+        ======================================== */
+        
+        const cursorFlash =
+          document.querySelector('.cursor-flash');
+        
+        
+        /* ========================================
+           SECTORS
+        ======================================== */
+        
+        const letters =
+          ['A', 'B', 'C', 'D', 'E', 'F'];
+        
+        
+        /* ========================================
+           MOUSE DATA
+        ======================================== */
+        
+        let previousX = 0;
+        let previousY = 0;
+        
+        let previousTime =
+          performance.now();
+        
+        let idleTimer;
+        
+        
+        /* ========================================
+           MOUSE MOVEMENT
+        ======================================== */
+        
+        document.addEventListener(
+          'mousemove',
+          (event) => {
+        
+            const x = event.clientX;
+            const y = event.clientY;
+        
+            const currentTime =
+              performance.now();
+        
+        
+            /* CURSOR */
+        
+            measureX.style.left =
+              `${x}px`;
+        
+            measureY.style.top =
+              `${y}px`;
+        
+            cursor.style.left =
+              `${x}px`;
+        
+            cursor.style.top =
+              `${y}px`;
+        
+        
+            /* COORDINATES */
+        
+            cursorX.textContent =
+              x
+                .toFixed(2)
+                .padStart(7, '0');
+        
+            cursorY.textContent =
+              y
+                .toFixed(2)
+                .padStart(7, '0');
+        
+        
+            /* DISTANCE */
+        
+            const deltaX =
+              x - previousX;
+        
+            const deltaY =
+              y - previousY;
+        
+            const distance =
+              Math.hypot(
+                deltaX,
+                deltaY
+              );
+        
+        
+            /* TIME */
+        
+            const deltaTime =
+              currentTime -
+              previousTime;
+        
+        
+            /* SPEED */
+        
+            const speed =
+              Math.min(
+                deltaTime > 0
+                  ? (distance / deltaTime) * 10
+                  : 0,
+                99.99
+              );
+        
+            cursorSpeed.textContent =
+              speed
+                .toFixed(2)
+                .padStart(5, '0');
+        
+        
+            /* VECTOR */
+        
+            if (distance > 0.5) {
+        
+              const angle =
+                (
+                  Math.atan2(
+                    deltaY,
+                    deltaX
+                  ) *
+                  180 /
+                  Math.PI +
+                  360
+                ) % 360;
+        
+              cursorVector.textContent =
+                Math.round(angle)
+                  .toString()
+                  .padStart(3, '0') +
+                '°';
+            }
+        
+        
+            /* SECTOR */
+        
+            const column =
+              Math.min(
+                5,
+                Math.floor(
+                  (x / window.innerWidth) * 6
+                )
+              );
+        
+            const row =
+              Math.min(
+                3,
+                Math.floor(
+                  (y / window.innerHeight) * 4
+                )
+              );
+        
+            cursorSector.textContent =
+              `${letters[column]}-${String(row + 1).padStart(2, '0')}`;
+        
+        
+            /* STATUS */
+        
+            cursorStatus.textContent =
+              'TRACKING';
+        
+        
+            clearTimeout(
+              idleTimer
+            );
+        
+        
+            idleTimer =
+              setTimeout(
+                () => {
+        
+                  cursorStatus.textContent =
+                    'IDLE';
+        
+                },
+                400
+              );
+        
+        
+            /* UPDATE */
+        
+            previousX = x;
+            previousY = y;
+            previousTime = currentTime;
+        
+          }
+        );
+        
+        
+        /* ========================================
+           CLICK FLASH
+        ======================================== */
+        
+        document.addEventListener(
+          'click',
+          function(event) {
+        
+            /* Posición del click */
+        
+            cursorFlash.style.left =
+              event.clientX + 'px';
+        
+            cursorFlash.style.top =
+              event.clientY + 'px';
+        
+        
+            /* Reiniciar animación */
+        
+            cursorFlash.classList.remove(
+              'active'
+            );
+        
+        
+            /* Forzar reinicio */
+        
+            void cursorFlash.offsetWidth;
+        
+        
+            /* Activar flash */
+        
+            cursorFlash.classList.add(
+              'active'
+            );
+        
+          }
+        );
+        
+        
+        /* ========================================
+           MOUSE LEAVES WINDOW
+        ======================================== */
+        
+        document.addEventListener(
+          'mouseleave',
+          () => {
+        
+            cursor.style.opacity =
+              '0';
+        
+            cursorFlash.style.opacity =
+              '0';
+        
+            cursorStatus.textContent =
+              'LOST';
+        
+          }
+        );
+        
+        
+        /* ========================================
+           MOUSE ENTERS WINDOW
+        ======================================== */
+        
+        document.addEventListener(
+          'mouseenter',
+          () => {
+        
+            cursor.style.opacity =
+              '1';
+        
+            cursorFlash.style.opacity =
+              '0';
+        
+            cursorStatus.textContent =
+              'TRACKING';
+        
+          }
+        );
+        
+        </script>
     
   </body>
 </html>
