@@ -744,7 +744,7 @@ hr {
   font-size: 16px;
   margin: 0;
   font-weight: 300;
-  color: #e7e0d1;
+  color: #e8d9b8 !important;
 }
 
 .footer-links {
@@ -773,8 +773,9 @@ hr {
 .footer-links li a {
   
   background: transparent;
-  color: #e7e0d1;
+  color: #e8d9b8;
   text-decoration: none;
+  filter: blur(0.7px);
   font-weight: 500;
   transition: color 0.3s ease-in-out;
 }
