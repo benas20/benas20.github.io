@@ -15,17 +15,13 @@ html, body {
     margin: 0;
     overflow-x: hidden;
     background-image:
-        url("/img/rene1.jpg"),
-        url("/img/rene2.jpg");
+        url("/img/IndexBGPrueba.jpg");
     background-repeat:
-        no-repeat,
         no-repeat;
     background-position:
-        center top,
-        center 1080px;
+        center;
     background-size:
-        100% 1080px,
-        100% 1080px;
+        2080px;
     color: #48535c;
     cursor: none;
     caret-color: transparent;
