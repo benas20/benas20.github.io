@@ -682,92 +682,168 @@
        JAVASCRIPT
   ======================================== -->
 
-  <script>
+  <!-- ========================================
+     JAVASCRIPT
+======================================== -->
+
+<script>
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
 
 const cursor =
   document.querySelector('.custom-cursor');
 
+
 const cursorX =
   document.getElementById('cursor-x');
+
 
 const cursorY =
   document.getElementById('cursor-y');
 
+
 const cursorVector =
   document.getElementById('cursor-vector');
+
 
 const cursorSpeed =
   document.getElementById('cursor-speed');
 
+
 const cursorSector =
   document.getElementById('cursor-sector');
+
 
 const cursorStatus =
   document.getElementById('cursor-status');
 
+
 const measureX =
   document.querySelector('.cursor-measure-x');
+
 
 const measureY =
   document.querySelector('.cursor-measure-y');
 
 
+/* ========================================
+   CURSOR FLASH
+======================================== */
+
+
+const cursorFlash =
+  document.querySelector('.cursor-flash');
+
+
+/* ========================================
+   MOUSE DATA
+======================================== */
+
+
 let previousX = 0;
 let previousY = 0;
+
 
 let previousTime =
   performance.now();
 
+
 let mouseMoving = false;
 
+
 let idleTimer;
+
+
+/* ========================================
+   MOUSE MOVEMENT
+======================================== */
 
 
 document.addEventListener(
   'mousemove',
   function(event) {
 
+
     const x = event.clientX;
     const y = event.clientY;
+
 
     const currentTime =
       performance.now();
 
 
-    /* CURSOR */
+    /* ==================================
+       MOVE RETICLE
+    ================================== */
+
 
     cursor.style.left =
       x + 'px';
+
 
     cursor.style.top =
       y + 'px';
 
 
-    /* GUÍAS */
+    /* ==================================
+       MOVE CURSOR GUIDES
+    ================================== */
+
 
     measureX.style.left =
       x + 'px';
+
 
     measureY.style.top =
       y + 'px';
 
 
-    /* COORDENADAS */
+    /* ==================================
+       MOVE FLASH POSITION
+    ================================== */
+
+
+    cursorFlash.style.left =
+      x + 'px';
+
+
+    cursorFlash.style.top =
+      y + 'px';
+
+
+    /* ==================================
+       COORDINATES
+    ================================== */
+
 
     cursorX.textContent =
-      x.toFixed(2).padStart(7, '0');
+      x
+        .toFixed(2)
+        .padStart(7, '0');
+
 
     cursorY.textContent =
-      y.toFixed(2).padStart(7, '0');
+      y
+        .toFixed(2)
+        .padStart(7, '0');
 
 
-    /* DISTANCIA */
+    /* ==================================
+       DISTANCE
+    ================================== */
+
 
     const deltaX =
       x - previousX;
 
+
     const deltaY =
       y - previousY;
+
 
     const distance =
       Math.sqrt(
@@ -776,16 +852,23 @@ document.addEventListener(
       );
 
 
-    /* TIEMPO */
+    /* ==================================
+       TIME
+    ================================== */
+
 
     const deltaTime =
       currentTime -
       previousTime;
 
 
-    /* VELOCIDAD */
+    /* ==================================
+       SPEED
+    ================================== */
+
 
     let speed = 0;
+
 
     if (deltaTime > 0) {
 
@@ -796,8 +879,13 @@ document.addEventListener(
 
     }
 
+
     speed =
-      Math.min(speed, 99.99);
+      Math.min(
+        speed,
+        99.99
+      );
+
 
     cursorSpeed.textContent =
       speed
@@ -805,9 +893,13 @@ document.addEventListener(
         .padStart(5, '0');
 
 
-    /* VECTOR */
+    /* ==================================
+       VECTOR
+    ================================== */
+
 
     if (distance > 0.5) {
+
 
       let angle =
         Math.atan2(
@@ -817,8 +909,12 @@ document.addEventListener(
         180 /
         Math.PI;
 
+
+      /* Convert to 0-360 */
+
       angle =
         (angle + 360) % 360;
+
 
       cursorVector.textContent =
         Math.round(angle)
@@ -829,10 +925,14 @@ document.addEventListener(
     }
 
 
-    /* SECTOR */
+    /* ==================================
+       SECTOR
+    ================================== */
+
 
     const columns = 6;
     const rows = 4;
+
 
     const column =
       Math.min(
@@ -844,6 +944,7 @@ document.addEventListener(
         )
       );
 
+
     const row =
       Math.min(
         rows - 1,
@@ -854,8 +955,17 @@ document.addEventListener(
         )
       );
 
+
     const letters =
-      ['A', 'B', 'C', 'D', 'E', 'F'];
+      [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F'
+      ];
+
 
     cursorSector.textContent =
       letters[column] +
@@ -864,67 +974,159 @@ document.addEventListener(
         .padStart(2, '0');
 
 
-    /* ESTADO */
+    /* ==================================
+       STATUS
+    ================================== */
+
 
     cursorStatus.textContent =
       'TRACKING';
 
+
     mouseMoving = true;
 
-    clearTimeout(idleTimer);
+
+    /* ==================================
+       RESET IDLE TIMER
+    ================================== */
+
+
+    clearTimeout(
+      idleTimer
+    );
+
 
     idleTimer =
       setTimeout(
         function() {
 
+
           cursorStatus.textContent =
             'IDLE';
 
+
           mouseMoving = false;
+
 
         },
         400
       );
 
 
-    /* ACTUALIZAR */
+    /* ==================================
+       UPDATE PREVIOUS DATA
+    ================================== */
+
 
     previousX = x;
+
     previousY = y;
-    previousTime = currentTime;
+
+    previousTime =
+      currentTime;
+
 
   }
 );
 
 
-/* SALE DE LA VENTANA */
+/* ========================================
+   CLICK FLASH
+======================================== */
+
+
+document.addEventListener(
+  'click',
+  function(event) {
+
+
+    /* Position of the click */
+
+    cursorFlash.style.left =
+      event.clientX + 'px';
+
+
+    cursorFlash.style.top =
+      event.clientY + 'px';
+
+
+    /* Reset animation */
+
+    cursorFlash.classList.remove(
+      'active'
+    );
+
+
+    /*
+       Force the browser to restart
+       the animation.
+    */
+
+    void cursorFlash.offsetWidth;
+
+
+    /* Trigger flash */
+
+    cursorFlash.classList.add(
+      'active'
+    );
+
+
+  }
+);
+
+
+/* ========================================
+   MOUSE LEAVES WINDOW
+======================================== */
+
 
 document.addEventListener(
   'mouseleave',
   function() {
 
-    cursor.style.opacity = '0';
+
+    cursor.style.opacity =
+      '0';
+
+
+    cursorFlash.style.opacity =
+      '0';
+
 
     cursorStatus.textContent =
       'LOST';
+
 
   }
 );
 
 
-/* ENTRA EN LA VENTANA */
+/* ========================================
+   MOUSE ENTERS WINDOW
+======================================== */
+
 
 document.addEventListener(
   'mouseenter',
   function() {
 
-    cursor.style.opacity = '1';
+
+    cursor.style.opacity =
+      '1';
+
+
+    cursorFlash.style.opacity =
+      '0';
+
 
     cursorStatus.textContent =
       'TRACKING';
 
+
   }
 );
+
 
 </script>
 
