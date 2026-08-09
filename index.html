@@ -109,69 +109,278 @@
       </div>
     </footer>
 
-          <!-- CUSTOM CURSOR -->
-          <div class="custom-cursor">
-              <div class="cursor-horizontal"></div>
-              <div class="cursor-vertical"></div>
-              <div class="cursor-circle"></div>
-          </div>
+          <!-- ========================================
+     CUSTOM CURSOR
+======================================== -->
+
+<div class="custom-cursor">
+
+    <div class="cursor-horizontal"></div>
+    <div class="cursor-vertical"></div>
+
+    <div class="cursor-circle"></div>
+
+    <!-- TICKS HORIZONTALES -->
+    <div class="tick tick-top"></div>
+    <div class="tick tick-bottom"></div>
+
+    <!-- TICKS VERTICALES -->
+    <div class="tick tick-left"></div>
+    <div class="tick tick-right"></div>
+
+    <!-- TICKS DIAGONALES -->
+    <div class="tick tick-diagonal-1"></div>
+    <div class="tick tick-diagonal-2"></div>
+    <div class="tick tick-diagonal-3"></div>
+    <div class="tick tick-diagonal-4"></div>
+
+</div>
+
+
+<!-- ========================================
+     OBSERVATION DATA
+======================================== -->
+
+        <div class="cursor-info">
+        
+            <div class="observation-title">
+                OBSERVATION / 01
+            </div>
+        
+            <div class="observation-coordinates">
+                <div>
+                    X <span id="cursor-x">0000.00</span>
+                </div>
+                <div>
+                    Y <span id="cursor-y">0000.00</span>
+                </div>
+            </div>
+        
+            <div class="observation-data">
+                <div>
+                    VECTOR <span id="cursor-vector">000°</span>
+                </div>
+                <div>
+                    SPEED&nbsp;&nbsp; <span id="cursor-speed">00.00</span>
+                </div>
+            </div>
+        
+            <div class="observation-system">
+                <div>
+                    SECTOR <span id="cursor-sector">A-01</span>
+                </div>
+                <div>
+                    STATUS / <span id="cursor-status">IDLE</span>
+                </div>
+            </div>
+        </div>
+
+        <script>
           
-          <!-- COORDENADAS -->
-          <div class="cursor-info">
-              X <span id="cursor-x">0000</span>
-              &nbsp;&nbsp;
-              Y <span id="cursor-y">0000</span>
-          </div>
-
-          <script>
-
-const cursor = document.querySelector('.custom-cursor');
-
-const cursorX = document.getElementById('cursor-x');
-const cursorY = document.getElementById('cursor-y');
-
-
-document.addEventListener('mousemove', function(event) {
-
-    const x = event.clientX;
-    const y = event.clientY;
-
-
-    /* Mover retícula */
-
-    cursor.style.left = x + 'px';
-    cursor.style.top = y + 'px';
-
-
-    /* Coordenadas */
-
-    cursorX.textContent = String(x).padStart(4, '0');
-    cursorY.textContent = String(y).padStart(4, '0');
-
-});
-
-
-/* Ocultar la retícula cuando el ratón sale de la página */
-
-document.addEventListener('mouseleave', function() {
-
-    cursor.style.opacity = '0';
-
-});
-
-
-/* Mostrarla de nuevo */
-
-document.addEventListener('mouseenter', function() {
-
-    cursor.style.opacity = '1';
-
-});
-
-</script>
-    
+          /* ========================================
+             ELEMENTS
+          ======================================== */
+          
+          const cursor =
+              document.querySelector('.custom-cursor');
+          const cursorX =
+              document.getElementById('cursor-x');          
+          const cursorY =
+              document.getElementById('cursor-y');         
+          const cursorVector =
+              document.getElementById('cursor-vector');        
+          const cursorSpeed =
+              document.getElementById('cursor-speed');        
+          const cursorSector =
+              document.getElementById('cursor-sector');       
+          const cursorStatus =
+              document.getElementById('cursor-status');   
+          /* ========================================
+             MOUSE DATA
+          ======================================== */
+          
+          let previousX = 0;
+          let previousY = 0;
+          let previousTime = performance.now();        
+          let mouseMoving = false;       
+          let idleTimer;      
+          
+          /* ========================================
+             MOUSE MOVEMENT
+          ======================================== */
+          
+          document.addEventListener(
+              'mousemove',
+              function(event) {
+                  const x = event.clientX;
+                  const y = event.clientY;
+                  const currentTime = performance.now();         
+          
+                  /* ==================================
+                     MOVE RETICLE
+                  ================================== */
+        
+                  cursor.style.left =
+                      x + 'px';
+                  cursor.style.top =
+                      y + 'px';          
+                  /* ==================================
+                     COORDINATES
+                  ================================== */
+          
+                  cursorX.textContent =
+                      x.toFixed(2).padStart(7, '0');
+          
+                  cursorY.textContent =
+                      y.toFixed(2).padStart(7, '0');
+                  /* ==================================
+                     DISTANCE
+                  ================================== */
+          
+                  const deltaX =
+                      x - previousX;
+                  const deltaY =
+                      y - previousY;          
+                  const distance =
+                      Math.sqrt(
+                          deltaX * deltaX +
+                          deltaY * deltaY
+                      );      
+                  /* ==================================
+                     TIME
+                  ================================== */
+          
+                  const deltaTime =
+                      currentTime -
+                      previousTime;
+                  
+                  /* ==================================
+                     SPEED
+                  ================================== */
+          
+                  let speed = 0;   
+                  if (deltaTime > 0) {     
+                      speed =
+                          distance /
+                          deltaTime *
+                          10;  
+                  } 
+                  /* Limit speed */  
+                  speed =
+                      Math.min(speed, 99.99);
+                
+                  cursorSpeed.textContent =
+                      speed.toFixed(2).padStart(5, '0');
+          
+                  /* ==================================
+                     VECTOR
+                  ================================== */
+          
+                  if (distance > 0.5) {
+                      let angle =
+                          Math.atan2(
+                              deltaY,
+                              deltaX
+                          ) *
+                          180 /
+                          Math.PI;
+          
+          
+                      /* Convert to 0-360 */
+          
+                      angle =
+                          (angle + 360) % 360;
+                    
+                      cursorVector.textContent =
+                          Math.round(angle)
+                              .toString()
+                              .padStart(3, '0') + '°';
+                  }
+                  /* ==================================
+                     SECTOR
+                  ================================== */
+          
+                  const columns = 6;
+                  const rows = 4;   
+                  const column =
+                      Math.min(
+                          columns - 1,
+                          Math.floor(
+                              x /
+                              window.innerWidth *
+                              columns
+                          )
+                      );
+                  const row =
+                      Math.min(
+                          rows - 1,
+                          Math.floor(
+                              y /
+                              window.innerHeight *
+                              rows
+                          )
+                      );
+                  const letters =
+                      ['A', 'B', 'C', 'D', 'E', 'F'];
+                
+                  cursorSector.textContent =
+                      letters[column] +
+                      '-' +
+                      String(row + 1).padStart(2, '0');
+                  /* ==================================
+                     STATUS
+                  ================================== */
+          
+                  cursorStatus.textContent =
+                      'TRACKING';
+                  mouseMoving = true;
+     
+                  clearTimeout(idleTimer);
+          
+                  idleTimer =
+                      setTimeout(
+                          function() {
+                              cursorStatus.textContent ='IDLE';
+                              mouseMoving = false;
+                          },
+                          400
+                      );
+                  /* ==================================
+                     UPDATE
+                  ================================== */
+                  previousX = x;
+                  previousY = y;
+                  previousTime = currentTime;
+              }
+          );
+          
+          
+          /* ========================================
+             MOUSE LEAVES WINDOW
+          ======================================== */
+          
+          document.addEventListener(
+              'mouseleave',
+              function() {
+                  cursor.style.opacity = '0';
+                  cursorStatus.textContent =
+                      'LOST';
+              }
+          );
+          
+          /* ========================================
+             MOUSE ENTERS WINDOW
+          ======================================== */
+          
+          document.addEventListener(
+              'mouseenter',
+              function() {
+                  cursor.style.opacity = '1';
+                  cursorStatus.textContent = 'TRACKING';
+              }
+          );
+          
+          </script>
     
   </body>
-
-
 </html>
