@@ -1109,989 +1109,1111 @@
 
 
   <!-- =====================================================
-       THREE.JS
-  ===================================================== -->
+     THREE.JS
+===================================================== -->
 
-  <script type="importmap">
+<script type="importmap">
 
-  {
-    "imports": {
-      "three":
-        "https://unpkg.com/three@0.160.0/build/three.module.js",
+{
+  "imports": {
 
-      "three/addons/":
-        "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
+    "three":
+      "https://unpkg.com/three@0.160.0/build/three.module.js",
+
+    "three/addons/":
+      "https://unpkg.com/three@0.160.0/examples/jsm/"
+
   }
+}
 
-  </script>
+</script>
+
+
+<!-- =====================================================
+     THREE.JS / 3D VIEWERS
+===================================================== -->
+
+<script type="module">
+
+  import * as THREE from 'three';
+
+  import {
+    OrbitControls
+  } from
+    'three/addons/controls/OrbitControls.js';
+
+  import {
+    FBXLoader
+  } from
+    'three/addons/loaders/FBXLoader.js';
 
 
 
-  <!-- =====================================================
-       THREE.JS / 3D VIEWERS
-  ===================================================== -->
+  /* ========================================
+     VIEWERS
+  ======================================== */
 
-  <script type="module">
+  const viewers = {};
 
-    import * as THREE from 'three';
 
-    import {
-      OrbitControls
-    } from
-      'three/addons/controls/OrbitControls.js';
 
-    import {
-      FBXLoader
-    } from
-      'three/addons/loaders/FBXLoader.js';
+  /* ========================================
+     CREATE VIEWER
+  ======================================== */
+
+  function createViewer(
+    canvasId,
+    modelPath
+  ) {
+
+    const canvas =
+      document.getElementById(canvasId);
+
+
+    if (!canvas) {
+
+      console.error(
+        'CANVAS NOT FOUND:',
+        canvasId
+      );
+
+      return;
+
+    }
+
 
 
     /* ========================================
-       VIEWERS
+       SCENE
     ======================================== */
 
-    const viewers = {};
+    const scene =
+      new THREE.Scene();
+
+
+    scene.background =
+      new THREE.Color(
+        0x111512
+      );
+
 
 
     /* ========================================
-       CREATE VIEWER
+       CAMERA
     ======================================== */
 
-    function createViewer(
-      canvasId,
-      modelPath
-    ) {
+    const camera =
+      new THREE.PerspectiveCamera(
 
-      const canvas =
-        document.getElementById(canvasId);
+        35,
 
-      if (!canvas) return;
-
-
-      const scene =
-        new THREE.Scene();
-
-
-      scene.background =
-        new THREE.Color(0x111512);
-
-
-      const camera =
-        new THREE.PerspectiveCamera(
-          35,
-          canvas.clientWidth /
-            canvas.clientHeight,
-          0.1,
-          1000
-        );
-
-
-      camera.position.set(
-        3,
-        2,
-        5
-      );
-
-
-      const renderer =
-        new THREE.WebGLRenderer({
-
-          canvas: canvas,
-
-          antialias: true,
-
-          alpha: true
-
-        });
-
-
-      renderer.setPixelRatio(
-        Math.min(
-          window.devicePixelRatio,
-          2
-        )
-      );
-
-
-      renderer.setSize(
-        canvas.clientWidth,
+        canvas.clientWidth /
         canvas.clientHeight,
-        false
+
+        0.01,
+
+        1000
+
       );
 
 
-      renderer.outputColorSpace =
-        THREE.SRGBColorSpace;
+    camera.position.set(
+      3,
+      2,
+      5
+    );
 
 
 
-      /* ==================================
-         LIGHTING
-      ================================== */
+    /* ========================================
+       RENDERER
+    ======================================== */
 
-      const ambient =
-        new THREE.AmbientLight(
-          0xffffff,
-          1.8
-        );
+    const renderer =
+      new THREE.WebGLRenderer({
 
+        canvas: canvas,
 
-      scene.add(ambient);
+        antialias: true,
 
+        alpha: true
 
-      const keyLight =
-        new THREE.DirectionalLight(
-          0xffffff,
-          3
-        );
+      });
 
 
-      keyLight.position.set(
-        4,
-        6,
-        5
+    renderer.setPixelRatio(
+
+      Math.min(
+
+        window.devicePixelRatio,
+
+        2
+
+      )
+
+    );
+
+
+    renderer.setSize(
+
+      canvas.clientWidth,
+
+      canvas.clientHeight,
+
+      false
+
+    );
+
+
+    renderer.outputColorSpace =
+      THREE.SRGBColorSpace;
+
+
+
+    /* ========================================
+       LIGHTING
+    ======================================== */
+
+    const ambient =
+      new THREE.AmbientLight(
+
+        0xffffff,
+
+        1.8
+
       );
 
 
-      scene.add(keyLight);
+    scene.add(
+      ambient
+    );
 
 
-      const fillLight =
-        new THREE.DirectionalLight(
-          0x7CFF6B,
-          1.2
-        );
 
+    const keyLight =
+      new THREE.DirectionalLight(
 
-      fillLight.position.set(
-        -5,
-        2,
-        -3
+        0xffffff,
+
+        3
+
       );
 
 
-      scene.add(fillLight);
+    keyLight.position.set(
+
+      4,
+      6,
+      5
+
+    );
+
+
+    scene.add(
+      keyLight
+    );
 
 
 
-      /* ==================================
-         GRID
-      ================================== */
+    const fillLight =
+      new THREE.DirectionalLight(
 
-      const grid =
-        new THREE.GridHelper(
-          10,
-          20,
-          0x7CFF6B,
-          0x303830
+        0x7CFF6B,
+
+        1.2
+
+      );
+
+
+    fillLight.position.set(
+
+      -5,
+      2,
+      -3
+
+    );
+
+
+    scene.add(
+      fillLight
+    );
+
+
+
+    /* ========================================
+       GRID
+    ======================================== */
+
+    const grid =
+      new THREE.GridHelper(
+
+        10,
+
+        20,
+
+        0x7CFF6B,
+
+        0x303830
+
+      );
+
+
+    grid.material.opacity =
+      0.18;
+
+
+    grid.material.transparent =
+      true;
+
+
+    scene.add(
+      grid
+    );
+
+
+
+    /* ========================================
+       CONTROLS
+    ======================================== */
+
+    const controls =
+      new OrbitControls(
+
+        camera,
+
+        canvas
+
+      );
+
+
+    controls.enableDamping =
+      true;
+
+
+    controls.dampingFactor =
+      0.06;
+
+
+    controls.minDistance =
+      0.5;
+
+
+    controls.maxDistance =
+      20;
+
+
+    controls.enablePan =
+      true;
+
+
+
+    /* ========================================
+       LOADING MANAGER
+    ======================================== */
+
+    const manager =
+      new THREE.LoadingManager();
+
+
+    manager.onStart =
+      function(
+        url,
+        itemsLoaded,
+        itemsTotal
+      ) {
+
+        console.log(
+          'FBX START:',
+          url
         );
 
-
-      grid.material.opacity =
-        0.18;
+      };
 
 
-      grid.material.transparent =
-        true;
+    manager.onProgress =
+      function(
+        url,
+        itemsLoaded,
+        itemsTotal
+      ) {
 
+        console.log(
 
-      scene.add(grid);
+          'FBX LOADING:',
 
+          url,
 
+          itemsLoaded +
+          '/' +
+          itemsTotal
 
-      /* ==================================
-         CONTROLS
-      ================================== */
-
-      const controls =
-        new OrbitControls(
-          camera,
-          canvas
         );
 
-
-      controls.enableDamping =
-        true;
+      };
 
 
-      controls.dampingFactor =
-        0.06;
+    manager.onLoad =
+      function() {
+
+        console.log(
+          'FBX LOADED SUCCESSFULLY'
+        );
+
+      };
 
 
-      controls.minDistance =
-        1;
+    manager.onError =
+      function(url) {
+
+        console.error(
+          'FBX FAILED:',
+          url
+        );
+
+      };
 
 
-      controls.maxDistance =
-        20;
+
+    /* ========================================
+       FBX LOADER
+    ======================================== */
+
+    const loader =
+      new FBXLoader(
+        manager
+      );
 
 
-      controls.enablePan =
-        true;
+    let model = null;
 
 
 
-      /* ==================================
-         FBX LOADER
-      ================================== */
+    /* ========================================
+       ABSOLUTE MODEL URL
+    ======================================== */
 
-      const loader =
-        new FBXLoader();
-
-
-      let model = null;
-
-
-      loader.load(
+    const absoluteModelPath =
+      new URL(
 
         modelPath,
 
-        function(object) {
+        window.location.href
 
-          model = object;
-
-
-          /* NORMALIZE */
-
-          const box =
-            new THREE.Box3()
-              .setFromObject(object);
+      ).href;
 
 
-          const size =
-            box.getSize(
-              new THREE.Vector3()
+    console.log(
+      'ATTEMPTING TO LOAD FBX:',
+      absoluteModelPath
+    );
+
+
+
+    /* ========================================
+       LOAD FBX
+    ======================================== */
+
+    loader.load(
+
+      absoluteModelPath,
+
+
+      /* ======================================
+         SUCCESS
+      ====================================== */
+
+      function(object) {
+
+        console.log(
+          'FBX MODEL RECEIVED:',
+          object
+        );
+
+
+        model =
+          object;
+
+
+
+        /* ==================================
+           REMOVE OLD MODEL IF NECESSARY
+        ================================== */
+
+        object.traverse(
+
+          function(child) {
+
+            if (
+              child.isMesh
+            ) {
+
+              child.castShadow =
+                true;
+
+              child.receiveShadow =
+                true;
+
+            }
+
+          }
+
+        );
+
+
+
+        /* ==================================
+           CALCULATE BOUNDING BOX
+        ================================== */
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(
+              object
             );
 
 
-          const center =
-            box.getCenter(
-              new THREE.Vector3()
-            );
+        const size =
+          box.getSize(
+
+            new THREE.Vector3()
+
+          );
 
 
-          object.position.sub(center);
+        const center =
+          box.getCenter(
+
+            new THREE.Vector3()
+
+          );
 
 
-          const maxDimension =
-            Math.max(
-              size.x,
-              size.y,
-              size.z
-            );
+        console.log(
+          'FBX SIZE:',
+          size
+        );
 
+
+        console.log(
+          'FBX CENTER:',
+          center
+        );
+
+
+
+        /* ==================================
+           CENTER MODEL
+        ================================== */
+
+        object.position.sub(
+          center
+        );
+
+
+
+        /* ==================================
+           NORMALIZE SIZE
+        ================================== */
+
+        const maxDimension =
+          Math.max(
+
+            size.x,
+
+            size.y,
+
+            size.z
+
+          );
+
+
+        if (
+          maxDimension > 0
+        ) {
 
           const scale =
-            3 / maxDimension;
+            3 /
+            maxDimension;
 
 
           object.scale.setScalar(
             scale
           );
 
-
-
-          /* MATERIAL */
-
-          object.traverse(
-            function(child) {
-
-              if (
-                child.isMesh
-              ) {
-
-                child.material =
-                  new THREE.MeshStandardMaterial({
-
-                    color: 0x9aa59d,
-
-                    roughness: 0.58,
-
-                    metalness: 0.18
-
-                  });
-
-              }
-
-            }
-          );
-
-
-          scene.add(object);
-
-
-
-          /* CAMERA */
-
-          controls.target.set(
-            0,
-            0,
-            0
-          );
-
-
-          controls.update();
-
-
-
-          /* STATISTICS */
-
-          let vertices = 0;
-          let polygons = 0;
-          let objects = 0;
-
-
-          object.traverse(
-            function(child) {
-
-              if (
-                child.isMesh
-              ) {
-
-                objects++;
-
-
-                if (
-                  child.geometry
-                ) {
-
-                  const geometry =
-                    child.geometry;
-
-
-                  if (
-                    geometry.attributes.position
-                  ) {
-
-                    vertices +=
-                      geometry
-                        .attributes
-                        .position
-                        .count;
-
-                  }
-
-
-                  if (
-                    geometry.index
-                  ) {
-
-                    polygons +=
-                      geometry.index.count /
-                      3;
-
-                  } else {
-
-                    polygons +=
-                      geometry
-                        .attributes
-                        .position
-                        .count /
-                      3;
-
-                  }
-
-                }
-
-              }
-
-            }
-          );
-
-
-          updateStats(
-            canvasId,
-            vertices,
-            polygons,
-            objects
-          );
-
-        },
-
-
-        undefined,
-
-
-        function(error) {
-
-          console.error(
-            'MODEL ERROR:',
-            modelPath,
-            error
-          );
-
         }
 
-      );
 
 
+        /* ==================================
+           MATERIAL
+        ================================== */
 
-      /* ==================================
-         SAVE VIEWER
-      ================================== */
+        object.traverse(
 
-      viewers[canvasId] = {
+          function(child) {
 
-        scene,
+            if (
+              child.isMesh
+            ) {
 
-        camera,
+              child.material =
 
-        renderer,
+                new THREE.MeshStandardMaterial({
 
-        controls,
+                  color:
+                    0x9aa59d,
 
-        getModel: () => model
+                  roughness:
+                    0.58,
 
-      };
+                  metalness:
+                    0.18
 
+                });
 
+            }
 
-      /* ==================================
-         RESIZE
-      ================================== */
+          }
 
-      function resize() {
-
-        const width =
-          canvas.clientWidth;
-
-
-        const height =
-          canvas.clientHeight;
-
-
-        if (
-          width === 0 ||
-          height === 0
-        ) return;
-
-
-        camera.aspect =
-          width / height;
-
-
-        camera.updateProjectionMatrix();
-
-
-        renderer.setSize(
-          width,
-          height,
-          false
         );
 
-      }
 
 
-      window.addEventListener(
-        'resize',
-        resize
-      );
+        /* ==================================
+           ADD MODEL TO SCENE
+        ================================== */
+
+        scene.add(
+          object
+        );
 
 
 
-      /* ==================================
-         ANIMATION
-      ================================== */
+        /* ==================================
+           CAMERA TARGET
+        ================================== */
 
-      function animate() {
+        controls.target.set(
 
-        requestAnimationFrame(
-          animate
+          0,
+
+          0,
+
+          0
+
         );
 
 
         controls.update();
 
 
-        renderer.render(
-          scene,
-          camera
-        );
 
-      }
+        /* ==================================
+           STATISTICS
+        ================================== */
 
+        let vertices = 0;
 
-      animate();
+        let polygons = 0;
 
-    }
-
+        let objects = 0;
 
 
-    /* ========================================
-       STATISTICS
-    ======================================== */
+        object.traverse(
 
-    function updateStats(
-      canvasId,
-      vertices,
-      polygons,
-      objects
-    ) {
-
-      const suffix =
-        canvasId.replace(
-          'viewer-',
-          ''
-        );
-
-
-      const poly =
-        document.getElementById(
-          'poly-' + suffix
-        );
-
-
-      const vertex =
-        document.getElementById(
-          'vertex-' + suffix
-        );
-
-
-      const object =
-        document.getElementById(
-          'objects-' + suffix
-        );
-
-
-      if (poly) {
-
-        poly.textContent =
-          Math.round(
-            polygons
-          ).toLocaleString();
-
-      }
-
-
-      if (vertex) {
-
-        vertex.textContent =
-          Math.round(
-            vertices
-          ).toLocaleString();
-
-      }
-
-
-      if (object) {
-
-        object.textContent =
-          objects;
-
-      }
-
-    }
-
-
-
-    /* ========================================
-       WIREFRAME
-    ======================================== */
-
-    window.toggleWireframe =
-      function(canvasId) {
-
-        const viewer =
-          viewers[canvasId];
-
-
-        if (!viewer) return;
-
-
-        const model =
-          viewer.getModel();
-
-
-        if (!model) return;
-
-
-        model.traverse(
           function(child) {
 
             if (
-              child.isMesh &&
-              child.material
+              child.isMesh
             ) {
 
-              child.material.wireframe =
-                !child.material.wireframe;
+              objects++;
+
+
+              if (
+                child.geometry
+              ) {
+
+                const geometry =
+                  child.geometry;
+
+
+
+                /* =========================
+                   VERTICES
+                ========================= */
+
+                if (
+                  geometry.attributes &&
+                  geometry.attributes.position
+                ) {
+
+                  vertices +=
+
+                    geometry
+                      .attributes
+                      .position
+                      .count;
+
+                }
+
+
+
+                /* =========================
+                   POLYGONS
+                ========================= */
+
+                if (
+                  geometry.index
+                ) {
+
+                  polygons +=
+
+                    geometry.index
+                      .count / 3;
+
+                }
+
+                else if (
+                  geometry.attributes &&
+                  geometry.attributes.position
+                ) {
+
+                  polygons +=
+
+                    geometry
+                      .attributes
+                      .position
+                      .count / 3;
+
+                }
+
+              }
 
             }
 
           }
-        );
 
-      };
-
-
-
-    /* ========================================
-       RESET VIEW
-    ======================================== */
-
-    window.resetModel =
-      function(canvasId) {
-
-        const viewer =
-          viewers[canvasId];
-
-
-        if (!viewer) return;
-
-
-        viewer.camera.position.set(
-          3,
-          2,
-          5
         );
 
 
-        viewer.controls.target.set(
-          0,
-          0,
-          0
+        updateStats(
+
+          canvasId,
+
+          vertices,
+
+          polygons,
+
+          objects
+
         );
 
 
-        viewer.controls.update();
 
-      };
+        console.log(
+          'FBX READY:',
+          canvasId
+        );
 
+      },
 
 
-    /* ========================================
-       LOAD MODELS
-    ======================================== */
+      /* ======================================
+         PROGRESS
+      ====================================== */
 
-    createViewer(
-      'viewer-001',
-      'models/model001.fbx'
-    );
+      function(
+        xhr
+      ) {
 
+        if (
+          xhr.lengthComputable
+        ) {
 
-    createViewer(
-      'viewer-002',
-      'models/model002.fbx'
-    );
+          const percentage =
 
-
-    createViewer(
-      'viewer-003',
-      'models/model003.fbx'
-    );
-
-  </script>
-
-
-
-  <!-- =====================================================
-       CURSOR SYSTEM
-       EXACTLY THE SAME SYSTEM AS GRAPHIC DESIGN
-  ===================================================== -->
-
-  <script>
-
-    const cursor =
-      document.querySelector('.custom-cursor');
-
-
-    const cursorX =
-      document.getElementById('cursor-x');
-
-
-    const cursorY =
-      document.getElementById('cursor-y');
-
-
-    const cursorVector =
-      document.getElementById('cursor-vector');
-
-
-    const cursorSpeed =
-      document.getElementById('cursor-speed');
-
-
-    const cursorSector =
-      document.getElementById('cursor-sector');
-
-
-    const cursorStatus =
-      document.getElementById('cursor-status');
-
-
-    const measureX =
-      document.querySelector('.cursor-measure-x');
-
-
-    const measureY =
-      document.querySelector('.cursor-measure-y');
-
-
-    const cursorFlash =
-      document.querySelector('.cursor-flash');
-
-
-    let previousX = 0;
-    let previousY = 0;
-
-    let previousTime =
-      performance.now();
-
-    let idleTimer;
-
-
-    document.addEventListener(
-      'mousemove',
-      function(event) {
-
-        const x =
-          event.clientX;
-
-        const y =
-          event.clientY;
-
-        const currentTime =
-          performance.now();
-
-
-        cursor.style.left =
-          x + 'px';
-
-        cursor.style.top =
-          y + 'px';
-
-
-        measureX.style.left =
-          x + 'px';
-
-        measureY.style.top =
-          y + 'px';
-
-
-        cursorX.textContent =
-          x
-            .toFixed(2)
-            .padStart(7, '0');
-
-
-        cursorY.textContent =
-          y
-            .toFixed(2)
-            .padStart(7, '0');
-
-
-        const deltaX =
-          x - previousX;
-
-        const deltaY =
-          y - previousY;
-
-
-        const distance =
-          Math.sqrt(
-            deltaX * deltaX +
-            deltaY * deltaY
-          );
-
-
-        const deltaTime =
-          currentTime -
-          previousTime;
-
-
-        let speed = 0;
-
-
-        if (deltaTime > 0) {
-
-          speed =
-            distance /
-            deltaTime *
-            10;
-
-        }
-
-
-        speed =
-          Math.min(
-            speed,
-            99.99
-          );
-
-
-        cursorSpeed.textContent =
-          speed
-            .toFixed(2)
-            .padStart(5, '0');
-
-
-        if (distance > 0.5) {
-
-          let angle =
-            Math.atan2(
-              deltaY,
-              deltaX
+            (
+              xhr.loaded /
+              xhr.total
             ) *
-            180 /
-            Math.PI;
+            100;
 
 
-          angle =
-            (angle + 360) % 360;
+          console.log(
 
+            'FBX PROGRESS:',
 
-          cursorVector.textContent =
-            Math.round(angle)
-              .toString()
-              .padStart(3, '0') +
-            '°';
+            percentage
+              .toFixed(1) +
+            '%'
+
+          );
 
         }
 
-
-        const columns = 6;
-        const rows = 4;
+      },
 
 
-        const column =
-          Math.min(
-            columns - 1,
-            Math.floor(
-              x /
-              window.innerWidth *
-              columns
-            )
-          );
+      /* ======================================
+         ERROR
+      ====================================== */
 
+      function(error) {
 
-        const row =
-          Math.min(
-            rows - 1,
-            Math.floor(
-              y /
-              window.innerHeight *
-              rows
-            )
-          );
-
-
-        const letters = [
-          'A',
-          'B',
-          'C',
-          'D',
-          'E',
-          'F'
-        ];
-
-
-        cursorSector.textContent =
-          letters[column] +
-          '-' +
-          String(row + 1)
-            .padStart(2, '0');
-
-
-        cursorStatus.textContent =
-          'TRACKING';
-
-
-        clearTimeout(
-          idleTimer
+        console.error(
+          '================================'
         );
 
 
-        idleTimer =
-          setTimeout(
-            function() {
-
-              cursorStatus.textContent =
-                'IDLE';
-
-            },
-            400
-          );
-
-
-        previousX = x;
-        previousY = y;
-
-        previousTime =
-          currentTime;
-
-      }
-    );
-
-
-    /* CLICK FLASH */
-
-    document.addEventListener(
-      'click',
-      function(event) {
-
-        cursorFlash.style.left =
-          event.clientX + 'px';
-
-
-        cursorFlash.style.top =
-          event.clientY + 'px';
-
-
-        cursorFlash.classList.remove(
-          'active'
+        console.error(
+          'FBX MODEL ERROR'
         );
 
 
-        void cursorFlash.offsetWidth;
+        console.error(
+          'CANVAS:',
+          canvasId
+        );
 
 
-        cursorFlash.classList.add(
-          'active'
+        console.error(
+          'PATH:',
+          absoluteModelPath
+        );
+
+
+        console.error(
+          'ERROR:',
+          error
+        );
+
+
+        console.error(
+          '================================'
         );
 
       }
+
     );
 
 
-    /* LEAVE */
 
-    document.addEventListener(
-      'mouseleave',
-      function() {
+    /* ========================================
+       SAVE VIEWER
+    ======================================== */
 
-        cursor.style.opacity =
-          '0';
+    viewers[canvasId] = {
 
-        cursorFlash.style.opacity =
-          '0';
+      scene,
 
-        cursorStatus.textContent =
-          'LOST';
+      camera,
+
+      renderer,
+
+      controls,
+
+      getModel:
+        () => model
+
+    };
+
+
+
+    /* ========================================
+       RESIZE
+    ======================================== */
+
+    function resize() {
+
+      const width =
+        canvas.clientWidth;
+
+
+      const height =
+        canvas.clientHeight;
+
+
+      if (
+        width === 0 ||
+        height === 0
+      ) {
+
+        return;
 
       }
+
+
+      camera.aspect =
+        width /
+        height;
+
+
+      camera.updateProjectionMatrix();
+
+
+      renderer.setSize(
+
+        width,
+
+        height,
+
+        false
+
+      );
+
+    }
+
+
+    window.addEventListener(
+
+      'resize',
+
+      resize
+
     );
 
 
-    /* ENTER */
 
-    document.addEventListener(
-      'mouseenter',
-      function() {
+    /* ========================================
+       ANIMATION
+    ======================================== */
 
-        cursor.style.opacity =
-          '1';
+    function animate() {
 
-        cursorFlash.style.opacity =
-          '0';
+      requestAnimationFrame(
+        animate
+      );
 
-        cursorStatus.textContent =
-          'TRACKING';
 
-      }
-    );
+      controls.update();
 
-  </script>
+
+      renderer.render(
+
+        scene,
+
+        camera
+
+      );
+
+    }
+
+
+    animate();
+
+  }
+
+
+
+  /* ========================================
+     STATISTICS
+  ======================================== */
+
+  function updateStats(
+
+    canvasId,
+
+    vertices,
+
+    polygons,
+
+    objects
+
+  ) {
+
+    const suffix =
+      canvasId.replace(
+
+        'viewer-',
+
+        ''
+
+      );
+
+
+    const poly =
+      document.getElementById(
+
+        'poly-' +
+        suffix
+
+      );
+
+
+    const vertex =
+      document.getElementById(
+
+        'vertex-' +
+        suffix
+
+      );
+
+
+    const object =
+      document.getElementById(
+
+        'objects-' +
+        suffix
+
+      );
+
+
+    if (poly) {
+
+      poly.textContent =
+
+        Math.round(
+          polygons
+        ).toLocaleString();
+
+    }
+
+
+    if (vertex) {
+
+      vertex.textContent =
+
+        Math.round(
+          vertices
+        ).toLocaleString();
+
+    }
+
+
+    if (object) {
+
+      object.textContent =
+        objects;
+
+    }
+
+  }
+
+
+
+  /* ========================================
+     WIREFRAME
+  ======================================== */
+
+  window.toggleWireframe =
+
+    function(canvasId) {
+
+      const viewer =
+        viewers[canvasId];
+
+
+      if (!viewer) return;
+
+
+      const model =
+        viewer.getModel();
+
+
+      if (!model) return;
+
+
+      model.traverse(
+
+        function(child) {
+
+          if (
+
+            child.isMesh &&
+
+            child.material
+
+          ) {
+
+            child.material.wireframe =
+
+              !child.material.wireframe;
+
+          }
+
+        }
+
+      );
+
+    };
+
+
+
+  /* ========================================
+     RESET VIEW
+  ======================================== */
+
+  window.resetModel =
+
+    function(canvasId) {
+
+      const viewer =
+        viewers[canvasId];
+
+
+      if (!viewer) return;
+
+
+      viewer.camera.position.set(
+
+        3,
+
+        2,
+
+        5
+
+      );
+
+
+      viewer.controls.target.set(
+
+        0,
+
+        0,
+
+        0
+
+      );
+
+
+      viewer.controls.update();
+
+    };
+
+
+
+  /* ========================================
+     LOAD MODELS
+  ======================================== */
+
+  createViewer(
+
+    'viewer-001',
+
+    'models/model001.fbx'
+
+  );
+
+
+  createViewer(
+
+    'viewer-002',
+
+    'models/model002.fbx'
+
+  );
+
+
+  createViewer(
+
+    'viewer-003',
+
+    'models/model003.fbx'
+
+  );
+
+</script>
 
 </body>
 
