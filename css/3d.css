@@ -560,6 +560,7 @@ body {
   position: relative;
   width: 75%;
   height: 650px;
+  margin-left: 210px;
   overflow: hidden;
   border: 1px solid rgba(124, 255, 107, 0.25);
   background:
