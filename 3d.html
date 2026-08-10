@@ -555,6 +555,7 @@
       import * as THREE from 'three';
       import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+      import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
       const viewers = {};
 
@@ -608,7 +609,7 @@
         controls.maxDistance = 20;
         controls.enablePan = true;
 
-        const loader = new FBXLoader();
+        const fbxLoader = new FBXLoader();
         const gltfLoader = new GLTFLoader();
         const textureLoader = new THREE.TextureLoader();
 
@@ -633,112 +634,121 @@
 
         const isGLB = modelPath.toLowerCase().endsWith('.glb');
 
-        const loadModel = isGLB ? gltfLoader : fbxLoader;
+const loader = isGLB ? gltfLoader : fbxLoader;
 
-          loadModel.load( modelPath, function (result) {
+loader.load(
+  modelPath,
+  function (result) {
 
-        const object = isGLB ? result.scene : result;
-    
-           model = object;
+    const object = isGLB ? result.scene : result;
 
-            const box = new THREE.Box3().setFromObject(object);
-            const size = box.getSize(new THREE.Vector3());
-            const center = box.getCenter(new THREE.Vector3());
+    model = object;
 
-            object.position.sub(center);
+    const box = new THREE.Box3().setFromObject(object);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
 
-            const maxDimension = Math.max(size.x, size.y, size.z);
-            const scale = 3 / maxDimension;
-            
-            object.scale.setScalar(scale);
+    object.position.sub(center);
 
-            object.traverse(function (child) {
+    const maxDimension = Math.max(size.x, size.y, size.z);
+    const scale = 3 / maxDimension;
 
-            if (child.isMesh) {
-              if (canvasId === 'viewer-002') {   
-                
-                console.log( 'MODEL 002 UV:', child.geometry.attributes.uv);
-                
-                // ==========================================
-                // MODEL 002
-                // Piel alienígena + textura
-                // ==========================================
-                child.material = new THREE.MeshStandardMaterial({
-                    // Color base debajo de la textura
-                    color: 0x9fb8c4,
-                    // Material ligeramente brillante
-                    roughness: 0.32,
-                    // Metálico desactivado para que parezca piel
-                    metalness: 0.0,
-                    // Tu textura
-                    map: model002Texture 
-                });
-              }
-              else if (canvasId === 'viewer-001') {
-                // ==========================================
-                // MODEL 001
-                // NO TOCAR
-                // ==========================================
-                child.material = new THREE.MeshStandardMaterial({
-                  
-                    color: 0xd6d6d6,
-                    roughness: 0.18,
-                    metalness: 1
-                  });
-              }
-              else {
-                // ==========================================
-                // MODEL 003
-                // ==========================================
-                child.material =
-                  new THREE.MeshStandardMaterial({
-                    
-                    color: 0xd6d6d6,
-                    roughness: 0.18,
-                    metalness: 1
-                  });
-              }
-              child.castShadow = true;
-              child.receiveShadow = true;
-            }
-          });
+    object.scale.setScalar(scale);
 
-            scene.add(object);
+    object.traverse(function (child) {
 
-            controls.target.set(0, 0, 0);
-            controls.update();
+      if (child.isMesh) {
 
-            let vertices = 0;
-            let polygons = 0;
-            let objects = 0;
+        if (canvasId === 'viewer-002') {
 
-            object.traverse(function (child) {
-              if (child.isMesh) {
-                objects++;
+          console.log(
+            'MODEL 002 UV:',
+            child.geometry.attributes.uv
+          );
 
-                if (child.geometry) {
-                  const geometry = child.geometry;
-
-                  if (geometry.attributes.position) {
-                    vertices += geometry.attributes.position.count;
-                  }
-
-                  if (geometry.index) {
-                    polygons += geometry.index.count / 3;
-                  } else {
-                    polygons += geometry.attributes.position.count / 3;
-                  }
-                }
-              }
+          child.material =
+            new THREE.MeshStandardMaterial({
+              color: 0x9fb8c4,
+              roughness: 0.32,
+              metalness: 0.0,
+              map: model002Texture
             });
+        }
 
-            updateStats(canvasId, vertices, polygons, objects);
-          },
-          undefined,
-          function (error) {
-            console.error('MODEL ERROR:', modelPath, error);
+        else if (canvasId === 'viewer-001') {
+
+          child.material =
+            new THREE.MeshStandardMaterial({
+              color: 0xd6d6d6,
+              roughness: 0.18,
+              metalness: 1
+            });
+        }
+          
+        else {
+          child.material =
+            new THREE.MeshStandardMaterial({
+              color: 0xd6d6d6,
+              roughness: 0.18,
+              metalness: 1
+            });
+        }
+        
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+
+    scene.add(object);
+    controls.target.set(0, 0, 0);
+    controls.update();
+
+    let vertices = 0;
+    let polygons = 0;
+    let objects = 0;
+
+    object.traverse(function (child) {
+
+      if (child.isMesh) {
+        
+        objects++;
+        
+        if (child.geometry) {
+          
+          const geometry = child.geometry;
+          if (geometry.attributes.position) {
+            vertices += geometry.attributes.position.count;
           }
-        );
+          if (geometry.index) {
+            polygons += geometry.index.count / 3;
+          }
+          else {
+            polygons +=
+              geometry.attributes.position.count / 3;
+          }
+        }
+      }
+    });
+
+              updateStats(
+                canvasId,
+                vertices,
+                polygons,
+                objects
+              );
+          
+            },
+            undefined,
+            function (error) {
+          
+              console.error(
+                'MODEL ERROR:',
+                modelPath,
+                error
+              );
+          
+            }
+          );
 
         viewers[canvasId] = {
           scene,
