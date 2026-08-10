@@ -706,60 +706,21 @@ hr {
   background: #48535c;
 }
 
-/* Footer */
-.footer {
-  color: #48535c;
-  padding: 50px 0;
-  text-align: center;
-  margin-top: 75px;
-}
+/* =========================================================
+   FOOTER DE FILE 001
+   ========================================================= */
 
-.footer-container {
+.design-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  flex: 1;
-  font-size: 14px;
-}
-
-.footer-content p {
-  font-size: 16px;
-  margin: 0;
-  font-weight: 300;
-  color: #e8d9b8 !important;
-}
-
-.footer-links {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.footer-links ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 30px;
-}
-
-.footer-links li a {
-  color: #e8d9b8;
-  text-decoration: none;
-  filter: blur(0.7px);
-  font-weight: 500;
-  transition: color 0.3s ease-in-out;
-}
-
-.footer-links li a:hover {
-  color: #48535c;
-  text-decoration: underline;
+  margin-top: 150px;
+  padding-top: 20px;
+  border-top:
+    1px solid rgba(41, 37, 31, 0.25);
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #29251F;
+  opacity: 0.6;
 }
 
 /* Cursor personalizado */
