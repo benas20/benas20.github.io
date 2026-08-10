@@ -937,56 +937,49 @@
               =============================================== */
     
               else if (canvasId === 'viewer-003') {
+
               const materials = Array.isArray(child.material)
-                
                 ? child.material
                 : [child.material];
             
               materials.forEach(material => {
             
                 console.log(
-                  'MATERIAL:',
-                  material.name,
-                  'roughness:',
-                  material.roughness,
-                  'metalness:',
-                  material.metalness
+                  '========== MATERIAL 003 =========='
                 );
-    
-    
-                  /* -------------------------------------------
-                     MATERIAL.001
-                     DONUT / CRISTAL
-                  ------------------------------------------- */
-    
-                  if (material.name === 'material.001') {
-
-                    // DONUT / CRISTAL
-                    material.color.set(0xffffff);
-                    material.roughness = 0.08;
-                    material.metalness = 0;
-              
-                  }
-    
-                  /* -------------------------------------------
-                     MATERIAL.002
-                     LETRAS
-                  ------------------------------------------- */
-    
-                  if (material.name === 'material.002') {
-
-                    // LETRAS
-                    material.color.set(0xb8c5c8);
-                    material.roughness = 0.45;
-                    material.metalness = 0.65;
-              
-                  }
-                                    
-                  material.needsUpdate = true;
-                  });
+            
+                console.log('NAME:', material.name);
+                console.log('TYPE:', material.type);
+                console.log('COLOR:', material.color);
+                console.log('ROUGHNESS:', material.roughness);
+                console.log('METALNESS:', material.metalness);
+                console.log('TRANSPARENT:', material.transparent);
+                console.log('OPACITY:', material.opacity);
+                console.log('TRANSMISSION:', material.transmission);
+                console.log('IOR:', material.ior);
+            
+                if (material.name === 'material.001') {
+            
+                  console.log('>>> DONUT');
+            
+                  material.color.set(0xff0000);
+                  material.roughness = 0.1;
+                  material.metalness = 0;
                 }
-            });
-    
+            
+                if (material.name === 'material.002') {
+            
+                  console.log('>>> LETRAS');
+            
+                  material.color.set(0x00ff00);
+                  material.roughness = 0.5;
+                  material.metalness = 0;
+                }
+            
+                material.needsUpdate = true;
+              });
+            }
+                
             /* =================================================
                ADD MODEL TO SCENE
             ================================================= */
