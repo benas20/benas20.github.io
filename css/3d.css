@@ -1,0 +1,2614 @@
+/* =========================================================
+   3D MODELING
+   STYLE 3D
+   BAV / FILE 002
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  background: #111512;
+  color: #9aa59d;
+
+  font-family:
+    "Courier New",
+    Courier,
+    monospace;
+
+  overflow-x: hidden;
+
+  cursor: none;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: #7cff6b;
+  color: #111512;
+}
+
+
+/* =========================================================
+   SYSTEM HEADER
+========================================================= */
+
+.system-header {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 34px;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 24px;
+
+  border-bottom: 1px solid rgba(124, 255, 107, 0.18);
+
+  font-size: 9px;
+  letter-spacing: 2px;
+
+  z-index: 1000;
+
+  pointer-events: none;
+
+  background: rgba(17, 21, 18, 0.72);
+
+  backdrop-filter: blur(4px);
+}
+
+
+.system-online {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #7cff6b;
+}
+
+
+.system-online i {
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #7cff6b;
+
+  box-shadow:
+    0 0 7px rgba(124, 255, 107, 0.8);
+
+}
+
+
+/* =========================================================
+   ARCHIVE LOCATION
+========================================================= */
+
+.archive-location {
+
+  position: fixed;
+
+  top: 52px;
+  left: 24px;
+
+  z-index: 900;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+  line-height: 1.2;
+
+  pointer-events: none;
+
+  color: #67716b;
+}
+
+
+.archive-location div:first-child {
+
+  color: #9aa59d;
+
+}
+
+
+/* =========================================================
+   SCREEN MEASUREMENTS
+========================================================= */
+
+.measurement-x {
+
+  position: fixed;
+
+  top: 35px;
+  left: 0;
+
+  width: 100%;
+  height: 20px;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  align-items: center;
+
+  z-index: 700;
+
+  pointer-events: none;
+
+  color: #4c554f;
+
+  font-size: 7px;
+
+  letter-spacing: 1px;
+
+  border-bottom: 1px solid rgba(124, 255, 107, 0.08);
+}
+
+
+.measurement-y {
+
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  width: 25px;
+  height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  align-items: center;
+
+  z-index: 700;
+
+  pointer-events: none;
+
+  color: #4c554f;
+
+  font-size: 7px;
+
+  writing-mode: vertical-rl;
+
+  border-left: 1px solid rgba(124, 255, 107, 0.08);
+}
+
+
+/* =========================================================
+   SCAN LINES
+========================================================= */
+
+.scan-line,
+.scan-line-reverse,
+.scan-line-horizontal,
+.scan-line-horizontal-reverse {
+
+  position: fixed;
+
+  pointer-events: none;
+
+  z-index: 800;
+
+  opacity: 0.12;
+
+}
+
+
+.scan-line {
+
+  top: 0;
+  left: 18%;
+
+  width: 1px;
+  height: 100vh;
+
+  background: #7cff6b;
+
+}
+
+
+.scan-line-reverse {
+
+  top: 0;
+  right: 18%;
+
+  width: 1px;
+  height: 100vh;
+
+  background: #7cff6b;
+
+}
+
+
+.scan-line-horizontal {
+
+  top: 35%;
+
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #7cff6b;
+
+}
+
+
+.scan-line-horizontal-reverse {
+
+  top: 72%;
+
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #7cff6b;
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu-container {
+
+  position: fixed;
+
+  top: 65px;
+  right: 35px;
+
+  z-index: 2000;
+
+}
+
+
+.menu-toggle {
+
+  display: none;
+
+}
+
+
+.menu-icon {
+
+  width: 32px;
+  height: 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  cursor: none;
+
+}
+
+
+.menu-icon span {
+
+  display: block;
+
+  width: 100%;
+  height: 1px;
+
+  background: #9aa59d;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+}
+
+
+.menu-toggle:checked
+~ .menu-icon
+span:nth-child(1) {
+
+  transform:
+    translateY(12px)
+    rotate(45deg);
+
+}
+
+
+.menu-toggle:checked
+~ .menu-icon
+span:nth-child(2) {
+
+  opacity: 0;
+
+}
+
+
+.menu-toggle:checked
+~ .menu-icon
+span:nth-child(3) {
+
+  transform:
+    translateY(-12px)
+    rotate(-45deg);
+
+}
+
+
+/* =========================================================
+   MENU LIST
+========================================================= */
+
+.menu-list {
+
+  position: absolute;
+
+  top: 45px;
+  right: 0;
+
+  width: 245px;
+
+  list-style: none;
+
+  padding: 15px 0;
+
+  background: rgba(17, 21, 18, 0.96);
+
+  border: 1px solid rgba(124, 255, 107, 0.2);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform:
+    translateY(-10px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+
+}
+
+
+.menu-toggle:checked
+~ .menu-list {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateY(0);
+
+}
+
+
+.menu-list li {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 10px 18px;
+
+}
+
+
+.menu-number {
+
+  font-size: 8px;
+
+  color: #536058;
+
+}
+
+
+.menu-list a {
+
+  color: #9aa59d;
+
+  text-decoration: none;
+
+  font-size: 9px;
+
+  letter-spacing: 1.5px;
+
+  transition:
+    color 0.2s ease;
+
+}
+
+
+.menu-list a:hover {
+
+  color: #7cff6b;
+
+}
+
+
+/* =========================================================
+   CURSOR GUIDES
+========================================================= */
+
+.cursor-measure-x {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 1px;
+  height: 100vh;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(124, 255, 107, 0.35),
+      transparent
+    );
+
+  pointer-events: none;
+
+  z-index: 3000;
+
+}
+
+
+.cursor-measure-y {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(124, 255, 107, 0.35),
+      transparent
+    );
+
+  pointer-events: none;
+
+  z-index: 3000;
+
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.custom-cursor {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 42px;
+  height: 42px;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 5000;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease;
+
+}
+
+
+.cursor-horizontal {
+
+  position: absolute;
+
+  top: 50%;
+  left: -15px;
+
+  width: 72px;
+  height: 1px;
+
+  background: #7cff6b;
+
+}
+
+
+.cursor-vertical {
+
+  position: absolute;
+
+  left: 50%;
+  top: -15px;
+
+  width: 1px;
+  height: 72px;
+
+  background: #7cff6b;
+
+}
+
+
+.cursor-circle {
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 12px;
+  height: 12px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border: 1px solid #7cff6b;
+
+  border-radius: 50%;
+
+}
+
+
+/* =========================================================
+   CURSOR TICKS
+========================================================= */
+
+.tick {
+
+  position: absolute;
+
+  width: 6px;
+  height: 1px;
+
+  background: #7cff6b;
+
+}
+
+
+.tick-top {
+
+  top: 2px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+.tick-bottom {
+
+  bottom: 2px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+.tick-left {
+
+  left: 2px;
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(90deg);
+
+}
+
+
+.tick-right {
+
+  right: 2px;
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(90deg);
+
+}
+
+
+.tick-diagonal-1 {
+
+  top: 6px;
+  left: 6px;
+
+  transform:
+    rotate(45deg);
+
+}
+
+
+.tick-diagonal-2 {
+
+  top: 6px;
+  right: 6px;
+
+  transform:
+    rotate(-45deg);
+
+}
+
+
+.tick-diagonal-3 {
+
+  bottom: 6px;
+  left: 6px;
+
+  transform:
+    rotate(-45deg);
+
+}
+
+
+.tick-diagonal-4 {
+
+  bottom: 6px;
+  right: 6px;
+
+  transform:
+    rotate(45deg);
+
+}
+
+
+/* =========================================================
+   CURSOR FLASH
+========================================================= */
+
+.cursor-flash {
+
+  position: fixed;
+
+  width: 8px;
+  height: 8px;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  border: 1px solid #7cff6b;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 6000;
+
+  opacity: 0;
+
+}
+
+
+.cursor-flash.active {
+
+  animation:
+    cursorFlash 0.45s ease-out;
+
+}
+
+
+@keyframes cursorFlash {
+
+  0% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+
+    opacity: 1;
+
+  }
+
+  100% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(5);
+
+    opacity: 0;
+
+  }
+
+}
+
+
+/* =========================================================
+   OBSERVATION PANEL
+========================================================= */
+
+.cursor-info {
+
+  position: fixed;
+
+  left: 24px;
+  bottom: 24px;
+
+  width: 190px;
+
+  padding: 12px 14px;
+
+  border-left:
+    1px solid
+    rgba(124, 255, 107, 0.35);
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.12);
+
+  background:
+    rgba(17, 21, 18, 0.78);
+
+  backdrop-filter:
+    blur(5px);
+
+  z-index: 1200;
+
+  pointer-events: none;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  line-height: 1.6;
+
+}
+
+
+.observation-title {
+
+  color: #7cff6b;
+
+  font-size: 8px;
+
+  margin-bottom: 9px;
+
+  letter-spacing: 2px;
+
+}
+
+
+.observation-coordinates,
+.observation-data,
+.observation-system {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+}
+
+
+.observation-coordinates span,
+.observation-data span,
+.observation-system span {
+
+  color: #9aa59d;
+
+}
+
+
+.observation-coordinates {
+
+  margin-bottom: 5px;
+
+}
+
+
+.observation-data {
+
+  padding-bottom: 7px;
+
+  margin-bottom: 7px;
+
+  border-bottom:
+    1px solid
+    rgba(124, 255, 107, 0.1);
+
+}
+
+
+.observation-system span {
+
+  color: #7cff6b;
+
+}
+
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.model-page {
+
+  width: 100%;
+
+  padding-top: 110px;
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.model-intro {
+
+  position: relative;
+
+  min-height: 92vh;
+
+  padding:
+    100px
+    10vw
+    130px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+
+.model-index {
+
+  position: absolute;
+
+  top: 95px;
+  left: 10vw;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #566159;
+
+}
+
+
+.model-index span:first-child {
+
+  color: #7cff6b;
+
+}
+
+
+.model-title-wrapper {
+
+  position: relative;
+
+  width: fit-content;
+
+}
+
+
+.model-title-small {
+
+  margin-bottom: 22px;
+
+  font-size: 9px;
+
+  letter-spacing: 5px;
+
+  color: #6d786f;
+
+}
+
+
+.model-title-wrapper h1 {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(75px, 12vw, 190px);
+
+  font-weight: 400;
+
+  line-height: 0.78;
+
+  letter-spacing: -9px;
+
+  color: #9aa59d;
+
+}
+
+
+.model-axis-decoration {
+
+  position: absolute;
+
+  right: -90px;
+  bottom: 12px;
+
+  display: flex;
+
+  gap: 8px;
+
+  font-size: 8px;
+
+  color: #7cff6b;
+
+  letter-spacing: 2px;
+
+}
+
+
+.model-description {
+
+  max-width: 430px;
+
+  margin-top: 55px;
+
+  margin-left: 16vw;
+
+  font-size: 9px;
+
+  line-height: 1.8;
+
+  letter-spacing: 2px;
+
+  color: #657069;
+
+}
+
+
+/* =========================================================
+   MODEL ENTRY
+========================================================= */
+
+.model-entry {
+
+  position: relative;
+
+  padding:
+    100px
+    8vw
+    150px;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+}
+
+
+.model-entry-alt {
+
+  padding-top: 140px;
+
+}
+
+
+.model-entry-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 30px;
+
+}
+
+
+.model-number,
+.model-code {
+
+  display: block;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+}
+
+
+.model-number {
+
+  color: #7cff6b;
+
+  margin-bottom: 6px;
+
+}
+
+
+.model-code {
+
+  color: #555f58;
+
+}
+
+
+.model-state {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  color: #647069;
+
+}
+
+
+.state-dot {
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #7cff6b;
+
+  box-shadow:
+    0 0 8px
+    rgba(124, 255, 107, 0.6);
+
+}
+
+
+/* =========================================================
+   VIEWER LAYOUT
+========================================================= */
+
+.model-viewer-layout {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    280px;
+
+  gap: 45px;
+
+  align-items: stretch;
+
+}
+
+
+.model-entry-alt
+.model-viewer-layout {
+
+  grid-template-columns:
+    280px
+    minmax(0, 1fr);
+
+}
+
+
+/* =========================================================
+   3D VIEWER
+========================================================= */
+
+.model-viewer {
+
+  position: relative;
+
+  height: 650px;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.2);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(124, 255, 107, 0.04),
+      transparent 55%
+    ),
+    #0c100d;
+
+}
+
+
+.model-viewer::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49.9%,
+      rgba(124, 255, 107, 0.08) 50%,
+      transparent 50.1%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 49.9%,
+      rgba(124, 255, 107, 0.08) 50%,
+      transparent 50.1%
+    );
+
+}
+
+
+.three-canvas {
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+}
+
+
+/* =========================================================
+   VIEWER OVERLAY
+========================================================= */
+
+.viewer-overlay {
+
+  position: absolute;
+
+  top: 18px;
+  left: 18px;
+
+  right: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  font-size: 7px;
+
+  letter-spacing: 1.5px;
+
+  color: #647069;
+
+}
+
+
+.viewer-axis {
+
+  position: absolute;
+
+  right: 18px;
+  top: 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  font-size: 8px;
+
+}
+
+
+.axis-x {
+
+  color: #ff7070;
+
+}
+
+
+.axis-y {
+
+  color: #7cff6b;
+
+}
+
+
+.axis-z {
+
+  color: #70a7ff;
+
+}
+
+
+/* =========================================================
+   VIEWER CONTROLS
+========================================================= */
+
+.viewer-controls {
+
+  position: absolute;
+
+  left: 18px;
+  bottom: 18px;
+
+  display: flex;
+
+  gap: 7px;
+
+  z-index: 10;
+
+}
+
+
+.viewer-controls button {
+
+  padding: 7px 10px;
+
+  background:
+    rgba(17, 21, 18, 0.85);
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.25);
+
+  color: #79847d;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 7px;
+
+  letter-spacing: 1px;
+
+  cursor: none;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+.viewer-controls button:hover {
+
+  color: #7cff6b;
+
+  border-color:
+    rgba(124, 255, 107, 0.65);
+
+  background:
+    rgba(124, 255, 107, 0.05);
+
+}
+
+
+/* =========================================================
+   MODEL INFORMATION
+========================================================= */
+
+.model-information {
+
+  position: relative;
+
+  padding:
+    25px
+    0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 400px;
+
+}
+
+
+.model-type {
+
+  color: #7cff6b;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 20px;
+
+}
+
+
+.model-information h2 {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 42px;
+
+  font-weight: 400;
+
+  letter-spacing: -2px;
+
+  color: #a5aea8;
+
+  margin-bottom: 28px;
+
+}
+
+
+.model-text {
+
+  max-width: 260px;
+
+  font-size: 8px;
+
+  line-height: 1.8;
+
+  letter-spacing: 1.3px;
+
+  color: #616c65;
+
+}
+
+
+/* =========================================================
+   TECHNICAL DATA
+========================================================= */
+
+.technical-data {
+
+  margin-top: auto;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.14);
+
+}
+
+
+.technical-data div {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 9px 0;
+
+  border-bottom:
+    1px solid
+    rgba(124, 255, 107, 0.08);
+
+  font-size: 7px;
+
+  letter-spacing: 1px;
+
+}
+
+
+.technical-data span {
+
+  color: #555f58;
+
+}
+
+
+.technical-data strong {
+
+  font-weight: normal;
+
+  color: #9aa59d;
+
+}
+
+
+/* =========================================================
+   MODEL TAGS
+========================================================= */
+
+.model-tags {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 18px;
+
+}
+
+
+.model-tags span {
+
+  padding: 5px 7px;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+  font-size: 6px;
+
+  letter-spacing: 1px;
+
+  color: #5f6b63;
+
+}
+
+
+/* =========================================================
+   TOPOLOGY
+========================================================= */
+
+.topology-section {
+
+  padding:
+    120px
+    8vw
+    150px;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+}
+
+
+.section-marker {
+
+  margin-bottom: 45px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #7cff6b;
+
+}
+
+
+.topology-content {
+
+  display: grid;
+
+  grid-template-columns:
+    0.8fr
+    1.2fr;
+
+  gap: 100px;
+
+  align-items: center;
+
+}
+
+
+.technical-label {
+
+  font-size: 8px;
+
+  letter-spacing: 3px;
+
+  color: #59645d;
+
+}
+
+
+.topology-text h2 {
+
+  margin:
+    15px 0 25px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(55px, 8vw, 120px);
+
+  font-weight: 400;
+
+  letter-spacing: -7px;
+
+  color: #9aa59d;
+
+}
+
+
+.topology-text p {
+
+  max-width: 360px;
+
+  font-size: 8px;
+
+  line-height: 1.9;
+
+  letter-spacing: 1.5px;
+
+  color: #606b64;
+
+}
+
+
+.topology-data {
+
+  margin-top: 35px;
+
+  max-width: 360px;
+
+}
+
+
+.topology-data div {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding:
+    10px 0;
+
+  border-bottom:
+    1px solid
+    rgba(124, 255, 107, 0.1);
+
+  font-size: 7px;
+
+}
+
+
+.topology-data strong {
+
+  font-weight: normal;
+
+  color: #9aa59d;
+
+}
+
+
+/* =========================================================
+   WIREFRAME DISPLAY
+========================================================= */
+
+.wireframe-display {
+
+  position: relative;
+
+  height: 420px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+  background:
+    #0d110e;
+
+}
+
+
+.wireframe-grid {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  grid-template-rows:
+    repeat(2, 1fr);
+
+}
+
+
+.wireframe-grid div {
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.08);
+
+}
+
+
+.wireframe-display::after {
+
+  content: "◎";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  font-size: 160px;
+
+  font-family: Arial, sans-serif;
+
+  font-weight: 100;
+
+  color:
+    rgba(124, 255, 107, 0.08);
+
+}
+
+
+.wireframe-label {
+
+  position: absolute;
+
+  left: 15px;
+  bottom: 15px;
+
+  font-size: 7px;
+
+  letter-spacing: 2px;
+
+  color: #67716b;
+
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process-section {
+
+  padding:
+    120px
+    8vw
+    160px;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+}
+
+
+.process-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 80px;
+
+}
+
+
+.process-header h2 {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(45px, 7vw, 100px);
+
+  line-height: 0.9;
+
+  font-weight: 400;
+
+  letter-spacing: -5px;
+
+}
+
+
+.process-header span {
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #59645d;
+
+}
+
+
+/* =========================================================
+   PROCESS GRID
+========================================================= */
+
+.process-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    80px
+    1fr
+    80px
+    1fr
+    80px
+    1fr;
+
+  align-items: center;
+
+}
+
+
+.process-step {
+
+  text-align: center;
+
+}
+
+
+.process-number {
+
+  margin-bottom: 15px;
+
+  font-size: 8px;
+
+  color: #7cff6b;
+
+}
+
+
+.process-shape {
+
+  width: 120px;
+  height: 120px;
+
+  margin:
+    0 auto 20px;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.45);
+
+  transition:
+    transform 0.4s ease;
+
+}
+
+
+.process-step:hover
+.process-shape {
+
+  transform:
+    rotate(8deg)
+    scale(1.05);
+
+}
+
+
+.shape-blockout {
+
+  border-style: dashed;
+
+  transform:
+    rotate(45deg)
+    scale(0.65);
+
+}
+
+
+.shape-form {
+
+  border-radius: 35%;
+
+  transform:
+    rotate(20deg);
+
+}
+
+
+.shape-detail {
+
+  clip-path:
+    polygon(
+      50% 0%,
+      100% 35%,
+      80% 100%,
+      20% 100%,
+      0% 35%
+    );
+
+}
+
+
+.shape-final {
+
+  border-radius: 50%;
+
+  box-shadow:
+    inset
+    0 0 0 15px
+    rgba(124, 255, 107, 0.04);
+
+}
+
+
+.process-step span {
+
+  font-size: 7px;
+
+  letter-spacing: 2px;
+
+  color: #68736c;
+
+}
+
+
+.process-line {
+
+  height: 1px;
+
+  background:
+    rgba(124, 255, 107, 0.2);
+
+}
+
+
+/* =========================================================
+   RENDER ARCHIVE
+========================================================= */
+
+.render-archive {
+
+  padding:
+    120px
+    8vw
+    150px;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+}
+
+
+.render-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 60px;
+
+}
+
+
+.render-header h2 {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(40px, 6vw, 90px);
+
+  font-weight: 400;
+
+  letter-spacing: -5px;
+
+}
+
+
+.render-header span {
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #59645d;
+
+}
+
+
+/* =========================================================
+   RENDER GRID
+========================================================= */
+
+.render-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+
+}
+
+
+.render-item {
+
+  min-width: 0;
+
+}
+
+
+.render-placeholder {
+
+  position: relative;
+
+  height: 380px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(124, 255, 107, 0.08),
+      transparent 55%
+    );
+
+}
+
+
+.render-placeholder::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.22);
+
+  border-radius: 50%;
+
+  transform:
+    rotateX(60deg);
+
+}
+
+
+.render-placeholder::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 250px;
+  height: 1px;
+
+  background:
+    rgba(124, 255, 107, 0.18);
+
+}
+
+
+.render-placeholder span {
+
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #59645d;
+
+}
+
+
+.render-caption {
+
+  padding-top: 12px;
+
+  font-size: 7px;
+
+  letter-spacing: 1.5px;
+
+  color: #67716b;
+
+}
+
+
+/* =========================================================
+   FINAL MODEL
+========================================================= */
+
+.final-model {
+
+  padding:
+    100px 5vw 150px;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+}
+
+
+.final-model-label {
+
+  margin-bottom: 20px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #7cff6b;
+
+}
+
+
+.final-model-viewer {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 850px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(124, 255, 107, 0.25);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(124, 255, 107, 0.08),
+      transparent 50%
+    ),
+    #0b0f0c;
+
+}
+
+
+.final-model-title {
+
+  position: absolute;
+
+  top: 35px;
+  left: 35px;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+}
+
+
+.final-model-title span {
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #7cff6b;
+
+}
+
+
+.final-model-title h2 {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(40px, 7vw, 100px);
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  letter-spacing: -5px;
+
+}
+
+
+.final-model-title p {
+
+  margin-top: 15px;
+
+  font-size: 7px;
+
+  letter-spacing: 2px;
+
+  color: #59645d;
+
+}
+
+
+/* =========================================================
+   FINAL VIEWER CONTROLS
+========================================================= */
+
+.final-model-viewer
+.viewer-controls {
+
+  bottom: 30px;
+  left: 30px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.model-footer {
+
+  width: 100%;
+
+  padding:
+    35px 8vw;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-top:
+    1px solid
+    rgba(124, 255, 107, 0.16);
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+}
+
+
+.model-footer a {
+
+  color: #67716b;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+
+}
+
+
+.model-footer a:hover {
+
+  color: #7cff6b;
+
+}
+
+
+/* =========================================================
+   HOVER EFFECTS
+========================================================= */
+
+.model-viewer:hover {
+
+  border-color:
+    rgba(124, 255, 107, 0.4);
+
+}
+
+
+.render-placeholder:hover {
+
+  border-color:
+    rgba(124, 255, 107, 0.4);
+
+}
+
+
+.render-placeholder:hover::before {
+
+  animation:
+    renderSpin 5s linear infinite;
+
+}
+
+
+@keyframes renderSpin {
+
+  from {
+
+    transform:
+      rotateX(60deg)
+      rotateZ(0deg);
+
+  }
+
+  to {
+
+    transform:
+      rotateX(60deg)
+      rotateZ(360deg);
+
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+
+  .model-viewer-layout,
+  .model-entry-alt .model-viewer-layout {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .model-information {
+
+    min-height: auto;
+
+  }
+
+
+  .technical-data {
+
+    margin-top: 35px;
+
+  }
+
+
+  .topology-content {
+
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+
+  }
+
+
+  .process-grid {
+
+    grid-template-columns:
+      1fr 50px
+      1fr 50px
+      1fr 50px
+      1fr;
+
+  }
+
+
+  .render-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+
+  body {
+
+    cursor: auto;
+
+  }
+
+
+  .custom-cursor,
+  .cursor-measure-x,
+  .cursor-measure-y {
+
+    display: none;
+
+  }
+
+
+  .cursor-info {
+
+    display: none;
+
+  }
+
+
+  .archive-location {
+
+    display: none;
+
+  }
+
+
+  .measurement-y {
+
+    display: none;
+
+  }
+
+
+  .menu-container {
+
+    right: 20px;
+
+  }
+
+
+  .model-page {
+
+    padding-top: 70px;
+
+  }
+
+
+  .model-intro {
+
+    min-height: 80vh;
+
+    padding:
+      100px 8vw;
+
+  }
+
+
+  .model-index {
+
+    left: 8vw;
+
+  }
+
+
+  .model-title-wrapper h1 {
+
+    font-size:
+      clamp(65px, 18vw, 120px);
+
+    letter-spacing: -5px;
+
+  }
+
+
+  .model-axis-decoration {
+
+    right: -35px;
+
+    transform:
+      scale(0.8);
+
+  }
+
+
+  .model-description {
+
+    margin-left: 0;
+
+    margin-top: 40px;
+
+  }
+
+
+  .model-entry,
+  .topology-section,
+  .process-section,
+  .render-archive {
+
+    padding:
+      80px 7vw 100px;
+
+  }
+
+
+  .model-viewer {
+
+    height: 430px;
+
+  }
+
+
+  .topology-text h2 {
+
+    font-size:
+      70px;
+
+  }
+
+
+  .process-header,
+  .render-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+  }
+
+
+  .process-grid {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 35px;
+
+  }
+
+
+  .process-line {
+
+    width: 1px;
+
+    height: 45px;
+
+  }
+
+
+  .render-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .render-placeholder {
+
+    height: 300px;
+
+  }
+
+
+  .final-model {
+
+    padding:
+      70px 4vw 100px;
+
+  }
+
+
+  .final-model-viewer {
+
+    height: 600px;
+
+  }
+
+
+  .model-footer {
+
+    padding:
+      30px 7vw;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    align-items: flex-start;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      0.01ms !important;
+
+  }
+
+}
