@@ -555,10 +555,10 @@
         scene.background = new THREE.Color(0x111512);
 
         const camera = new THREE.PerspectiveCamera(
-          35,
+          45,
           canvas.clientWidth / canvas.clientHeight,
-          0.1,
-          1000
+          0.3,
+          3000
         );
         camera.position.set(3, 2, 5);
 
@@ -636,14 +636,14 @@
               if (child.isMesh) {
                 if (canvasId === 'viewer-002') {
                   child.material = new THREE.MeshStandardMaterial({
-                    color: 0xB8D6D8,
+                    color: 0xd6d6d6,
                     roughness: 0.18,
                     metalness: 1,
                     map: model002Texture
                   });
                 } else {
                   child.material = new THREE.MeshStandardMaterial({
-                    color: 0xB8B8B8,
+                    color: 0xd6d6d6,
                     roughness: 0.18,
                     metalness: 1
                   });
