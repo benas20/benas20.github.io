@@ -1157,26 +1157,11 @@
 
 
   /* ========================================
-     MODEL 002 TEXTURES
+     MODEL 002 TEXTURE
   ======================================== */
 
-  const model002TexturePaths = [
-
-    /*
-      PON AQUÍ EL NOMBRE EXACTO DEL PNG 1
-    */
-
-    'textura-model002.png',
-
-
-    /*
-      PON AQUÍ EL NOMBRE EXACTO DEL PNG 2
-    */
-
-    'textura-model002.png'
-
-  ];
-
+  const model002TexturePath =
+    'textura-model002.png';
 
 
   /* ========================================
@@ -1376,79 +1361,59 @@
     let model = null;
 
 
-
     /* ==================================
-       MODEL 002 TEXTURES
+       MODEL 002 TEXTURE
     ================================== */
 
-    let model002Textures = [];
+    let model002Texture = null;
 
 
     /*
-      Solamente cargamos las texturas
-      cuando estamos creando viewer-002.
+       Solo cargamos la textura cuando
+       estamos creando viewer-002.
     */
 
     if (
-      canvasId === 'viewer-002'
+      canvasId ===
+      'viewer-002'
     ) {
 
-      model002TexturePaths.forEach(
-        function(texturePath) {
+      model002Texture =
+        textureLoader.load(
 
-          const texture =
-            textureLoader.load(
+          model002TexturePath,
 
-              texturePath,
+          function() {
 
-              function() {
-
-                console.log(
-                  'TEXTURE LOADED:',
-                  texturePath
-                );
-
-              },
-
-              undefined,
-
-              function(error) {
-
-                console.error(
-                  'TEXTURE ERROR:',
-                  texturePath,
-                  error
-                );
-
-              }
-
+            console.log(
+              'TEXTURE LOADED:',
+              model002TexturePath
             );
 
+          },
 
-          /*
-            Las imágenes PNG/JPG son
-            texturas de color.
-          */
+          undefined,
 
-          texture.colorSpace =
-            THREE.SRGBColorSpace;
+          function(error) {
 
+            console.error(
+              'TEXTURE ERROR:',
+              model002TexturePath,
+              error
+            );
 
-          /*
-            Mantener calidad de textura.
-          */
+          }
 
-          texture.anisotropy =
-            renderer.capabilities
-              .getMaxAnisotropy();
+        );
 
 
-          model002Textures.push(
-            texture
-          );
+      model002Texture.colorSpace =
+        THREE.SRGBColorSpace;
 
-        }
-      );
+
+      model002Texture.anisotropy =
+        renderer.capabilities
+          .getMaxAnisotropy();
 
     }
 
@@ -1488,7 +1453,9 @@
           );
 
 
-        object.position.sub(center);
+        object.position.sub(
+          center
+        );
 
 
         const maxDimension =
@@ -1500,7 +1467,8 @@
 
 
         const scale =
-          3 / maxDimension;
+          3 /
+          maxDimension;
 
 
         object.scale.setScalar(
@@ -1513,9 +1481,6 @@
            MATERIAL
         ================================== */
 
-        let meshIndex = 0;
-
-
         object.traverse(
           function(child) {
 
@@ -1524,80 +1489,62 @@
             ) {
 
 
-              /*
-                ==================================
-                MODEL 002
-                ==================================
-              */
+              /* ==============================
+                 MODEL 002
+              ============================== */
 
               if (
-                canvasId === 'viewer-002'
+                canvasId ===
+                'viewer-002'
               ) {
-
-
-                /*
-                  Elegimos la textura según
-                  el mesh/material.
-
-                  Mesh 0 -> textura 1
-                  Mesh 1 -> textura 2
-                */
-
-                const texture =
-                  model002Textures[
-                    meshIndex
-                  ] || null;
-
 
                 child.material =
                   new THREE.MeshStandardMaterial({
 
-                    color: 0xB8B8B8,
+                    color:
+                      0xB8B8B8,
 
-                    roughness: 0.18,
+                    roughness:
+                      0.18,
 
-                    metalness: 1,
+                    metalness:
+                      1,
 
-                    map: texture
+                    map:
+                      model002Texture
 
                   });
 
 
-                /*
-                  Si existe textura,
-                  Three.js la utiliza como
-                  color base del material.
-                */
+                if (
+                  model002Texture
+                ) {
 
-                if (texture) {
-
-                  texture.colorSpace =
+                  model002Texture.colorSpace =
                     THREE.SRGBColorSpace;
 
                 }
 
-
-                meshIndex++;
-
               }
 
 
-              /*
-                ==================================
-                MODEL 001 / MODEL 003
-                ==================================
-              */
+              /* ==============================
+                 MODEL 001 / MODEL 003
+              ============================== */
 
               else {
 
                 child.material =
                   new THREE.MeshStandardMaterial({
 
-                    color: 0xB8B8B8,
+                    color:
+                      0xB8B8B8,
 
-                    roughness: 0.18,
+                    roughness:
+                      0.18,
 
-                    metalness: 1
+                    metalness:
+                      1
 
                   });
 
@@ -1617,7 +1564,9 @@
         );
 
 
-        scene.add(object);
+        scene.add(
+          object
+        );
 
 
 
@@ -1641,7 +1590,9 @@
         ================================== */
 
         let vertices = 0;
+
         let polygons = 0;
+
         let objects = 0;
 
 
@@ -1664,7 +1615,9 @@
 
 
                 if (
-                  geometry.attributes.position
+                  geometry
+                    .attributes
+                    .position
                 ) {
 
                   vertices +=
@@ -1746,7 +1699,8 @@
 
       controls,
 
-      getModel: () => model
+      getModel:
+        () => model
 
     };
 
@@ -1773,7 +1727,8 @@
 
 
       camera.aspect =
-        width / height;
+        width /
+        height;
 
 
       camera.updateProjectionMatrix();
@@ -1843,19 +1798,22 @@
 
     const poly =
       document.getElementById(
-        'poly-' + suffix
+        'poly-' +
+        suffix
       );
 
 
     const vertex =
       document.getElementById(
-        'vertex-' + suffix
+        'vertex-' +
+        suffix
       );
 
 
     const object =
       document.getElementById(
-        'objects-' + suffix
+        'objects-' +
+        suffix
       );
 
 
@@ -1998,50 +1956,73 @@
 <script>
 
   const cursor =
-    document.querySelector('.custom-cursor');
+    document.querySelector(
+      '.custom-cursor'
+    );
 
 
   const cursorX =
-    document.getElementById('cursor-x');
+    document.getElementById(
+      'cursor-x'
+    );
 
 
   const cursorY =
-    document.getElementById('cursor-y');
+    document.getElementById(
+      'cursor-y'
+    );
 
 
   const cursorVector =
-    document.getElementById('cursor-vector');
+    document.getElementById(
+      'cursor-vector'
+    );
 
 
   const cursorSpeed =
-    document.getElementById('cursor-speed');
+    document.getElementById(
+      'cursor-speed'
+    );
 
 
   const cursorSector =
-    document.getElementById('cursor-sector');
+    document.getElementById(
+      'cursor-sector'
+    );
 
 
   const cursorStatus =
-    document.getElementById('cursor-status');
+    document.getElementById(
+      'cursor-status'
+    );
 
 
   const measureX =
-    document.querySelector('.cursor-measure-x');
+    document.querySelector(
+      '.cursor-measure-x'
+    );
 
 
   const measureY =
-    document.querySelector('.cursor-measure-y');
+    document.querySelector(
+      '.cursor-measure-y'
+    );
 
 
   const cursorFlash =
-    document.querySelector('.cursor-flash');
+    document.querySelector(
+      '.cursor-flash'
+    );
 
 
   let previousX = 0;
+
   let previousY = 0;
+
 
   let previousTime =
     performance.now();
+
 
   let idleTimer;
 
@@ -2053,8 +2034,10 @@
       const x =
         event.clientX;
 
+
       const y =
         event.clientY;
+
 
       const currentTime =
         performance.now();
@@ -2063,12 +2046,14 @@
       cursor.style.left =
         x + 'px';
 
+
       cursor.style.top =
         y + 'px';
 
 
       measureX.style.left =
         x + 'px';
+
 
       measureY.style.top =
         y + 'px';
@@ -2077,26 +2062,37 @@
       cursorX.textContent =
         x
           .toFixed(2)
-          .padStart(7, '0');
+          .padStart(
+            7,
+            '0'
+          );
 
 
       cursorY.textContent =
         y
           .toFixed(2)
-          .padStart(7, '0');
+          .padStart(
+            7,
+            '0'
+          );
 
 
       const deltaX =
-        x - previousX;
+        x -
+        previousX;
+
 
       const deltaY =
-        y - previousY;
+        y -
+        previousY;
 
 
       const distance =
         Math.sqrt(
-          deltaX * deltaX +
-          deltaY * deltaY
+          deltaX *
+            deltaX +
+          deltaY *
+            deltaY
         );
 
 
@@ -2108,7 +2104,9 @@
       let speed = 0;
 
 
-      if (deltaTime > 0) {
+      if (
+        deltaTime > 0
+      ) {
 
         speed =
           distance /
@@ -2128,10 +2126,15 @@
       cursorSpeed.textContent =
         speed
           .toFixed(2)
-          .padStart(5, '0');
+          .padStart(
+            5,
+            '0'
+          );
 
 
-      if (distance > 0.5) {
+      if (
+        distance > 0.5
+      ) {
 
         let angle =
           Math.atan2(
@@ -2143,19 +2146,28 @@
 
 
         angle =
-          (angle + 360) % 360;
+          (
+            angle +
+            360
+          ) % 360;
 
 
         cursorVector.textContent =
-          Math.round(angle)
+          Math.round(
+            angle
+          )
             .toString()
-            .padStart(3, '0') +
+            .padStart(
+              3,
+              '0'
+            ) +
           '°';
 
       }
 
 
       const columns = 6;
+
       const rows = 4;
 
 
@@ -2182,20 +2194,26 @@
 
 
       const letters = [
+
         'A',
         'B',
         'C',
         'D',
         'E',
         'F'
+
       ];
 
 
       cursorSector.textContent =
         letters[column] +
         '-' +
-        String(row + 1)
-          .padStart(2, '0');
+        String(
+          row + 1
+        ).padStart(
+          2,
+          '0'
+        );
 
 
       cursorStatus.textContent =
@@ -2219,8 +2237,13 @@
         );
 
 
-      previousX = x;
-      previousY = y;
+      previousX =
+        x;
+
+
+      previousY =
+        y;
+
 
       previousTime =
         currentTime;
@@ -2229,18 +2252,23 @@
   );
 
 
-  /* CLICK FLASH */
+
+  /* ========================================
+     CLICK FLASH
+  ======================================== */
 
   document.addEventListener(
     'click',
     function(event) {
 
       cursorFlash.style.left =
-        event.clientX + 'px';
+        event.clientX +
+        'px';
 
 
       cursorFlash.style.top =
-        event.clientY + 'px';
+        event.clientY +
+        'px';
 
 
       cursorFlash.classList.remove(
@@ -2259,7 +2287,10 @@
   );
 
 
-  /* LEAVE */
+
+  /* ========================================
+     LEAVE
+  ======================================== */
 
   document.addEventListener(
     'mouseleave',
@@ -2268,8 +2299,10 @@
       cursor.style.opacity =
         '0';
 
+
       cursorFlash.style.opacity =
         '0';
+
 
       cursorStatus.textContent =
         'LOST';
@@ -2278,7 +2311,10 @@
   );
 
 
-  /* ENTER */
+
+  /* ========================================
+     ENTER
+  ======================================== */
 
   document.addEventListener(
     'mouseenter',
@@ -2287,8 +2323,10 @@
       cursor.style.opacity =
         '1';
 
+
       cursorFlash.style.opacity =
         '0';
+
 
       cursorStatus.textContent =
         'TRACKING';
