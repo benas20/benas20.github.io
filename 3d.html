@@ -632,26 +632,55 @@
             object.scale.setScalar(scale);
 
             object.traverse(function (child) {
-              if (child.isMesh) {
-                if (canvasId === 'viewer-002') {
-                  child.material = new THREE.MeshStandardMaterial({
-                    color: 0xd6d6d6,
-                    roughness: 0.18,
-                    metalness: 1,
-                    map: model002Texture
-                  });
-                } else {
-                  child.material = new THREE.MeshStandardMaterial({
+
+            if (child.isMesh) {
+              if (canvasId === 'viewer-002') {   
+                
+                console.log( 'MODEL 002 UV:', child.geometry.attributes.uv);
+                
+                // ==========================================
+                // MODEL 002
+                // Piel alienígena + textura
+                // ==========================================
+                child.material = new THREE.MeshStandardMaterial({
+                    // Color base debajo de la textura
+                    color: 0x9fb8c4,
+                    // Material ligeramente brillante
+                    roughness: 0.32,
+                    // Metálico desactivado para que parezca piel
+                    metalness: 0.0,
+                    // Tu textura
+                    map: model002Texture 
+                });
+              }
+              else if (canvasId === 'viewer-001') {
+                // ==========================================
+                // MODEL 001
+                // NO TOCAR
+                // ==========================================
+                child.material = new THREE.MeshStandardMaterial({
+                  
                     color: 0xd6d6d6,
                     roughness: 0.18,
                     metalness: 1
                   });
-                }
-
-                child.castShadow = true;
-                child.receiveShadow = true;
               }
-            });
+              else {
+                // ==========================================
+                // MODEL 003
+                // ==========================================
+                child.material =
+                  new THREE.MeshStandardMaterial({
+                    
+                    color: 0xd6d6d6,
+                    roughness: 0.18,
+                    metalness: 1
+                  });
+              }
+              child.castShadow = true;
+              child.receiveShadow = true;
+            }
+          });
 
             scene.add(object);
 
