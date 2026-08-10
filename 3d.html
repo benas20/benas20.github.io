@@ -1396,30 +1396,31 @@
 
 
 
-          /* MATERIAL */
+          /* ------------------------------
+           MATERIAL
+          ------------------------------ */
 
-          object.traverse(
-            function(child) {
-
-              if (
-                child.isMesh
-              ) {
-
-                child.material =
-                  new THREE.MeshStandardMaterial({
-
-                    color: 0x9aa59d,
-
-                    roughness: 0.58,
-
-                    metalness: 0.18
-
-                  });
-
-              }
-
-            }
-          );
+            object.traverse(function(child) {
+            
+                if (child.isMesh) {
+            
+                    child.material =
+                        new THREE.MeshStandardMaterial({
+            
+                            color: 0xB8B8B8,
+            
+                            roughness: 0.18,
+            
+                            metalness: 0.95
+            
+                        });
+            
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+            
+                }
+            
+            });
 
 
           scene.add(object);
