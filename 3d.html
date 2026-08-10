@@ -887,35 +887,44 @@
                 materials.forEach(material => {
               
                   /* DONUT */
-              
-                  if (material.name === 'Material.001') {
-              
-                    material.color.set(0xffffff);
-                    material.roughness = 0;
-                    material.metalness = 0;
-              
-                    material.transparent = false;
-                    material.opacity = 1;
-                    material.transmission = 0;
-              
-                    material.needsUpdate = true;
-                  }
+
+                if (material.name === 'Material.001') {
+                
+                  console.log('>>> DONUT');
+                
+                  material.color.set(0xffffff);
+                
+                  material.roughness = 0;
+                  material.metalness = 0;
+                
+                  // Transparencia del donut
+                  material.transparent = true;
+                  material.opacity = 0.35;
+                
+                  // Mantener algo de efecto cristal
+                  material.transmission = 0.3;
+                
+                  material.needsUpdate = true;
+                }
               
               
                   /* LETRAS */
-              
+
                   if (material.name === 'Material.002') {
-              
+                  
+                    console.log('>>> LETRAS');
+                  
                     material.color.set(0xffffff);
-                    material.roughness = 1;
-                    material.metalness = 1;
-              
+                  
+                    material.roughness = 0.5;
+                    material.metalness = 0;
+                  
                     material.transparent = false;
                     material.opacity = 1;
-              
+                  
                     material.needsUpdate = true;
                   }
-              
+                                
                 });
               
               }
