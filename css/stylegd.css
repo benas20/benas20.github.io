@@ -196,10 +196,6 @@ a:hover {
 .menu-list,
 .section1,
 .section2,
-.footer,
-.footer-container,
-.footer-content,
-.footer-links,
 .card,
 .card-image,
 .card-content,
@@ -536,62 +532,6 @@ body p {
   }
 }
 
-/* Footer */
-.footer {
-  color: #48535c;
-  padding: 50px 0;
-  text-align: center;
-  margin-top: 75px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  flex: 1;
-  font-size: 14px;
-}
-
-.footer-content p {
-  font-size: 16px;
-  margin: 0;
-  font-weight: 300;
-  color: #e8d9b8 !important;
-}
-
-.footer-links {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.footer-links ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 30px;
-}
-
-.footer-links li a {
-  color: #e8d9b8;
-  text-decoration: none;
-  filter: blur(0.7px);
-  font-weight: 500;
-  transition: color 0.3s ease-in-out;
-}
-
-.footer-links li a:hover {
-  color: #48535c;
-  text-decoration: underline;
-}
-
 /* Cursor personalizado */
 .custom-cursor {
   position: fixed;
@@ -774,8 +714,6 @@ body p {
 /* =========================================================
    GRAPHIC DESIGN / FILE 001
    ========================================================= */
-
-
 /* =========================================================
    PÁGINA PRINCIPAL
    ========================================================= */
