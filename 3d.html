@@ -720,11 +720,10 @@
           }
   
           else if (canvasId === 'viewer-003') {
-  
-            // IMPORTANTE:
-            // No reemplazar el material exportado desde Blender
-          
-           const materials = Array.isArray(child.material)
+
+          // No reemplazar los materiales exportados desde Blender
+        
+          const materials = Array.isArray(child.material)
             ? child.material
             : [child.material];
         
@@ -741,6 +740,7 @@
         
             if (material.name === 'material.001') {
         
+              // DONUT / CRISTAL
               material.color.set(0xffffff);
               material.roughness = 0;
               material.metalness = 0;
@@ -749,6 +749,7 @@
         
             if (material.name === 'material.002') {
         
+              // LETRAS
               material.color.set(0xffffff);
               material.roughness = 1;
               material.metalness = 1;
@@ -758,8 +759,7 @@
             material.needsUpdate = true;
           });
         }
-         /////////////////////////////////// 
-          
+
               updateStats(
                 canvasId,
                 vertices,
