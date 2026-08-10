@@ -586,14 +586,14 @@
         renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
         renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-        const ambient = new THREE.AmbientLight(0xffffff, 1.8);
+        const ambient = new THREE.AmbientLight(0xffffff, canvasId === 'viewer-003' ? 0.12 : 1.8);
         scene.add(ambient);
 
-        const keyLight = new THREE.DirectionalLight(0xB8D6D8, 3);
+        const keyLight = new THREE.DirectionalLight(0xB8D6D8, canvasId === 'viewer-003' ? 0.2 : 3);
         keyLight.position.set(4, 6, 5);
         scene.add(keyLight);
 
-        const fillLight = new THREE.DirectionalLight(0xB8D6D8, 1.2);
+        const fillLight = new THREE.DirectionalLight(0xB8D6D8, canvasId === 'viewer-003' ? 0.08 : 1.2);
         fillLight.position.set(-5, 2, -3);
         scene.add(fillLight);
 
@@ -601,35 +601,25 @@
 
           // 🔵 Luz azul
           const blueLight = new THREE.SpotLight(
-            0x0066ff,
-            80,
-            20,
-            Math.PI / 5,
-            0.5,
-            1
-          );
+             0x0066ff,
+             12,
+             12,
+             2
+           );
         
-          blueLight.position.set(-4, 2, 4);
-          blueLight.target.position.set(0, 0, 0);
-        
+          blueLight.position.set(-4, 1.5, 2.5);
           scene.add(blueLight);
-          scene.add(blueLight.target);
         
-          // 🔴 Luz roja
-          const redLight = new THREE.SpotLight(
+          // 🔴 Luz roja lateral derecha
+          const redLight = new THREE.PointLight(
             0xff0033,
-            80,
-            20,
-            Math.PI / 5,
-            0.5,
-            1
+            12,
+            12,
+            2
           );
         
-          redLight.position.set(4, 2, 4);
-          redLight.target.position.set(0, 0, 0);
-        
+          redLight.position.set(4, 1.5, 2.5);
           scene.add(redLight);
-          scene.add(redLight.target);
         }
 
         const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
@@ -725,6 +715,14 @@
             // No reemplazar el material exportado desde Blender
           
             console.log('MODEL 003 MATERIAL:', child.material);
+            
+            if (Array.isArray(child.material)) {
+            child.material.forEach(material => {
+            material.needsUpdate = true;
+            });         
+          } 
+            else if (child.material) {
+            child.material.needsUpdate = true;
           }
       });
           
