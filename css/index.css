@@ -725,8 +725,9 @@ hr {
 }
 
 .design-footer span, a {
-  text-decortaion: none !important;
+  text-decoration: none !important;
   color: #E8D9B8;
+  font-size: 12px;
 }
 
 /* Cursor personalizado */
