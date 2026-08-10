@@ -937,33 +937,21 @@
               =============================================== */
     
               else if (canvasId === 'viewer-003') {
-    
-                /*
-                  IMPORTANTE:
-    
-                  No reemplazamos los materiales
-                  exportados desde Blender.
-                */
-    
-                const materials =
-                  Array.isArray(child.material)
-                    ? child.material
-                    : [child.material];
-    
-    
-                materials.forEach(function (material) {
-    
-                  if (!material) return;
-    
-    
-                  console.log(
-                    'MATERIAL:',
-                    material.name,
-                    'roughness:',
-                    material.roughness,
-                    'metalness:',
-                    material.metalness
-                  );
+              const materials = Array.isArray(child.material)
+                
+                ? child.material
+                : [child.material];
+            
+              materials.forEach(material => {
+            
+                console.log(
+                  'MATERIAL:',
+                  material.name,
+                  'roughness:',
+                  material.roughness,
+                  'metalness:',
+                  material.metalness
+                );
     
     
                   /* -------------------------------------------
@@ -971,49 +959,33 @@
                      DONUT / CRISTAL
                   ------------------------------------------- */
     
-                  if (
-                    material.name === 'material.001'
-                  ) {
-    
-                    material.color.set(
-                      0xffffff
-                    );
-    
-                    material.roughness = 0;
-    
+                  if (material.name === 'material.001') {
+
+                    // DONUT / CRISTAL
+                    material.color.set(0xffffff);
+                    material.roughness = 0.08;
                     material.metalness = 0;
-    
+              
                   }
-    
     
                   /* -------------------------------------------
                      MATERIAL.002
                      LETRAS
                   ------------------------------------------- */
     
-                  if (
-                    material.name === 'material.002'
-                  ) {
-    
-                    material.color.set(
-                      0xffffff
-                    );
-    
-                    material.roughness = 1;
-    
-                    material.metalness = 1;
-    
+                  if (material.name === 'material.002') {
+
+                    // LETRAS
+                    material.color.set(0xb8c5c8);
+                    material.roughness = 0.45;
+                    material.metalness = 0.65;
+              
                   }
-    
-    
+                                    
                   material.needsUpdate = true;
-    
-                });
-    
-              }
-    
+                  });
+                }
             });
-    
     
             /* =================================================
                ADD MODEL TO SCENE
