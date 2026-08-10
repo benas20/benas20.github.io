@@ -7,8 +7,7 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    content="width=device-width, initial-scale=1.0">
 
   <title>FILE 002 / 3D MODELING</title>
 
@@ -575,16 +574,16 @@
         const ambient = new THREE.AmbientLight(0xffffff, 1.8);
         scene.add(ambient);
 
-        const keyLight = new THREE.DirectionalLight(0xffffff, 3);
+        const keyLight = new THREE.DirectionalLight(0xB8D6D8, 3);
         keyLight.position.set(4, 6, 5);
         scene.add(keyLight);
 
-        const fillLight = new THREE.DirectionalLight(0x7CFF6B, 1.2);
+        const fillLight = new THREE.DirectionalLight(0xB8D6D8, 1.2);
         fillLight.position.set(-5, 2, -3);
         scene.add(fillLight);
 
-        const grid = new THREE.GridHelper(10, 20, 0x7CFF6B, 0x303830);
-        grid.material.opacity = 0.18;
+        const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
+        grid.material.opacity = 0.05;
         grid.material.transparent = true;
         scene.add(grid);
 
