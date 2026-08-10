@@ -634,72 +634,67 @@
 
         const isGLB = modelPath.toLowerCase().endsWith('.glb');
 
-const loader = isGLB ? gltfLoader : fbxLoader;
-
-loader.load(
-  modelPath,
-  function (result) {
-
-    const object = isGLB ? result.scene : result;
-
-    model = object;
-
-    const box = new THREE.Box3().setFromObject(object);
-    const size = box.getSize(new THREE.Vector3());
-    const center = box.getCenter(new THREE.Vector3());
-
-    object.position.sub(center);
-
-    const maxDimension = Math.max(size.x, size.y, size.z);
-    const scale = 3 / maxDimension;
-
-    object.scale.setScalar(scale);
-
-    object.traverse(function (child) {
-
-      if (child.isMesh) {
-
-        if (canvasId === 'viewer-002') {
-
-          console.log(
-            'MODEL 002 UV:',
-            child.geometry.attributes.uv
-          );
-
-          child.material =
-            new THREE.MeshStandardMaterial({
-              color: 0x9fb8c4,
-              roughness: 0.32,
-              metalness: 0.0,
-              map: model002Texture
-            });
-        }
-
-        else if (canvasId === 'viewer-001') {
-
-          child.material =
-            new THREE.MeshStandardMaterial({
-              color: 0xd6d6d6,
-              roughness: 0.18,
-              metalness: 1
-            });
-        }
+        const loader = isGLB ? gltfLoader : fbxLoader;
+    
+        loader.load(
+        modelPath,
+        function (result) {
+      
+        const object = isGLB ? result.scene : result;
+    
+        model = object;
+    
+        const box = new THREE.Box3().setFromObject(object);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+    
+        object.position.sub(center);
+    
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const scale = 3 / maxDimension;
+    
+        object.scale.setScalar(scale);
+    
+        object.traverse(function (child) {
           
-        else {
-          child.material =
-            new THREE.MeshStandardMaterial({
-              color: 0xd6d6d6,
+        if (!child.isMesh) return;
+  
+            if (canvasId === 'viewer-002') {
+    
+                console.log(
+                  'MODEL 002 UV:',
+                  child.geometry.attributes.uv
+                );
+              
+                child.material = new THREE.MeshStandardMaterial({
+                  color: 0x9fb8c4,
+                  roughness: 0.32,
+                  metalness: 0.0,
+                  map: model002Texture
+                });
+              
+              }
+  
+           else if (canvasId === 'viewer-001') {
+  
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0xe6e3e3,
               roughness: 0.18,
               metalness: 1
             });
-        }
-        
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-
+          }
+  
+          else if (canvasId === 'viewer-003') {
+  
+            // IMPORTANTE:
+            // No reemplazar el material exportado desde Blender
+          
+            console.log('MODEL 003 MATERIAL:', child.material);
+          }
+      });
+          
     scene.add(object);
+        
     controls.target.set(0, 0, 0);
     controls.update();
 
