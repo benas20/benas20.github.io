@@ -607,13 +607,13 @@
              Math.PI / 5,
              0.5,
              1
-           );  
+           // );  
         
-          blueLight.position.set(-4, 2, 4);
-          blueLight.target.position.set(0, 0, 0);
+         // blueLight.position.set(-4, 2, 4);
+         // blueLight.target.position.set(0, 0, 0);
           
-          scene.add(blueLight);
-          scene.add(blueLight.target);
+         // scene.add(blueLight);
+         // scene.add(blueLight.target);
         
           // 🔴 Luz roja lateral derecha
           // const redLight = new THREE.SpotLight(
@@ -623,13 +623,13 @@
             Math.PI / 5,
             0.5,
             1
-          );
+          //);
         
-          redLight.position.set(4, 2, 4);
-          redLight.target.position.set(0, 0, 0);
+        //  redLight.position.set(4, 2, 4);
+        // redLight.target.position.set(0, 0, 0);
         
-          scene.add(redLight);
-          scene.add(redLight.target);
+       //   scene.add(redLight);
+       //   scene.add(redLight.target);
         }
 
         const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
@@ -758,7 +758,6 @@
             material.needsUpdate = true;
           });
         }
-
          /////////////////////////////////// 
           
               updateStats(
