@@ -877,75 +877,48 @@
               /* ===============================================
                  MODEL 003
               =============================================== */
-            
+              
               else if (canvasId === 'viewer-003') {
-
-              const materials = Array.isArray(child.material)
-                ? child.material
-                : [child.material];
-            
-              materials.forEach(material => {
-            
-                console.log('========== MATERIAL 003 ==========');
-                console.log('NAME:', material.name);
-                console.log('TYPE:', material.type);
-                console.log('ROUGHNESS:', material.roughness);
-                console.log('METALNESS:', material.metalness);
-                console.log('TRANSPARENT:', material.transparent);
-                console.log('OPACITY:', material.opacity);
-                console.log('TRANSMISSION:', material.transmission);
-                console.log('IOR:', material.ior);
-            
-            
-                /* =================================================
-                   DONUT
-                   Material.001
-                ================================================= */
-            
-                if (material.name === 'Material.001') {
-            
-                  console.log('>>> DONUT');
-            
-                  material.color.set(0xffffff);
-            
-                  material.roughness = 0;
-                  material.metalness = 0;
-            
-                  // Quitar completamente el efecto cristal
-                  material.transparent = false;
-                  material.opacity = 1;
-            
-                  if ('transmission' in material) {
+              
+                const materials = Array.isArray(child.material)
+                  ? child.material
+                  : [child.material];
+              
+                materials.forEach(material => {
+              
+                  /* DONUT */
+              
+                  if (material.name === 'Material.001') {
+              
+                    material.color.set(0xffffff);
+                    material.roughness = 0;
+                    material.metalness = 0;
+              
+                    material.transparent = false;
+                    material.opacity = 1;
                     material.transmission = 0;
+              
+                    material.needsUpdate = true;
                   }
-            
-                  material.needsUpdate = true;
-                }
-            
-            
-                /* =================================================
-                   LETRAS
-                   Material.002
-                ================================================= */
-            
-                if (material.name === 'Material.002') {
-            
-                  console.log('>>> LETRAS');
-            
-                  material.color.set(0xffffff);
-            
-                  material.roughness = 1;
-                  material.metalness = 1;
-            
-                  material.transparent = false;
-                  material.opacity = 1;
-            
-                  material.needsUpdate = true;
-                }
-            
-              });
-            
-            }
+              
+              
+                  /* LETRAS */
+              
+                  if (material.name === 'Material.002') {
+              
+                    material.color.set(0xffffff);
+                    material.roughness = 1;
+                    material.metalness = 1;
+              
+                    material.transparent = false;
+                    material.opacity = 1;
+              
+                    material.needsUpdate = true;
+                  }
+              
+                });
+              
+              }
             
             }); // <-- ESTA ERA LA QUE FALTABA
             
