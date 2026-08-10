@@ -721,6 +721,12 @@ hr {
   letter-spacing: 2px;
   color: #29251F;
   opacity: 0.6;
+  padding: 10px 70px 10px;
+}
+
+.design-footer span, a {
+  text-decortaion: none !important;
+  color: #E8D9B8;
 }
 
 /* Cursor personalizado */
