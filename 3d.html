@@ -651,14 +651,70 @@
     
         /* =====================================================
            MODEL 003 COLORED LIGHTS
-    
-           De momento están DESACTIVADAS.
-           Las dejamos aquí para poder activarlas después.
         ===================================================== */
-    
-        
-        // Luces de color desactivadas temporalmente.
-     
+
+          if (canvasId === 'viewer-003') {
+
+            const lightTopLeft = new THREE.SpotLight(
+              0x6688ff,
+              3,
+              15,
+              Math.PI / 3,
+              0.8,
+              2
+            );
+          
+            lightTopLeft.position.set(-4, 4, 4);
+            lightTopLeft.target.position.set(0, 0, 0);
+          
+            scene.add(lightTopLeft);
+            scene.add(lightTopLeft.target);
+          
+            const lightTopRight = new THREE.SpotLight(
+              0xaa66ff,
+              3,
+              15,
+              Math.PI / 3,
+              0.8,
+              2
+            );
+          
+            lightTopRight.position.set(4, 4, 4);
+            lightTopRight.target.position.set(0, 0, 0);
+          
+            scene.add(lightTopRight);
+            scene.add(lightTopRight.target);
+          
+            const lightBottomLeft = new THREE.SpotLight(
+              0xff6677,
+              2,
+              15,
+              Math.PI / 3,
+              0.8,
+              2
+            );
+          
+            lightBottomLeft.position.set(-4, -3, 4);
+            lightBottomLeft.target.position.set(0, 0, 0);
+          
+            scene.add(lightBottomLeft);
+            scene.add(lightBottomLeft.target);
+          
+            const lightBottomRight = new THREE.SpotLight(
+              0xffaa66,
+              2,
+              15,
+              Math.PI / 3,
+              0.8,
+              2
+            );
+          
+            lightBottomRight.position.set(4, -3, 4);
+            lightBottomRight.target.position.set(0, 0, 0);
+          
+            scene.add(lightBottomRight);
+            scene.add(lightBottomRight.target);
+          }
         
         /* =====================================================
            GRID
