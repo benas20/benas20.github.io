@@ -523,6 +523,7 @@ body p {
 .typing-title span:nth-child(11) { animation-delay: 0.80s; }
 .typing-title span:nth-child(12) { animation-delay: 0.88s; }
 .typing-title span:nth-child(13) { animation-delay: 0.96s; }
+.typing-title span:nth-child(14) { animation-delay: 1.10s; }
 
 @keyframes letterReveal {
   from {
@@ -852,7 +853,7 @@ body p {
 
   justify-content: center;
 
-  gap: 35px;
+  gap: 100px;
 
   margin-bottom: 50px;
 
