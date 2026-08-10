@@ -625,31 +625,27 @@
         ===================================================== */
     
         const ambient = new THREE.AmbientLight(
-          0xffffff,
-          canvasId === 'viewer-003' ? 0 : 1.8
-        );
-    
-        scene.add(ambient);
-    
-    
-        const keyLight = new THREE.DirectionalLight(
-          0xB8D6D8,
-          canvasId === 'viewer-003' ? 0 : 3
-        );
-    
-        keyLight.position.set(4, 6, 5);
-    
-        scene.add(keyLight);
-    
-    
-        const fillLight = new THREE.DirectionalLight(
-          0xB8D6D8,
-          canvasId === 'viewer-003' ? 0 : 1.2
-        );
-    
-        fillLight.position.set(-5, 2, -3);
-    
-        scene.add(fillLight);
+        0xffffff,
+        canvasId === 'viewer-003' ? 0 : 1.8
+      );
+      
+      scene.add(ambient);
+      
+      const keyLight = new THREE.DirectionalLight(
+        0xB8D6D8,
+        canvasId === 'viewer-003' ? 0 : 3
+      );
+      
+      keyLight.position.set(4, 6, 5);
+      scene.add(keyLight);
+      
+      const fillLight = new THREE.DirectionalLight(
+        0xB8D6D8,
+        canvasId === 'viewer-003' ? 0 : 1.2
+      );
+      
+      fillLight.position.set(-5, 2, -3);
+      scene.add(fillLight);
     
     
         /* =====================================================
@@ -659,9 +655,9 @@
            Las dejamos aquí para poder activarlas después.
         ===================================================== */
     
-        if (canvasId === 'viewer-003') {
+        
         // Luces de color desactivadas temporalmente.
-      }
+     
         
         /* =====================================================
            GRID
@@ -897,10 +893,7 @@
             
               materials.forEach(material => {
             
-                console.log(
-                  '========== MATERIAL 003 =========='
-                );
-            
+                console.log('========== MATERIAL 003 ==========');
                 console.log('NAME:', material.name);
                 console.log('TYPE:', material.type);
                 console.log('COLOR:', material.color);
@@ -913,24 +906,26 @@
             
                 if (material.name === 'material.001') {
             
-                  console.log('>>> DONUT');
-            
-                  material.color.set(0xff0000);
-                  material.roughness = 0.1;
+                  // DONUT / CRISTAL
+                  material.color.set(0xffffff);
+                  material.roughness = 0;
                   material.metalness = 0;
+            
                 }
             
                 if (material.name === 'material.002') {
             
-                  console.log('>>> LETRAS');
+                  // LETRAS
+                  material.color.set(0xffffff);
+                  material.roughness = 1;
+                  material.metalness = 1;
             
-                  material.color.set(0x00ff00);
-                  material.roughness = 0.5;
-                  material.metalness = 0;
                 }
             
                 material.needsUpdate = true;
+            
               });
+            
             }
                 
             /* =================================================
