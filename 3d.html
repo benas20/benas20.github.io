@@ -827,111 +827,115 @@
             /* =================================================
                MATERIALS
             ================================================= */
-    
+            
             object.traverse(function (child) {
-    
+            
               if (!child.isMesh) return;
-    
-    
+            
+            
               /* ===============================================
                  MODEL 002
               =============================================== */
-    
+            
               if (canvasId === 'viewer-002') {
-    
+            
                 console.log(
                   'MODEL 002 UV:',
                   child.geometry.attributes.uv
                 );
-    
-    
-                child.material =
-                  new THREE.MeshStandardMaterial({
-    
-                    color: 0x9fb8c4,
-    
-                    roughness: 0.32,
-    
-                    metalness: 0.0,
-    
-                    map: model002Texture
-    
-                  });
-    
+            
+                child.material = new THREE.MeshStandardMaterial({
+            
+                  color: 0x9fb8c4,
+                  roughness: 0.32,
+                  metalness: 0.0,
+                  map: model002Texture
+            
+                });
+            
               }
-    
-    
+            
+            
               /* ===============================================
                  MODEL 001
               =============================================== */
-    
+            
               else if (canvasId === 'viewer-001') {
-    
-                child.material =
-                  new THREE.MeshStandardMaterial({
-    
-                    color: 0xe6e3e3,
-    
-                    roughness: 0.18,
-    
-                    metalness: 1
-    
-                  });
-    
+            
+                child.material = new THREE.MeshStandardMaterial({
+            
+                  color: 0xe6e3e3,
+                  roughness: 0.18,
+                  metalness: 1
+            
+                });
+            
               }
-    
-    
+            
+            
               /* ===============================================
                  MODEL 003
               =============================================== */
-    
+            
               else if (canvasId === 'viewer-003') {
-
-              const materials = Array.isArray(child.material)
-                ? child.material
-                : [child.material];
             
-              materials.forEach(material => {
+                const materials = Array.isArray(child.material)
+                  ? child.material
+                  : [child.material];
             
-                console.log('========== MATERIAL 003 ==========');
-                console.log('NAME:', material.name);
-                console.log('TYPE:', material.type);
-                console.log('COLOR:', material.color);
-                console.log('ROUGHNESS:', material.roughness);
-                console.log('METALNESS:', material.metalness);
-                console.log('TRANSPARENT:', material.transparent);
-                console.log('OPACITY:', material.opacity);
-                console.log('TRANSMISSION:', material.transmission);
-                console.log('IOR:', material.ior);
+                materials.forEach(material => {
             
-                if (material.name === 'material.001') {
+                  console.log('========== MATERIAL 003 ==========');
+                  console.log('NAME:', material.name);
+                  console.log('TYPE:', material.type);
+                  console.log('COLOR:', material.color);
+                  console.log('ROUGHNESS:', material.roughness);
+                  console.log('METALNESS:', material.metalness);
+                  console.log('TRANSPARENT:', material.transparent);
+                  console.log('OPACITY:', material.opacity);
+                  console.log('TRANSMISSION:', material.transmission);
+                  console.log('IOR:', material.ior);
             
-                  // DONUT / CRISTAL
-                  material.color.set(0xffffff);
-                  material.roughness = 0;
-                  material.metalness = 0;
             
-                }
+                  /* DONUT */
             
-                if (material.name === 'material.002') {
+                  if (material.name === 'material.001') {
             
-                  // LETRAS
-                  material.color.set(0xffffff);
-                  material.roughness = 1;
-                  material.metalness = 1;
+                    console.log('>>> DONUT');
             
-                }
+                    material.color.set(0xffffff);
+                    material.roughness = 0;
+                    material.metalness = 0;
             
-                material.needsUpdate = true;
+                  }
             
-              });
             
-            }
-                
+                  /* LETRAS */
+            
+                  if (material.name === 'material.002') {
+            
+                    console.log('>>> LETRAS');
+            
+                    material.color.set(0xffffff);
+                    material.roughness = 1;
+                    material.metalness = 1;
+            
+                  }
+            
+            
+                  material.needsUpdate = true;
+            
+                });
+            
+              }
+            
+            }); // <-- ESTA ERA LA QUE FALTABA
+            
+            
             /* =================================================
                ADD MODEL TO SCENE
             ================================================= */
-    
+            
             scene.add(object);
     
     
