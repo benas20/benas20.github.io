@@ -549,417 +549,1303 @@
     </script>
 
     <!-- =====================================================
-         THREE.JS / 3D VIEWERS
+     THREE.JS / 3D VIEWERS
     ===================================================== -->
     <script type="module">
+    
       import * as THREE from 'three';
       import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
       import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+    
       const viewers = {};
-
+    
       const model002TexturePath = 'models/textura-model002.png';
-
+    
+    
+      /* =====================================================
+         CREATE 3D VIEWER
+      ===================================================== */
+    
       function createViewer(canvasId, modelPath) {
+    
         const canvas = document.getElementById(canvasId);
+    
         if (!canvas) return;
-
+    
+    
+        /* =====================================================
+           SCENE
+        ===================================================== */
+    
         const scene = new THREE.Scene();
+    
         scene.background = new THREE.Color(0x111512);
-
+    
+    
+        /* =====================================================
+           CAMERA
+        ===================================================== */
+    
         const camera = new THREE.PerspectiveCamera(
           45,
           canvas.clientWidth / canvas.clientHeight,
           0.3,
           3000
         );
+    
         camera.position.set(3, 2, 5);
-
+    
+    
+        /* =====================================================
+           RENDERER
+        ===================================================== */
+    
         const renderer = new THREE.WebGLRenderer({
           canvas: canvas,
           antialias: true,
           alpha: true
         });
-
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    
+        renderer.setPixelRatio(
+          Math.min(window.devicePixelRatio, 2)
+        );
+    
+        renderer.setSize(
+          canvas.clientWidth,
+          canvas.clientHeight,
+          false
+        );
+    
         renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-        const ambient = new THREE.AmbientLight(0xffffff, canvasId === 'viewer-003' ? 0 : 1.8);
+    
+    
+        /* =====================================================
+           LIGHTING
+        ===================================================== */
+    
+        const ambient = new THREE.AmbientLight(
+          0xffffff,
+          canvasId === 'viewer-003' ? 0 : 1.8
+        );
+    
         scene.add(ambient);
-
-        const keyLight = new THREE.DirectionalLight(0xB8D6D8, canvasId === 'viewer-003' ? 0 : 3);
+    
+    
+        const keyLight = new THREE.DirectionalLight(
+          0xB8D6D8,
+          canvasId === 'viewer-003' ? 0 : 3
+        );
+    
         keyLight.position.set(4, 6, 5);
+    
         scene.add(keyLight);
-
-        const fillLight = new THREE.DirectionalLight(0xB8D6D8, canvasId === 'viewer-003' ? 0 : 1.2);
+    
+    
+        const fillLight = new THREE.DirectionalLight(
+          0xB8D6D8,
+          canvasId === 'viewer-003' ? 0 : 1.2
+        );
+    
         fillLight.position.set(-5, 2, -3);
+    
         scene.add(fillLight);
-
+    
+    
+        /* =====================================================
+           MODEL 003 COLORED LIGHTS
+    
+           De momento están DESACTIVADAS.
+           Las dejamos aquí para poder activarlas después.
+        ===================================================== */
+    
         if (canvasId === 'viewer-003') {
-
-          //🔵 Luz azul
-          // const blueLight = new THREE.SpotLight(
-             0x0066ff,
-             80,
-             20,
-             Math.PI / 5,
-             0.5,
-             1
-           // );  
-        
-         // blueLight.position.set(-4, 2, 4);
-         // blueLight.target.position.set(0, 0, 0);
-          
-         // scene.add(blueLight);
-         // scene.add(blueLight.target);
-        
-          // 🔴 Luz roja lateral derecha
-          // const redLight = new THREE.SpotLight(
+    
+          /*
+          // 🔵 LUZ AZUL
+    
+          const blueLight = new THREE.SpotLight(
+            0x0066ff,
+            80,
+            20,
+            Math.PI / 5,
+            0.5,
+            1
+          );
+    
+          blueLight.position.set(-4, 2, 4);
+    
+          blueLight.target.position.set(
+            0,
+            0,
+            0
+          );
+    
+          scene.add(blueLight);
+          scene.add(blueLight.target);
+    
+    
+          // 🔴 LUZ ROJA
+    
+          const redLight = new THREE.SpotLight(
             0xff0033,
             80,
             20,
             Math.PI / 5,
             0.5,
             1
-          //);
-        
-        //  redLight.position.set(4, 2, 4);
-        // redLight.target.position.set(0, 0, 0);
-        
-       //   scene.add(redLight);
-       //   scene.add(redLight.target);
+          );
+    
+          redLight.position.set(4, 2, 4);
+    
+          redLight.target.position.set(
+            0,
+            0,
+            0
+          );
+    
+          scene.add(redLight);
+          scene.add(redLight.target);
+          */
         }
-
-        const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
+    
+    
+        /* =====================================================
+           GRID
+        ===================================================== */
+    
+        const grid = new THREE.GridHelper(
+          10000,
+          10000,
+          0x7CFF6B,
+          0x303830
+        );
+    
         grid.material.opacity = 0.05;
         grid.material.transparent = true;
+    
         scene.add(grid);
-
-        const controls = new OrbitControls(camera, canvas);
+    
+    
+        /* =====================================================
+           ORBIT CONTROLS
+        ===================================================== */
+    
+        const controls = new OrbitControls(
+          camera,
+          canvas
+        );
+    
         controls.enableDamping = true;
         controls.dampingFactor = 0.06;
+    
         controls.minDistance = 1;
         controls.maxDistance = 20;
+    
         controls.enablePan = true;
-
+    
+    
+        /* =====================================================
+           LOADERS
+        ===================================================== */
+    
         const fbxLoader = new FBXLoader();
         const gltfLoader = new GLTFLoader();
         const textureLoader = new THREE.TextureLoader();
-
+    
+    
         let model = null;
         let model002Texture = null;
-
+    
+    
+        /* =====================================================
+           MODEL 002 TEXTURE
+        ===================================================== */
+    
         if (canvasId === 'viewer-002') {
+    
           model002Texture = textureLoader.load(
+    
             model002TexturePath,
+    
             function () {
-              console.log('TEXTURE LOADED:', model002TexturePath);
+    
+              console.log(
+                'TEXTURE LOADED:',
+                model002TexturePath
+              );
+    
             },
+    
             undefined,
+    
             function (error) {
-              console.error('TEXTURE ERROR:', model002TexturePath, error);
+    
+              console.error(
+                'TEXTURE ERROR:',
+                model002TexturePath,
+                error
+              );
+    
             }
+    
           );
-
-          model002Texture.colorSpace = THREE.SRGBColorSpace;
-          model002Texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    
+          model002Texture.colorSpace =
+            THREE.SRGBColorSpace;
+    
+          model002Texture.anisotropy =
+            renderer.capabilities.getMaxAnisotropy();
         }
-
-        const isGLB = modelPath.toLowerCase().endsWith('.glb');
-
-        const loader = isGLB ? gltfLoader : fbxLoader;
+    
+    
+        /* =====================================================
+           DETECT FILE TYPE
+        ===================================================== */
+    
+        const isGLB =
+          modelPath
+            .toLowerCase()
+            .endsWith('.glb');
+    
+    
+        const loader =
+          isGLB
+            ? gltfLoader
+            : fbxLoader;
+    
+    
+        /* =====================================================
+           LOAD MODEL
+        ===================================================== */
     
         loader.load(
-        modelPath,
-        function (result) {
-      
-        const object = isGLB ? result.scene : result;
     
-        model = object;
+          modelPath,
     
-        const box = new THREE.Box3().setFromObject(object);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
+          function (result) {
     
-        object.position.sub(center);
+            /* =================================================
+               GET OBJECT
+            ================================================= */
     
-        const maxDimension = Math.max(size.x, size.y, size.z);
-        const scale = 3 / maxDimension;
+            const object =
+              isGLB
+                ? result.scene
+                : result;
     
-        object.scale.setScalar(scale);
+            model = object;
     
-        object.traverse(function (child) {
-          
-        if (!child.isMesh) return;
-  
-            if (canvasId === 'viewer-002') {
+    
+            /* =================================================
+               CENTER MODEL
+            ================================================= */
+    
+            const box =
+              new THREE.Box3()
+                .setFromObject(object);
+    
+            const size =
+              box.getSize(
+                new THREE.Vector3()
+              );
+    
+            const center =
+              box.getCenter(
+                new THREE.Vector3()
+              );
+    
+            object.position.sub(center);
+    
+    
+            /* =================================================
+               NORMALIZE SCALE
+            ================================================= */
+    
+            const maxDimension =
+              Math.max(
+                size.x,
+                size.y,
+                size.z
+              );
+    
+            const scale =
+              3 / maxDimension;
+    
+            object.scale.setScalar(scale);
+    
+    
+            /* =================================================
+               MATERIALS
+            ================================================= */
+    
+            object.traverse(function (child) {
+    
+              if (!child.isMesh) return;
+    
+    
+              /* ===============================================
+                 MODEL 002
+              =============================================== */
+    
+              if (canvasId === 'viewer-002') {
     
                 console.log(
                   'MODEL 002 UV:',
                   child.geometry.attributes.uv
                 );
-              
-                child.material = new THREE.MeshStandardMaterial({
-                  color: 0x9fb8c4,
-                  roughness: 0.32,
-                  metalness: 0.0,
-                  map: model002Texture
-                });
-              
+    
+    
+                child.material =
+                  new THREE.MeshStandardMaterial({
+    
+                    color: 0x9fb8c4,
+    
+                    roughness: 0.32,
+    
+                    metalness: 0.0,
+    
+                    map: model002Texture
+    
+                  });
+    
               }
-  
-           else if (canvasId === 'viewer-001') {
-  
-            child.material = new THREE.MeshStandardMaterial({
-              color: 0xe6e3e3,
-              roughness: 0.18,
-              metalness: 1
+    
+    
+              /* ===============================================
+                 MODEL 001
+              =============================================== */
+    
+              else if (canvasId === 'viewer-001') {
+    
+                child.material =
+                  new THREE.MeshStandardMaterial({
+    
+                    color: 0xe6e3e3,
+    
+                    roughness: 0.18,
+    
+                    metalness: 1
+    
+                  });
+    
+              }
+    
+    
+              /* ===============================================
+                 MODEL 003
+              =============================================== */
+    
+              else if (canvasId === 'viewer-003') {
+    
+                /*
+                  IMPORTANTE:
+    
+                  No reemplazamos los materiales
+                  exportados desde Blender.
+                */
+    
+                const materials =
+                  Array.isArray(child.material)
+                    ? child.material
+                    : [child.material];
+    
+    
+                materials.forEach(function (material) {
+    
+                  if (!material) return;
+    
+    
+                  console.log(
+                    'MATERIAL:',
+                    material.name,
+                    'roughness:',
+                    material.roughness,
+                    'metalness:',
+                    material.metalness
+                  );
+    
+    
+                  /* -------------------------------------------
+                     MATERIAL.001
+                     DONUT / CRISTAL
+                  ------------------------------------------- */
+    
+                  if (
+                    material.name === 'material.001'
+                  ) {
+    
+                    material.color.set(
+                      0xffffff
+                    );
+    
+                    material.roughness = 0;
+    
+                    material.metalness = 0;
+    
+                  }
+    
+    
+                  /* -------------------------------------------
+                     MATERIAL.002
+                     LETRAS
+                  ------------------------------------------- */
+    
+                  if (
+                    material.name === 'material.002'
+                  ) {
+    
+                    material.color.set(
+                      0xffffff
+                    );
+    
+                    material.roughness = 1;
+    
+                    material.metalness = 1;
+    
+                  }
+    
+    
+                  material.needsUpdate = true;
+    
+                });
+    
+              }
+    
             });
-          }
-  
-          else if (canvasId === 'viewer-003') {
-
-          // No reemplazar los materiales exportados desde Blender
-        
-          const materials = Array.isArray(child.material)
-            ? child.material
-            : [child.material];
-        
-          materials.forEach(material => {
-        
-            console.log(
-              'MATERIAL:',
-              material.name,
-              'roughness:',
-              material.roughness,
-              'metalness:',
-              material.metalness
+    
+    
+            /* =================================================
+               ADD MODEL TO SCENE
+            ================================================= */
+    
+            scene.add(object);
+    
+    
+            controls.target.set(
+              0,
+              0,
+              0
             );
-        
-            if (material.name === 'material.001') {
-        
-              // DONUT / CRISTAL
-              material.color.set(0xffffff);
-              material.roughness = 0;
-              material.metalness = 0;
-        
-            }
-        
-            if (material.name === 'material.002') {
-        
-              // LETRAS
-              material.color.set(0xffffff);
-              material.roughness = 1;
-              material.metalness = 1;
-        
-            }
-        
-            material.needsUpdate = true;
-          });
+    
+            controls.update();
+    
+    
+            /* =================================================
+               CALCULATE MODEL STATISTICS
+            ================================================= */
+    
+            let vertices = 0;
+            let polygons = 0;
+            let objects = 0;
+    
+    
+            object.traverse(function (child) {
+    
+              if (!child.isMesh) return;
+    
+    
+              objects++;
+    
+    
+              if (!child.geometry) return;
+    
+    
+              const geometry =
+                child.geometry;
+    
+    
+              /* -----------------------------------------------
+                 VERTICES
+              ----------------------------------------------- */
+    
+              if (
+                geometry.attributes &&
+                geometry.attributes.position
+              ) {
+    
+                vertices +=
+                  geometry.attributes.position.count;
+    
+              }
+    
+    
+              /* -----------------------------------------------
+                 POLYGONS
+              ----------------------------------------------- */
+    
+              if (geometry.index) {
+    
+                polygons +=
+                  geometry.index.count / 3;
+    
+              }
+    
+              else if (
+                geometry.attributes &&
+                geometry.attributes.position
+              ) {
+    
+                polygons +=
+                  geometry.attributes.position.count / 3;
+    
+              }
+    
+            });
+    
+    
+            /* =================================================
+               UPDATE STATS
+            ================================================= */
+    
+            updateStats(
+              canvasId,
+              vertices,
+              polygons,
+              objects
+            );
+    
+    
+            console.log(
+              'MODEL LOADED:',
+              modelPath
+            );
+    
+            console.log(
+              'VERTICES:',
+              vertices
+            );
+    
+            console.log(
+              'POLYGONS:',
+              polygons
+            );
+    
+            console.log(
+              'OBJECTS:',
+              objects
+            );
+    
+          },
+    
+    
+          /* =================================================
+             PROGRESS
+          ================================================= */
+    
+          undefined,
+    
+    
+          /* =================================================
+             ERROR
+          ================================================= */
+    
+          function (error) {
+    
+            console.error(
+              'MODEL ERROR:',
+              modelPath,
+              error
+            );
+    
+          }
+    
+        );
+    
+    
+        /* =====================================================
+           SAVE VIEWER
+        ===================================================== */
+    
+        viewers[canvasId] = {
+    
+          scene,
+    
+          camera,
+    
+          renderer,
+    
+          controls,
+    
+          getModel: () => model
+    
+        };
+    
+    
+        /* =====================================================
+           RESIZE
+        ===================================================== */
+    
+        function resize() {
+    
+          const width =
+            canvas.clientWidth;
+    
+          const height =
+            canvas.clientHeight;
+    
+    
+          if (
+            width === 0 ||
+            height === 0
+          ) {
+            return;
+          }
+    
+    
+          camera.aspect =
+            width / height;
+    
+          camera.updateProjectionMatrix();
+    
+    
+          renderer.setSize(
+            width,
+            height,
+            false
+          );
+    
         }
-
-              updateStats(
-                canvasId,
-                vertices,
-                polygons,
-                objects
-              );
-          
-            },
-            undefined,
-            function (error) {
-          
-              console.error(
-                'MODEL ERROR:',
-                modelPath,
-                error
-              );
-          
+    
+    
+        window.addEventListener(
+          'resize',
+          resize
+        );
+    
+    
+        /* =====================================================
+           ANIMATION LOOP
+        ===================================================== */
+    
+        function animate() {
+    
+          requestAnimationFrame(
+            animate
+          );
+    
+          controls.update();
+    
+          renderer.render(
+            scene,
+            camera
+          );
+    
+        }
+    
+    
+        animate();
+    
+      }
+    
+    
+      /* =====================================================
+         UPDATE MODEL STATS
+      ===================================================== */
+    
+      function updateStats(
+        canvasId,
+        vertices,
+        polygons,
+        objects
+      ) {
+    
+        const suffix =
+          canvasId.replace(
+            'viewer-',
+            ''
+          );
+    
+    
+        const poly =
+          document.getElementById(
+            'poly-' + suffix
+          );
+    
+        const vertex =
+          document.getElementById(
+            'vertex-' + suffix
+          );
+    
+        const object =
+          document.getElementById(
+            'objects-' + suffix
+          );
+    
+    
+        if (poly) {
+    
+          poly.textContent =
+            Math.round(
+              polygons
+            ).toLocaleString();
+    
+        }
+    
+    
+        if (vertex) {
+    
+          vertex.textContent =
+            Math.round(
+              vertices
+            ).toLocaleString();
+    
+        }
+    
+    
+        if (object) {
+    
+          object.textContent =
+            objects;
+    
+        }
+    
+      }
+    
+    
+      /* =====================================================
+         WIREFRAME
+      ===================================================== */
+    
+      window.toggleWireframe =
+        function (canvasId) {
+    
+          const viewer =
+            viewers[canvasId];
+    
+          if (!viewer) return;
+    
+    
+          const model =
+            viewer.getModel();
+    
+          if (!model) return;
+    
+    
+          model.traverse(
+            function (child) {
+    
+              if (
+                child.isMesh &&
+                child.material
+              ) {
+    
+                if (
+                  Array.isArray(
+                    child.material
+                  )
+                ) {
+    
+                  child.material.forEach(
+                    function (material) {
+    
+                      material.wireframe =
+                        !material.wireframe;
+    
+                    }
+                  );
+    
+                }
+    
+                else {
+    
+                  child.material.wireframe =
+                    !child.material.wireframe;
+    
+                }
+    
+              }
+    
             }
           );
-
-        viewers[canvasId] = {
-          scene,
-          camera,
-          renderer,
-          controls,
-          getModel: () => model
+    
         };
-
-        function resize() {
-          const width = canvas.clientWidth;
-          const height = canvas.clientHeight;
-          if (width === 0 || height === 0) return;
-
-          camera.aspect = width / height;
-          camera.updateProjectionMatrix();
-          renderer.setSize(width, height, false);
-        }
-
-        window.addEventListener('resize', resize);
-
-        function animate() {
-          requestAnimationFrame(animate);
-          controls.update();
-          renderer.render(scene, camera);
-        }
-
-        animate();
-      }
-
-      function updateStats(canvasId, vertices, polygons, objects) {
-        const suffix = canvasId.replace('viewer-', '');
-
-        const poly = document.getElementById('poly-' + suffix);
-        const vertex = document.getElementById('vertex-' + suffix);
-        const object = document.getElementById('objects-' + suffix);
-
-        if (poly) poly.textContent = Math.round(polygons).toLocaleString();
-        if (vertex) vertex.textContent = Math.round(vertices).toLocaleString();
-        if (object) object.textContent = objects;
-      }
-
-      window.toggleWireframe = function (canvasId) {
-        const viewer = viewers[canvasId];
-        if (!viewer) return;
-
-        const model = viewer.getModel();
-        if (!model) return;
-
-        model.traverse(function (child) {
-          if (child.isMesh && child.material) {
-            child.material.wireframe = !child.material.wireframe;
-          }
-        });
-      };
-
-      window.resetModel = function (canvasId) {
-        const viewer = viewers[canvasId];
-        if (!viewer) return;
-
-        viewer.camera.position.set(3, 2, 5);
-        viewer.controls.target.set(0, 0, 0);
-        viewer.controls.update();
-      };
-
-      createViewer('viewer-001', 'models/model001.fbx');
-      createViewer('viewer-002', 'models/model002.fbx');
-      createViewer('viewer-003', 'models/model003.glb');
+    
+    
+      /* =====================================================
+         RESET CAMERA
+      ===================================================== */
+    
+      window.resetModel =
+        function (canvasId) {
+    
+          const viewer =
+            viewers[canvasId];
+    
+          if (!viewer) return;
+    
+    
+          viewer.camera.position.set(
+            3,
+            2,
+            5
+          );
+    
+    
+          viewer.controls.target.set(
+            0,
+            0,
+            0
+          );
+    
+    
+          viewer.controls.update();
+    
+        };
+    
+    
+      /* =====================================================
+         CREATE VIEWERS
+      ===================================================== */
+    
+      createViewer(
+        'viewer-001',
+        'models/model001.fbx'
+      );
+    
+      createViewer(
+        'viewer-002',
+        'models/model002.fbx'
+      );
+    
+      createViewer(
+        'viewer-003',
+        'models/model003.glb'
+      );
+    
     </script>
-
+    
+    
     <!-- =====================================================
          CURSOR SYSTEM
          EXACTLY THE SAME SYSTEM AS GRAPHIC DESIGN
     ===================================================== -->
+    
     <script>
-      const cursor = document.querySelector('.custom-cursor');
-
-      const cursorX = document.getElementById('cursor-x');
-      const cursorY = document.getElementById('cursor-y');
-      const cursorVector = document.getElementById('cursor-vector');
-      const cursorSpeed = document.getElementById('cursor-speed');
-      const cursorSector = document.getElementById('cursor-sector');
-      const cursorStatus = document.getElementById('cursor-status');
-
-      const measureX = document.querySelector('.cursor-measure-x');
-      const measureY = document.querySelector('.cursor-measure-y');
-      const cursorFlash = document.querySelector('.cursor-flash');
-
+    
+      const cursor =
+        document.querySelector(
+          '.custom-cursor'
+        );
+    
+    
+      const cursorX =
+        document.getElementById(
+          'cursor-x'
+        );
+    
+      const cursorY =
+        document.getElementById(
+          'cursor-y'
+        );
+    
+      const cursorVector =
+        document.getElementById(
+          'cursor-vector'
+        );
+    
+      const cursorSpeed =
+        document.getElementById(
+          'cursor-speed'
+        );
+    
+      const cursorSector =
+        document.getElementById(
+          'cursor-sector'
+        );
+    
+      const cursorStatus =
+        document.getElementById(
+          'cursor-status'
+        );
+    
+    
+      const measureX =
+        document.querySelector(
+          '.cursor-measure-x'
+        );
+    
+      const measureY =
+        document.querySelector(
+          '.cursor-measure-y'
+        );
+    
+      const cursorFlash =
+        document.querySelector(
+          '.cursor-flash'
+        );
+    
+    
       let previousX = 0;
       let previousY = 0;
-      let previousTime = performance.now();
+    
+      let previousTime =
+        performance.now();
+    
       let idleTimer;
-
-      document.addEventListener('mousemove', function (event) {
-        const x = event.clientX;
-        const y = event.clientY;
-        const currentTime = performance.now();
-
-        cursor.style.left = x + 'px';
-        cursor.style.top = y + 'px';
-
-        measureX.style.left = x + 'px';
-        measureY.style.top = y + 'px';
-
-        cursorX.textContent = x.toFixed(2).padStart(7, '0');
-        cursorY.textContent = y.toFixed(2).padStart(7, '0');
-
-        const deltaX = x - previousX;
-        const deltaY = y - previousY;
-
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        const deltaTime = currentTime - previousTime;
-
-        let speed = 0;
-
-        if (deltaTime > 0) {
-          speed = (distance / deltaTime) * 10;
+    
+    
+      /* =====================================================
+         MOUSE MOVE
+      ===================================================== */
+    
+      document.addEventListener(
+        'mousemove',
+        function (event) {
+    
+          const x =
+            event.clientX;
+    
+          const y =
+            event.clientY;
+    
+    
+          const currentTime =
+            performance.now();
+    
+    
+          if (cursor) {
+    
+            cursor.style.left =
+              x + 'px';
+    
+            cursor.style.top =
+              y + 'px';
+    
+          }
+    
+    
+          if (measureX) {
+    
+            measureX.style.left =
+              x + 'px';
+    
+          }
+    
+    
+          if (measureY) {
+    
+            measureY.style.top =
+              y + 'px';
+    
+          }
+    
+    
+          if (cursorX) {
+    
+            cursorX.textContent =
+              x.toFixed(2)
+                .padStart(
+                  7,
+                  '0'
+                );
+    
+          }
+    
+    
+          if (cursorY) {
+    
+            cursorY.textContent =
+              y.toFixed(2)
+                .padStart(
+                  7,
+                  '0'
+                );
+    
+          }
+    
+    
+          /* =================================================
+             SPEED
+          ================================================= */
+    
+          const deltaX =
+            x - previousX;
+    
+          const deltaY =
+            y - previousY;
+    
+    
+          const distance =
+            Math.sqrt(
+              deltaX * deltaX +
+              deltaY * deltaY
+            );
+    
+    
+          const deltaTime =
+            currentTime -
+            previousTime;
+    
+    
+          let speed = 0;
+    
+    
+          if (deltaTime > 0) {
+    
+            speed =
+              (distance / deltaTime) *
+              10;
+    
+          }
+    
+    
+          speed =
+            Math.min(
+              speed,
+              99.99
+            );
+    
+    
+          if (cursorSpeed) {
+    
+            cursorSpeed.textContent =
+              speed
+                .toFixed(2)
+                .padStart(
+                  5,
+                  '0'
+                );
+    
+          }
+    
+    
+          /* =================================================
+             VECTOR
+          ================================================= */
+    
+          if (
+            distance > 0.5 &&
+            cursorVector
+          ) {
+    
+            let angle =
+              (
+                Math.atan2(
+                  deltaY,
+                  deltaX
+                ) *
+                180
+              ) /
+              Math.PI;
+    
+    
+            angle =
+              (angle + 360) %
+              360;
+    
+    
+            cursorVector.textContent =
+              Math.round(angle)
+                .toString()
+                .padStart(
+                  3,
+                  '0'
+                ) + '°';
+    
+          }
+    
+    
+          /* =================================================
+             SECTOR
+          ================================================= */
+    
+          const columns = 6;
+          const rows = 4;
+    
+    
+          const column =
+            Math.min(
+              columns - 1,
+              Math.floor(
+                (x /
+                  window.innerWidth) *
+                  columns
+              )
+            );
+    
+    
+          const row =
+            Math.min(
+              rows - 1,
+              Math.floor(
+                (y /
+                  window.innerHeight) *
+                  rows
+              )
+            );
+    
+    
+          const letters = [
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F'
+          ];
+    
+    
+          if (cursorSector) {
+    
+            cursorSector.textContent =
+              letters[column] +
+              '-' +
+              String(row + 1)
+                .padStart(
+                  2,
+                  '0'
+                );
+    
+          }
+    
+    
+          if (cursorStatus) {
+    
+            cursorStatus.textContent =
+              'TRACKING';
+    
+          }
+    
+    
+          /* =================================================
+             IDLE TIMER
+          ================================================= */
+    
+          clearTimeout(
+            idleTimer
+          );
+    
+    
+          idleTimer =
+            setTimeout(
+              function () {
+    
+                if (cursorStatus) {
+    
+                  cursorStatus.textContent =
+                    'IDLE';
+    
+                }
+    
+              },
+              400
+            );
+    
+    
+          previousX = x;
+          previousY = y;
+    
+          previousTime =
+            currentTime;
+    
         }
-
-        speed = Math.min(speed, 99.99);
-
-        cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
-
-        if (distance > 0.5) {
-          let angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
-          angle = (angle + 360) % 360;
-
-          cursorVector.textContent =
-            Math.round(angle).toString().padStart(3, '0') + '°';
+      );
+    
+    
+      /* =====================================================
+         CLICK FLASH
+      ===================================================== */
+    
+      document.addEventListener(
+        'click',
+        function (event) {
+    
+          if (!cursorFlash) return;
+    
+    
+          cursorFlash.style.left =
+            event.clientX + 'px';
+    
+          cursorFlash.style.top =
+            event.clientY + 'px';
+    
+    
+          cursorFlash.classList.remove(
+            'active'
+          );
+    
+    
+          void cursorFlash.offsetWidth;
+    
+    
+          cursorFlash.classList.add(
+            'active'
+          );
+    
         }
-
-        const columns = 6;
-        const rows = 4;
-
-        const column = Math.min(
-          columns - 1,
-          Math.floor((x / window.innerWidth) * columns)
-        );
-
-        const row = Math.min(
-          rows - 1,
-          Math.floor((y / window.innerHeight) * rows)
-        );
-
-        const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-
-        cursorSector.textContent =
-          letters[column] + '-' + String(row + 1).padStart(2, '0');
-
-        cursorStatus.textContent = 'TRACKING';
-
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(function () {
-          cursorStatus.textContent = 'IDLE';
-        }, 400);
-
-        previousX = x;
-        previousY = y;
-        previousTime = currentTime;
-      });
-
-      document.addEventListener('click', function (event) {
-        cursorFlash.style.left = event.clientX + 'px';
-        cursorFlash.style.top = event.clientY + 'px';
-
-        cursorFlash.classList.remove('active');
-        void cursorFlash.offsetWidth;
-        cursorFlash.classList.add('active');
-      });
-
-      document.addEventListener('mouseleave', function () {
-        cursor.style.opacity = '0';
-        cursorFlash.style.opacity = '0';
-        cursorStatus.textContent = 'LOST';
-      });
-
-      document.addEventListener('mouseenter', function () {
-        cursor.style.opacity = '1';
-        cursorFlash.style.opacity = '0';
-        cursorStatus.textContent = 'TRACKING';
-      });
+      );
+    
+    
+      /* =====================================================
+         MOUSE LEAVE
+      ===================================================== */
+    
+      document.addEventListener(
+        'mouseleave',
+        function () {
+    
+          if (cursor) {
+    
+            cursor.style.opacity =
+              '0';
+    
+          }
+    
+    
+          if (cursorFlash) {
+    
+            cursorFlash.style.opacity =
+              '0';
+    
+          }
+    
+    
+          if (cursorStatus) {
+    
+            cursorStatus.textContent =
+              'LOST';
+    
+          }
+    
+        }
+      );
+    
+    
+      /* =====================================================
+         MOUSE ENTER
+      ===================================================== */
+    
+      document.addEventListener(
+        'mouseenter',
+        function () {
+    
+          if (cursor) {
+    
+            cursor.style.opacity =
+              '1';
+    
+          }
+    
+    
+          if (cursorFlash) {
+    
+            cursorFlash.style.opacity =
+              '0';
+    
+          }
+    
+    
+          if (cursorStatus) {
+    
+            cursorStatus.textContent =
+              'TRACKING';
+    
+          }
+    
+        }
+      );
+    
     </script>
   </body>
   
