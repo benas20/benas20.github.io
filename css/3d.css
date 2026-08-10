@@ -1635,61 +1635,38 @@ span:nth-child(3) {
 ========================================================= */
 
 .wireframe-display {
-
   position: relative;
   height: 420px;
   overflow: hidden;
-  border:
-    1px solid
-    rgba(124, 255, 107, 0.16);
-  background:
-    #0d110e;
+
+  border: 1px solid rgba(124, 255, 107, 0.16);
+
+  background: #0d110e;
 }
 
 .wireframe-grid {
-
   position: absolute;
   inset: 0;
-  display: grid;
 }
 
 .wireframe-grid img {
-
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-
-}
-
-.wireframe-display::after {
-
-  content: "◎";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:
-    translate(-50%, -50%);
-  font-size: 160px;
-  font-family: Arial, sans-serif;
-  font-weight: 100;
-  color:
-    rgba(124, 255, 107, 0.08);
-
 }
 
 .wireframe-label {
-
   position: absolute;
   left: 15px;
   bottom: 15px;
+
   font-size: 7px;
   letter-spacing: 2px;
   color: #67716b;
+
   z-index: 10;
-
 }
-
 
 /* =========================================================
    PROCESS
