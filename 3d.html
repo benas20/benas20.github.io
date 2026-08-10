@@ -878,56 +878,73 @@
               =============================================== */
             
               else if (canvasId === 'viewer-003') {
+
+              const materials = Array.isArray(child.material)
+                ? child.material
+                : [child.material];
             
-                const materials = Array.isArray(child.material)
-                  ? child.material
-                  : [child.material];
+              materials.forEach(material => {
             
-                materials.forEach(material => {
-            
-                  console.log('========== MATERIAL 003 ==========');
-                  console.log('NAME:', material.name);
-                  console.log('TYPE:', material.type);
-                  console.log('COLOR:', material.color);
-                  console.log('ROUGHNESS:', material.roughness);
-                  console.log('METALNESS:', material.metalness);
-                  console.log('TRANSPARENT:', material.transparent);
-                  console.log('OPACITY:', material.opacity);
-                  console.log('TRANSMISSION:', material.transmission);
-                  console.log('IOR:', material.ior);
+                console.log('========== MATERIAL 003 ==========');
+                console.log('NAME:', material.name);
+                console.log('TYPE:', material.type);
+                console.log('ROUGHNESS:', material.roughness);
+                console.log('METALNESS:', material.metalness);
+                console.log('TRANSPARENT:', material.transparent);
+                console.log('OPACITY:', material.opacity);
+                console.log('TRANSMISSION:', material.transmission);
+                console.log('IOR:', material.ior);
             
             
-                  /* DONUT */
+                /* =================================================
+                   DONUT
+                   Material.001
+                ================================================= */
             
-                  if (material.name === 'material.001') {
+                if (material.name === 'Material.001') {
             
-                    console.log('>>> DONUT');
+                  console.log('>>> DONUT');
             
-                    material.color.set(0xffffff);
-                    material.roughness = 0;
-                    material.metalness = 0;
+                  material.color.set(0xffffff);
             
+                  material.roughness = 0;
+                  material.metalness = 0;
+            
+                  // Quitar completamente el efecto cristal
+                  material.transparent = false;
+                  material.opacity = 1;
+            
+                  if ('transmission' in material) {
+                    material.transmission = 0;
                   }
-            
-            
-                  /* LETRAS */
-            
-                  if (material.name === 'material.002') {
-            
-                    console.log('>>> LETRAS');
-            
-                    material.color.set(0xffffff);
-                    material.roughness = 1;
-                    material.metalness = 1;
-            
-                  }
-            
             
                   material.needsUpdate = true;
+                }
             
-                });
             
-              }
+                /* =================================================
+                   LETRAS
+                   Material.002
+                ================================================= */
+            
+                if (material.name === 'Material.002') {
+            
+                  console.log('>>> LETRAS');
+            
+                  material.color.set(0xffffff);
+            
+                  material.roughness = 1;
+                  material.metalness = 1;
+            
+                  material.transparent = false;
+                  material.opacity = 1;
+            
+                  material.needsUpdate = true;
+                }
+            
+              });
+            
+            }
             
             }); // <-- ESTA ERA LA QUE FALTABA
             
