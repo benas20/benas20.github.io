@@ -839,7 +839,7 @@ body p {
 .design-intro {
   position: relative;
 
-  padding: 130px 0 170px;
+  padding: 175px 0 250px;
 
   text-align: center;
 }
@@ -854,7 +854,7 @@ body p {
 
   gap: 35px;
 
-  margin-bottom: 35px;
+  margin-bottom: 50px;
 
   font-size: 8px;
 
@@ -870,18 +870,11 @@ body p {
 
 .design-title {
   margin: 0 !important;
-
   font-family: Arial, sans-serif !important;
-
-  font-size: clamp(60px, 9vw, 150px) !important;
-
-  font-weight: 400;
-
+  font-size: clamp(60px, 7.1vw, 150px) !important;
   letter-spacing: 5px;
-
   color: #29251F !important;
-
-  filter: blur(0.8px) !important;
+  filter: blur(1px) !important;
 }
 
 
@@ -890,7 +883,7 @@ body p {
 .design-description {
   max-width: 420px;
 
-  margin: 30px auto 0 !important;
+  margin: 100px auto 0 !important;
 
   font-family: Arial, sans-serif;
 
