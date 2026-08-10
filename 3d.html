@@ -609,6 +609,7 @@
         controls.enablePan = true;
 
         const loader = new FBXLoader();
+        const gltfLoader = new GLTFLoader();
         const textureLoader = new THREE.TextureLoader();
 
         let model = null;
@@ -630,10 +631,15 @@
           model002Texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
         }
 
-        loader.load(
-          modelPath,
-          function (object) {
-            model = object;
+        const isGLB = modelPath.toLowerCase().endsWith('.glb');
+
+        const loadModel = isGLB ? gltfLoader : fbxLoader;
+
+          loadModel.load( modelPath, function (result) {
+
+        const object = isGLB ? result.scene : result;
+    
+           model = object;
 
             const box = new THREE.Box3().setFromObject(object);
             const size = box.getSize(new THREE.Vector3());
@@ -643,6 +649,7 @@
 
             const maxDimension = Math.max(size.x, size.y, size.z);
             const scale = 3 / maxDimension;
+            
             object.scale.setScalar(scale);
 
             object.traverse(function (child) {
@@ -799,7 +806,7 @@
 
       createViewer('viewer-001', 'models/model001.fbx');
       createViewer('viewer-002', 'models/model002.fbx');
-      createViewer('viewer-003', 'models/model003.fbx');
+      createViewer('viewer-003', 'models/model003.glb');
     </script>
 
     <!-- =====================================================
