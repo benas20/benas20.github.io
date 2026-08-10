@@ -620,33 +620,34 @@
         renderer.outputColorSpace = THREE.SRGBColorSpace;
     
     
-        /* =====================================================
-           LIGHTING
-        ===================================================== */
-    
-        const ambient = new THREE.AmbientLight(
-        0xffffff,
-        canvasId === 'viewer-003' ? 0 : 1.8
-      );
-      
-      scene.add(ambient);
-      
-      const keyLight = new THREE.DirectionalLight(
-        0xB8D6D8,
-        canvasId === 'viewer-003' ? 0 : 3
-      );
-      
-      keyLight.position.set(4, 6, 5);
-      scene.add(keyLight);
-      
-      const fillLight = new THREE.DirectionalLight(
-        0xB8D6D8,
-        canvasId === 'viewer-003' ? 0 : 1.2
-      );
-      
-      fillLight.position.set(-5, 2, -3);
-      scene.add(fillLight);
-    
+          /* =====================================================
+             LIGHTING
+          ===================================================== */
+          
+          const ambient = new THREE.AmbientLight(
+            0xffffff,
+            canvasId === 'viewer-003' ? 0.8 : 1.8
+          );
+          
+          scene.add(ambient);
+          
+          const keyLight = new THREE.DirectionalLight(
+            0xffffff,
+            canvasId === 'viewer-003' ? 1.5 : 3
+          );
+          
+          keyLight.position.set(4, 6, 5);
+          
+          scene.add(keyLight);
+          
+          const fillLight = new THREE.DirectionalLight(
+            0xffffff,
+            canvasId === 'viewer-003' ? 0.5 : 1.2
+          );
+          
+          fillLight.position.set(-5, 2, -3);
+          
+          scene.add(fillLight);
     
         /* =====================================================
            MODEL 003 COLORED LIGHTS
