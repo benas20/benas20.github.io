@@ -16,7 +16,6 @@
 
 <body>
 
-
   <!-- ========================================
        SYSTEM HEADER
   ======================================== -->
@@ -46,7 +45,7 @@
     </div>
 
     <div>
-      DIGITAL OBJECT ARCHIVE
+      VISUAL ARCHIVE
     </div>
 
     <div>
@@ -96,11 +95,6 @@
   <div class="scan-line-horizontal"></div>
   <div class="scan-line-horizontal-reverse"></div>
 
-
-  <!-- ========================================
-       CURSOR FLASH
-  ======================================== -->
-
   <div class="cursor-flash"></div>
 
 
@@ -128,40 +122,47 @@
     </label>
 
 
-    <!-- Lista desplegable -->
-
     <ul class="menu-list">
 
       <li>
         <span class="menu-number">001</span>
+
         <a href="graphicdesign.html">
           GRAPHIC DESIGN
         </a>
       </li>
 
+
       <li>
         <span class="menu-number">002</span>
+
         <a href="3dmodel.html">
           3D MODELING
         </a>
       </li>
 
+
       <li>
         <span class="menu-number">003</span>
+
         <a href="photography.html">
           PHOTOGRAPHY
         </a>
       </li>
 
+
       <li>
         <span class="menu-number">004</span>
+
         <a href="#">
           MUSIC
         </a>
       </li>
 
+
       <li>
         <span class="menu-number">005</span>
+
         <a href="index.html">
           INDEX
         </a>
@@ -187,9 +188,7 @@
   <div class="custom-cursor">
 
     <div class="cursor-horizontal"></div>
-
     <div class="cursor-vertical"></div>
-
     <div class="cursor-circle"></div>
 
     <div class="tick tick-top"></div>
@@ -212,7 +211,7 @@
   <div class="cursor-info">
 
     <div class="observation-title">
-      OBSERVATION / 02
+      OBSERVATION / 01
     </div>
 
 
@@ -275,304 +274,544 @@
   </div>
 
 
-  <!-- ========================================
+
+  <!-- =====================================================
        3D MODELING
        MAIN CONTENT
-  ======================================== -->
+  ===================================================== -->
 
   <main class="model-page">
 
 
-    <!-- ======================================
-         FILE IDENTIFICATION
-    ====================================== -->
+    <!-- ==========================================
+         INTRO
+    ========================================== -->
 
-    <header class="model-header">
+    <section class="model-intro">
 
-      <div class="model-header-left">
+
+      <div class="model-index">
 
         <span>
-          FILE / 002
+          ARCHIVE / 002
         </span>
 
         <span>
-          CATEGORY / DIGITAL OBJECTS
+          OBJECTS / 03
+        </span>
+
+        <span>
+          FORMAT / 3D
         </span>
 
       </div>
 
 
-      <div class="model-header-center">
-
-        <span>
-          3D MODELING
-        </span>
-
-      </div>
+      <div class="model-title-wrapper">
 
 
-      <div class="model-header-right">
+        <div class="model-title-small">
+          DIGITAL OBJECT ARCHIVE
+        </div>
 
-        <span>
-          BAV / 3D-ARCHIVE
-        </span>
-
-        <span>
-          STATUS / ACTIVE
-        </span>
-
-      </div>
-
-    </header>
-
-
-    <!-- ======================================
-         HERO
-    ====================================== -->
-
-    <section class="model-hero">
-
-
-      <div class="hero-meta">
-
-        <span>
-          ARCHIVE 002
-        </span>
-
-        <span>
-          OBJECT COLLECTION
-        </span>
-
-        <span>
-          3D / 02
-        </span>
-
-      </div>
-
-
-      <div class="hero-title">
-
-        <span class="hero-title-small">
-          DIGITAL
-        </span>
 
         <h1>
-          OBJECTS
+          3D<br>
+          MODELING
         </h1>
 
-        <span class="hero-title-index">
-          / 3D MODELING
-        </span>
+
+        <div class="model-axis-decoration">
+
+          <span>X</span>
+          <span>+</span>
+          <span>Y</span>
+          <span>+</span>
+          <span>Z</span>
+
+        </div>
+
 
       </div>
 
 
-      <div class="hero-description">
+      <p class="model-description">
 
-        <p>
-          SELECTED THREE-DIMENSIONAL OBJECTS,
-          ENVIRONMENTS AND EXPERIMENTAL MODELS.
-        </p>
+        THREE-DIMENSIONAL OBJECTS, ENVIRONMENTS
+        AND EXPERIMENTAL DIGITAL FORMS.
 
-        <div class="hero-line"></div>
-
-        <span>
-          BLENDER / SUBSTANCE / UNREAL ENGINE
-        </span>
-
-      </div>
+      </p>
 
 
     </section>
 
 
-    <!-- ======================================
+
+    <!-- ==========================================
          MODEL 001
-    ====================================== -->
+    ========================================== -->
 
-    <section class="model-object object-primary">
+    <section class="model-entry">
 
 
-      <div class="object-index">
+      <div class="model-entry-header">
 
-        <span>
-          OBJECT / 001
-        </span>
+        <div>
 
-        <span>
-          BAV-3D-001
-        </span>
+          <span class="model-number">
+            OBJECT / 001
+          </span>
+
+          <span class="model-code">
+            BAV / 3D-001
+          </span>
+
+        </div>
+
+
+        <div class="model-state">
+
+          <span class="state-dot"></span>
+
+          INTERACTIVE OBJECT
+
+        </div>
 
       </div>
 
 
-      <div class="object-stage">
 
-        <div class="object-image">
+      <div class="model-viewer-layout">
 
-          <img
-            src="img/3DModel001.jpg"
-            alt="3D model project 001"
-          >
 
-          <div class="image-cross cross-a"></div>
-          <div class="image-cross cross-b"></div>
+        <!-- 3D VIEWER -->
 
-          <div class="image-label">
-            PERSPECTIVE / 01
+        <div class="model-viewer">
+
+          <canvas
+            id="viewer-001"
+            class="three-canvas"
+          ></canvas>
+
+
+          <div class="viewer-overlay">
+
+            <span>
+              PERSPECTIVE / USER
+            </span>
+
+            <span>
+              OBJ 001
+            </span>
+
+          </div>
+
+
+          <div class="viewer-axis">
+
+            <span class="axis-x">X</span>
+            <span class="axis-y">Y</span>
+            <span class="axis-z">Z</span>
+
+          </div>
+
+
+          <div class="viewer-controls">
+
+            <button
+              onclick="toggleWireframe('viewer-001')"
+            >
+              WIREFRAME
+            </button>
+
+            <button
+              onclick="resetModel('viewer-001')"
+            >
+              RESET VIEW
+            </button>
+
           </div>
 
         </div>
 
 
-        <div class="object-info">
+
+        <!-- INFORMATION -->
+
+        <aside class="model-information">
 
 
-          <div class="object-heading">
-
-            <span>
-              01 / OBJECT
-            </span>
-
-            <h2>
-              DIGITAL FORM
-            </h2>
-
+          <div class="model-type">
+            DIGITAL SCULPTURE
           </div>
 
 
-          <div class="object-description">
+          <h2>
+            MODEL 001
+          </h2>
 
-            <p>
-              THREE-DIMENSIONAL MODEL CREATED
-              FROM AN ORIGINAL CONCEPT.
-              FORM, MATERIAL AND LIGHTING
-              DEVELOPED AS A SINGLE DIGITAL OBJECT.
-            </p>
 
-          </div>
+          <p class="model-text">
+
+            EXPERIMENTAL THREE-DIMENSIONAL
+            OBJECT DEVELOPED FROM AN
+            INITIAL DIGITAL BLOCKOUT.
+
+          </p>
 
 
           <div class="technical-data">
 
             <div>
-              <span>SOFTWARE</span>
-              <strong>BLENDER</strong>
+
+              <span>
+                POLYGONS
+              </span>
+
+              <strong id="poly-001">
+                ---
+              </strong>
+
             </div>
 
-            <div>
-              <span>TYPE</span>
-              <strong>HARD SURFACE</strong>
-            </div>
 
             <div>
-              <span>POLYGONS</span>
-              <strong>086.421</strong>
+
+              <span>
+                VERTICES
+              </span>
+
+              <strong id="vertex-001">
+                ---
+              </strong>
+
             </div>
 
+
             <div>
-              <span>YEAR</span>
-              <strong>2025</strong>
+
+              <span>
+                OBJECTS
+              </span>
+
+              <strong id="objects-001">
+                ---
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                FORMAT
+              </span>
+
+              <strong>
+                FBX
+              </strong>
+
             </div>
 
           </div>
 
 
-        </div>
+          <div class="model-tags">
+
+            <span>BLENDER</span>
+            <span>MODELING</span>
+            <span>TEXTURE</span>
+
+          </div>
+
+
+        </aside>
+
 
       </div>
 
     </section>
 
 
-    <!-- ======================================
+
+    <!-- ==========================================
+         TOPOLOGY
+    ========================================== -->
+
+    <section class="topology-section">
+
+
+      <div class="section-marker">
+        ANALYSIS / 002
+      </div>
+
+
+      <div class="topology-content">
+
+
+        <div class="topology-text">
+
+          <span class="technical-label">
+            MESH ANALYSIS
+          </span>
+
+
+          <h2>
+            TOPOLOGY
+          </h2>
+
+
+          <p>
+
+            STRUCTURAL STUDY OF DIGITAL
+            GEOMETRY, EDGE FLOW AND
+            POLYGON DISTRIBUTION.
+
+          </p>
+
+
+          <div class="topology-data">
+
+            <div>
+
+              <span>
+                GEOMETRY
+              </span>
+
+              <strong>
+                QUAD / TRI
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                UV
+              </span>
+
+              <strong>
+                UNWRAPPED
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                NORMALS
+              </span>
+
+              <strong>
+                CALCULATED
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="wireframe-display">
+
+          <div class="wireframe-grid">
+
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+
+          </div>
+
+
+          <div class="wireframe-label">
+            WIREFRAME / 001
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
          MODEL 002
-    ====================================== -->
+    ========================================== -->
 
-    <section class="model-object object-secondary">
+    <section class="model-entry model-entry-alt">
 
 
-      <div class="object-index">
+      <div class="model-entry-header">
 
-        <span>
-          OBJECT / 002
-        </span>
+        <div>
 
-        <span>
-          BAV-3D-002
-        </span>
+          <span class="model-number">
+            OBJECT / 002
+          </span>
+
+          <span class="model-code">
+            BAV / 3D-002
+          </span>
+
+        </div>
+
+
+        <div class="model-state">
+
+          <span class="state-dot"></span>
+
+          INTERACTIVE OBJECT
+
+        </div>
 
       </div>
 
 
-      <div class="object-stage">
+
+      <div class="model-viewer-layout">
 
 
-        <div class="object-info">
+        <aside class="model-information">
 
 
-          <div class="object-heading">
-
-            <span>
-              02 / ENVIRONMENT
-            </span>
-
-            <h2>
-              PLANET BENUS
-            </h2>
-
+          <div class="model-type">
+            HARD SURFACE
           </div>
 
 
-          <div class="object-description">
+          <h2>
+            MODEL 002
+          </h2>
 
-            <p>
-              EXPERIMENTAL ENVIRONMENT DEVELOPED
-              FOR AN ANIMATED WORLD. ORGANIC FORMS,
-              ARCHITECTURE AND LANDSCAPE BUILT
-              AS A CONNECTED 3D SYSTEM.
-            </p>
 
-          </div>
+          <p class="model-text">
+
+            HARD-SURFACE MODELING EXPERIMENT
+            FOCUSED ON FORM, PROPORTION
+            AND MECHANICAL DETAILS.
+
+          </p>
 
 
           <div class="technical-data">
 
             <div>
-              <span>SOFTWARE</span>
-              <strong>BLENDER</strong>
+
+              <span>
+                POLYGONS
+              </span>
+
+              <strong id="poly-002">
+                ---
+              </strong>
+
             </div>
 
-            <div>
-              <span>ENGINE</span>
-              <strong>GREASE PENCIL</strong>
-            </div>
 
             <div>
-              <span>TYPE</span>
-              <strong>ENVIRONMENT</strong>
+
+              <span>
+                VERTICES
+              </span>
+
+              <strong id="vertex-002">
+                ---
+              </strong>
+
             </div>
 
+
             <div>
-              <span>STATUS</span>
-              <strong>IN DEVELOPMENT</strong>
+
+              <span>
+                OBJECTS
+              </span>
+
+              <strong id="objects-002">
+                ---
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                FORMAT
+              </span>
+
+              <strong>
+                FBX
+              </strong>
+
             </div>
 
           </div>
 
 
-        </div>
+          <div class="model-tags">
+
+            <span>HARD SURFACE</span>
+            <span>BLENDER</span>
+            <span>DETAIL</span>
+
+          </div>
 
 
-        <div class="object-image">
+        </aside>
 
-          <img
-            src="img/3DModel002.jpg"
-            alt="Planet Benus 3D environment"
-          >
 
-          <div class="image-label">
-            ENVIRONMENT / 02
+
+        <div class="model-viewer">
+
+          <canvas
+            id="viewer-002"
+            class="three-canvas"
+          ></canvas>
+
+
+          <div class="viewer-overlay">
+
+            <span>
+              PERSPECTIVE / USER
+            </span>
+
+            <span>
+              OBJ 002
+            </span>
+
+          </div>
+
+
+          <div class="viewer-axis">
+
+            <span class="axis-x">X</span>
+            <span class="axis-y">Y</span>
+            <span class="axis-z">Z</span>
+
+          </div>
+
+
+          <div class="viewer-controls">
+
+            <button
+              onclick="toggleWireframe('viewer-002')"
+            >
+              WIREFRAME
+            </button>
+
+            <button
+              onclick="resetModel('viewer-002')"
+            >
+              RESET VIEW
+            </button>
+
           </div>
 
         </div>
@@ -583,333 +822,105 @@
     </section>
 
 
-    <!-- ======================================
-         TECHNICAL VIEWS
-    ====================================== -->
 
-    <section class="technical-section">
+    <!-- ==========================================
+         PROCESS
+    ========================================== -->
 
-
-      <div class="technical-header">
-
-        <div>
-
-          <span>
-            TECHNICAL ARCHIVE / 003
-          </span>
-
-          <h2>
-            MODEL ANALYSIS
-          </h2>
-
-        </div>
+    <section class="process-section">
 
 
-        <span class="technical-code">
-          VIEWPORT / ORTHOGRAPHIC
-        </span>
-
+      <div class="section-marker">
+        PROCESS / 003
       </div>
 
 
-      <div class="technical-grid">
-
-
-        <div class="technical-view">
-
-          <div class="technical-view-label">
-            FRONT
-          </div>
-
-          <img
-            src="img/3DFront.jpg"
-            alt="Front orthographic view"
-          >
-
-        </div>
-
-
-        <div class="technical-view">
-
-          <div class="technical-view-label">
-            SIDE
-          </div>
-
-          <img
-            src="img/3DSide.jpg"
-            alt="Side orthographic view"
-          >
-
-        </div>
-
-
-        <div class="technical-view">
-
-          <div class="technical-view-label">
-            WIREFRAME
-          </div>
-
-          <img
-            src="img/3DWireframe.jpg"
-            alt="3D wireframe"
-          >
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ======================================
-         MODEL COLLECTION
-    ====================================== -->
-
-    <section class="model-collection">
-
-
-      <div class="collection-header">
-
-        <div>
-
-          <span>
-            COLLECTION / 004
-          </span>
-
-          <h2>
-            OTHER OBJECTS
-          </h2>
-
-        </div>
-
-
-        <span>
-          SELECTED / 04
-        </span>
-
-      </div>
-
-
-      <div class="collection-grid">
-
-
-        <article class="collection-item">
-
-          <div class="collection-image">
-
-            <img
-              src="img/3DObject01.jpg"
-              alt=""
-            >
-
-            <span>
-              OBJ / 04A
-            </span>
-
-          </div>
-
-          <div class="collection-info">
-
-            <span>
-              HARD SURFACE
-            </span>
-
-            <strong>
-              OBJECT 04A
-            </strong>
-
-          </div>
-
-        </article>
-
-
-        <article class="collection-item">
-
-          <div class="collection-image">
-
-            <img
-              src="img/3DObject02.jpg"
-              alt=""
-            >
-
-            <span>
-              OBJ / 04B
-            </span>
-
-          </div>
-
-          <div class="collection-info">
-
-            <span>
-              ORGANIC
-            </span>
-
-            <strong>
-              OBJECT 04B
-            </strong>
-
-          </div>
-
-        </article>
-
-
-        <article class="collection-item">
-
-          <div class="collection-image">
-
-            <img
-              src="img/3DObject03.jpg"
-              alt=""
-            >
-
-            <span>
-              OBJ / 04C
-            </span>
-
-          </div>
-
-          <div class="collection-info">
-
-            <span>
-              SCULPT
-            </span>
-
-            <strong>
-              OBJECT 04C
-            </strong>
-
-          </div>
-
-        </article>
-
-
-        <article class="collection-item">
-
-          <div class="collection-image">
-
-            <img
-              src="img/3DObject04.jpg"
-              alt=""
-            >
-
-            <span>
-              OBJ / 04D
-            </span>
-
-          </div>
-
-          <div class="collection-info">
-
-            <span>
-              EXPERIMENTAL
-            </span>
-
-            <strong>
-              OBJECT 04D
-            </strong>
-
-          </div>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ======================================
-         SOFTWARE / WORKFLOW
-    ====================================== -->
-
-    <section class="workflow-section">
-
-
-      <div class="workflow-title">
-
-        <span>
-          SYSTEM / 005
-        </span>
+      <div class="process-header">
 
         <h2>
-          WORKFLOW
+
+          FROM BLOCKOUT
+          <br>
+          TO FINAL MESH
+
         </h2>
+
+
+        <span>
+          MODEL DEVELOPMENT
+        </span>
 
       </div>
 
 
-      <div class="workflow-list">
+      <div class="process-grid">
 
 
-        <div class="workflow-step">
+        <div class="process-step">
 
-          <span>
+          <div class="process-number">
             01
+          </div>
+
+          <div class="process-shape shape-blockout"></div>
+
+          <span>
+            BLOCKOUT
           </span>
-
-          <strong>
-            CONCEPT
-          </strong>
-
-          <p>
-            FORM DEVELOPMENT
-            AND VISUAL RESEARCH
-          </p>
 
         </div>
 
 
-        <div class="workflow-step">
+        <div class="process-line"></div>
 
-          <span>
+
+        <div class="process-step">
+
+          <div class="process-number">
             02
+          </div>
+
+          <div class="process-shape shape-form"></div>
+
+          <span>
+            FORM
           </span>
-
-          <strong>
-            MODEL
-          </strong>
-
-          <p>
-            POLYGONAL MODELING
-            AND SCULPTING
-          </p>
 
         </div>
 
 
-        <div class="workflow-step">
+        <div class="process-line"></div>
 
-          <span>
+
+        <div class="process-step">
+
+          <div class="process-number">
             03
+          </div>
+
+          <div class="process-shape shape-detail"></div>
+
+          <span>
+            DETAIL
           </span>
-
-          <strong>
-            MATERIAL
-          </strong>
-
-          <p>
-            UV / TEXTURE /
-            SURFACE DEVELOPMENT
-          </p>
 
         </div>
 
 
-        <div class="workflow-step">
+        <div class="process-line"></div>
+
+
+        <div class="process-step">
+
+          <div class="process-number">
+            04
+          </div>
+
+          <div class="process-shape shape-final"></div>
 
           <span>
-            04
+            FINAL MESH
           </span>
-
-          <strong>
-            RENDER
-          </strong>
-
-          <p>
-            LIGHTING / CAMERA /
-            FINAL OUTPUT
-          </p>
 
         </div>
 
@@ -919,31 +930,176 @@
     </section>
 
 
-    <!-- ======================================
+
+    <!-- ==========================================
+         MATERIAL / RENDER ARCHIVE
+    ========================================== -->
+
+    <section class="render-archive">
+
+
+      <div class="section-marker">
+        RENDER ARCHIVE / 004
+      </div>
+
+
+      <div class="render-header">
+
+        <h2>
+          MATERIAL / LIGHT / FORM
+        </h2>
+
+        <span>
+          SELECTED TEST RENDERS
+        </span>
+
+      </div>
+
+
+      <div class="render-grid">
+
+
+        <div class="render-item">
+
+          <div class="render-placeholder">
+
+            <span>
+              RENDER / 001
+            </span>
+
+          </div>
+
+          <div class="render-caption">
+            MATERIAL TEST
+          </div>
+
+        </div>
+
+
+        <div class="render-item">
+
+          <div class="render-placeholder">
+
+            <span>
+              RENDER / 002
+            </span>
+
+          </div>
+
+          <div class="render-caption">
+            LIGHTING TEST
+          </div>
+
+        </div>
+
+
+        <div class="render-item">
+
+          <div class="render-placeholder">
+
+            <span>
+              RENDER / 003
+            </span>
+
+          </div>
+
+          <div class="render-caption">
+            FINAL FORM
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         FINAL MODEL
+    ========================================== -->
+
+    <section class="final-model">
+
+
+      <div class="final-model-label">
+        OBJECT / 003
+      </div>
+
+
+      <div class="final-model-viewer">
+
+
+        <canvas
+          id="viewer-003"
+          class="three-canvas"
+        ></canvas>
+
+
+        <div class="final-model-title">
+
+          <span>
+            BAV / 3D-003
+          </span>
+
+          <h2>
+            FINAL OBJECT
+          </h2>
+
+          <p>
+            360° INTERACTIVE VIEW
+          </p>
+
+        </div>
+
+
+        <div class="viewer-controls">
+
+          <button
+            onclick="toggleWireframe('viewer-003')"
+          >
+            WIREFRAME
+          </button>
+
+          <button
+            onclick="resetModel('viewer-003')"
+          >
+            RESET VIEW
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
          END OF FILE
-    ====================================== -->
+    ========================================== -->
 
     <footer class="model-footer">
 
-
       <span>
-        <a href="graphicdesign.html">
-          ← PREVIOUS FILE / 001
+        <a href="index.html">
+          BACK TO INDEX 00
         </a>
       </span>
 
 
       <span>
-        FILE 002 / 3D MODELING
+        FILE 002 / 003
       </span>
 
 
       <span>
         <a href="photography.html">
-          NEXT FILE / 003 →
+          NEXT FILE → 003
         </a>
       </span>
-
 
     </footer>
 
@@ -951,261 +1107,876 @@
   </main>
 
 
-  <!-- ========================================
-       JAVASCRIPT
-  ======================================== -->
+
+  <!-- =====================================================
+       THREE.JS
+  ===================================================== -->
+
+  <script type="importmap">
+
+  {
+    "imports": {
+      "three":
+        "https://unpkg.com/three@0.160.0/build/three.module.js",
+
+      "three/addons/":
+        "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+
+  </script>
+
+
+
+  <!-- =====================================================
+       THREE.JS / 3D VIEWERS
+  ===================================================== -->
+
+  <script type="module">
+
+    import * as THREE from 'three';
+
+    import {
+      OrbitControls
+    } from
+      'three/addons/controls/OrbitControls.js';
+
+    import {
+      FBXLoader
+    } from
+      'three/addons/loaders/FBXLoader.js';
+
+
+    /* ========================================
+       VIEWERS
+    ======================================== */
+
+    const viewers = {};
+
+
+    /* ========================================
+       CREATE VIEWER
+    ======================================== */
+
+    function createViewer(
+      canvasId,
+      modelPath
+    ) {
+
+      const canvas =
+        document.getElementById(canvasId);
+
+      if (!canvas) return;
+
+
+      const scene =
+        new THREE.Scene();
+
+
+      scene.background =
+        new THREE.Color(0x111512);
+
+
+      const camera =
+        new THREE.PerspectiveCamera(
+          35,
+          canvas.clientWidth /
+            canvas.clientHeight,
+          0.1,
+          1000
+        );
+
+
+      camera.position.set(
+        3,
+        2,
+        5
+      );
+
+
+      const renderer =
+        new THREE.WebGLRenderer({
+
+          canvas: canvas,
+
+          antialias: true,
+
+          alpha: true
+
+        });
+
+
+      renderer.setPixelRatio(
+        Math.min(
+          window.devicePixelRatio,
+          2
+        )
+      );
+
+
+      renderer.setSize(
+        canvas.clientWidth,
+        canvas.clientHeight,
+        false
+      );
+
+
+      renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
+
+
+
+      /* ==================================
+         LIGHTING
+      ================================== */
+
+      const ambient =
+        new THREE.AmbientLight(
+          0xffffff,
+          1.8
+        );
+
+
+      scene.add(ambient);
+
+
+      const keyLight =
+        new THREE.DirectionalLight(
+          0xffffff,
+          3
+        );
+
+
+      keyLight.position.set(
+        4,
+        6,
+        5
+      );
+
+
+      scene.add(keyLight);
+
+
+      const fillLight =
+        new THREE.DirectionalLight(
+          0x7CFF6B,
+          1.2
+        );
+
+
+      fillLight.position.set(
+        -5,
+        2,
+        -3
+      );
+
+
+      scene.add(fillLight);
+
+
+
+      /* ==================================
+         GRID
+      ================================== */
+
+      const grid =
+        new THREE.GridHelper(
+          10,
+          20,
+          0x7CFF6B,
+          0x303830
+        );
+
+
+      grid.material.opacity =
+        0.18;
+
+
+      grid.material.transparent =
+        true;
+
+
+      scene.add(grid);
+
+
+
+      /* ==================================
+         CONTROLS
+      ================================== */
+
+      const controls =
+        new OrbitControls(
+          camera,
+          canvas
+        );
+
+
+      controls.enableDamping =
+        true;
+
+
+      controls.dampingFactor =
+        0.06;
+
+
+      controls.minDistance =
+        1;
+
+
+      controls.maxDistance =
+        20;
+
+
+      controls.enablePan =
+        true;
+
+
+
+      /* ==================================
+         FBX LOADER
+      ================================== */
+
+      const loader =
+        new FBXLoader();
+
+
+      let model = null;
+
+
+      loader.load(
+
+        modelPath,
+
+        function(object) {
+
+          model = object;
+
+
+          /* NORMALIZE */
+
+          const box =
+            new THREE.Box3()
+              .setFromObject(object);
+
+
+          const size =
+            box.getSize(
+              new THREE.Vector3()
+            );
+
+
+          const center =
+            box.getCenter(
+              new THREE.Vector3()
+            );
+
+
+          object.position.sub(center);
+
+
+          const maxDimension =
+            Math.max(
+              size.x,
+              size.y,
+              size.z
+            );
+
+
+          const scale =
+            3 / maxDimension;
+
+
+          object.scale.setScalar(
+            scale
+          );
+
+
+
+          /* MATERIAL */
+
+          object.traverse(
+            function(child) {
+
+              if (
+                child.isMesh
+              ) {
+
+                child.material =
+                  new THREE.MeshStandardMaterial({
+
+                    color: 0x9aa59d,
+
+                    roughness: 0.58,
+
+                    metalness: 0.18
+
+                  });
+
+              }
+
+            }
+          );
+
+
+          scene.add(object);
+
+
+
+          /* CAMERA */
+
+          controls.target.set(
+            0,
+            0,
+            0
+          );
+
+
+          controls.update();
+
+
+
+          /* STATISTICS */
+
+          let vertices = 0;
+          let polygons = 0;
+          let objects = 0;
+
+
+          object.traverse(
+            function(child) {
+
+              if (
+                child.isMesh
+              ) {
+
+                objects++;
+
+
+                if (
+                  child.geometry
+                ) {
+
+                  const geometry =
+                    child.geometry;
+
+
+                  if (
+                    geometry.attributes.position
+                  ) {
+
+                    vertices +=
+                      geometry
+                        .attributes
+                        .position
+                        .count;
+
+                  }
+
+
+                  if (
+                    geometry.index
+                  ) {
+
+                    polygons +=
+                      geometry.index.count /
+                      3;
+
+                  } else {
+
+                    polygons +=
+                      geometry
+                        .attributes
+                        .position
+                        .count /
+                      3;
+
+                  }
+
+                }
+
+              }
+
+            }
+          );
+
+
+          updateStats(
+            canvasId,
+            vertices,
+            polygons,
+            objects
+          );
+
+        },
+
+
+        undefined,
+
+
+        function(error) {
+
+          console.error(
+            'MODEL ERROR:',
+            modelPath,
+            error
+          );
+
+        }
+
+      );
+
+
+
+      /* ==================================
+         SAVE VIEWER
+      ================================== */
+
+      viewers[canvasId] = {
+
+        scene,
+
+        camera,
+
+        renderer,
+
+        controls,
+
+        getModel: () => model
+
+      };
+
+
+
+      /* ==================================
+         RESIZE
+      ================================== */
+
+      function resize() {
+
+        const width =
+          canvas.clientWidth;
+
+
+        const height =
+          canvas.clientHeight;
+
+
+        if (
+          width === 0 ||
+          height === 0
+        ) return;
+
+
+        camera.aspect =
+          width / height;
+
+
+        camera.updateProjectionMatrix();
+
+
+        renderer.setSize(
+          width,
+          height,
+          false
+        );
+
+      }
+
+
+      window.addEventListener(
+        'resize',
+        resize
+      );
+
+
+
+      /* ==================================
+         ANIMATION
+      ================================== */
+
+      function animate() {
+
+        requestAnimationFrame(
+          animate
+        );
+
+
+        controls.update();
+
+
+        renderer.render(
+          scene,
+          camera
+        );
+
+      }
+
+
+      animate();
+
+    }
+
+
+
+    /* ========================================
+       STATISTICS
+    ======================================== */
+
+    function updateStats(
+      canvasId,
+      vertices,
+      polygons,
+      objects
+    ) {
+
+      const suffix =
+        canvasId.replace(
+          'viewer-',
+          ''
+        );
+
+
+      const poly =
+        document.getElementById(
+          'poly-' + suffix
+        );
+
+
+      const vertex =
+        document.getElementById(
+          'vertex-' + suffix
+        );
+
+
+      const object =
+        document.getElementById(
+          'objects-' + suffix
+        );
+
+
+      if (poly) {
+
+        poly.textContent =
+          Math.round(
+            polygons
+          ).toLocaleString();
+
+      }
+
+
+      if (vertex) {
+
+        vertex.textContent =
+          Math.round(
+            vertices
+          ).toLocaleString();
+
+      }
+
+
+      if (object) {
+
+        object.textContent =
+          objects;
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       WIREFRAME
+    ======================================== */
+
+    window.toggleWireframe =
+      function(canvasId) {
+
+        const viewer =
+          viewers[canvasId];
+
+
+        if (!viewer) return;
+
+
+        const model =
+          viewer.getModel();
+
+
+        if (!model) return;
+
+
+        model.traverse(
+          function(child) {
+
+            if (
+              child.isMesh &&
+              child.material
+            ) {
+
+              child.material.wireframe =
+                !child.material.wireframe;
+
+            }
+
+          }
+        );
+
+      };
+
+
+
+    /* ========================================
+       RESET VIEW
+    ======================================== */
+
+    window.resetModel =
+      function(canvasId) {
+
+        const viewer =
+          viewers[canvasId];
+
+
+        if (!viewer) return;
+
+
+        viewer.camera.position.set(
+          3,
+          2,
+          5
+        );
+
+
+        viewer.controls.target.set(
+          0,
+          0,
+          0
+        );
+
+
+        viewer.controls.update();
+
+      };
+
+
+
+    /* ========================================
+       LOAD MODELS
+    ======================================== */
+
+    createViewer(
+      'viewer-001',
+      'models/model001.fbx'
+    );
+
+
+    createViewer(
+      'viewer-002',
+      'models/model002.fbx'
+    );
+
+
+    createViewer(
+      'viewer-003',
+      'models/model003.fbx'
+    );
+
+  </script>
+
+
+
+  <!-- =====================================================
+       CURSOR SYSTEM
+       EXACTLY THE SAME SYSTEM AS GRAPHIC DESIGN
+  ===================================================== -->
 
   <script>
 
+    const cursor =
+      document.querySelector('.custom-cursor');
 
-  /* ========================================
-     ELEMENTS
-  ======================================== */
 
+    const cursorX =
+      document.getElementById('cursor-x');
 
-  const cursor =
-    document.querySelector('.custom-cursor');
 
+    const cursorY =
+      document.getElementById('cursor-y');
 
-  const cursorX =
-    document.getElementById('cursor-x');
 
+    const cursorVector =
+      document.getElementById('cursor-vector');
 
-  const cursorY =
-    document.getElementById('cursor-y');
 
+    const cursorSpeed =
+      document.getElementById('cursor-speed');
 
-  const cursorVector =
-    document.getElementById('cursor-vector');
 
+    const cursorSector =
+      document.getElementById('cursor-sector');
 
-  const cursorSpeed =
-    document.getElementById('cursor-speed');
 
+    const cursorStatus =
+      document.getElementById('cursor-status');
 
-  const cursorSector =
-    document.getElementById('cursor-sector');
 
+    const measureX =
+      document.querySelector('.cursor-measure-x');
 
-  const cursorStatus =
-    document.getElementById('cursor-status');
 
+    const measureY =
+      document.querySelector('.cursor-measure-y');
 
-  const measureX =
-    document.querySelector('.cursor-measure-x');
 
+    const cursorFlash =
+      document.querySelector('.cursor-flash');
 
-  const measureY =
-    document.querySelector('.cursor-measure-y');
 
+    let previousX = 0;
+    let previousY = 0;
 
-  /* ========================================
-     CURSOR FLASH
-  ======================================== */
+    let previousTime =
+      performance.now();
 
+    let idleTimer;
 
-  const cursorFlash =
-    document.querySelector('.cursor-flash');
 
+    document.addEventListener(
+      'mousemove',
+      function(event) {
 
-  /* ========================================
-     MOUSE DATA
-  ======================================== */
+        const x =
+          event.clientX;
 
+        const y =
+          event.clientY;
 
-  let previousX = 0;
-  let previousY = 0;
+        const currentTime =
+          performance.now();
 
-  let previousTime =
-    performance.now();
 
-  let mouseMoving = false;
+        cursor.style.left =
+          x + 'px';
 
-  let idleTimer;
+        cursor.style.top =
+          y + 'px';
 
 
-  /* ========================================
-     MOUSE MOVEMENT
-  ======================================== */
+        measureX.style.left =
+          x + 'px';
 
+        measureY.style.top =
+          y + 'px';
 
-  document.addEventListener(
-    'mousemove',
-    function(event) {
 
+        cursorX.textContent =
+          x
+            .toFixed(2)
+            .padStart(7, '0');
 
-      const x = event.clientX;
-      const y = event.clientY;
 
-      const currentTime =
-        performance.now();
+        cursorY.textContent =
+          y
+            .toFixed(2)
+            .padStart(7, '0');
 
 
-      /* ==================================
-         MOVE RETICLE
-      ================================== */
+        const deltaX =
+          x - previousX;
 
+        const deltaY =
+          y - previousY;
 
-      cursor.style.left =
-        x + 'px';
 
-      cursor.style.top =
-        y + 'px';
+        const distance =
+          Math.sqrt(
+            deltaX * deltaX +
+            deltaY * deltaY
+          );
 
 
-      /* ==================================
-         MOVE CURSOR GUIDES
-      ================================== */
+        const deltaTime =
+          currentTime -
+          previousTime;
 
 
-      measureX.style.left =
-        x + 'px';
+        let speed = 0;
 
-      measureY.style.top =
-        y + 'px';
 
+        if (deltaTime > 0) {
 
-      /* ==================================
-         COORDINATES
-      ================================== */
+          speed =
+            distance /
+            deltaTime *
+            10;
 
+        }
 
-      cursorX.textContent =
-        x
-          .toFixed(2)
-          .padStart(7, '0');
-
-
-      cursorY.textContent =
-        y
-          .toFixed(2)
-          .padStart(7, '0');
-
-
-      /* ==================================
-         DISTANCE
-      ================================== */
-
-
-      const deltaX =
-        x - previousX;
-
-
-      const deltaY =
-        y - previousY;
-
-
-      const distance =
-        Math.sqrt(
-          deltaX * deltaX +
-          deltaY * deltaY
-        );
-
-
-      /* ==================================
-         TIME
-      ================================== */
-
-
-      const deltaTime =
-        currentTime -
-        previousTime;
-
-
-      /* ==================================
-         SPEED
-      ================================== */
-
-
-      let speed = 0;
-
-
-      if (deltaTime > 0) {
 
         speed =
-          distance /
-          deltaTime *
-          10;
-
-      }
-
-
-      speed =
-        Math.min(
-          speed,
-          99.99
-        );
+          Math.min(
+            speed,
+            99.99
+          );
 
 
-      cursorSpeed.textContent =
-        speed
-          .toFixed(2)
-          .padStart(5, '0');
+        cursorSpeed.textContent =
+          speed
+            .toFixed(2)
+            .padStart(5, '0');
 
 
-      /* ==================================
-         VECTOR
-      ================================== */
+        if (distance > 0.5) {
+
+          let angle =
+            Math.atan2(
+              deltaY,
+              deltaX
+            ) *
+            180 /
+            Math.PI;
 
 
-      if (distance > 0.5) {
+          angle =
+            (angle + 360) % 360;
 
 
-        let angle =
-          Math.atan2(
-            deltaY,
-            deltaX
-          ) *
-          180 /
-          Math.PI;
+          cursorVector.textContent =
+            Math.round(angle)
+              .toString()
+              .padStart(3, '0') +
+            '°';
+
+        }
 
 
-        angle =
-          (angle + 360) % 360;
+        const columns = 6;
+        const rows = 4;
 
 
-        cursorVector.textContent =
-          Math.round(angle)
-            .toString()
-            .padStart(3, '0') +
-          '°';
-
-      }
-
-
-      /* ==================================
-         SECTOR
-      ================================== */
+        const column =
+          Math.min(
+            columns - 1,
+            Math.floor(
+              x /
+              window.innerWidth *
+              columns
+            )
+          );
 
 
-      const columns = 6;
-      const rows = 4;
+        const row =
+          Math.min(
+            rows - 1,
+            Math.floor(
+              y /
+              window.innerHeight *
+              rows
+            )
+          );
 
 
-      const column =
-        Math.min(
-          columns - 1,
-          Math.floor(
-            x /
-            window.innerWidth *
-            columns
-          )
-        );
-
-
-      const row =
-        Math.min(
-          rows - 1,
-          Math.floor(
-            y /
-            window.innerHeight *
-            rows
-          )
-        );
-
-
-      const letters =
-        [
+        const letters = [
           'A',
           'B',
           'C',
@@ -1215,158 +1986,112 @@
         ];
 
 
-      cursorSector.textContent =
-        letters[column] +
-        '-' +
-        String(row + 1)
-          .padStart(2, '0');
+        cursorSector.textContent =
+          letters[column] +
+          '-' +
+          String(row + 1)
+            .padStart(2, '0');
 
 
-      /* ==================================
-         STATUS
-      ================================== */
+        cursorStatus.textContent =
+          'TRACKING';
 
 
-      cursorStatus.textContent =
-        'TRACKING';
-
-
-      mouseMoving = true;
-
-
-      /* ==================================
-         RESET IDLE TIMER
-      ================================== */
-
-
-      clearTimeout(
-        idleTimer
-      );
-
-
-      idleTimer =
-        setTimeout(
-          function() {
-
-
-            cursorStatus.textContent =
-              'IDLE';
-
-
-            mouseMoving = false;
-
-
-          },
-          400
+        clearTimeout(
+          idleTimer
         );
 
 
-      /* ==================================
-         UPDATE PREVIOUS DATA
-      ================================== */
+        idleTimer =
+          setTimeout(
+            function() {
+
+              cursorStatus.textContent =
+                'IDLE';
+
+            },
+            400
+          );
 
 
-      previousX = x;
+        previousX = x;
+        previousY = y;
 
-      previousY = y;
+        previousTime =
+          currentTime;
 
-      previousTime =
-        currentTime;
-
-
-    }
-  );
+      }
+    );
 
 
-  /* ========================================
-     CLICK FLASH
-  ======================================== */
+    /* CLICK FLASH */
+
+    document.addEventListener(
+      'click',
+      function(event) {
+
+        cursorFlash.style.left =
+          event.clientX + 'px';
 
 
-  document.addEventListener(
-    'click',
-    function(event) {
+        cursorFlash.style.top =
+          event.clientY + 'px';
 
 
-      cursorFlash.style.left =
-        event.clientX + 'px';
+        cursorFlash.classList.remove(
+          'active'
+        );
 
 
-      cursorFlash.style.top =
-        event.clientY + 'px';
+        void cursorFlash.offsetWidth;
 
 
-      cursorFlash.classList.remove(
-        'active'
-      );
+        cursorFlash.classList.add(
+          'active'
+        );
+
+      }
+    );
 
 
-      void cursorFlash.offsetWidth;
+    /* LEAVE */
+
+    document.addEventListener(
+      'mouseleave',
+      function() {
+
+        cursor.style.opacity =
+          '0';
+
+        cursorFlash.style.opacity =
+          '0';
+
+        cursorStatus.textContent =
+          'LOST';
+
+      }
+    );
 
 
-      cursorFlash.classList.add(
-        'active'
-      );
+    /* ENTER */
 
+    document.addEventListener(
+      'mouseenter',
+      function() {
 
-    }
-  );
+        cursor.style.opacity =
+          '1';
 
+        cursorFlash.style.opacity =
+          '0';
 
-  /* ========================================
-     MOUSE LEAVES WINDOW
-  ======================================== */
+        cursorStatus.textContent =
+          'TRACKING';
 
-
-  document.addEventListener(
-    'mouseleave',
-    function() {
-
-
-      cursor.style.opacity =
-        '0';
-
-
-      cursorFlash.style.opacity =
-        '0';
-
-
-      cursorStatus.textContent =
-        'LOST';
-
-
-    }
-  );
-
-
-  /* ========================================
-     MOUSE ENTERS WINDOW
-  ======================================== */
-
-
-  document.addEventListener(
-    'mouseenter',
-    function() {
-
-
-      cursor.style.opacity =
-        '1';
-
-
-      cursorFlash.style.opacity =
-        '0';
-
-
-      cursorStatus.textContent =
-        'TRACKING';
-
-
-    }
-  );
-
+      }
+    );
 
   </script>
-
 
 </body>
 
