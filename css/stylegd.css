@@ -635,8 +635,8 @@ body p {
 /* Panel de observación */
 .cursor-info {
   position: fixed;
-  left: 28px;
-  bottom: 25px;
+  left: 50px;
+  bottom: 75px;
   z-index: 99998;
   pointer-events: none;
   user-select: none;
@@ -654,7 +654,7 @@ body p {
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
-  opacity: 0.9;
+  opacity: 0.75;
 }
 
 .cursor-info::before {
