@@ -558,12 +558,10 @@ body {
 
 .final-model-viewer {
   position: relative;
-  width: 100%;
-  height: 850px;
+  width: 75%;
+  height: 650px;
   overflow: hidden;
-
   border: 1px solid rgba(124, 255, 107, 0.25);
-
   background:
     radial-gradient(
       circle at center,
@@ -577,7 +575,6 @@ body {
   position: absolute;
   top: 35px;
   left: 35px;
-
   z-index: 10;
   pointer-events: none;
 }
@@ -622,13 +619,10 @@ body {
 .model-footer {
   width: 100%;
   padding: 35px 8vw;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   border-top: 1px solid rgba(124, 255, 107, 0.16);
-
   font-size: 8px;
   letter-spacing: 1.5px;
 }
@@ -683,15 +677,11 @@ body {
 .render-placeholder {
   position: relative;
   height: 380px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
-
   border: 1px solid rgba(124, 255, 107, 0.16);
-
   background:
     radial-gradient(
       circle,
@@ -705,10 +695,8 @@ body {
   position: absolute;
   width: 180px;
   height: 180px;
-
   border: 1px solid rgba(124, 255, 107, 0.22);
   border-radius: 50%;
-
   transform: rotateX(60deg);
 }
 
@@ -723,7 +711,6 @@ body {
 .render-placeholder span {
   position: relative;
   z-index: 2;
-
   font-size: 8px;
   letter-spacing: 2px;
   color: #59645d;
@@ -832,7 +819,7 @@ body {
 }
 
 .process-step span {
-  font-size: 7px;
+  font-size: 8px;
   letter-spacing: 2px;
   color: #68736c;
 }
