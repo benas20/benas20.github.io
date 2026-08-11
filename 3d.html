@@ -484,30 +484,37 @@
           <label>
             AMBIENT
             <input type="range" id="final-light-ambient" min="0" max="2" step="0.01" value="0" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-ambient-color" value="#ffffff" oninput="updateFinalObjectLights()">
           </label>
           <label>
             KEY LIGHT
             <input type="range" id="final-light-key" min="0" max="6" step="0.01" value="0" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-key-color" value="#ffffff" oninput="updateFinalObjectLights()">
           </label>
           <label>
             FILL LIGHT
             <input type="range" id="final-light-fill" min="0" max="3" step="0.01" value="0" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-fill-color" value="#ffffff" oninput="updateFinalObjectLights()">
           </label>
           <label>
             TOP LEFT
             <input type="range" id="final-light-top-left" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-top-left-color" value="#6688ff" oninput="updateFinalObjectLights()">
           </label>
           <label>
             TOP RIGHT
             <input type="range" id="final-light-top-right" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-top-right-color" value="#ff6677" oninput="updateFinalObjectLights()">
           </label>
           <label>
             BOTTOM LEFT
             <input type="range" id="final-light-bottom-left" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-bottom-left-color" value="#ff6677" oninput="updateFinalObjectLights()">
           </label>
           <label>
             BOTTOM RIGHT
             <input type="range" id="final-light-bottom-right" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()">
+            <input type="color" id="final-light-bottom-right-color" value="#6688ff" oninput="updateFinalObjectLights()">
           </label>
         </div>
       </div>
@@ -730,7 +737,6 @@
               const materials = Array.isArray(child.material) ? child.material : [child.material];
               materials.forEach(material => {
                 if (material.name === 'Material.001') {
-                  console.log('>>> DONUT');
                   material.color.set(finalObjectColors.material1);
                   material.roughness = 0;
                   material.metalness = 0;
@@ -741,7 +747,6 @@
                 }
 
                 if (material.name === 'Material.002') {
-                  console.log('>>> LETRAS');
                   material.color.set(finalObjectColors.material2);
                   material.roughness = 0.5;
                   material.metalness = 0;
@@ -915,6 +920,22 @@
         const input = document.getElementById(ids[key]);
         if (!input || !viewer.lights[key]) return;
         viewer.lights[key].intensity = parseFloat(input.value);
+      });
+
+      const colorIds = {
+        ambient: 'final-light-ambient-color',
+        keyLight: 'final-light-key-color',
+        fillLight: 'final-light-fill-color',
+        lightTopLeft: 'final-light-top-left-color',
+        lightTopRight: 'final-light-top-right-color',
+        lightBottomLeft: 'final-light-bottom-left-color',
+        lightBottomRight: 'final-light-bottom-right-color'
+      };
+
+      Object.keys(colorIds).forEach(function (key) {
+        const input = document.getElementById(colorIds[key]);
+        if (!input || !viewer.lights[key]) return;
+        viewer.lights[key].color.set(input.value);
       });
     };
 
