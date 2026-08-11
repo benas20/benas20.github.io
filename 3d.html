@@ -468,6 +468,17 @@
           <button onclick="toggleWireframe('viewer-003')">WIREFRAME</button>
           <button onclick="resetModel('viewer-003')">RESET VIEW</button>
         </div>
+
+        <div class="final-color-controls">
+          <label>
+            MATERIAL 1
+            <input type="color" id="final-material-1" value="#ffffff" oninput="updateFinalObjectColors()">
+          </label>
+          <label>
+            MATERIAL 2
+            <input type="color" id="final-material-2" value="#ffffff" oninput="updateFinalObjectColors()">
+          </label>
+        </div>
       </div>
     </section>
 
