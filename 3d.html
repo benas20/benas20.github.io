@@ -161,10 +161,6 @@
     </div>
   </div>
 
-  <!-- =====================================================
-       3D MODELING
-       MAIN CONTENT
-  ===================================================== -->
   <main class="model-page">
     <section class="model-intro">
       <div class="model-index">
@@ -481,41 +477,13 @@
         </div>
 
         <div class="final-light-controls">
-          <label>
-            AMBIENT
-            <input type="range" id="final-light-ambient" min="0" max="2" step="0.01" value="0" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-ambient-color" value="#ffffff" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            KEY LIGHT
-            <input type="range" id="final-light-key" min="0" max="6" step="0.01" value="0" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-key-color" value="#ffffff" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            FILL LIGHT
-            <input type="range" id="final-light-fill" min="0" max="3" step="0.01" value="0" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-fill-color" value="#ffffff" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            TOP LEFT
-            <input type="range" id="final-light-top-left" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-top-left-color" value="#6688ff" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            TOP RIGHT
-            <input type="range" id="final-light-top-right" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-top-right-color" value="#ff6677" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            BOTTOM LEFT
-            <input type="range" id="final-light-bottom-left" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-bottom-left-color" value="#ff6677" oninput="updateFinalObjectLights()">
-          </label>
-          <label>
-            BOTTOM RIGHT
-            <input type="range" id="final-light-bottom-right" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()">
-            <input type="color" id="final-light-bottom-right-color" value="#6688ff" oninput="updateFinalObjectLights()">
-          </label>
+          <label>AMBIENT <input type="range" id="final-light-ambient" min="0" max="2" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-ambient-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
+          <label>KEY LIGHT <input type="range" id="final-light-key" min="0" max="6" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-key-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
+          <label>FILL LIGHT <input type="range" id="final-light-fill" min="0" max="3" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-fill-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
+          <label>TOP LEFT <input type="range" id="final-light-top-left" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()"><input type="color" id="final-light-top-left-color" value="#6688ff" oninput="updateFinalObjectLights()"></label>
+          <label>TOP RIGHT <input type="range" id="final-light-top-right" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()"><input type="color" id="final-light-top-right-color" value="#ff6677" oninput="updateFinalObjectLights()"></label>
+          <label>BOTTOM LEFT <input type="range" id="final-light-bottom-left" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()"><input type="color" id="final-light-bottom-left-color" value="#ff6677" oninput="updateFinalObjectLights()"></label>
+          <label>BOTTOM RIGHT <input type="range" id="final-light-bottom-right" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()"><input type="color" id="final-light-bottom-right-color" value="#6688ff" oninput="updateFinalObjectLights()"></label>
         </div>
       </div>
     </section>
@@ -574,23 +542,14 @@
       renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-      const ambient = new THREE.AmbientLight(
-        0xffffff,
-        canvasId === 'viewer-003' ? 0 : 0.5
-      );
+      const ambient = new THREE.AmbientLight(0xffffff, canvasId === 'viewer-003' ? 0 : 0.5);
       scene.add(ambient);
 
-      const keyLight = new THREE.DirectionalLight(
-        0xffffff,
-        canvasId === 'viewer-003' ? 0 : 3
-      );
+      const keyLight = new THREE.DirectionalLight(0xffffff, canvasId === 'viewer-003' ? 0 : 3);
       keyLight.position.set(4, 6, 5);
       scene.add(keyLight);
 
-      const fillLight = new THREE.DirectionalLight(
-        0xffffff,
-        canvasId === 'viewer-003' ? 0 : 1.2
-      );
+      const fillLight = new THREE.DirectionalLight(0xffffff, canvasId === 'viewer-003' ? 0 : 1.2);
       fillLight.position.set(-5, 2, -3);
       scene.add(fillLight);
 
@@ -683,17 +642,7 @@
       let model002Texture = null;
 
       if (canvasId === 'viewer-002') {
-        model002Texture = textureLoader.load(
-          model002TexturePath,
-          function () {
-            console.log('TEXTURE LOADED:', model002TexturePath);
-          },
-          undefined,
-          function (error) {
-            console.error('TEXTURE ERROR:', model002TexturePath, error);
-          }
-        );
-
+        model002Texture = textureLoader.load(model002TexturePath);
         model002Texture.colorSpace = THREE.SRGBColorSpace;
         model002Texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
       }
@@ -701,104 +650,85 @@
       const isGLB = modelPath.toLowerCase().endsWith('.glb');
       const loader = isGLB ? gltfLoader : fbxLoader;
 
-      loader.load(
-        modelPath,
-        function (result) {
-          const object = isGLB ? result.scene : result;
-          model = object;
+      loader.load(modelPath, function (result) {
+        const object = isGLB ? result.scene : result;
+        model = object;
 
-          const box = new THREE.Box3().setFromObject(object);
-          const size = box.getSize(new THREE.Vector3());
-          const center = box.getCenter(new THREE.Vector3());
-          object.position.sub(center);
+        const box = new THREE.Box3().setFromObject(object);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        object.position.sub(center);
 
-          const maxDimension = Math.max(size.x, size.y, size.z);
-          const scale = 3 / maxDimension;
-          object.scale.setScalar(scale);
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const scale = 3 / maxDimension;
+        object.scale.setScalar(scale);
 
-          object.traverse(function (child) {
-            if (!child.isMesh) return;
+        object.traverse(function (child) {
+          if (!child.isMesh) return;
 
-            if (canvasId === 'viewer-002') {
-              console.log('MODEL 002 UV:', child.geometry.attributes.uv);
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0x9fb8c4,
-                roughness: 0.32,
-                metalness: 0.0,
-                map: model002Texture
-              });
-            } else if (canvasId === 'viewer-001') {
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0x8c8c8c,
-                roughness: 0.22,
-                metalness: 0.9
-              });
-            } else if (canvasId === 'viewer-003') {
-              const materials = Array.isArray(child.material) ? child.material : [child.material];
-              materials.forEach(material => {
-                if (material.name === 'Material.001') {
-                  material.color.set(finalObjectColors.material1);
-                  material.roughness = 0;
-                  material.metalness = 0;
-                  material.transparent = true;
-                  material.opacity = 0.15;
-                  material.transmission = 0.3;
-                  material.needsUpdate = true;
-                }
+          if (canvasId === 'viewer-002') {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0x9fb8c4,
+              roughness: 0.32,
+              metalness: 0.0,
+              map: model002Texture
+            });
+          } else if (canvasId === 'viewer-001') {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0x8c8c8c,
+              roughness: 0.22,
+              metalness: 0.9
+            });
+          } else if (canvasId === 'viewer-003') {
+            const materials = Array.isArray(child.material) ? child.material : [child.material];
+            materials.forEach(material => {
+              if (material.name === 'Material.001') {
+                material.color.set(finalObjectColors.material1);
+                material.roughness = 0;
+                material.metalness = 0;
+                material.transparent = true;
+                material.opacity = 0.15;
+                material.transmission = 0.3;
+                material.needsUpdate = true;
+              }
+              if (material.name === 'Material.002') {
+                material.color.set(finalObjectColors.material2);
+                material.roughness = 0.5;
+                material.metalness = 0;
+                material.transparent = false;
+                material.opacity = 1;
+                material.needsUpdate = true;
+              }
+            });
+          }
+        });
 
-                if (material.name === 'Material.002') {
-                  material.color.set(finalObjectColors.material2);
-                  material.roughness = 0.5;
-                  material.metalness = 0;
-                  material.transparent = false;
-                  material.opacity = 1;
-                  material.needsUpdate = true;
-                }
-              });
-            }
-          });
+        scene.add(object);
+        controls.target.set(0, 0, 0);
+        controls.update();
 
-          scene.add(object);
+        let vertices = 0;
+        let polygons = 0;
+        let objects = 0;
 
-          controls.target.set(0, 0, 0);
-          controls.update();
+        object.traverse(function (child) {
+          if (!child.isMesh) return;
+          objects++;
+          if (!child.geometry) return;
 
-          let vertices = 0;
-          let polygons = 0;
-          let objects = 0;
+          const geometry = child.geometry;
+          if (geometry.attributes && geometry.attributes.position) {
+            vertices += geometry.attributes.position.count;
+          }
+          if (geometry.index) {
+            polygons += geometry.index.count / 3;
+          } else if (geometry.attributes && geometry.attributes.position) {
+            polygons += geometry.attributes.position.count / 3;
+          }
+        });
 
-          object.traverse(function (child) {
-            if (!child.isMesh) return;
-
-            objects++;
-
-            if (!child.geometry) return;
-
-            const geometry = child.geometry;
-
-            if (geometry.attributes && geometry.attributes.position) {
-              vertices += geometry.attributes.position.count;
-            }
-
-            if (geometry.index) {
-              polygons += geometry.index.count / 3;
-            } else if (geometry.attributes && geometry.attributes.position) {
-              polygons += geometry.attributes.position.count / 3;
-            }
-          });
-
-          updateStats(canvasId, vertices, polygons, objects);
-
-          console.log('MODEL LOADED:', modelPath);
-          console.log('VERTICES:', vertices);
-          console.log('POLYGONS:', polygons);
-          console.log('OBJECTS:', objects);
-        },
-        undefined,
-        function (error) {
-          console.error('MODEL ERROR:', modelPath, error);
-        }
-      );
+        updateStats(canvasId, vertices, polygons, objects);
+      });
 
       viewers[canvasId] = {
         scene,
@@ -811,9 +741,7 @@
       function resize() {
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
-
         if (width === 0 || height === 0) return;
-
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height, false);
@@ -832,11 +760,9 @@
 
     function updateStats(canvasId, vertices, polygons, objects) {
       const suffix = canvasId.replace('viewer-', '');
-
       const poly = document.getElementById('poly-' + suffix);
       const vertex = document.getElementById('vertex-' + suffix);
       const object = document.getElementById('objects-' + suffix);
-
       if (poly) poly.textContent = Math.round(polygons).toLocaleString();
       if (vertex) vertex.textContent = Math.round(vertices).toLocaleString();
       if (object) object.textContent = objects;
@@ -845,7 +771,6 @@
     window.toggleWireframe = function (canvasId) {
       const viewer = viewers[canvasId];
       if (!viewer) return;
-
       const model = viewer.getModel();
       if (!model) return;
 
@@ -865,7 +790,6 @@
     window.resetModel = function (canvasId) {
       const viewer = viewers[canvasId];
       if (!viewer) return;
-
       viewer.camera.position.set(3, 2, 5);
       viewer.controls.target.set(0, 0, 0);
       viewer.controls.update();
@@ -886,14 +810,12 @@
 
       model.traverse(function (child) {
         if (!child.isMesh || !child.material) return;
-
         const materials = Array.isArray(child.material) ? child.material : [child.material];
         materials.forEach(function (material) {
           if (material.name === 'Material.001') {
             material.color.set(finalObjectColors.material1);
             material.needsUpdate = true;
           }
-
           if (material.name === 'Material.002') {
             material.color.set(finalObjectColors.material2);
             material.needsUpdate = true;
@@ -906,36 +828,28 @@
       const viewer = viewers['viewer-003'];
       if (!viewer || !viewer.lights) return;
 
-      const ids = {
-        ambient: 'final-light-ambient',
-        keyLight: 'final-light-key',
-        fillLight: 'final-light-fill',
-        lightTopLeft: 'final-light-top-left',
-        lightTopRight: 'final-light-top-right',
-        lightBottomLeft: 'final-light-bottom-left',
-        lightBottomRight: 'final-light-bottom-right'
-      };
+      const mappings = [
+        ['ambient', 'final-light-ambient', 'final-light-ambient-color'],
+        ['keyLight', 'final-light-key', 'final-light-key-color'],
+        ['fillLight', 'final-light-fill', 'final-light-fill-color'],
+        ['lightTopLeft', 'final-light-top-left', 'final-light-top-left-color'],
+        ['lightTopRight', 'final-light-top-right', 'final-light-top-right-color'],
+        ['lightBottomLeft', 'final-light-bottom-left', 'final-light-bottom-left-color'],
+        ['lightBottomRight', 'final-light-bottom-right', 'final-light-bottom-right-color']
+      ];
 
-      Object.keys(ids).forEach(function (key) {
-        const input = document.getElementById(ids[key]);
-        if (!input || !viewer.lights[key]) return;
-        viewer.lights[key].intensity = parseFloat(input.value);
-      });
+      mappings.forEach(function ([key, intensityId, colorId]) {
+        const light = viewer.lights[key];
+        const intensityInput = document.getElementById(intensityId);
+        const colorInput = document.getElementById(colorId);
 
-      const colorIds = {
-        ambient: 'final-light-ambient-color',
-        keyLight: 'final-light-key-color',
-        fillLight: 'final-light-fill-color',
-        lightTopLeft: 'final-light-top-left-color',
-        lightTopRight: 'final-light-top-right-color',
-        lightBottomLeft: 'final-light-bottom-left-color',
-        lightBottomRight: 'final-light-bottom-right-color'
-      };
+        if (light && intensityInput) {
+          light.intensity = parseFloat(intensityInput.value);
+        }
 
-      Object.keys(colorIds).forEach(function (key) {
-        const input = document.getElementById(colorIds[key]);
-        if (!input || !viewer.lights[key]) return;
-        viewer.lights[key].color.set(input.value);
+        if (light && colorInput) {
+          light.color.set(colorInput.value);
+        }
       });
     };
 
@@ -983,15 +897,10 @@
       const deltaTime = currentTime - previousTime;
 
       let speed = 0;
-      if (deltaTime > 0) {
-        speed = (distance / deltaTime) * 10;
-      }
-
+      if (deltaTime > 0) speed = (distance / deltaTime) * 10;
       speed = Math.min(speed, 99.99);
 
-      if (cursorSpeed) {
-        cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
-      }
+      if (cursorSpeed) cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
 
       if (distance > 0.5 && cursorVector) {
         let angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
@@ -1003,23 +912,14 @@
       const rows = 4;
       const column = Math.min(columns - 1, Math.floor((x / window.innerWidth) * columns));
       const row = Math.min(rows - 1, Math.floor((y / window.innerHeight) * rows));
-
       const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-      if (cursorSector) {
-        cursorSector.textContent = letters[column] + '-' + String(row + 1).padStart(2, '0');
-      }
-
-      if (cursorStatus) {
-        cursorStatus.textContent = 'TRACKING';
-      }
+      if (cursorSector) cursorSector.textContent = letters[column] + '-' + String(row + 1).padStart(2, '0');
+      if (cursorStatus) cursorStatus.textContent = 'TRACKING';
 
       clearTimeout(idleTimer);
-
       idleTimer = setTimeout(function () {
-        if (cursorStatus) {
-          cursorStatus.textContent = 'IDLE';
-        }
+        if (cursorStatus) cursorStatus.textContent = 'IDLE';
       }, 400);
 
       previousX = x;
@@ -1029,7 +929,6 @@
 
     document.addEventListener('click', function (event) {
       if (!cursorFlash) return;
-
       cursorFlash.style.left = event.clientX + 'px';
       cursorFlash.style.top = event.clientY + 'px';
       cursorFlash.classList.remove('active');
