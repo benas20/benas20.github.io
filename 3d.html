@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FILE 002 / 3D MODELING</title>
-  <link rel="stylesheet" href="css/3d.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- ========================================
@@ -523,7 +523,7 @@
 
       const ambient = new THREE.AmbientLight(
         0xffffff,
-        canvasId === 'viewer-003' ? 0 : 1.8
+        canvasId === 'viewer-003' ? 0 : 0.5
       );
       scene.add(ambient);
 
@@ -565,6 +565,32 @@
         lightBottomRight.target.position.set(0, 0, 0);
         scene.add(lightBottomRight);
         scene.add(lightBottomRight.target);
+      }
+
+      if (canvasId === 'viewer-001') {
+        const metalLight1 = new THREE.SpotLight(0xffffff, 5, 20, Math.PI / 5, 0.7, 2);
+        metalLight1.position.set(-5, 5, 5);
+        metalLight1.target.position.set(0, 0, 0);
+        scene.add(metalLight1);
+        scene.add(metalLight1.target);
+
+        const metalLight2 = new THREE.SpotLight(0xffffff, 4, 20, Math.PI / 5, 0.7, 2);
+        metalLight2.position.set(5, 4, 3);
+        metalLight2.target.position.set(0, 0, 0);
+        scene.add(metalLight2);
+        scene.add(metalLight2.target);
+
+        const metalLight3 = new THREE.SpotLight(0xffffff, 3, 15, Math.PI / 4, 0.8, 2);
+        metalLight3.position.set(-5, 1, 1);
+        metalLight3.target.position.set(0, 0, 0);
+        scene.add(metalLight3);
+        scene.add(metalLight3.target);
+
+        const metalLight4 = new THREE.SpotLight(0xffffff, 3, 15, Math.PI / 4, 0.8, 2);
+        metalLight4.position.set(5, 1, 1);
+        metalLight4.target.position.set(0, 0, 0);
+        scene.add(metalLight4);
+        scene.add(metalLight4.target);
       }
 
       const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
@@ -633,9 +659,9 @@
               });
             } else if (canvasId === 'viewer-001') {
               child.material = new THREE.MeshStandardMaterial({
-                color: 0xe6e3e3,
-                roughness: 0.18,
-                metalness: 1
+                color: 0x8c8c8c,
+                roughness: 0.22,
+                metalness: 0.9
               });
             } else if (canvasId === 'viewer-003') {
               const materials = Array.isArray(child.material) ? child.material : [child.material];
