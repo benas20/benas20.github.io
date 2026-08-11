@@ -500,6 +500,76 @@ body {
 }
 
 /* =========================================================
+   MODEL INTRO
+========================================================= */
+
+.model-intro {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  padding: 120px 8vw 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.model-index {
+  position: absolute;
+  top: 55px;
+  left: 8vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #59645d;
+}
+
+.model-title-wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.model-title-small {
+  margin-bottom: 20px;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: #7cff6b;
+}
+
+.model-title-wrapper h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(80px, 13vw, 190px);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -10px;
+  color: #9aa59d;
+}
+
+.model-axis-decoration {
+  position: absolute;
+  right: -90px;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #59645d;
+}
+
+.model-description {
+  max-width: 390px;
+  margin-top: 55px;
+  margin-left: 25vw;
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 1.5px;
+  color: #606b64;
+}
+
+/* =========================================================
    MAIN PAGE
 ========================================================= */
 
@@ -1154,10 +1224,6 @@ body {
   }
 }
 
-/* =========================================================
-   TABLET / MOVIL
-========================================================= */
-
 @media (max-width: 700px) {
   body {
     cursor: auto;
@@ -1165,18 +1231,9 @@ body {
 
   .custom-cursor,
   .cursor-measure-x,
-  .cursor-measure-y {
-    display: none;
-  }
-
-  .cursor-info {
-    display: none;
-  }
-
-  .archive-location {
-    display: none;
-  }
-
+  .cursor-measure-y,
+  .cursor-info,
+  .archive-location,
   .measurement-y {
     display: none;
   }
@@ -1185,10 +1242,7 @@ body {
     right: 20px;
   }
 
-  .model-page {
-    padding-top: 70px;
-  }
-
+  /* NO modificar .model-intro */
   .model-index {
     left: 8vw;
   }
@@ -1264,30 +1318,7 @@ body {
     align-items: flex-start;
   }
 
-  /* =======================================================
-     CONTROLES DE LUZ - MODEL 003
-  ======================================================= */
-
-  .final-light-controls {
-    position: relative;
-    right: auto;
-    top: auto;
-    width: calc(100% - 30px);
-    max-height: 260px;
-    margin: 15px;
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-
-  .final-light-controls input[type="range"] {
-    width: 120px;
-    max-width: 100%;
-  }
-
-  /* =======================================================
-     CONTROLES DE COLOR
-  ======================================================= */
-
+  /* CONTROLES DE LUZ MODEL 003 */
   .final-light-controls {
     position: relative;
     right: auto;
@@ -1305,9 +1336,11 @@ body {
   }
 }
 
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
+@media (max-width: 900px) {
+  .cursor-info {
+    display: none;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
