@@ -1064,11 +1064,12 @@ body {
   gap: 4px;
   font-size: 8px;
   letter-spacing: 1px;
-  color: #9aa59d;
+  color: #7cff6b;
 }
 
 .final-light-controls input[type="range"] {
   width: 180px;
+  accent-color: #7cff6b;
 }
 
 .final-color-controls {
@@ -1089,7 +1090,7 @@ body {
   gap: 8px;
   font-size: 8px;
   letter-spacing: 1px;
-  color: #9aa59d;
+  color: #7cff6b;
 }
 
 .final-color-controls input[type="color"] {
