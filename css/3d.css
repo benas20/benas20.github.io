@@ -508,6 +508,36 @@ body {
   padding-top: 110px;
 }
 
+.final-color-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 15;
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(17, 21, 18, 0.85);
+  border: 1px solid rgba(124, 255, 107, 0.25);
+}
+
+.final-color-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #9aa59d;
+}
+
+.final-color-controls input[type="color"] {
+  width: 28px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: none;
+}
+
 /* =========================================================
    FINAL MODEL (más cerca del final en index.html)
 ========================================================= */
@@ -571,10 +601,6 @@ body {
   bottom: 30px;
   left: 30px;
 }
-
-/* =========================================================
-   FINAL VIEWER CONTROLS (base ya definida antes por .viewer-controls)
-========================================================= */
 
 /* =========================================================
    FOOTER
@@ -755,8 +781,6 @@ body {
   object-fit: cover;
   transition: transform 0.5s ease, opacity 0.3s ease;
 }
-
-/* HOVER */
 
 .process-step:hover .process-image {
   transform: scale(1.04);
@@ -992,18 +1016,6 @@ body {
   font-size: 8px;
 }
 
-.axis-x {
-  color: #ff7070;
-}
-
-.axis-y {
-  color: #7cff6b;
-}
-
-.axis-z {
-  color: #70a7ff;
-}
-
 /* =========================================================
    VIEWER CONTROLS
 ========================================================= */
@@ -1033,6 +1045,60 @@ body {
   color: #7cff6b;
   border-color: rgba(124, 255, 107, 0.65);
   background: rgba(124, 255, 107, 0.05);
+}
+
+.final-light-controls {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 15;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(17, 21, 18, 0.85);
+  border: 1px solid rgba(124, 255, 107, 0.25);
+}
+
+.final-light-controls label {
+  display: grid;
+  gap: 4px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #9aa59d;
+}
+
+.final-light-controls input[type="range"] {
+  width: 180px;
+}
+
+.final-color-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 15;
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(17, 21, 18, 0.85);
+  border: 1px solid rgba(124, 255, 107, 0.25);
+}
+
+.final-color-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #9aa59d;
+}
+
+.final-color-controls input[type="color"] {
+  width: 28px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: none;
 }
 
 /* =========================================================
@@ -1357,37 +1423,6 @@ body {
     align-items: flex-start;
   }
 }
-
-.final-color-controls {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 15;
-  display: flex;
-  gap: 12px;
-  padding: 10px;
-  background: rgba(17, 21, 18, 0.85);
-  border: 1px solid rgba(124, 255, 107, 0.25);
-}
-
-.final-color-controls label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: #9aa59d;
-}
-
-.final-color-controls input[type="color"] {
-  width: 28px;
-  height: 20px;
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: none;
-}
-
 
 /* =========================================================
    REDUCE MOTION
