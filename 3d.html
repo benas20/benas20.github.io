@@ -495,6 +495,10 @@
 
     const viewers = {};
     const model002TexturePath = 'models/textura-model002.png';
+    const finalObjectColors = {
+      material1: '#ffffff',
+      material2: '#ffffff'
+    };
 
     function createViewer(canvasId, modelPath) {
       const canvas = document.getElementById(canvasId);
@@ -668,7 +672,7 @@
               materials.forEach(material => {
                 if (material.name === 'Material.001') {
                   console.log('>>> DONUT');
-                  material.color.set(0xffffff);
+                  material.color.set(finalObjectColors.material1);
                   material.roughness = 0;
                   material.metalness = 0;
                   material.transparent = true;
@@ -679,7 +683,7 @@
 
                 if (material.name === 'Material.002') {
                   console.log('>>> LETRAS');
-                  material.color.set(0xffffff);
+                  material.color.set(finalObjectColors.material2);
                   material.roughness = 0.5;
                   material.metalness = 0;
                   material.transparent = false;
@@ -801,6 +805,37 @@
       viewer.camera.position.set(3, 2, 5);
       viewer.controls.target.set(0, 0, 0);
       viewer.controls.update();
+    };
+
+    window.updateFinalObjectColors = function () {
+      const material1 = document.getElementById('final-material-1');
+      const material2 = document.getElementById('final-material-2');
+
+      if (material1) finalObjectColors.material1 = material1.value;
+      if (material2) finalObjectColors.material2 = material2.value;
+
+      const viewer = viewers['viewer-003'];
+      if (!viewer) return;
+
+      const model = viewer.getModel();
+      if (!model) return;
+
+      model.traverse(function (child) {
+        if (!child.isMesh || !child.material) return;
+
+        const materials = Array.isArray(child.material) ? child.material : [child.material];
+        materials.forEach(function (material) {
+          if (material.name === 'Material.001') {
+            material.color.set(finalObjectColors.material1);
+            material.needsUpdate = true;
+          }
+
+          if (material.name === 'Material.002') {
+            material.color.set(finalObjectColors.material2);
+            material.needsUpdate = true;
+          }
+        });
+      });
     };
 
     createViewer('viewer-001', 'models/model001.fbx');
