@@ -1189,11 +1189,6 @@ body {
     padding-top: 70px;
   }
 
-  .model-intro {
-    min-height: 80vh;
-    padding: 100px 8vw;
-  }
-
   .model-index {
     left: 8vw;
   }
@@ -1293,18 +1288,20 @@ body {
      CONTROLES DE COLOR
   ======================================================= */
 
-  .final-color-controls {
+  .final-light-controls {
     position: relative;
     right: auto;
-    bottom: auto;
-    margin: 15px;
+    top: auto;
     width: calc(100% - 30px);
+    max-height: 260px;
+    margin: 15px;
+    overflow-y: auto;
     box-sizing: border-box;
-    flex-wrap: wrap;
   }
 
-  .final-color-controls input[type="color"] {
-    cursor: auto;
+  .final-light-controls input[type="range"] {
+    width: 120px;
+    max-width: 100%;
   }
 }
 
