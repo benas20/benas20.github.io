@@ -1121,3 +1121,214 @@ body {
 }
 
 /* rest of CSS unchanged */
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .model-viewer-layout,
+  .model-entry-alt .model-viewer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .model-information {
+    min-height: auto;
+  }
+
+  .technical-data {
+    margin-top: 35px;
+  }
+
+  .topology-content {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr 50px 1fr 50px 1fr 50px 1fr;
+  }
+
+  .render-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   TABLET / MOVIL
+========================================================= */
+
+@media (max-width: 700px) {
+  body {
+    cursor: auto;
+  }
+
+  .custom-cursor,
+  .cursor-measure-x,
+  .cursor-measure-y {
+    display: none;
+  }
+
+  .cursor-info {
+    display: none;
+  }
+
+  .archive-location {
+    display: none;
+  }
+
+  .measurement-y {
+    display: none;
+  }
+
+  .menu-container {
+    right: 20px;
+  }
+
+  .model-page {
+    padding-top: 70px;
+  }
+
+  .model-intro {
+    min-height: 80vh;
+    padding: 100px 8vw;
+  }
+
+  .model-index {
+    left: 8vw;
+  }
+
+  .model-title-wrapper h1 {
+    font-size: clamp(65px, 18vw, 120px);
+    letter-spacing: -5px;
+  }
+
+  .model-axis-decoration {
+    right: -35px;
+    transform: scale(0.8);
+  }
+
+  .model-description {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+
+  .model-entry,
+  .topology-section,
+  .process-section,
+  .render-archive {
+    padding: 80px 7vw 100px;
+  }
+
+  .model-viewer {
+    height: 430px;
+  }
+
+  .topology-text h2 {
+    font-size: 70px;
+  }
+
+  .process-header,
+  .render-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .process-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .process-line {
+    width: 1px;
+    height: 45px;
+  }
+
+  .render-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .render-placeholder {
+    height: 300px;
+  }
+
+  .final-model {
+    padding: 70px 4vw 100px;
+  }
+
+  .final-model-viewer {
+    height: 600px;
+  }
+
+  .model-footer {
+    padding: 30px 7vw;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  /* =======================================================
+     CONTROLES DE LUZ - MODEL 003
+  ======================================================= */
+
+  .final-light-controls {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: calc(100% - 30px);
+    max-height: 260px;
+    margin: 15px;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+
+  .final-light-controls input[type="range"] {
+    width: 120px;
+    max-width: 100%;
+  }
+
+  /* =======================================================
+     CONTROLES DE COLOR
+  ======================================================= */
+
+  .final-color-controls {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 15px;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
+
+  .final-color-controls input[type="color"] {
+    cursor: auto;
+  }
+}
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   OCULTAR PANEL DE CURSOR EN TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .cursor-info {
+    display: none;
+  }
+}
