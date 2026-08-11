@@ -1451,3 +1451,10 @@ body p {
     height: 220px;
   }
 }
+
+/* Ocultar panel de cursor en tablet y móvil */
+@media (max-width: 900px) {
+  .cursor-info {
+    display: none;
+  }
+}
