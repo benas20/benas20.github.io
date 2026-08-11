@@ -86,13 +86,21 @@ a:hover {
 }
 
 @keyframes scanMove {
-  0% { top: 0%; }
-  100% { top: 100%; }
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
 }
 
 @keyframes scanMoveReverse {
-  0% { top: 100%; }
-  100% { top: 0%; }
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
 }
 
 /* Horizontal de izquierda a derecha */
@@ -112,16 +120,22 @@ a:hover {
 }
 
 @keyframes scanMoveHorizontal {
-  0% { left: 0%; }
-  100% { left: 100%; }
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes scanMoveHorizontalReverse {
-  0% { left: 100%; }
-  100% { left: 0%; }
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
 }
-
-
 
 /* ========================================
    FLASH DEL CURSOR
@@ -140,7 +154,7 @@ a:hover {
 
   border-radius: 50%;
 
-  background: #7CFF6B;
+  background: #7cff6b;
 
   pointer-events: none;
 
@@ -149,10 +163,9 @@ a:hover {
   opacity: 0;
 
   box-shadow:
-    0 0 5px #7CFF6B,
+    0 0 5px #7cff6b,
     0 0 14px rgba(124, 255, 107, 0.7);
 }
-
 
 .cursor-flash.active {
   animation:
@@ -161,9 +174,7 @@ a:hover {
     ease-out;
 }
 
-
 @keyframes cursorFlash {
-
   0% {
     opacity: 0;
     transform:
@@ -184,7 +195,6 @@ a:hover {
       translate(-50%, -50%)
       scale(3);
   }
-
 }
 
 /* Bloques transparentes compartidos */
@@ -221,7 +231,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   z-index: 9990;
-  color: #29251F;
+  color: #29251f;
   font-size: 8px;
   letter-spacing: 2px;
   opacity: 0.78;
@@ -246,8 +256,13 @@ a:hover {
 }
 
 @keyframes systemPulse {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Ubicación del archivo */
@@ -259,7 +274,7 @@ a:hover {
   font-size: 8px;
   line-height: 1.9;
   letter-spacing: 1.8px;
-  color: #29251F;
+  color: #29251f;
   opacity: 0.65;
   pointer-events: none;
   text-shadow: 0 1px 6px rgba(232, 217, 184, 0.3);
@@ -301,8 +316,8 @@ a:hover {
   top: 0;
   width: 1px;
   height: 100vh;
-  background: #7CFF6B;
-  opacity: 0.10;
+  background: #7cff6b;
+  opacity: 0.1;
   pointer-events: none;
 }
 
@@ -311,8 +326,8 @@ a:hover {
   left: 0;
   width: 100vw;
   height: 1px;
-  background: #7CFF6B;
-  opacity: 0.10;
+  background: #7cff6b;
+  opacity: 0.1;
   pointer-events: none;
 }
 
@@ -323,7 +338,7 @@ body h1 {
   font-size: 200px;
   filter: blur(5px);
   margin-top: 0;
-  color: #E8D9B8;
+  color: #e8d9b8;
 }
 
 body p {
@@ -403,7 +418,7 @@ body p {
   padding: 8px 0;
   margin: 0;
   list-style: none;
-  background: rgba(41, 37, 31, 0.90);
+  background: rgba(41, 37, 31, 0.9);
   border: 1px solid rgba(141, 112, 72, 0.45);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
@@ -435,14 +450,14 @@ body p {
 .menu-number {
   font-size: 8px;
   letter-spacing: 1px;
-  color: #7CFF6B;
+  color: #7cff6b;
   opacity: 0.75;
 }
 
 .menu-list li a {
   display: block;
   width: 100%;
-  color: #E8D9B8;
+  color: #e8d9b8;
   text-decoration: none;
   font-size: 10px;
   letter-spacing: 2px;
@@ -454,7 +469,7 @@ body p {
   filter: blur(0);
   letter-spacing: 2.5px;
   transform: translateX(4px);
-  color: #80988A;
+  color: #80988a;
   background: rgba(41, 37, 31, 0);
 }
 
@@ -465,7 +480,7 @@ body p {
   top: 0;
   width: 1px;
   height: 100%;
-  background: #7CFF6B;
+  background: #7cff6b;
   transform: scaleY(0);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -499,6 +514,13 @@ body p {
   overflow: hidden;
 }
 
+/* ✅ Ajustes para el título principal (responsive real) */
+.typing-title {
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding: 0 10px;
+}
+
 .typing-title span {
   display: inline-block;
   opacity: 0;
@@ -506,20 +528,48 @@ body p {
   animation: letterReveal 1.4s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 
-.typing-title span:nth-child(1) { animation-delay: 0.00s; }
-.typing-title span:nth-child(2) { animation-delay: 0.08s; }
-.typing-title span:nth-child(3) { animation-delay: 0.16s; }
-.typing-title span:nth-child(4) { animation-delay: 0.24s; }
-.typing-title span:nth-child(5) { animation-delay: 0.32s; }
-.typing-title span:nth-child(6) { animation-delay: 0.40s; }
-.typing-title span:nth-child(7) { animation-delay: 0.48s; }
-.typing-title span:nth-child(8) { animation-delay: 0.56s; }
-.typing-title span:nth-child(9) { animation-delay: 0.64s; }
-.typing-title span:nth-child(10) { animation-delay: 0.72s; }
-.typing-title span:nth-child(11) { animation-delay: 0.80s; }
-.typing-title span:nth-child(12) { animation-delay: 0.88s; }
-.typing-title span:nth-child(13) { animation-delay: 0.96s; }
-.typing-title span:nth-child(14) { animation-delay: 1.10s; }
+.typing-title span:nth-child(1) {
+  animation-delay: 0.00s;
+}
+.typing-title span:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.typing-title span:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.typing-title span:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.typing-title span:nth-child(5) {
+  animation-delay: 0.32s;
+}
+.typing-title span:nth-child(6) {
+  animation-delay: 0.40s;
+}
+.typing-title span:nth-child(7) {
+  animation-delay: 0.48s;
+}
+.typing-title span:nth-child(8) {
+  animation-delay: 0.56s;
+}
+.typing-title span:nth-child(9) {
+  animation-delay: 0.64s;
+}
+.typing-title span:nth-child(10) {
+  animation-delay: 0.72s;
+}
+.typing-title span:nth-child(11) {
+  animation-delay: 0.80s;
+}
+.typing-title span:nth-child(12) {
+  animation-delay: 0.88s;
+}
+.typing-title span:nth-child(13) {
+  animation-delay: 0.96s;
+}
+.typing-title span:nth-child(14) {
+  animation-delay: 1.10s;
+}
 
 @keyframes letterReveal {
   from {
@@ -542,7 +592,7 @@ body p {
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 99999;
-  color: #7CFF6B;
+  color: #7cff6b;
   transition: opacity 0.3s ease;
 }
 
@@ -550,7 +600,7 @@ body p {
   position: absolute;
   width: 34px;
   height: 1px;
-  background: #7CFF6B;
+  background: #7cff6b;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -560,7 +610,7 @@ body p {
   position: absolute;
   width: 1px;
   height: 34px;
-  background: #7CFF6B;
+  background: #7cff6b;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -570,7 +620,7 @@ body p {
   position: absolute;
   width: 8px;
   height: 8px;
-  border: 1px solid #7CFF6B;
+  border: 1px solid #7cff6b;
   border-radius: 50%;
   left: 50%;
   top: 50%;
@@ -581,7 +631,7 @@ body p {
   position: absolute;
   width: 5px;
   height: 1px;
-  background: #7CFF6B;
+  background: #7cff6b;
 }
 
 .tick-top {
@@ -643,7 +693,7 @@ body p {
   width: 190px;
   padding: 14px 16px 13px;
   box-sizing: border-box;
-  color: #7CFF6B;
+  color: #7cff6b;
   font-family: Arial, sans-serif;
   font-size: 9px;
   letter-spacing: 1.8px;
@@ -664,7 +714,7 @@ body p {
   left: -1px;
   width: 45px;
   height: 1px;
-  background: #7CFF6B;
+  background: #7cff6b;
   opacity: 0.8;
 }
 
@@ -711,6 +761,7 @@ body p {
 #cursor-sector {
   font-variant-numeric: tabular-nums;
 }
+
 /* =========================================================
    GRAPHIC DESIGN / FILE 001
    ========================================================= */
@@ -732,7 +783,6 @@ body p {
   font-family: Arial, sans-serif;
 }
 
-
 /* =========================================================
    HEADER DEL ARCHIVO
    ========================================================= */
@@ -748,14 +798,13 @@ body p {
 
   border-bottom: 1px solid rgba(41, 37, 31, 0.35);
 
-  color: #29251F;
+  color: #29251f;
 
   font-size: 8px;
   letter-spacing: 2px;
 
   opacity: 0.8;
 }
-
 
 .design-header-left,
 .design-header-right {
@@ -765,11 +814,9 @@ body p {
   gap: 5px;
 }
 
-
 .design-header-right {
   text-align: right;
 }
-
 
 /* =========================================================
    INTRODUCCIÓN
@@ -782,7 +829,6 @@ body p {
 
   text-align: center;
 }
-
 
 /* Información superior */
 
@@ -799,23 +845,24 @@ body p {
 
   letter-spacing: 2px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.6;
 }
 
-
-/* Título principal */
-
+/* Título principal (si usas esta clase en el h1) */
 .design-title {
   margin: 0 !important;
   font-family: Arial, sans-serif !important;
-  font-size: clamp(60px, 7.1vw, 150px) !important;
-  letter-spacing: 5px;
-  color: #29251F !important;
+  font-size: clamp(42px, 6.5vw, 150px) !important;
+  letter-spacing: 4px;
+  color: #29251f !important;
   filter: blur(1px) !important;
-}
 
+  line-height: 0.95;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
 
 /* Descripción */
 
@@ -834,13 +881,12 @@ body p {
 
   text-align: center !important;
 
-  color: #29251F !important;
+  color: #29251f !important;
 
   opacity: 0.65;
 
   filter: blur(0) !important;
 }
-
 
 /* =========================================================
    PROYECTOS
@@ -852,7 +898,6 @@ body p {
   margin-bottom: 190px;
 }
 
-
 /* PROJECT 001 */
 
 .project-number {
@@ -862,11 +907,10 @@ body p {
 
   letter-spacing: 2.5px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.65;
 }
-
 
 /* Contenedor imagen + información */
 
@@ -881,7 +925,6 @@ body p {
 
   align-items: start;
 }
-
 
 /* =========================================================
    IMÁGENES DE PROYECTOS
@@ -898,7 +941,6 @@ body p {
 
   border: 1px solid rgba(41, 37, 31, 0.25);
 }
-
 
 /* Etiqueta sobre la imagen */
 
@@ -921,7 +963,6 @@ body p {
   opacity: 0.7;
 }
 
-
 /* Imagen */
 
 .project-image img {
@@ -941,7 +982,6 @@ body p {
     filter 0.6s ease;
 }
 
-
 /* Hover */
 
 .project-image:hover img {
@@ -952,7 +992,6 @@ body p {
   filter: saturate(1);
 }
 
-
 /* =========================================================
    INFORMACIÓN DEL PROYECTO
    ========================================================= */
@@ -960,9 +999,8 @@ body p {
 .project-info {
   padding-top: 10px;
 
-  color: #29251F;
+  color: #29251f;
 }
-
 
 /* Código */
 
@@ -973,11 +1011,10 @@ body p {
 
   letter-spacing: 2px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.55;
 }
-
 
 /* Nombre */
 
@@ -992,11 +1029,10 @@ body p {
 
   letter-spacing: 3px;
 
-  color: #29251F !important;
+  color: #29251f !important;
 
   filter: blur(0.3px);
 }
-
 
 /* Categorías */
 
@@ -1012,11 +1048,10 @@ body p {
 
   letter-spacing: 1.8px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.75;
 }
-
 
 /* Descripción */
 
@@ -1025,7 +1060,6 @@ body p {
 
   max-width: 300px;
 }
-
 
 .project-description p {
   margin: 0 !important;
@@ -1040,13 +1074,12 @@ body p {
 
   letter-spacing: 1px;
 
-  color: #29251F !important;
+  color: #29251f !important;
 
   opacity: 0.65;
 
   filter: blur(0) !important;
 }
-
 
 /* =========================================================
    DATOS TÉCNICOS DEL PROYECTO
@@ -1070,11 +1103,10 @@ body p {
 
   letter-spacing: 1.7px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.6;
 }
-
 
 /* =========================================================
    PROJECT 002
@@ -1086,13 +1118,11 @@ body p {
   margin-left: auto;
 }
 
-
 .project-offset .project-main {
   grid-template-columns:
     minmax(280px, 0.7fr)
     minmax(0, 1.5fr);
 }
-
 
 /* =========================================================
    PROJECT 003 / SKATE SHOP
@@ -1102,11 +1132,9 @@ body p {
   margin-top: 240px;
 }
 
-
 .project-image-large {
   min-height: 550px;
 }
-
 
 /* =========================================================
    MATERIAL ARCHIVE
@@ -1121,7 +1149,6 @@ body p {
     1px solid rgba(41, 37, 31, 0.3);
 }
 
-
 /* Cabecera */
 
 .material-header {
@@ -1134,7 +1161,6 @@ body p {
   margin-bottom: 45px;
 }
 
-
 .material-header h2 {
   margin: 0 !important;
 
@@ -1146,20 +1172,18 @@ body p {
 
   letter-spacing: 3px;
 
-  color: #29251F !important;
+  color: #29251f !important;
 }
-
 
 .material-header span {
   font-size: 7px;
 
   letter-spacing: 1.5px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.55;
 }
-
 
 /* =========================================================
    GRID DE MATERIAL
@@ -1174,7 +1198,6 @@ body p {
   gap: 15px;
 }
 
-
 .material-item {
   position: relative;
 
@@ -1186,7 +1209,6 @@ body p {
   border:
     1px solid rgba(41, 37, 31, 0.2);
 }
-
 
 .material-item img {
   display: block;
@@ -1207,7 +1229,6 @@ body p {
     filter 0.5s ease;
 }
 
-
 .material-item:hover img {
   transform: scale(1.04);
 
@@ -1215,7 +1236,6 @@ body p {
 
   filter: saturate(1);
 }
-
 
 /* =========================================================
    FOOTER DE FILE 001
@@ -1237,11 +1257,10 @@ body p {
 
   letter-spacing: 2px;
 
-  color: #29251F;
+  color: #29251f;
 
   opacity: 0.6;
 }
-
 
 /* =========================================================
    ANIMACIONES DE ENTRADA
@@ -1261,261 +1280,174 @@ body p {
     forwards;
 }
 
-
 .design-project:nth-child(1) {
   animation-delay: 0.15s;
 }
-
 
 .design-project:nth-child(2) {
   animation-delay: 0.30s;
 }
 
-
 .design-project:nth-child(3) {
   animation-delay: 0.45s;
 }
-
 
 .material-archive {
   animation-delay: 0.60s;
 }
 
-
 @keyframes designReveal {
-
   from {
-
     opacity: 0;
 
     transform:
       translateY(35px);
-
   }
 
   to {
-
     opacity: 1;
 
     transform:
       translateY(0);
-
   }
-
 }
-
 
 /* =========================================================
    RESPONSIVE / TABLET
    ========================================================= */
 
 @media (max-width: 1000px) {
-
   .design-page {
-
     padding-left: 40px;
-
     padding-right: 40px;
-
   }
-
 
   .project-main,
   .project-offset .project-main {
-
     grid-template-columns:
       minmax(0, 1.3fr)
       minmax(230px, 0.7fr);
 
     gap: 35px;
-
   }
-
 
   .project-info h2 {
-
     font-size: 23px !important;
-
   }
 
+  /* Título: menos “pico” */
+  .typing-title {
+    padding: 0 8px;
+  }
 }
-
 
 /* =========================================================
    RESPONSIVE / MÓVIL
    ========================================================= */
 
 @media (max-width: 800px) {
-
   .design-page {
-
     padding:
       140px
       25px
       70px;
-
   }
 
-
   .design-intro {
-
     padding:
       90px
       0
       110px;
-
   }
 
-
-  .design-title {
-
-    font-size:
-      52px !important;
-
-    letter-spacing:
-      3px;
-
+  /* ✅ Ajuste clave: no forzar un tamaño enorme */
+  .section1 h1 {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: clamp(40px, 10vw, 92px);
+    filter: blur(1px);
   }
 
+  .typing-title span {
+    /* ayuda a que no se desborde por el contenedor flex */
+    max-width: 100%;
+  }
 
   .design-index {
-
     gap: 20px;
-
   }
-
 
   .project-main,
   .project-offset .project-main {
-
-    grid-template-columns:
-      1fr;
-
+    grid-template-columns: 1fr;
     gap: 30px;
-
   }
-
 
   .project-offset {
-
     width: 100%;
-
   }
-
 
   .project-offset .project-info {
-
     order: 2;
-
   }
-
 
   .project-offset .project-image {
-
     order: 1;
-
   }
-
 
   .skate-project {
-
     margin-top: 100px;
-
   }
-
 
   .project-image-large {
-
     min-height: 0;
-
   }
-
 
   .project-info h2 {
-
-    font-size:
-      24px !important;
-
+    font-size: 24px !important;
   }
-
 
   .material-grid {
-
     grid-template-columns:
       repeat(2, 1fr);
-
   }
-
 
   .material-header {
-
-    flex-direction:
-      column;
-
+    flex-direction: column;
     gap: 15px;
-
   }
-
 
   .design-footer {
-
-    flex-direction:
-      column;
-
+    flex-direction: column;
     gap: 15px;
-
   }
-
 }
-
 
 /* =========================================================
    MÓVIL PEQUEÑO
    ========================================================= */
 
 @media (max-width: 500px) {
-
   .design-page {
-
     padding-left: 18px;
-
     padding-right: 18px;
-
   }
 
-
-  .design-title {
-
-    font-size:
-      40px !important;
-
-    letter-spacing:
-      2px;
-
+  .section1 h1 {
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: clamp(34px, 10.5vw, 70px);
   }
-
 
   .design-description {
-
-    font-size:
-      8px !important;
-
+    font-size: 8px !important;
   }
-
 
   .material-grid {
-
-    grid-template-columns:
-      1fr;
-
+    grid-template-columns: 1fr;
   }
-
 
   .material-item img {
-
-    height:
-      220px;
-
+    height: 220px;
   }
-
 }
