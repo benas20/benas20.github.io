@@ -6,7 +6,9 @@
   <title>FILE 002 / 3D MODELING</title>
   <link rel="stylesheet" href="css/3d.css">
 </head>
+
 <body>
+
   <!-- ========================================
        SYSTEM HEADER
   ======================================== -->
@@ -14,11 +16,13 @@
     <div>
       <span>SYSTEM PROJECT 02</span>
     </div>
+
     <div class="system-online">
       <i></i>
       ONLINE
     </div>
   </div>
+
 
   <!-- ========================================
        ARCHIVE LOCATION
@@ -28,6 +32,7 @@
     <div>VISUAL ARCHIVE</div>
     <div>UNIT 03</div>
   </div>
+
 
   <!-- ========================================
        MEDICIONES DE PANTALLA
@@ -52,6 +57,7 @@
     <span>1500</span>
   </div>
 
+
   <!-- ========================================
        SCAN LINES
   ======================================== -->
@@ -61,11 +67,18 @@
   <div class="scan-line-horizontal-reverse"></div>
   <div class="cursor-flash"></div>
 
+
   <!-- ========================================
        MENÚ HAMBURGUESA
   ======================================== -->
   <div class="menu-container">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      class="menu-toggle"
+    >
+
     <label for="menu-toggle" class="menu-icon">
       <span></span>
       <span></span>
@@ -73,28 +86,35 @@
     </label>
 
     <ul class="menu-list">
+
       <li>
         <span class="menu-number">001</span>
         <a href="graphicdesign.html">GRAPHIC DESIGN</a>
       </li>
+
       <li>
         <span class="menu-number">002</span>
         <a href="3d.html">3D MODELING</a>
       </li>
+
       <li>
         <span class="menu-number">003</span>
         <a href="photography.html">PHOTOGRAPHY</a>
       </li>
+
       <li>
         <span class="menu-number">004</span>
         <a href="#">MUSIC</a>
       </li>
+
       <li>
         <span class="menu-number">005</span>
         <a href="index.html">INDEX</a>
       </li>
+
     </ul>
   </div>
+
 
   <!-- ========================================
        GUÍAS DEL CURSOR
@@ -102,10 +122,12 @@
   <div class="cursor-measure-x"></div>
   <div class="cursor-measure-y"></div>
 
+
   <!-- ========================================
        CURSOR PERSONALIZADO
   ======================================== -->
   <div class="custom-cursor">
+
     <div class="cursor-horizontal"></div>
     <div class="cursor-vertical"></div>
     <div class="cursor-circle"></div>
@@ -119,50 +141,71 @@
     <div class="tick tick-diagonal-2"></div>
     <div class="tick tick-diagonal-3"></div>
     <div class="tick tick-diagonal-4"></div>
+
   </div>
+
 
   <!-- ========================================
        OBSERVATION PANEL
   ======================================== -->
   <div class="cursor-info">
-    <div class="observation-title">OBSERVATION / 03</div>
+
+    <div class="observation-title">
+      OBSERVATION / 03
+    </div>
 
     <div class="observation-coordinates">
+
       <div>
         X
         <span id="cursor-x">0000.00</span>
       </div>
+
       <div>
         Y
         <span id="cursor-y">0000.00</span>
       </div>
+
     </div>
 
     <div class="observation-data">
+
       <div>
         VECTOR
         <span id="cursor-vector">000°</span>
       </div>
+
       <div>
         SPEED&nbsp;&nbsp;
         <span id="cursor-speed">00.00</span>
       </div>
+
     </div>
 
     <div class="observation-system">
+
       <div>
         SECTOR
         <span id="cursor-sector">A-01</span>
       </div>
+
       <div>
         STATUS /
         <span id="cursor-status">IDLE</span>
       </div>
+
     </div>
+
   </div>
 
+
   <main class="model-page">
+
+    <!-- ========================================
+         INTRO
+    ======================================== -->
     <section class="model-intro">
+
       <div class="model-index">
         <span>ARCHIVE / 002</span>
         <span>OBJECTS / 03</span>
@@ -170,7 +213,10 @@
       </div>
 
       <div class="model-title-wrapper">
-        <div class="model-title-small">DIGITAL OBJECT ARCHIVE</div>
+
+        <div class="model-title-small">
+          DIGITAL OBJECT ARCHIVE
+        </div>
 
         <h1>
           3D
@@ -185,29 +231,49 @@
           <span>+</span>
           <span>Z</span>
         </div>
+
       </div>
 
       <p class="model-description">
         THREE-DIMENSIONAL OBJECTS, ENVIRONMENTS AND EXPERIMENTAL DIGITAL FORMS.
       </p>
+
     </section>
 
+
+    <!-- ========================================
+         MODEL 001
+    ======================================== -->
     <section class="model-entry">
+
       <div class="model-entry-header">
+
         <div>
-          <span class="model-number">OBJECT / 001</span>
-          <span class="model-code">BAV / 3D-001</span>
+          <span class="model-number">
+            OBJECT / 001
+          </span>
+
+          <span class="model-code">
+            BAV / 3D-001
+          </span>
         </div>
 
         <div class="model-state">
           <span class="state-dot"></span>
           INTERACTIVE OBJECT
         </div>
+
       </div>
 
+
       <div class="model-viewer-layout">
+
         <div class="model-viewer">
-          <canvas id="viewer-001" class="three-canvas"></canvas>
+
+          <canvas
+            id="viewer-001"
+            class="three-canvas">
+          </canvas>
 
           <div class="viewer-overlay">
             <span>PERSPECTIVE / USER</span>
@@ -221,36 +287,56 @@
           </div>
 
           <div class="viewer-controls">
-            <button onclick="toggleWireframe('viewer-001')">WIREFRAME</button>
-            <button onclick="resetModel('viewer-001')">RESET VIEW</button>
+
+            <button onclick="toggleWireframe('viewer-001')">
+              WIREFRAME
+            </button>
+
+            <button onclick="resetModel('viewer-001')">
+              RESET VIEW
+            </button>
+
           </div>
+
         </div>
 
+
         <aside class="model-information">
-          <div class="model-type">DIGITAL SCULPTURE</div>
-          <h2>MODEL 001</h2>
+
+          <div class="model-type">
+            DIGITAL SCULPTURE
+          </div>
+
+          <h2>
+            MODEL 001
+          </h2>
 
           <p class="model-text">
             EXPERIMENTAL THREE-DIMENSIONAL OBJECT DEVELOPED FROM AN INITIAL DIGITAL BLOCKOUT.
           </p>
 
           <div class="technical-data">
+
             <div>
               <span>POLYGONS</span>
               <strong id="poly-001">151.800</strong>
             </div>
+
             <div>
               <span>VERTICES</span>
               <strong id="vertex-001">88.214</strong>
             </div>
+
             <div>
               <span>OBJECTS</span>
               <strong id="objects-001">2</strong>
             </div>
+
             <div>
               <span>FORMAT</span>
               <strong>FBX</strong>
             </div>
+
           </div>
 
           <div class="model-tags">
@@ -258,86 +344,148 @@
             <span>MODELING</span>
             <span>TEXTURE</span>
           </div>
+
         </aside>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         TOPOLOGY
+    ======================================== -->
     <section class="topology-section">
-      <div class="section-marker">ANALYSIS / 002</div>
+
+      <div class="section-marker">
+        ANALYSIS / 002
+      </div>
 
       <div class="topology-content">
+
         <div class="topology-text">
-          <span class="technical-label">MESH ANALYSIS</span>
-          <h2>TOPOLOGY</h2>
+
+          <span class="technical-label">
+            MESH ANALYSIS
+          </span>
+
+          <h2>
+            TOPOLOGY
+          </h2>
 
           <p>
             STRUCTURAL STUDY OF DIGITAL GEOMETRY, EDGE FLOW AND POLYGON DISTRIBUTION.
           </p>
 
           <div class="topology-data">
+
             <div>
               <span>GEOMETRY</span>
               <strong>QUAD / TRI</strong>
             </div>
+
             <div>
               <span>UV</span>
               <strong>UNWRAPPED</strong>
             </div>
+
             <div>
               <span>NORMALS</span>
               <strong>CALCULATED</strong>
             </div>
+
           </div>
+
         </div>
+
 
         <div class="wireframe-display">
+
           <div class="wireframe-grid">
-            <img src="models/WGTopology.jpg" alt="Topology 001">
-            <div class="wireframe-label">WIREFRAME / 001</div>
+
+            <img
+              src="models/WGTopology.jpg"
+              alt="Topology 001"
+            >
+
+            <div class="wireframe-label">
+              WIREFRAME / 001
+            </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         MODEL 002
+    ======================================== -->
     <section class="model-entry model-entry-alt">
+
       <div class="model-entry-header">
+
         <div>
-          <span class="model-number">OBJECT / 002</span>
-          <span class="model-code">BAV / 3D-002</span>
+
+          <span class="model-number">
+            OBJECT / 002
+          </span>
+
+          <span class="model-code">
+            BAV / 3D-002
+          </span>
+
         </div>
 
         <div class="model-state">
           <span class="state-dot"></span>
           INTERACTIVE OBJECT
         </div>
+
       </div>
 
+
       <div class="model-viewer-layout">
+
         <aside class="model-information">
-          <div class="model-type">HARD SURFACE</div>
-          <h2>MODEL 002</h2>
+
+          <div class="model-type">
+            HARD SURFACE
+          </div>
+
+          <h2>
+            MODEL 002
+          </h2>
 
           <p class="model-text">
             HARD-SURFACE MODELING EXPERIMENT FOCUSED ON FORM, PROPORTION AND MECHANICAL DETAILS.
           </p>
 
           <div class="technical-data">
+
             <div>
               <span>POLYGONS</span>
               <strong id="poly-002">---</strong>
             </div>
+
             <div>
               <span>VERTICES</span>
               <strong id="vertex-002">---</strong>
             </div>
+
             <div>
               <span>OBJECTS</span>
               <strong id="objects-002">---</strong>
             </div>
+
             <div>
               <span>FORMAT</span>
               <strong>FBX</strong>
             </div>
+
           </div>
 
           <div class="model-tags">
@@ -345,10 +493,16 @@
             <span>BLENDER</span>
             <span>DETAIL</span>
           </div>
+
         </aside>
 
+
         <div class="model-viewer">
-          <canvas id="viewer-002" class="three-canvas"></canvas>
+
+          <canvas
+            id="viewer-002"
+            class="three-canvas">
+          </canvas>
 
           <div class="viewer-overlay">
             <span>PERSPECTIVE / USER</span>
@@ -362,139 +516,484 @@
           </div>
 
           <div class="viewer-controls">
-            <button onclick="toggleWireframe('viewer-002')">WIREFRAME</button>
-            <button onclick="resetModel('viewer-002')">RESET VIEW</button>
+
+            <button onclick="toggleWireframe('viewer-002')">
+              WIREFRAME
+            </button>
+
+            <button onclick="resetModel('viewer-002')">
+              RESET VIEW
+            </button>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         PROCESS
+    ======================================== -->
     <section class="process-section">
-      <div class="section-marker">PROCESS / 003</div>
+
+      <div class="section-marker">
+        PROCESS / 003
+      </div>
 
       <div class="process-header">
+
         <h2>
           FROM BLOCKOUT
           <br>
           TO FINAL MESH
         </h2>
-        <span>MODEL DEVELOPMENT</span>
+
+        <span>
+          MODEL DEVELOPMENT
+        </span>
+
       </div>
 
+
       <div class="process-grid">
+
         <div class="process-step">
-          <div class="process-number">01</div>
+
+          <div class="process-number">
+            01
+          </div>
+
           <div class="process-image">
             <img src="models/MurnSketch1.jpg" alt="BLOCKOUT">
           </div>
+
           <span>IDEA</span>
+
         </div>
+
 
         <div class="process-line"></div>
 
+
         <div class="process-step">
-          <div class="process-number">02</div>
+
+          <div class="process-number">
+            02
+          </div>
+
           <div class="process-image">
             <img src="models/MurnSketch2.jpg" alt="FORM">
           </div>
+
           <span>SKETCH</span>
+
         </div>
+
 
         <div class="process-line"></div>
 
+
         <div class="process-step">
-          <div class="process-number">03</div>
+
+          <div class="process-number">
+            03
+          </div>
+
           <div class="process-image">
             <img src="models/MurnSketch3.jpg" alt="DETAIL">
           </div>
+
           <span>MODEL</span>
+
         </div>
+
 
         <div class="process-line"></div>
 
+
         <div class="process-step">
-          <div class="process-number">04</div>
+
+          <div class="process-number">
+            04
+          </div>
+
           <div class="process-image">
             <img src="models/MurnSketch4.jpg" alt="FINAL MESH">
           </div>
+
           <span>FINAL MESH</span>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         RENDER ARCHIVE
+    ======================================== -->
     <section class="render-archive">
-      <div class="section-marker">RENDER ARCHIVE / 004</div>
+
+      <div class="section-marker">
+        RENDER ARCHIVE / 004
+      </div>
 
       <div class="render-header">
-        <h2>MATERIAL / LIGHT / FORM</h2>
-        <span>SELECTED TEST RENDERS</span>
+
+        <h2>
+          MATERIAL / LIGHT / FORM
+        </h2>
+
+        <span>
+          SELECTED TEST RENDERS
+        </span>
+
       </div>
+
 
       <div class="render-grid">
-        <div class="render-item">
-          <div class="render-placeholder"><span>RENDER / 001</span></div>
-          <div class="render-caption">MATERIAL TEST</div>
-        </div>
 
         <div class="render-item">
-          <div class="render-placeholder"><span>RENDER / 002</span></div>
-          <div class="render-caption">LIGHTING TEST</div>
+
+          <div class="render-placeholder">
+            <span>RENDER / 001</span>
+          </div>
+
+          <div class="render-caption">
+            MATERIAL TEST
+          </div>
+
         </div>
 
+
         <div class="render-item">
-          <div class="render-placeholder"><span>RENDER / 003</span></div>
-          <div class="render-caption">FINAL FORM</div>
+
+          <div class="render-placeholder">
+            <span>RENDER / 002</span>
+          </div>
+
+          <div class="render-caption">
+            LIGHTING TEST
+          </div>
+
         </div>
+
+
+        <div class="render-item">
+
+          <div class="render-placeholder">
+            <span>RENDER / 003</span>
+          </div>
+
+          <div class="render-caption">
+            FINAL FORM
+          </div>
+
+        </div>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         FINAL MODEL / MODEL 003
+    ======================================== -->
     <section class="final-model">
-      <div class="final-model-label">OBJECT / 003</div>
+
+      <div class="final-model-label">
+        OBJECT / 003
+      </div>
+
 
       <div class="final-model-viewer">
-        <canvas id="viewer-003" class="three-canvas"></canvas>
+
+        <canvas
+          id="viewer-003"
+          class="three-canvas">
+        </canvas>
+
 
         <div class="final-model-title">
-          <span>BAV / 3D-003</span>
-          <h2>FINAL OBJECT</h2>
-          <p>360° INTERACTIVE VIEW</p>
+
+          <span>
+            BAV / 3D-003
+          </span>
+
+          <h2>
+            FINAL OBJECT
+          </h2>
+
+          <p>
+            360° INTERACTIVE VIEW
+          </p>
+
         </div>
 
+
+        <!-- ========================================
+             VIEWER CONTROLS
+        ======================================== -->
         <div class="viewer-controls">
-          <button onclick="toggleWireframe('viewer-003')">WIREFRAME</button>
-          <button onclick="resetModel('viewer-003')">RESET VIEW</button>
+
+          <button onclick="toggleWireframe('viewer-003')">
+            WIREFRAME
+          </button>
+
+          <button onclick="resetModel('viewer-003')">
+            RESET VIEW
+          </button>
+
         </div>
 
+
+        <!-- ========================================
+             MATERIAL CONTROLS
+        ======================================== -->
         <div class="final-color-controls">
+
           <label>
+
             MATERIAL 1
-            <input type="color" id="final-material-1" value="#ffffff" oninput="updateFinalObjectColors()">
+
+            <input
+              type="color"
+              id="final-material-1"
+              value="#ffffff"
+              oninput="updateFinalObjectColors()"
+            >
+
           </label>
+
+
           <label>
+
             MATERIAL 2
-            <input type="color" id="final-material-2" value="#ffffff" oninput="updateFinalObjectColors()">
+
+            <input
+              type="color"
+              id="final-material-2"
+              value="#ffffff"
+              oninput="updateFinalObjectColors()"
+            >
+
           </label>
+
         </div>
 
+
+        <!-- ========================================
+             LIGHT CONTROLS
+        ======================================== -->
         <div class="final-light-controls">
-          <label>AMBIENT <input type="range" id="final-light-ambient" min="0" max="2" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-ambient-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
-          <label>KEY LIGHT <input type="range" id="final-light-key" min="0" max="6" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-key-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
-          <label>FILL LIGHT <input type="range" id="final-light-fill" min="0" max="3" step="0.01" value="0" oninput="updateFinalObjectLights()"><input type="color" id="final-light-fill-color" value="#ffffff" oninput="updateFinalObjectLights()"></label>
-          <label>TOP LEFT <input type="range" id="final-light-top-left" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()"><input type="color" id="final-light-top-left-color" value="#6688ff" oninput="updateFinalObjectLights()"></label>
-          <label>TOP RIGHT <input type="range" id="final-light-top-right" min="0" max="5" step="0.01" value="3" oninput="updateFinalObjectLights()"><input type="color" id="final-light-top-right-color" value="#ff6677" oninput="updateFinalObjectLights()"></label>
-          <label>BOTTOM LEFT <input type="range" id="final-light-bottom-left" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()"><input type="color" id="final-light-bottom-left-color" value="#ff6677" oninput="updateFinalObjectLights()"></label>
-          <label>BOTTOM RIGHT <input type="range" id="final-light-bottom-right" min="0" max="3" step="0.01" value="1.2" oninput="updateFinalObjectLights()"><input type="color" id="final-light-bottom-right-color" value="#6688ff" oninput="updateFinalObjectLights()"></label>
+
+          <label>
+
+            AMBIENT
+
+            <input
+              type="range"
+              id="final-light-ambient"
+              min="0"
+              max="2"
+              step="0.01"
+              value="0"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-ambient-color"
+              value="#ffffff"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            KEY LIGHT
+
+            <input
+              type="range"
+              id="final-light-key"
+              min="0"
+              max="6"
+              step="0.01"
+              value="0"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-key-color"
+              value="#ffffff"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            FILL LIGHT
+
+            <input
+              type="range"
+              id="final-light-fill"
+              min="0"
+              max="3"
+              step="0.01"
+              value="0"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-fill-color"
+              value="#ffffff"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            TOP LEFT
+
+            <input
+              type="range"
+              id="final-light-top-left"
+              min="0"
+              max="5"
+              step="0.01"
+              value="3"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-top-left-color"
+              value="#6688ff"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            TOP RIGHT
+
+            <input
+              type="range"
+              id="final-light-top-right"
+              min="0"
+              max="5"
+              step="0.01"
+              value="3"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-top-right-color"
+              value="#ff6677"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            BOTTOM LEFT
+
+            <input
+              type="range"
+              id="final-light-bottom-left"
+              min="0"
+              max="3"
+              step="0.01"
+              value="1.2"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-bottom-left-color"
+              value="#ff6677"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
+
+          <label>
+
+            BOTTOM RIGHT
+
+            <input
+              type="range"
+              id="final-light-bottom-right"
+              min="0"
+              max="3"
+              step="0.01"
+              value="1.2"
+              oninput="updateFinalObjectLights()"
+            >
+
+            <input
+              type="color"
+              id="final-light-bottom-right-color"
+              value="#6688ff"
+              oninput="updateFinalObjectLights()"
+            >
+
+          </label>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
     <footer class="model-footer">
-      <span><a href="index.html">BACK TO INDEX 00</a></span>
-      <span>FILE 002</span>
-      <span><a href="photography.html">NEXT FILE → 003</a></span>
+
+      <span>
+        <a href="index.html">
+          BACK TO INDEX 00
+        </a>
+      </span>
+
+      <span>
+        FILE 002
+      </span>
+
+      <span>
+        <a href="photography.html">
+          NEXT FILE → 003
+        </a>
+      </span>
+
     </footer>
+
   </main>
 
+
+  <!-- ========================================
+       THREE.JS IMPORTMAP
+  ======================================== -->
   <script type="importmap">
     {
       "imports": {
@@ -504,449 +1003,1655 @@
     }
   </script>
 
+
+  <!-- ========================================
+       THREE.JS
+  ======================================== -->
   <script type="module">
+
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+
+    /* ========================================
+       VIEWERS
+    ======================================== */
+
     const viewers = {};
-    const model002TexturePath = 'models/textura-model002.png';
+
+    const model002TexturePath =
+      'models/textura-model002.png';
+
+
+    /* ========================================
+       FINAL OBJECT COLORS
+    ======================================== */
+
     const finalObjectColors = {
       material1: '#ffffff',
       material2: '#ffffff'
     };
 
+
+    /* ========================================
+       CREATE VIEWER
+    ======================================== */
+
     function createViewer(canvasId, modelPath) {
+
       const canvas = document.getElementById(canvasId);
+
       if (!canvas) return;
 
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x111512);
 
-      const camera = new THREE.PerspectiveCamera(
-        45,
-        canvas.clientWidth / canvas.clientHeight,
-        0.3,
-        3000
-      );
+      /* ========================================
+         SCENE
+      ======================================== */
+
+      const scene = new THREE.Scene();
+
+      scene.background =
+        new THREE.Color(0x111512);
+
+
+      /* ========================================
+         CAMERA
+      ======================================== */
+
+      const camera =
+        new THREE.PerspectiveCamera(
+          45,
+          canvas.clientWidth / canvas.clientHeight,
+          0.3,
+          3000
+        );
+
       camera.position.set(3, 2, 5);
 
-      const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        alpha: true
-      });
 
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      /* ========================================
+         RENDERER
+      ======================================== */
 
-      const ambient = new THREE.AmbientLight(0xffffff, canvasId === 'viewer-003' ? 0 : 0.5);
+      const renderer =
+        new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: true,
+          alpha: true
+        });
+
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 2)
+      );
+
+      renderer.setSize(
+        canvas.clientWidth,
+        canvas.clientHeight,
+        false
+      );
+
+      renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
+
+
+      /* ========================================
+         BASIC LIGHTS
+      ======================================== */
+
+      const ambient =
+        new THREE.AmbientLight(
+          0xffffff,
+          canvasId === 'viewer-003' ? 0 : 0.5
+        );
+
       scene.add(ambient);
 
-      const keyLight = new THREE.DirectionalLight(0xffffff, canvasId === 'viewer-003' ? 0 : 3);
+
+      const keyLight =
+        new THREE.DirectionalLight(
+          0xffffff,
+          canvasId === 'viewer-003' ? 0 : 3
+        );
+
       keyLight.position.set(4, 6, 5);
+
       scene.add(keyLight);
 
-      const fillLight = new THREE.DirectionalLight(0xffffff, canvasId === 'viewer-003' ? 0 : 1.2);
+
+      const fillLight =
+        new THREE.DirectionalLight(
+          0xffffff,
+          canvasId === 'viewer-003' ? 0 : 1.2
+        );
+
       fillLight.position.set(-5, 2, -3);
+
       scene.add(fillLight);
 
+
+      /* ========================================
+         MODEL 003 LIGHTS
+      ======================================== */
+
+      let lightTopLeft = null;
+      let lightTopRight = null;
+      let lightBottomLeft = null;
+      let lightBottomRight = null;
+
+
       if (canvasId === 'viewer-003') {
-        const lightTopLeft = new THREE.SpotLight(0x6688ff, 3, 15, Math.PI / 3, 0.8, 2);
+
+        /* ----------------------------------------
+           TOP LEFT
+        ---------------------------------------- */
+
+        lightTopLeft =
+          new THREE.SpotLight(
+            0x6688ff,
+            3,
+            15,
+            Math.PI / 3,
+            0.8,
+            2
+          );
+
         lightTopLeft.position.set(-4, 4, 4);
-        lightTopLeft.target.position.set(0, 0, 0);
+
+        lightTopLeft.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(lightTopLeft);
         scene.add(lightTopLeft.target);
 
-        const lightTopRight = new THREE.SpotLight(0xff6677, 3, 15, Math.PI / 3, 0.8, 2);
+
+        /* ----------------------------------------
+           TOP RIGHT
+        ---------------------------------------- */
+
+        lightTopRight =
+          new THREE.SpotLight(
+            0xff6677,
+            3,
+            15,
+            Math.PI / 3,
+            0.8,
+            2
+          );
+
         lightTopRight.position.set(4, 4, 4);
-        lightTopRight.target.position.set(0, 0, 0);
+
+        lightTopRight.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(lightTopRight);
         scene.add(lightTopRight.target);
 
-        const lightBottomLeft = new THREE.SpotLight(0xff6677, 1.2, 15, Math.PI / 3, 0.8, 2);
-        lightBottomLeft.position.set(-4, -3, 4);
-        lightBottomLeft.target.position.set(0, 0, 0);
+
+        /* ----------------------------------------
+           BOTTOM LEFT
+        ---------------------------------------- */
+
+        lightBottomLeft =
+          new THREE.SpotLight(
+            0xff6677,
+            1.2,
+            15,
+            Math.PI / 3,
+            0.8,
+            2
+          );
+
+        lightBottomLeft.position.set(
+          -4,
+          -3,
+          4
+        );
+
+        lightBottomLeft.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(lightBottomLeft);
         scene.add(lightBottomLeft.target);
 
-        const lightBottomRight = new THREE.SpotLight(0x6688ff, 1.2, 15, Math.PI / 3, 0.8, 2);
-        lightBottomRight.position.set(4, -3, 4);
-        lightBottomRight.target.position.set(0, 0, 0);
+
+        /* ----------------------------------------
+           BOTTOM RIGHT
+        ---------------------------------------- */
+
+        lightBottomRight =
+          new THREE.SpotLight(
+            0x6688ff,
+            1.2,
+            15,
+            Math.PI / 3,
+            0.8,
+            2
+          );
+
+        lightBottomRight.position.set(
+          4,
+          -3,
+          4
+        );
+
+        lightBottomRight.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(lightBottomRight);
         scene.add(lightBottomRight.target);
 
-        viewers[canvasId] = {
-          scene,
-          camera,
-          renderer,
-          controls: null,
-          getModel: () => null,
-          lights: {
-            ambient,
-            keyLight,
-            fillLight,
-            lightTopLeft,
-            lightTopRight,
-            lightBottomLeft,
-            lightBottomRight
-          }
-        };
       }
 
+
+      /* ========================================
+         MODEL 001 METAL LIGHTS
+      ======================================== */
+
       if (canvasId === 'viewer-001') {
-        const metalLight1 = new THREE.SpotLight(0xffffff, 5, 20, Math.PI / 5, 0.7, 2);
-        metalLight1.position.set(-5, 5, 5);
-        metalLight1.target.position.set(0, 0, 0);
+
+        const metalLight1 =
+          new THREE.SpotLight(
+            0xffffff,
+            5,
+            20,
+            Math.PI / 5,
+            0.7,
+            2
+          );
+
+        metalLight1.position.set(
+          -5,
+          5,
+          5
+        );
+
+        metalLight1.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(metalLight1);
         scene.add(metalLight1.target);
 
-        const metalLight2 = new THREE.SpotLight(0xffffff, 4, 20, Math.PI / 5, 0.7, 2);
-        metalLight2.position.set(5, 4, 3);
-        metalLight2.target.position.set(0, 0, 0);
+
+        const metalLight2 =
+          new THREE.SpotLight(
+            0xffffff,
+            4,
+            20,
+            Math.PI / 5,
+            0.7,
+            2
+          );
+
+        metalLight2.position.set(
+          5,
+          4,
+          3
+        );
+
+        metalLight2.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(metalLight2);
         scene.add(metalLight2.target);
 
-        const metalLight3 = new THREE.SpotLight(0xffffff, 3, 15, Math.PI / 4, 0.8, 2);
-        metalLight3.position.set(-5, 1, 1);
-        metalLight3.target.position.set(0, 0, 0);
+
+        const metalLight3 =
+          new THREE.SpotLight(
+            0xffffff,
+            3,
+            15,
+            Math.PI / 4,
+            0.8,
+            2
+          );
+
+        metalLight3.position.set(
+          -5,
+          1,
+          1
+        );
+
+        metalLight3.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(metalLight3);
         scene.add(metalLight3.target);
 
-        const metalLight4 = new THREE.SpotLight(0xffffff, 3, 15, Math.PI / 4, 0.8, 2);
-        metalLight4.position.set(5, 1, 1);
-        metalLight4.target.position.set(0, 0, 0);
+
+        const metalLight4 =
+          new THREE.SpotLight(
+            0xffffff,
+            3,
+            15,
+            Math.PI / 4,
+            0.8,
+            2
+          );
+
+        metalLight4.position.set(
+          5,
+          1,
+          1
+        );
+
+        metalLight4.target.position.set(
+          0,
+          0,
+          0
+        );
+
         scene.add(metalLight4);
         scene.add(metalLight4.target);
+
       }
 
-      const grid = new THREE.GridHelper(10000, 10000, 0x7CFF6B, 0x303830);
+
+      /* ========================================
+         GRID
+      ======================================== */
+
+      const grid =
+        new THREE.GridHelper(
+          10000,
+          10000,
+          0x7CFF6B,
+          0x303830
+        );
+
       grid.material.opacity = 0.05;
       grid.material.transparent = true;
+
       scene.add(grid);
 
-      const controls = new OrbitControls(camera, canvas);
+
+      /* ========================================
+         ORBIT CONTROLS
+      ======================================== */
+
+      const controls =
+        new OrbitControls(
+          camera,
+          canvas
+        );
+
       controls.enableDamping = true;
       controls.dampingFactor = 0.06;
       controls.minDistance = 1;
       controls.maxDistance = 20;
       controls.enablePan = true;
 
-      const fbxLoader = new FBXLoader();
-      const gltfLoader = new GLTFLoader();
-      const textureLoader = new THREE.TextureLoader();
 
-      let model = null;
+      /* ========================================
+         LOADERS
+      ======================================== */
+
+      const fbxLoader =
+        new FBXLoader();
+
+      const gltfLoader =
+        new GLTFLoader();
+
+      const textureLoader =
+        new THREE.TextureLoader();
+
+
+      /* ========================================
+         MODEL 002 TEXTURE
+      ======================================== */
+
       let model002Texture = null;
 
       if (canvasId === 'viewer-002') {
-        model002Texture = textureLoader.load(model002TexturePath);
-        model002Texture.colorSpace = THREE.SRGBColorSpace;
-        model002Texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+        model002Texture =
+          textureLoader.load(
+            model002TexturePath
+          );
+
+        model002Texture.colorSpace =
+          THREE.SRGBColorSpace;
+
+        model002Texture.anisotropy =
+          renderer.capabilities.getMaxAnisotropy();
+
       }
 
-      const isGLB = modelPath.toLowerCase().endsWith('.glb');
-      const loader = isGLB ? gltfLoader : fbxLoader;
 
-      loader.load(modelPath, function (result) {
-        const object = isGLB ? result.scene : result;
-        model = object;
+      /* ========================================
+         MODEL
+      ======================================== */
 
-        const box = new THREE.Box3().setFromObject(object);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-        object.position.sub(center);
+      let model = null;
 
-        const maxDimension = Math.max(size.x, size.y, size.z);
-        const scale = 3 / maxDimension;
-        object.scale.setScalar(scale);
+      const isGLB =
+        modelPath
+          .toLowerCase()
+          .endsWith('.glb');
 
-        object.traverse(function (child) {
-          if (!child.isMesh) return;
+      const loader =
+        isGLB
+          ? gltfLoader
+          : fbxLoader;
 
-          if (canvasId === 'viewer-002') {
-            child.material = new THREE.MeshStandardMaterial({
-              color: 0x9fb8c4,
-              roughness: 0.32,
-              metalness: 0.0,
-              map: model002Texture
-            });
-          } else if (canvasId === 'viewer-001') {
-            child.material = new THREE.MeshStandardMaterial({
-              color: 0x8c8c8c,
-              roughness: 0.22,
-              metalness: 0.9
-            });
-          } else if (canvasId === 'viewer-003') {
-            const materials = Array.isArray(child.material) ? child.material : [child.material];
-            materials.forEach(material => {
-              if (material.name === 'Material.001') {
-                material.color.set(finalObjectColors.material1);
-                material.roughness = 0;
-                material.metalness = 0;
-                material.transparent = true;
-                material.opacity = 0.15;
-                material.transmission = 0.3;
-                material.needsUpdate = true;
+
+      loader.load(
+        modelPath,
+
+        function (result) {
+
+          const object =
+            isGLB
+              ? result.scene
+              : result;
+
+          model = object;
+
+
+          /* ========================================
+             CENTER / SCALE
+          ======================================== */
+
+          const box =
+            new THREE.Box3()
+              .setFromObject(object);
+
+          const size =
+            box.getSize(
+              new THREE.Vector3()
+            );
+
+          const center =
+            box.getCenter(
+              new THREE.Vector3()
+            );
+
+          object.position.sub(center);
+
+
+          const maxDimension =
+            Math.max(
+              size.x,
+              size.y,
+              size.z
+            );
+
+          const scale =
+            3 / maxDimension;
+
+          object.scale.setScalar(scale);
+
+
+          /* ========================================
+             MATERIALS
+          ======================================== */
+
+          object.traverse(
+            function (child) {
+
+              if (!child.isMesh) return;
+
+
+              /* ----------------------------------------
+                 MODEL 002
+              ---------------------------------------- */
+
+              if (canvasId === 'viewer-002') {
+
+                child.material =
+                  new THREE.MeshStandardMaterial({
+
+                    color: 0x9fb8c4,
+
+                    roughness: 0.32,
+
+                    metalness: 0.0,
+
+                    map: model002Texture
+
+                  });
+
               }
-              if (material.name === 'Material.002') {
-                material.color.set(finalObjectColors.material2);
-                material.roughness = 0.5;
-                material.metalness = 0;
-                material.transparent = false;
-                material.opacity = 1;
-                material.needsUpdate = true;
+
+
+              /* ----------------------------------------
+                 MODEL 001
+              ---------------------------------------- */
+
+              else if (canvasId === 'viewer-001') {
+
+                child.material =
+                  new THREE.MeshStandardMaterial({
+
+                    color: 0x8c8c8c,
+
+                    roughness: 0.22,
+
+                    metalness: 0.9
+
+                  });
+
               }
-            });
-          }
-        });
 
-        scene.add(object);
-        controls.target.set(0, 0, 0);
-        controls.update();
 
-        let vertices = 0;
-        let polygons = 0;
-        let objects = 0;
+              /* ----------------------------------------
+                 MODEL 003
+              ---------------------------------------- */
 
-        object.traverse(function (child) {
-          if (!child.isMesh) return;
-          objects++;
-          if (!child.geometry) return;
+              else if (canvasId === 'viewer-003') {
 
-          const geometry = child.geometry;
-          if (geometry.attributes && geometry.attributes.position) {
-            vertices += geometry.attributes.position.count;
-          }
-          if (geometry.index) {
-            polygons += geometry.index.count / 3;
-          } else if (geometry.attributes && geometry.attributes.position) {
-            polygons += geometry.attributes.position.count / 3;
-          }
-        });
+                const materials =
+                  Array.isArray(child.material)
+                    ? child.material
+                    : [child.material];
 
-        updateStats(canvasId, vertices, polygons, objects);
-      });
+
+                materials.forEach(
+                  function (material) {
+
+                    /* ------------------------------
+                       MATERIAL 1
+                    ------------------------------ */
+
+                    if (
+                      material.name ===
+                      'Material.001'
+                    ) {
+
+                      material.color.set(
+                        finalObjectColors.material1
+                      );
+
+                      material.roughness = 0;
+
+                      material.metalness = 0;
+
+                      material.transparent = true;
+
+                      material.opacity = 0.15;
+
+                      material.transmission = 0.3;
+
+                      material.needsUpdate = true;
+
+                    }
+
+
+                    /* ------------------------------
+                       MATERIAL 2
+                    ------------------------------ */
+
+                    if (
+                      material.name ===
+                      'Material.002'
+                    ) {
+
+                      material.color.set(
+                        finalObjectColors.material2
+                      );
+
+                      material.roughness = 0.5;
+
+                      material.metalness = 0;
+
+                      material.transparent = false;
+
+                      material.opacity = 1;
+
+                      material.needsUpdate = true;
+
+                    }
+
+                  }
+                );
+
+              }
+
+            }
+          );
+
+
+          /* ========================================
+             ADD MODEL
+          ======================================== */
+
+          scene.add(object);
+
+          controls.target.set(
+            0,
+            0,
+            0
+          );
+
+          controls.update();
+
+
+          /* ========================================
+             MODEL STATISTICS
+          ======================================== */
+
+          let vertices = 0;
+          let polygons = 0;
+          let objects = 0;
+
+
+          object.traverse(
+            function (child) {
+
+              if (!child.isMesh) return;
+
+              objects++;
+
+
+              if (!child.geometry) return;
+
+              const geometry =
+                child.geometry;
+
+
+              if (
+                geometry.attributes &&
+                geometry.attributes.position
+              ) {
+
+                vertices +=
+                  geometry.attributes
+                    .position.count;
+
+              }
+
+
+              if (geometry.index) {
+
+                polygons +=
+                  geometry.index.count / 3;
+
+              }
+
+              else if (
+                geometry.attributes &&
+                geometry.attributes.position
+              ) {
+
+                polygons +=
+                  geometry.attributes
+                    .position.count / 3;
+
+              }
+
+            }
+          );
+
+
+          updateStats(
+            canvasId,
+            vertices,
+            polygons,
+            objects
+          );
+
+        }
+      );
+
+
+      /* ========================================
+         IMPORTANT:
+         SINGLE VIEWER REGISTRATION
+      ======================================== */
 
       viewers[canvasId] = {
+
         scene,
+
         camera,
+
         renderer,
+
         controls,
-        getModel: () => model
+
+        getModel: () => model,
+
+        /*
+         * Solo viewer-003 necesita
+         * conservar las referencias
+         * de sus luces.
+         */
+
+        lights:
+          canvasId === 'viewer-003'
+            ? {
+                ambient,
+
+                keyLight,
+
+                fillLight,
+
+                lightTopLeft,
+
+                lightTopRight,
+
+                lightBottomLeft,
+
+                lightBottomRight
+              }
+            : null
+
       };
 
+
+      /* ========================================
+         RESIZE
+      ======================================== */
+
       function resize() {
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        if (width === 0 || height === 0) return;
-        camera.aspect = width / height;
+
+        const width =
+          canvas.clientWidth;
+
+        const height =
+          canvas.clientHeight;
+
+
+        if (
+          width === 0 ||
+          height === 0
+        ) return;
+
+
+        camera.aspect =
+          width / height;
+
         camera.updateProjectionMatrix();
-        renderer.setSize(width, height, false);
+
+
+        renderer.setSize(
+          width,
+          height,
+          false
+        );
+
       }
 
-      window.addEventListener('resize', resize);
+
+      window.addEventListener(
+        'resize',
+        resize
+      );
+
+
+      /* ========================================
+         ANIMATION
+      ======================================== */
 
       function animate() {
-        requestAnimationFrame(animate);
+
+        requestAnimationFrame(
+          animate
+        );
+
         controls.update();
-        renderer.render(scene, camera);
+
+        renderer.render(
+          scene,
+          camera
+        );
+
       }
 
       animate();
+
     }
 
-    function updateStats(canvasId, vertices, polygons, objects) {
-      const suffix = canvasId.replace('viewer-', '');
-      const poly = document.getElementById('poly-' + suffix);
-      const vertex = document.getElementById('vertex-' + suffix);
-      const object = document.getElementById('objects-' + suffix);
-      if (poly) poly.textContent = Math.round(polygons).toLocaleString();
-      if (vertex) vertex.textContent = Math.round(vertices).toLocaleString();
-      if (object) object.textContent = objects;
+
+    /* ========================================
+       UPDATE STATS
+    ======================================== */
+
+    function updateStats(
+      canvasId,
+      vertices,
+      polygons,
+      objects
+    ) {
+
+      const suffix =
+        canvasId.replace(
+          'viewer-',
+          ''
+        );
+
+
+      const poly =
+        document.getElementById(
+          'poly-' + suffix
+        );
+
+      const vertex =
+        document.getElementById(
+          'vertex-' + suffix
+        );
+
+      const object =
+        document.getElementById(
+          'objects-' + suffix
+        );
+
+
+      if (poly) {
+
+        poly.textContent =
+          Math.round(
+            polygons
+          ).toLocaleString();
+
+      }
+
+
+      if (vertex) {
+
+        vertex.textContent =
+          Math.round(
+            vertices
+          ).toLocaleString();
+
+      }
+
+
+      if (object) {
+
+        object.textContent =
+          objects;
+
+      }
+
     }
 
-    window.toggleWireframe = function (canvasId) {
-      const viewer = viewers[canvasId];
-      if (!viewer) return;
-      const model = viewer.getModel();
-      if (!model) return;
 
-      model.traverse(function (child) {
-        if (child.isMesh && child.material) {
-          if (Array.isArray(child.material)) {
-            child.material.forEach(function (material) {
-              material.wireframe = !material.wireframe;
-            });
-          } else {
-            child.material.wireframe = !child.material.wireframe;
+    /* ========================================
+       WIREFRAME
+    ======================================== */
+
+    window.toggleWireframe =
+      function (canvasId) {
+
+        const viewer =
+          viewers[canvasId];
+
+        if (!viewer) return;
+
+
+        const model =
+          viewer.getModel();
+
+        if (!model) return;
+
+
+        model.traverse(
+          function (child) {
+
+            if (
+              child.isMesh &&
+              child.material
+            ) {
+
+              if (
+                Array.isArray(
+                  child.material
+                )
+              ) {
+
+                child.material.forEach(
+                  function (material) {
+
+                    material.wireframe =
+                      !material.wireframe;
+
+                  }
+                );
+
+              }
+
+              else {
+
+                child.material.wireframe =
+                  !child.material.wireframe;
+
+              }
+
+            }
+
           }
+        );
+
+      };
+
+
+    /* ========================================
+       RESET MODEL
+    ======================================== */
+
+    window.resetModel =
+      function (canvasId) {
+
+        const viewer =
+          viewers[canvasId];
+
+        if (!viewer) return;
+
+
+        viewer.camera.position.set(
+          3,
+          2,
+          5
+        );
+
+
+        viewer.controls.target.set(
+          0,
+          0,
+          0
+        );
+
+
+        viewer.controls.update();
+
+      };
+
+
+    /* ========================================
+       UPDATE MODEL 003 COLORS
+    ======================================== */
+
+    window.updateFinalObjectColors =
+      function () {
+
+        const material1 =
+          document.getElementById(
+            'final-material-1'
+          );
+
+        const material2 =
+          document.getElementById(
+            'final-material-2'
+          );
+
+
+        if (material1) {
+
+          finalObjectColors.material1 =
+            material1.value;
+
         }
-      });
-    };
 
-    window.resetModel = function (canvasId) {
-      const viewer = viewers[canvasId];
-      if (!viewer) return;
-      viewer.camera.position.set(3, 2, 5);
-      viewer.controls.target.set(0, 0, 0);
-      viewer.controls.update();
-    };
 
-    window.updateFinalObjectColors = function () {
-      const material1 = document.getElementById('final-material-1');
-      const material2 = document.getElementById('final-material-2');
+        if (material2) {
 
-      if (material1) finalObjectColors.material1 = material1.value;
-      if (material2) finalObjectColors.material2 = material2.value;
+          finalObjectColors.material2 =
+            material2.value;
 
-      const viewer = viewers['viewer-003'];
-      if (!viewer) return;
+        }
 
-      const model = viewer.getModel();
-      if (!model) return;
 
-      model.traverse(function (child) {
-        if (!child.isMesh || !child.material) return;
-        const materials = Array.isArray(child.material) ? child.material : [child.material];
-        materials.forEach(function (material) {
-          if (material.name === 'Material.001') {
-            material.color.set(finalObjectColors.material1);
-            material.needsUpdate = true;
+        const viewer =
+          viewers['viewer-003'];
+
+        if (!viewer) return;
+
+
+        const model =
+          viewer.getModel();
+
+        if (!model) return;
+
+
+        model.traverse(
+          function (child) {
+
+            if (
+              !child.isMesh ||
+              !child.material
+            ) return;
+
+
+            const materials =
+              Array.isArray(
+                child.material
+              )
+                ? child.material
+                : [child.material];
+
+
+            materials.forEach(
+              function (material) {
+
+
+                /* --------------------------------
+                   MATERIAL 1
+                -------------------------------- */
+
+                if (
+                  material.name ===
+                  'Material.001'
+                ) {
+
+                  material.color.set(
+                    finalObjectColors.material1
+                  );
+
+                  material.needsUpdate =
+                    true;
+
+                }
+
+
+                /* --------------------------------
+                   MATERIAL 2
+                -------------------------------- */
+
+                if (
+                  material.name ===
+                  'Material.002'
+                ) {
+
+                  material.color.set(
+                    finalObjectColors.material2
+                  );
+
+                  material.needsUpdate =
+                    true;
+
+                }
+
+              }
+            );
+
           }
-          if (material.name === 'Material.002') {
-            material.color.set(finalObjectColors.material2);
-            material.needsUpdate = true;
+        );
+
+      };
+
+
+    /* ========================================
+       UPDATE MODEL 003 LIGHTS
+    ======================================== */
+
+    window.updateFinalObjectLights =
+      function () {
+
+        const viewer =
+          viewers['viewer-003'];
+
+
+        if (
+          !viewer ||
+          !viewer.lights
+        ) return;
+
+
+        const mappings = [
+
+          [
+            'ambient',
+            'final-light-ambient',
+            'final-light-ambient-color'
+          ],
+
+          [
+            'keyLight',
+            'final-light-key',
+            'final-light-key-color'
+          ],
+
+          [
+            'fillLight',
+            'final-light-fill',
+            'final-light-fill-color'
+          ],
+
+          [
+            'lightTopLeft',
+            'final-light-top-left',
+            'final-light-top-left-color'
+          ],
+
+          [
+            'lightTopRight',
+            'final-light-top-right',
+            'final-light-top-right-color'
+          ],
+
+          [
+            'lightBottomLeft',
+            'final-light-bottom-left',
+            'final-light-bottom-left-color'
+          ],
+
+          [
+            'lightBottomRight',
+            'final-light-bottom-right',
+            'final-light-bottom-right-color'
+          ]
+
+        ];
+
+
+        mappings.forEach(
+          function (
+            [
+              key,
+              intensityId,
+              colorId
+            ]
+          ) {
+
+            const light =
+              viewer.lights[key];
+
+
+            const intensityInput =
+              document.getElementById(
+                intensityId
+              );
+
+
+            const colorInput =
+              document.getElementById(
+                colorId
+              );
+
+
+            /* --------------------------------
+               INTENSITY
+            -------------------------------- */
+
+            if (
+              light &&
+              intensityInput
+            ) {
+
+              light.intensity =
+                parseFloat(
+                  intensityInput.value
+                );
+
+            }
+
+
+            /* --------------------------------
+               COLOR
+            -------------------------------- */
+
+            if (
+              light &&
+              colorInput
+            ) {
+
+              light.color.set(
+                colorInput.value
+              );
+
+            }
+
           }
-        });
-      });
-    };
+        );
 
-    window.updateFinalObjectLights = function () {
-      const viewer = viewers['viewer-003'];
-      if (!viewer || !viewer.lights) return;
+      };
 
-      const mappings = [
-        ['ambient', 'final-light-ambient', 'final-light-ambient-color'],
-        ['keyLight', 'final-light-key', 'final-light-key-color'],
-        ['fillLight', 'final-light-fill', 'final-light-fill-color'],
-        ['lightTopLeft', 'final-light-top-left', 'final-light-top-left-color'],
-        ['lightTopRight', 'final-light-top-right', 'final-light-top-right-color'],
-        ['lightBottomLeft', 'final-light-bottom-left', 'final-light-bottom-left-color'],
-        ['lightBottomRight', 'final-light-bottom-right', 'final-light-bottom-right-color']
-      ];
 
-      mappings.forEach(function ([key, intensityId, colorId]) {
-        const light = viewer.lights[key];
-        const intensityInput = document.getElementById(intensityId);
-        const colorInput = document.getElementById(colorId);
+    /* ========================================
+       CREATE ALL VIEWERS
+    ======================================== */
 
-        if (light && intensityInput) {
-          light.intensity = parseFloat(intensityInput.value);
-        }
+    createViewer(
+      'viewer-001',
+      'models/model001.fbx'
+    );
 
-        if (light && colorInput) {
-          light.color.set(colorInput.value);
-        }
-      });
-    };
 
-    createViewer('viewer-001', 'models/model001.fbx');
-    createViewer('viewer-002', 'models/model002.fbx');
-    createViewer('viewer-003', 'models/model003.glb');
+    createViewer(
+      'viewer-002',
+      'models/model002.fbx'
+    );
+
+
+    createViewer(
+      'viewer-003',
+      'models/model003.glb'
+    );
+
   </script>
 
+
+  <!-- ========================================
+       CUSTOM CURSOR
+  ======================================== -->
   <script>
-    const cursor = document.querySelector('.custom-cursor');
-    const cursorX = document.getElementById('cursor-x');
-    const cursorY = document.getElementById('cursor-y');
-    const cursorVector = document.getElementById('cursor-vector');
-    const cursorSpeed = document.getElementById('cursor-speed');
-    const cursorSector = document.getElementById('cursor-sector');
-    const cursorStatus = document.getElementById('cursor-status');
-    const measureX = document.querySelector('.cursor-measure-x');
-    const measureY = document.querySelector('.cursor-measure-y');
-    const cursorFlash = document.querySelector('.cursor-flash');
+
+    const cursor =
+      document.querySelector(
+        '.custom-cursor'
+      );
+
+
+    const cursorX =
+      document.getElementById(
+        'cursor-x'
+      );
+
+
+    const cursorY =
+      document.getElementById(
+        'cursor-y'
+      );
+
+
+    const cursorVector =
+      document.getElementById(
+        'cursor-vector'
+      );
+
+
+    const cursorSpeed =
+      document.getElementById(
+        'cursor-speed'
+      );
+
+
+    const cursorSector =
+      document.getElementById(
+        'cursor-sector'
+      );
+
+
+    const cursorStatus =
+      document.getElementById(
+        'cursor-status'
+      );
+
+
+    const measureX =
+      document.querySelector(
+        '.cursor-measure-x'
+      );
+
+
+    const measureY =
+      document.querySelector(
+        '.cursor-measure-y'
+      );
+
+
+    const cursorFlash =
+      document.querySelector(
+        '.cursor-flash'
+      );
+
 
     let previousX = 0;
     let previousY = 0;
-    let previousTime = performance.now();
+
+    let previousTime =
+      performance.now();
+
     let idleTimer;
 
-    document.addEventListener('mousemove', function (event) {
-      const x = event.clientX;
-      const y = event.clientY;
-      const currentTime = performance.now();
 
-      if (cursor) {
-        cursor.style.left = x + 'px';
-        cursor.style.top = y + 'px';
+    /* ========================================
+       MOUSE MOVE
+    ======================================== */
+
+    document.addEventListener(
+      'mousemove',
+      function (event) {
+
+        const x =
+          event.clientX;
+
+        const y =
+          event.clientY;
+
+
+        const currentTime =
+          performance.now();
+
+
+        if (cursor) {
+
+          cursor.style.left =
+            x + 'px';
+
+          cursor.style.top =
+            y + 'px';
+
+        }
+
+
+        if (measureX) {
+
+          measureX.style.left =
+            x + 'px';
+
+        }
+
+
+        if (measureY) {
+
+          measureY.style.top =
+            y + 'px';
+
+        }
+
+
+        if (cursorX) {
+
+          cursorX.textContent =
+            x
+              .toFixed(2)
+              .padStart(7, '0');
+
+        }
+
+
+        if (cursorY) {
+
+          cursorY.textContent =
+            y
+              .toFixed(2)
+              .padStart(7, '0');
+
+        }
+
+
+        const deltaX =
+          x - previousX;
+
+        const deltaY =
+          y - previousY;
+
+
+        const distance =
+          Math.sqrt(
+            deltaX * deltaX +
+            deltaY * deltaY
+          );
+
+
+        const deltaTime =
+          currentTime -
+          previousTime;
+
+
+        let speed = 0;
+
+
+        if (deltaTime > 0) {
+
+          speed =
+            (distance / deltaTime) *
+            10;
+
+        }
+
+
+        speed =
+          Math.min(
+            speed,
+            99.99
+          );
+
+
+        if (cursorSpeed) {
+
+          cursorSpeed.textContent =
+            speed
+              .toFixed(2)
+              .padStart(5, '0');
+
+        }
+
+
+        if (
+          distance > 0.5 &&
+          cursorVector
+        ) {
+
+          let angle =
+            (
+              Math.atan2(
+                deltaY,
+                deltaX
+              ) * 180
+            ) / Math.PI;
+
+
+          angle =
+            (angle + 360) % 360;
+
+
+          cursorVector.textContent =
+            Math.round(angle)
+              .toString()
+              .padStart(3, '0') +
+            '°';
+
+        }
+
+
+        const columns = 6;
+        const rows = 4;
+
+
+        const column =
+          Math.min(
+            columns - 1,
+            Math.floor(
+              (x / window.innerWidth) *
+              columns
+            )
+          );
+
+
+        const row =
+          Math.min(
+            rows - 1,
+            Math.floor(
+              (y / window.innerHeight) *
+              rows
+            )
+          );
+
+
+        const letters = [
+          'A',
+          'B',
+          'C',
+          'D',
+          'E',
+          'F'
+        ];
+
+
+        if (cursorSector) {
+
+          cursorSector.textContent =
+            letters[column] +
+            '-' +
+            String(
+              row + 1
+            ).padStart(
+              2,
+              '0'
+            );
+
+        }
+
+
+        if (cursorStatus) {
+
+          cursorStatus.textContent =
+            'TRACKING';
+
+        }
+
+
+        clearTimeout(
+          idleTimer
+        );
+
+
+        idleTimer =
+          setTimeout(
+            function () {
+
+              if (cursorStatus) {
+
+                cursorStatus.textContent =
+                  'IDLE';
+
+              }
+
+            },
+            400
+          );
+
+
+        previousX = x;
+        previousY = y;
+
+        previousTime =
+          currentTime;
+
       }
+    );
 
-      if (measureX) measureX.style.left = x + 'px';
-      if (measureY) measureY.style.top = y + 'px';
 
-      if (cursorX) cursorX.textContent = x.toFixed(2).padStart(7, '0');
-      if (cursorY) cursorY.textContent = y.toFixed(2).padStart(7, '0');
+    /* ========================================
+       CLICK FLASH
+    ======================================== */
 
-      const deltaX = x - previousX;
-      const deltaY = y - previousY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-      const deltaTime = currentTime - previousTime;
+    document.addEventListener(
+      'click',
+      function (event) {
 
-      let speed = 0;
-      if (deltaTime > 0) speed = (distance / deltaTime) * 10;
-      speed = Math.min(speed, 99.99);
+        if (!cursorFlash) return;
 
-      if (cursorSpeed) cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
 
-      if (distance > 0.5 && cursorVector) {
-        let angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
-        angle = (angle + 360) % 360;
-        cursorVector.textContent = Math.round(angle).toString().padStart(3, '0') + '°';
+        cursorFlash.style.left =
+          event.clientX + 'px';
+
+
+        cursorFlash.style.top =
+          event.clientY + 'px';
+
+
+        cursorFlash.classList.remove(
+          'active'
+        );
+
+
+        void cursorFlash.offsetWidth;
+
+
+        cursorFlash.classList.add(
+          'active'
+        );
+
       }
+    );
 
-      const columns = 6;
-      const rows = 4;
-      const column = Math.min(columns - 1, Math.floor((x / window.innerWidth) * columns));
-      const row = Math.min(rows - 1, Math.floor((y / window.innerHeight) * rows));
-      const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-      if (cursorSector) cursorSector.textContent = letters[column] + '-' + String(row + 1).padStart(2, '0');
-      if (cursorStatus) cursorStatus.textContent = 'TRACKING';
+    /* ========================================
+       MOUSE LEAVE
+    ======================================== */
 
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(function () {
-        if (cursorStatus) cursorStatus.textContent = 'IDLE';
-      }, 400);
+    document.addEventListener(
+      'mouseleave',
+      function () {
 
-      previousX = x;
-      previousY = y;
-      previousTime = currentTime;
-    });
+        if (cursor) {
 
-    document.addEventListener('click', function (event) {
-      if (!cursorFlash) return;
-      cursorFlash.style.left = event.clientX + 'px';
-      cursorFlash.style.top = event.clientY + 'px';
-      cursorFlash.classList.remove('active');
-      void cursorFlash.offsetWidth;
-      cursorFlash.classList.add('active');
-    });
+          cursor.style.opacity =
+            '0';
 
-    document.addEventListener('mouseleave', function () {
-      if (cursor) cursor.style.opacity = '0';
-      if (cursorFlash) cursorFlash.style.opacity = '0';
-      if (cursorStatus) cursorStatus.textContent = 'LOST';
-    });
+        }
 
-    document.addEventListener('mouseenter', function () {
-      if (cursor) cursor.style.opacity = '1';
-      if (cursorFlash) cursorFlash.style.opacity = '0';
-      if (cursorStatus) cursorStatus.textContent = 'TRACKING';
-    });
+
+        if (cursorFlash) {
+
+          cursorFlash.style.opacity =
+            '0';
+
+        }
+
+
+        if (cursorStatus) {
+
+          cursorStatus.textContent =
+            'LOST';
+
+        }
+
+      }
+    );
+
+
+    /* ========================================
+       MOUSE ENTER
+    ======================================== */
+
+    document.addEventListener(
+      'mouseenter',
+      function () {
+
+        if (cursor) {
+
+          cursor.style.opacity =
+            '1';
+
+        }
+
+
+        if (cursorFlash) {
+
+          cursorFlash.style.opacity =
+            '0';
+
+        }
+
+
+        if (cursorStatus) {
+
+          cursorStatus.textContent =
+            'TRACKING';
+
+        }
+
+      }
+    );
+
   </script>
+
 </body>
 </html>
