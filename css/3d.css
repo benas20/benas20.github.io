@@ -1400,3 +1400,10 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Ocultar panel de cursor en tablet y móvil */
+@media (max-width: 900px) {
+  .cursor-info {
+    display: none;
+  }
+}
