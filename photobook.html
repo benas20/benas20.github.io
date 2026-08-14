@@ -8,7 +8,15 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;caret-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfae;font-family:"Courier New",monospace}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#1f1d17;
+    color:#d8cfae;
+    font-family:"Courier New",monospace
+}
 
 #background{
     position:fixed;
@@ -51,6 +59,90 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     backdrop-filter:blur(5px);
 }
 
+
+/* =========================
+   AXIS GIZMO
+========================= */
+
+.axis-gizmo{
+    position:absolute;
+    top:58px;
+    right:30px;
+    width:90px;
+    height:90px;
+    color:#650015;
+    opacity:.8;
+}
+
+.axis-center{
+    position:absolute;
+    left:39px;
+    top:39px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#650015;
+}
+
+.axis-line{
+    position:absolute;
+    left:42px;
+    top:42px;
+    height:1px;
+    background:#650015;
+    transform-origin:left center;
+}
+
+.axis-line span{
+    position:absolute;
+    font-size:8px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.axis-x{
+    width:36px;
+}
+
+.axis-x span{
+    right:-11px;
+    top:-5px;
+}
+
+.axis-y{
+    width:34px;
+}
+
+.axis-y span{
+    right:-9px;
+    top:-5px;
+}
+
+.axis-z{
+    width:30px;
+}
+
+.axis-z span{
+    right:-10px;
+    top:-5px;
+}
+
+.axis-caption{
+    position:absolute;
+    left:0;
+    bottom:-4px;
+    width:100%;
+    text-align:center;
+    font-size:6px;
+    letter-spacing:1.5px;
+    opacity:.65;
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
 .model-label{
     position:absolute;
     left:28px;
@@ -66,6 +158,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     font-size:9px;
     letter-spacing:2px;
 }
+
+
+/* =========================
+   BUY BUTTON
+========================= */
 
 .buy-button{
     position:absolute;
@@ -113,6 +210,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     transform:translateX(4px);
 }
 
+
+/* =========================
+   BACK
+========================= */
+
 .back{
     position:absolute;
     left:28px;
@@ -123,6 +225,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     letter-spacing:2px;
     pointer-events:auto;
 }
+
+
+/* =========================
+   GRAIN
+========================= */
 
 .grain{
     position:fixed;
@@ -144,28 +251,67 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 
 <div id="scene"></div>
 
+
 <div class="overlay">
+
     <div class="system-header">
         <span>SYSTEM PROYECT 02</span>
         <span>VISUAL ARCHIVE</span>
         <span>● ONLINE</span>
     </div>
 
-    <a class="back" href="index.html">← BACK TO INDEX</a>
+
+    <a class="back" href="index.html">
+        ← BACK TO INDEX
+    </a>
+
+
+    <!-- AXIS GIZMO -->
+
+    <div class="axis-gizmo">
+
+        <div class="axis-center"></div>
+
+        <div class="axis-line axis-x">
+            <span>X</span>
+        </div>
+
+        <div class="axis-line axis-y">
+            <span>Y</span>
+        </div>
+
+        <div class="axis-line axis-z">
+            <span>Z</span>
+        </div>
+
+        <div class="axis-caption">
+            360° OBJECT
+        </div>
+
+    </div>
+
 
     <div class="model-label">
         FILE 001 / BOOK 3D MODEL
     </div>
 
+
     <div class="rotate-label">
         DRAG TO ROTATE · SCROLL TO ZOOM
     </div>
-    
-    <a class="buy-button" href="TU-LINK-DE-COMPRA" target="_blank">BUY PHOTOBOOK</a>
-    
+
+
+    <a class="buy-button"
+       href="TU-LINK-DE-COMPRA"
+       target="_blank">
+        BUY PHOTOBOOK
+    </a>
+
 </div>
 
+
 <div class="grain"></div>
+
 
 <script type="importmap">
 {
@@ -176,13 +322,30 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 }
 </script>
 
+
 <script type="module">
+
 import * as THREE from "three";
 import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
 
+
+/* =========================
+   ELEMENTOS
+========================= */
+
 const container=document.getElementById("scene");
 
+const axisX=document.querySelector(".axis-x");
+const axisY=document.querySelector(".axis-y");
+const axisZ=document.querySelector(".axis-z");
+
+
+/* =========================
+   THREE.JS
+========================= */
+
 const scene=new THREE.Scene();
+
 
 const camera=new THREE.PerspectiveCamera(
     45,
@@ -193,115 +356,360 @@ const camera=new THREE.PerspectiveCamera(
 
 camera.position.set(0,1.2,11);
 
+
 const renderer=new THREE.WebGLRenderer({
     antialias:true,
     alpha:true
 });
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
+);
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
 renderer.outputColorSpace=THREE.SRGBColorSpace;
+
 container.appendChild(renderer.domElement);
 
 
-/* ILUMINACIÓN */
+/* =========================
+   ILUMINACIÓN
+========================= */
 
-scene.add(new THREE.AmbientLight(0xffffff,2));
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        2
+    )
+);
 
-const keyLight=new THREE.DirectionalLight(0xffffff,3);
-keyLight.position.set(4,6,5);
+
+const keyLight=new THREE.DirectionalLight(
+    0xffffff,
+    3
+);
+
+keyLight.position.set(
+    4,
+    6,
+    5
+);
+
 scene.add(keyLight);
 
-const fillLight=new THREE.DirectionalLight(0x9fa99b,1.5);
-fillLight.position.set(-4,2,-3);
+
+const fillLight=new THREE.DirectionalLight(
+    0x9fa99b,
+    1.5
+);
+
+fillLight.position.set(
+    -4,
+    2,
+    -3
+);
+
 scene.add(fillLight);
 
 
-/* MODELO */
+/* =========================
+   MODELO
+========================= */
 
 const loader=new FBXLoader();
 
+
 loader.load(
+
     "models/book.fbx",
+
     object=>{
 
         object.traverse(child=>{
+
             if(child.isMesh){
+
                 child.castShadow=true;
                 child.receiveShadow=true;
+
             }
+
         });
 
-        const box=new THREE.Box3().setFromObject(object);
-        const center=box.getCenter(new THREE.Vector3());
-        const size=box.getSize(new THREE.Vector3());
+
+        const box=new THREE.Box3()
+            .setFromObject(object);
+
+
+        const center=box.getCenter(
+            new THREE.Vector3()
+        );
+
+
+        const size=box.getSize(
+            new THREE.Vector3()
+        );
+
 
         object.position.sub(center);
-        object.position.y+=1.5;
 
-        const maxSize=Math.max(size.x,size.y,size.z);
+        object.position.y+=0.5;
+
+
+        const maxSize=Math.max(
+            size.x,
+            size.y,
+            size.z
+        );
+
+
         const scale=3/maxSize;
 
         object.scale.setScalar(scale);
 
+
         scene.add(object);
 
+
         window.model=object;
+
     },
+
     undefined,
+
     error=>{
-        console.error("Error cargando FBX:",error);
+
+        console.error(
+            "Error cargando FBX:",
+            error
+        );
+
     }
+
 );
 
-/* ROTACIÓN */
-    
+
+/* =========================
+   ROTACIÓN
+========================= */
+
 let dragging=false;
+
 let previousX=0;
 let previousY=0;
 
-container.addEventListener("pointerdown",e=>{
-    dragging=true;
-    previousX=e.clientX;
-    previousY=e.clientY;
-});
 
-window.addEventListener("pointerup",()=>{
-    dragging=false;
-});
+container.addEventListener(
+    "pointerdown",
+    e=>{
 
-window.addEventListener("pointermove",e=>{
-    if(!dragging||!window.model)return;
+        dragging=true;
 
-    const dx=e.clientX-previousX;
-    const dy=e.clientY-previousY;
+        previousX=e.clientX;
+        previousY=e.clientY;
 
-    window.model.rotation.y+=dx*.01;
-    window.model.rotation.x+=dy*.01;
+    }
+);
 
-    previousX=e.clientX;
-    previousY=e.clientY;
-});
 
-/* ZOOM */
-window.addEventListener("wheel",e=>{
-    camera.position.z+=e.deltaY*.003;
-    camera.position.z=Math.max(2.5,Math.min(10,camera.position.z));
-});
+window.addEventListener(
+    "pointerup",
+    ()=>{
 
-/* RESIZE */
-window.addEventListener("resize",()=>{
-    camera.aspect=window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth,window.innerHeight);
-});
+        dragging=false;
 
-/* RENDER */
-function animate(){
-    requestAnimationFrame(animate);
-    renderer.render(scene,camera);
+    }
+);
+
+
+window.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(
+            !dragging ||
+            !window.model
+        ) return;
+
+
+        const dx=
+            e.clientX-previousX;
+
+        const dy=
+            e.clientY-previousY;
+
+
+        window.model.rotation.y+=
+            dx*.01;
+
+        window.model.rotation.x+=
+            dy*.01;
+
+
+        previousX=e.clientX;
+        previousY=e.clientY;
+
+    }
+);
+
+
+/* =========================
+   ZOOM
+========================= */
+
+window.addEventListener(
+    "wheel",
+    e=>{
+
+        camera.position.z+=
+            e.deltaY*.003;
+
+
+        camera.position.z=Math.max(
+            2.5,
+            Math.min(
+                10,
+                camera.position.z
+            )
+        );
+
+    }
+);
+
+
+/* =========================
+   AXIS GIZMO
+========================= */
+
+function updateAxisGizmo(){
+
+    if(!window.model) return;
+
+
+    /*
+        Creamos los ejes locales del modelo:
+
+        X = derecha
+        Y = arriba
+        Z = profundidad
+    */
+
+    const axes={
+
+        x:new THREE.Vector3(1,0,0),
+
+        y:new THREE.Vector3(0,1,0),
+
+        z:new THREE.Vector3(0,0,1)
+
+    };
+
+
+    /*
+        Aplicamos exactamente la misma
+        rotación que tiene el libro.
+    */
+
+    const quaternion=
+        window.model.quaternion;
+
+
+    axes.x.applyQuaternion(
+        quaternion
+    );
+
+    axes.y.applyQuaternion(
+        quaternion
+    );
+
+    axes.z.applyQuaternion(
+        quaternion
+    );
+
+
+    /*
+        Convertimos cada eje 3D
+        en una dirección 2D para
+        dibujarlo en pantalla.
+    */
+
+    function getAngle(vector){
+
+        return Math.atan2(
+            vector.y,
+            vector.x
+        )*180/Math.PI;
+
+    }
+
+
+    axisX.style.transform=
+        `rotate(${getAngle(axes.x)}deg)`;
+
+
+    axisY.style.transform=
+        `rotate(${getAngle(axes.y)}deg)`;
+
+
+    axisZ.style.transform=
+        `rotate(${getAngle(axes.z)}deg)`;
+
 }
+
+
+/* =========================
+   RESIZE
+========================= */
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        camera.aspect=
+            window.innerWidth/
+            window.innerHeight;
+
+
+        camera.updateProjectionMatrix();
+
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+    }
+);
+
+
+/* =========================
+   RENDER
+========================= */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    updateAxisGizmo();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
 animate();
+
 </script>
 
 </body>
