@@ -206,6 +206,126 @@ html,body{
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
     mix-blend-mode:screen;
 }
+
+/* Responsive para tabletas */
+@media (max-width: 768px){
+    .system-header{
+        height:32px;
+        padding:0 16px;
+        font-size:9px;
+        letter-spacing:1.5px;
+    }
+
+    .back{
+        left:16px;
+        top:48px;
+        font-size:7px;
+    }
+
+    .axis-gizmo{
+        top:48px;
+        right:16px;
+        transform:scale(.85);
+        transform-origin:top right;
+    }
+
+    .model-label{
+        left:16px;
+        bottom:22px;
+        font-size:8px;
+        letter-spacing:1.5px;
+    }
+
+    .rotate-label{
+        right:16px;
+        bottom:22px;
+        font-size:8px;
+        letter-spacing:1.5px;
+    }
+
+    .buy-button{
+        top:86%;
+        padding:11px 15px;
+        font-size:8px;
+        letter-spacing:1.5px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px){
+    .system-header{
+        padding:0 10px;
+        font-size:7px;
+        letter-spacing:1px;
+    }
+
+    .system-header span:first-child{
+        max-width:48%;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+
+    .system-header span:nth-child(2){
+        font-size:7px;
+    }
+
+    .back{
+        left:12px;
+        top:45px;
+        font-size:6px;
+        letter-spacing:1.5px;
+    }
+
+    .axis-gizmo{
+        top:45px;
+        right:10px;
+        transform:scale(.7);
+    }
+
+    .model-label,
+    .rotate-label{
+        bottom:72px;
+        font-size:6px;
+        letter-spacing:1px;
+    }
+
+    .model-label{
+        left:10px;
+        max-width:42%;
+    }
+
+    .rotate-label{
+        right:10px;
+        max-width:42%;
+        text-align:right;
+    }
+
+    .buy-button{
+        top:91%;
+        padding:10px 13px;
+        gap:8px;
+        font-size:7px;
+        letter-spacing:1px;
+        white-space:nowrap;
+    }
+}
+
+/* Ajustes para móviles en orientación horizontal */
+@media (max-width: 768px) and (orientation: landscape){
+    .buy-button{
+        top:82%;
+    }
+
+    .model-label,
+    .rotate-label{
+        bottom:16px;
+    }
+
+    .axis-gizmo{
+        top:42px;
+    }
+}
 </style>
 </head>
 
