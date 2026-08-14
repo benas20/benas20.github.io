@@ -168,84 +168,92 @@ body::-webkit-scrollbar{
     margin-top:14px;
     opacity:.7;
 }
-    /* =========================
-       RESPONSIVE
-    ========================= */
-    
-    @media (max-width: 768px){
-    
-        .info-header{
-            width:calc(100% - 28px);
-            margin:18px auto 0;
-            padding:14px 12px;
-            font-size:8px;
-            line-height:1.7;
-            letter-spacing:1px;
-        }
-    
-        .info-header .main{
-            font-size:10px;
-        }
-    
-        .info-header .instruction{
-            margin-top:10px;
-        }
-    
-        .card-link{
-            width:min(var(--w), 28vw);
-        }
-    
-        .photo-block{
-            height:780px;
-            margin-bottom:700px;
-        }
-    
-        .title-wall span{
-            font-size:clamp(13px, 3vh, 24px);
-            letter-spacing:0;
-        }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px){
+
+    .info-header{
+        width:calc(100% - 28px);
+        margin:18px auto 0;
+        padding:14px 12px;
+        font-size:8px;
+        line-height:1.7;
+        letter-spacing:1px;
     }
-    
-    @media (max-width: 480px){
-    
-        .info-header{
-            width:calc(100% - 20px);
-            margin-top:12px;
-            padding:12px 8px;
-            font-size:7px;
-            line-height:1.6;
-            letter-spacing:.5px;
-        }
-    
-        .info-header .main{
-            font-size:9px;
-            margin-bottom:5px;
-        }
-    
-        .info-header .instruction{
-            margin-top:8px;
-        }
-    
-        .card-link{
-            width:min(var(--w), 38vw);
-        }
-    
-        .photo-block{
-            height:700px;
-            margin-bottom:620px;
-        }
-    
-        .card-link:hover{
-            transform:
-                translate(-50%,-50%)
-                scale(1.04)
-                rotate(var(--r));
-        }
-    
-        .title-wall span{
-            font-size:clamp(11px, 2.8vh, 20px);
-        }
+
+    .info-header .main{
+        font-size:10px;
     }
+
+    .info-header .instruction{
+        margin-top:10px;
+    }
+
+    .card-link{
+        width:min(var(--w), 28vw);
+    }
+
+    .photo-block{
+        height:780px;
+        margin-bottom:700px;
+    }
+
+    .title-wall span{
+        font-size:clamp(13px, 3vh, 24px);
+        letter-spacing:0;
+    }
+}
+
+@media (max-width: 480px){
+
+    .info-header{
+        width:calc(100% - 20px);
+        margin-top:12px;
+        padding:12px 8px;
+        font-size:7px;
+        line-height:1.6;
+        letter-spacing:.5px;
+    }
+
+    .info-header .main{
+        font-size:9px;
+        margin-bottom:5px;
+    }
+
+    .info-header .instruction{
+        margin-top:8px;
+    }
+
+    .photo-block{
+        display:grid;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:14px 8px;
+        height:auto;
+        margin:24px 8px 40px;
+        width:calc(100% - 16px);
+        overflow:visible;
+    }
+
+    .card-link{
+        position:relative;
+        left:auto !important;
+        top:auto !important;
+        width:100% !important;
+        transform:none !important;
+    }
+
+    .card-link:hover{
+        transform:scale(1.04) !important;
+    }
+
+    .title-wall span{
+        font-size:clamp(11px, 2.8vh, 20px);
+    }
+}
+
 </style>
 </head>
 
@@ -591,19 +599,21 @@ for(let i=0;i<totalTitles;i++){
 
 </script>
 
-    <script>
-    document.addEventListener("wheel",e=>{
-        if(e.ctrlKey){
-            e.preventDefault();
-        }
-    },{passive:false});
-    
-    document.addEventListener("keydown",e=>{
-        if(e.ctrlKey && ["+","-","=","0"].includes(e.key)){
-            e.preventDefault();
-        }
-    });
-    </script>
-    
+<script>
+
+document.addEventListener("wheel",e=>{
+    if(e.ctrlKey){
+        e.preventDefault();
+    }
+},{passive:false});
+
+document.addEventListener("keydown",e=>{
+    if(e.ctrlKey && ["+","-","=","0"].includes(e.key)){
+        e.preventDefault();
+    }
+});
+
+</script>
+
 </body>
 </html>
