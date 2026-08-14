@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dontfollowmecauseimlosttoo</title>
+  <link rel="stylesheet" href="data:,">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #e8dfce;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #650015;
+    }
+
+    .mitxifu {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .backgroundimg {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
+    }
+
+    .InteractiveTest {
+      position: fixed;
+      top: clamp(64px, 9vh, 100px);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .card {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: clamp(50px, 24vw, 260px);
+      height: auto;
+      transform: translate(-50%, -50%) rotate(var(--r));
+      transition: transform 0.2s ease, z-index 0s;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .card:hover {
+      z-index: 9999;
+      transform: translate(-50%, -50%) scale(1.08) rotate(var(--r));
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="InteractiveTest">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book1.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book2.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book3.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book4.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book5.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book6.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book7.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book8.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book9.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book10.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book11.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book12.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book13.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book14.jpg" class="card">
+    <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book15.jpg" class="card">
+  </div>
+
+  <script>
+    const container = document.querySelector(".InteractiveTest");
+    const cards = document.querySelectorAll(".card");
+
+    const positions = [
+      [9, 14], [28, 18], [49, 13], [69, 17], [91, 12],
+      [12, 48], [31, 43], [52, 51], [72, 45], [89, 52],
+      [8, 83], [29, 78], [48, 86], [70, 80], [92, 84]
+    ];
+
+    const rotations = [
+      -7, 4, -3, 6, -5,
+      5, -6, 3, -4, 7,
+      -4, 6, -5, 3, -7
+    ];
+
+    function setCardPositions() {
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+
+      cards.forEach((card, index) => {
+        const [xPercent, yPercent] = positions[index];
+        const angle = Math.abs(rotations[index]) * Math.PI / 180;
+        const width = card.offsetWidth;
+        const height = card.offsetHeight;
+
+        const rotatedWidth =
+          Math.abs(width * Math.cos(angle)) +
+          Math.abs(height * Math.sin(angle));
+
+        const rotatedHeight =
+          Math.abs(width * Math.sin(angle)) +
+          Math.abs(height * Math.cos(angle));
+
+        const minX = rotatedWidth / 2;
+        const maxX = containerWidth - rotatedWidth / 2;
+        const minY = rotatedHeight / 2;
+        const maxY = containerHeight - rotatedHeight / 2;
+
+        const desiredX = containerWidth * xPercent / 100;
+        const desiredY = containerHeight * yPercent / 100;
+
+        const x = Math.max(minX, Math.min(desiredX, maxX));
+        const y = Math.max(minY, Math.min(desiredY, maxY));
+
+        card.style.setProperty("--x", `${x}px`);
+        card.style.setProperty("--y", `${y}px`);
+        card.style.setProperty("--r", `${rotations[index]}deg`);
+        card.style.zIndex = index + 1;
+      });
+    }
+
+    cards.forEach(card => {
+      card.addEventListener("load", setCardPositions);
+    });
+
+    window.addEventListener("resize", setCardPositions);
+    setCardPositions();
+
+    document.addEventListener("mousemove", event => {
+      const x = event.clientX / window.innerWidth - 0.5;
+      const y = event.clientY / window.innerHeight - 0.5;
+
+      cards.forEach((card, index) => {
+        if (card.matches(":hover")) {
+          return;
+        }
+
+        const strength = (index + 1) * 1.2;
+
+        card.style.transform = `
+          translate(
+            calc(-50% + ${x * strength}px),
+            calc(-50% + ${y * strength}px)
+          )
+          rotate(${card.style.getPropertyValue("--r")})
+        `;
+      });
+    });
+
+    cards.forEach(card => {
+      card.addEventListener("mouseenter", () => {
+        card.style.zIndex = 9999;
+        card.style.transform = `
+          translate(-50%, -50%)
+          scale(1.08)
+          rotate(${card.style.getPropertyValue("--r")})
+        `;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.zIndex = Array.from(cards).indexOf(card) + 1;
+      });
+    });
+  </script>
+
+</body>
+
+</html>
