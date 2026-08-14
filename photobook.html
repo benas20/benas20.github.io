@@ -67,6 +67,52 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     letter-spacing:2px;
 }
 
+.buy-button{
+    position:absolute;
+    right:28px;
+    bottom:58px;
+
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+
+    padding:12px 18px;
+
+    color:#650015;
+    background:#ffffffd9;
+    border:1px solid #650015;
+
+    text-decoration:none;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:2px;
+
+    pointer-events:auto;
+    backdrop-filter:blur(5px);
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.buy-button::after{
+    content:"→";
+    transition:transform .25s ease;
+}
+
+.buy-button:hover{
+    color:#fff;
+    background:#650015;
+    transform:translateY(-2px);
+    box-shadow:4px 5px 0 #65001533;
+}
+
+.buy-button:hover::after{
+    transform:translateX(4px);
+}
+
 .back{
     position:absolute;
     left:28px;
@@ -114,6 +160,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     <div class="rotate-label">
         DRAG TO ROTATE · SCROLL TO ZOOM
     </div>
+    
+    <a class="buy-button" href="TU-LINK-DE-COMPRA" target="_blank">BUY PHOTOBOOK</a>
+    
 </div>
 
 <div class="grain"></div>
@@ -142,7 +191,7 @@ const camera=new THREE.PerspectiveCamera(
     1000
 );
 
-camera.position.set(0,1.2,12);
+camera.position.set(0,1.2,11);
 
 const renderer=new THREE.WebGLRenderer({
     antialias:true,
@@ -188,7 +237,7 @@ loader.load(
         const size=box.getSize(new THREE.Vector3());
 
         object.position.sub(center);
-        object.position.y+=0.35;
+        object.position.y+=0.5;
 
         const maxSize=Math.max(size.x,size.y,size.z);
         const scale=3/maxSize;
@@ -205,9 +254,8 @@ loader.load(
     }
 );
 
-
 /* ROTACIÓN */
-
+    
 let dragging=false;
 let previousX=0;
 let previousY=0;
@@ -235,31 +283,24 @@ window.addEventListener("pointermove",e=>{
     previousY=e.clientY;
 });
 
-
 /* ZOOM */
-
 window.addEventListener("wheel",e=>{
     camera.position.z+=e.deltaY*.003;
     camera.position.z=Math.max(2.5,Math.min(10,camera.position.z));
 });
 
-
 /* RESIZE */
-
 window.addEventListener("resize",()=>{
     camera.aspect=window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth,window.innerHeight);
 });
 
-
 /* RENDER */
-
 function animate(){
     requestAnimationFrame(animate);
     renderer.render(scene,camera);
 }
-
 animate();
 </script>
 
