@@ -7,7 +7,6 @@
 <link rel="icon" href="data:,">
 
 <style>
-
 /* RESET Y ESTRUCTURA GENERAL */
 
 *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;caret-color:transparent}
@@ -17,9 +16,7 @@ body.no-scroll{overflow:hidden}
 button,input{font:inherit}
 button{cursor:pointer}
 .page{position:relative;min-height:100vh;overflow:hidden}
-
 .grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");mix-blend-mode:multiply}
-
 
 /* CABECERA Y MENÚ */
 
@@ -27,7 +24,6 @@ button{cursor:pointer}
 .system-online{display:flex;align-items:center;gap:7px}
 .system-online i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#4f5d43;box-shadow:0 0 6px #4f5d4399}
 .archive-location{position:fixed;top:52px;left:28px;z-index:900;font-size:7px;line-height:1.9;letter-spacing:2px;color:#514d40;pointer-events:none}
-
 .menu-container{position:fixed;top:49px;right:28px;z-index:1200}
 .menu-toggle{display:none}
 .menu-icon{display:flex;width:28px;height:28px;flex-direction:column;justify-content:center;gap:5px;cursor:pointer}
@@ -38,10 +34,9 @@ button{cursor:pointer}
 .menu-number{font-size:6px;color:#77705e;letter-spacing:1px}
 .menu-list a{font-size:7px;letter-spacing:1.5px;color:#39362d;text-decoration:none}
 .menu-toggle:checked~.menu-list{opacity:1;visibility:visible;transform:translateY(0)}
-.menu-toggle:checked~.menu-icon span:first-child{transform:translateY(6px) rotate(45deg)}
-.menu-toggle:checked~.menu-icon span:nth-child(2){opacity:0}
-.menu-toggle:checked~.menu-icon span:last-child{transform:translateY(-6px) rotate(-45deg)}
-
+.menu-toggle:checked~.menu-list span:first-child{transform:translateY(6px) rotate(45deg)}
+.menu-toggle:checked~.menu-list span:nth-child(2){opacity:0}
+.menu-toggle:checked~.menu-list span:last-child{transform:translateY(-6px) rotate(-45deg)}
 
 /* HERO Y PAISAJE */
 
@@ -50,12 +45,10 @@ button{cursor:pointer}
 .sun{position:absolute;width:260px;height:260px;border-radius:50%;right:12%;top:17%;background:#c9b77f;opacity:.7;filter:blur(1px)}
 .moon{position:absolute;width:65px;height:65px;border-radius:50%;left:14%;top:22%;background:#e3dcc4;opacity:.75}
 .moon:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#c8bea2;left:15px;top:18px;opacity:.45;box-shadow:25px 10px 0 -3px #c8bea2,18px 32px 0 -5px #c8bea2}
-
 .far-mountain{position:absolute;left:-10%;bottom:20%;width:120%;height:42%;background:#7c7964;clip-path:polygon(0 75%,7% 58%,14% 70%,21% 38%,28% 63%,36% 30%,43% 55%,50% 18%,58% 55%,66% 35%,74% 61%,83% 25%,91% 54%,100% 35%,100% 100%,0 100%);opacity:.65}
 .far-mountain.back{bottom:17%;height:37%;background:#676957;opacity:.55;transform:translateX(4%)}
 .ground{position:absolute;left:-5%;bottom:-10%;width:110%;height:43%;background:#9c835d;clip-path:polygon(0 22%,8% 18%,16% 25%,24% 17%,33% 23%,41% 14%,50% 20%,59% 13%,67% 22%,75% 15%,84% 23%,92% 16%,100% 21%,100% 100%,0 100%);transform:rotate(-1deg)}
 .ground-shadow{position:absolute;left:-5%;bottom:8%;width:110%;height:15%;background:#695c46;opacity:.3;filter:blur(12px);transform:rotate(2deg)}
-
 
 /* TÍTULO Y ELEMENTOS DEL HERO */
 
@@ -64,7 +57,6 @@ button{cursor:pointer}
 .hero-title h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(70px,12vw,170px);line-height:.72;letter-spacing:-10px;color:#29271f}
 .hero-title h1 span{display:block;margin-left:8vw;color:#eee4c7;text-shadow:2px 2px 0 #615a4b}
 .hero-description{margin-top:45px;width:330px;font-size:8px;line-height:1.9;letter-spacing:1.4px;color:#4f4a3d}
-
 .axis{position:absolute;right:9vw;top:20%;z-index:20;width:90px;height:90px;color:#39362d;font-size:8px}
 .axis:before,.axis:after{content:"";position:absolute;background:#39362d;opacity:.55}
 .axis:before{width:70px;height:1px;left:10px;top:45px}
@@ -76,29 +68,43 @@ button{cursor:pointer}
 .hero-label{left:8vw}
 .scroll-indicator{right:8vw;writing-mode:vertical-rl}
 
-
 /* CRIATURAS, PLANTAS Y PÁJAROS */
 
-.creature{position:absolute;z-index:25;transform-origin:center bottom;animation:float 5s ease-in-out infinite}
-.creature-body{position:relative;background:#424638}
-
-.creature.one{left:50%;margin-left:-35px;bottom:22%;width:90px;height:145px;animation-delay:-2s}
-.creature.one .creature-body{width:70px;height:105px;border-radius:45% 55% 35% 35%;transform:rotate(-4deg)}
-.creature.one .leg{position:absolute;width:10px;height:55px;background:#424638;bottom:-40px;border-radius:10px}
-.creature.one .leg.a{left:13px;transform:rotate(8deg)}
-.creature.one .leg.b{right:10px;transform:rotate(-8deg)}
-.creature.one .eye{position:absolute;width:10px;height:16px;background:#d8cfae;border-radius:50%;top:27px;left:20px;box-shadow:22px 4px 0 #d8cfae}
-.creature.one .horn{position:absolute;width:18px;height:40px;border-radius:100% 0 100% 0;background:#424638;top:-30px;left:12px;transform:rotate(-20deg)}
-.creature.one .horn.b{left:49px;transform:rotate(20deg)}
-
-.creature.two{right:24%;bottom:24%;width:110px;height:130px;animation-delay:-4s}
-.creature.two .creature-body{width:95px;height:75px;border-radius:55% 45% 60% 40%;background:#574e3d;transform:rotate(8deg)}
-.creature.two .leg{position:absolute;width:8px;height:52px;background:#574e3d;bottom:-40px}
-.creature.two .leg.a{left:20px;transform:rotate(15deg)}
-.creature.two .leg.b{left:55px;transform:rotate(-12deg)}
-.creature.two .eye{position:absolute;width:13px;height:13px;background:#d7c991;border-radius:50%;left:25px;top:22px;box-shadow:31px -3px 0 #d7c991}
-.creature.two .antenna{position:absolute;width:2px;height:35px;background:#574e3d;left:47px;top:-29px}
-.creature.two .antenna:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#d7c991;left:-3px;top:-4px}
+.creature{position:absolute;z-index:25;width:100px;height:170px;transform-origin:center bottom;animation:float 5s ease-in-out infinite}
+.creature-head{position:absolute;z-index:3;width:58px;height:58px;left:21px;top:0;border-radius:50%;background:#a19478}
+.creature-torso{position:absolute;z-index:2;width:52px;height:78px;left:24px;top:49px;background:#384f52;border-radius:48% 52% 30% 30%}
+.creature-arm{position:absolute;z-index:1;width:11px;height:70px;top:57px;background:#384f52;border-radius:10px;transform-origin:top center}
+.creature-arm.arm-a{left:18px;transform:rotate(10deg)}
+.creature-arm.arm-b{left:71px;transform:rotate(-10deg)}
+.creature-leg{position:absolute;z-index:1;width:13px;height:62px;top:118px;background:#384f52;border-radius:10px;transform-origin:top center}
+.creature-leg.leg-a{left:31px;transform:rotate(4deg)}
+.creature-leg.leg-b{left:57px;transform:rotate(-4deg)}
+.creature-eye{position:absolute;z-index:5;width:8px;height:11px;top:23px;background:#d9d6cc;border-radius:50%}
+.creature-eye.eye-a{left:34px}
+.creature-eye.eye-b{left:56px}
+.creature.one{left:50%;margin-left:-50px;bottom:12%;width:100px;height:180px;animation-delay:-2s}
+.creature.one .creature-head{width:62px;height:62px;left:19px;top:0}
+.creature.one .creature-torso{width:65px;height:80px;left:19px;top:52px;border-radius:45% 55% 32% 32%}
+.creature.one .creature-arm.arm-a{left:12px;transform:rotate(12deg)}
+.creature.one .creature-arm.arm-b{left:74px;transform:rotate(-22deg)}
+.creature.one .creature-leg.leg-a{left:30px;transform:rotate(5deg)}
+.creature.one .creature-leg.leg-b{left:58px;transform:rotate(-5deg)}
+.creature.one .hat{position:absolute;width:48px;height:28px;left:23px;top:-19px;background:#702f2f;border-radius:45% 45% 8% 8%;transform:rotate(-3deg);z-index:3;opacity:95%}
+.creature.one .hat:after{content:"";position:absolute;width:62px;height:8px;left:-7px;bottom:-4px;background:#2b2b2b;border-radius:20%}
+.creature.two{right:24%;bottom:14%;width:100px;height:175px;animation-delay:-4s}
+.creature.two .creature-head{width:54px;height:54px;left:23px;top:2px;background:#a19478}
+.creature.two .creature-torso{width:49px;height:76px;left:25px;top:48px;background:#384f52;border-radius:50% 50% 35% 35%}
+.creature.two .creature-arm{width:10px;height:68px;top:56px;background:#384f52}
+.creature.two .creature-arm.arm-a{left:20px;transform:rotate(15deg)}
+.creature.two .creature-arm.arm-b{left:70px;transform:rotate(-15deg)}
+.creature.two .creature-leg{width:12px;height:62px;top:116px;background:#384f52}
+.creature.two .creature-leg.leg-a{left:31px;transform:rotate(3deg)}
+.creature.two .creature-leg.leg-b{left:57px;transform:rotate(-8deg)}
+.creature.two .creature-eye{width:8px;height:8px;top:22px;background:#d9d6cc}
+.creature.two .creature-eye.eye-a{left:31px}
+.creature.two .creature-eye.eye-b{left:52px}
+.creature.two .hat2{position:absolute;width:36px;height:40px;left:40px;top:-20px;background:#56787d;clip-path:polygon(50% 0,100% 82%,0 82%);transform:rotate(14deg);z-index:5;border-radius:100%}
+.creature.two .hat2:after{content:"";position:absolute;width:62px;height:5px;left:-8px;bottom:0;background:#000000;border-radius:100%;z-index:6}
 
 @keyframes float{
 0%,100%{transform:translateY(0) rotate(0)}
@@ -113,7 +119,6 @@ button{cursor:pointer}
 .leaf.a{left:-18px;top:72px;transform:rotate(18deg)}
 .leaf.b{left:38px;top:48px;transform:rotate(-20deg) scaleX(-1)}
 .leaf.c{left:-20px;top:30px;transform:rotate(35deg)}
-
 .bird{position:absolute;z-index:18;width:35px;height:15px;animation:flight 16s linear infinite}
 .bird:before,.bird:after{content:"";position:absolute;width:23px;height:10px;border-top:2px solid #38362d}
 .bird:before{left:0;transform:rotate(18deg)}
@@ -126,10 +131,9 @@ from{left:-10%;transform:translateX(0) scale(var(--scale,1))}
 to{left:110%;transform:translateX(0) scale(var(--scale,1))}
 }
 
-
 /* OVNI Y ABDUCCIÓN */
 
-.ufo{position:absolute;z-index:60;top:7%;left:-220px;width:150px;height:90px;pointer-events:none;opacity:0;will-change:transform,left,top}
+.ufo{position:absolute;z-index:60;top:7%;left:-220px;width:150px;height:90px;pointer-events:auto;opacity:0;will-change:transform,left,top}
 .ufo-body{position:absolute;left:10px;top:25px;width:130px;height:42px;border-radius:70% 70% 48% 48%;background:#45483e;border:1px solid #27251f8c;box-shadow:0 4px 0 #27251f26,inset 0 5px 0 #eee5c91f}
 .ufo-dome{position:absolute;left:43px;top:5px;width:64px;height:42px;border-radius:50% 50% 20% 20%;background:#8a8870;border:1px solid #27251f8c}
 .ufo-light{position:absolute;top:53px;width:8px;height:8px;border-radius:50%;background:#d7c991;box-shadow:0 0 10px #d7c991cc;animation:blink 1s ease-in-out infinite alternate}
@@ -145,7 +149,6 @@ to{opacity:1}
 
 .ufo-beam{position:absolute;left:30px;top:65px;width:90px;height:0;opacity:0;background:linear-gradient(#d7c9916b,#d7c99114);clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);transition:height 1s,opacity .7s}
 .ufo-beam.active{height:190px;opacity:1}
-.ufo.abducting,.ufo.returning{opacity:1}
 .abduction-particles{position:absolute;inset:0;pointer-events:none;opacity:0}
 .ufo-beam.active~.abduction-particles{opacity:1}
 .abduction-particles i{position:absolute;width:3px;height:3px;border-radius:50%;background:#eee4c7;animation:particle 1.3s ease-in-out infinite}
@@ -159,6 +162,398 @@ to{opacity:1}
 50%{transform:translateY(-10px);opacity:1}
 }
 
+.rescue-ufo{width:230px;height:135px;z-index:70;pointer-events:none}
+.rescue-body{position:absolute;left:5px;top:38px;width:220px;height:62px;border-radius:70% 70% 45% 45%;background:#4d3a3a;border:2px solid #1f211c;box-shadow:0 8px 0 #1f211c33,inset 0 8px 0 #eee5c922}
+.rescue-dome{position:absolute;left:65px;top:3px;width:100px;height:62px;border-radius:50% 50% 20% 20%;background:#728787;border:2px solid #292b25;box-shadow:inset 0 5px 0 #d8d0b833}
+.rescue-ring{position:absolute;left:-10px;top:25px;width:250px;height:90px;border:2px solid #575b4d;border-radius:50%;opacity:.65}
+.rescue-light{position:absolute;width:10px;height:10px;border-radius:50%;background:#b691d7;box-shadow:0 0 15px #d7c991}
+.rescue-light.r1{left:35px;top:88px}
+.rescue-light.r2{left:75px;top:94px}
+.rescue-light.r3{left:110px;top:97px}
+.rescue-light.r4{left:145px;top:94px}
+.rescue-light.r5{left:185px;top:88px}
+.rescue-beam{position:absolute;left:45px;top:98px;width:140px;height:0;opacity:0;background:linear-gradient(#c391d755,#c391d708);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);transition:height 1s,opacity .7s;pointer-events:none}
+
+/* ================================
+   EFECTOS DEL ACCIDENTE DEL OVNI
+   ================================ */
+
+.crash-site{
+    position:absolute;
+    z-index:55;
+    width:260px;
+    height:180px;
+    pointer-events:none;
+    transform:translate(-50%,-100%);
+}
+
+/* MARCA EN EL SUELO */
+
+.crash-mark{
+    position:absolute;
+    left:50%;
+    bottom:8px;
+    width:190px;
+    height:42px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:#302b20;
+    opacity:.55;
+    filter:blur(5px);
+    animation:crashMarkAppear .5s ease-out forwards;
+}
+
+.crash-mark:after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:125px;
+    height:25px;
+    transform:translate(-50%,-50%);
+    border:2px solid #4a4030;
+    border-radius:50%;
+    opacity:.6;
+}
+
+@keyframes crashMarkAppear{
+    from{
+        transform:translateX(-50%) scale(.2);
+        opacity:0;
+    }
+    to{
+        transform:translateX(-50%) scale(1);
+        opacity:.55;
+    }
+}
+
+
+/* DESTELLO DEL IMPACTO */
+
+.crash-flash{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    width:35px;
+    height:35px;
+    transform:translate(-50%,50%);
+    border-radius:50%;
+    background:#eee0a4;
+    box-shadow:
+        0 0 15px #eee0a4,
+        0 0 35px #c9a65d,
+        0 0 70px #a67d3c;
+    animation:crashFlash .45s ease-out forwards;
+}
+
+@keyframes crashFlash{
+    0%{
+        transform:translate(-50%,50%) scale(.2);
+        opacity:1;
+    }
+    35%{
+        transform:translate(-50%,50%) scale(1.8);
+        opacity:.9;
+    }
+    100%{
+        transform:translate(-50%,50%) scale(4);
+        opacity:0;
+    }
+}
+
+
+/* ONDA DE CHOQUE */
+
+.crash-shockwave{
+    position:absolute;
+    left:50%;
+    bottom:10px;
+    width:35px;
+    height:20px;
+    transform:translateX(-50%);
+    border:2px solid #c6ad75;
+    border-radius:50%;
+    opacity:.9;
+    animation:shockwave .7s ease-out forwards;
+}
+
+@keyframes shockwave{
+    from{
+        width:30px;
+        height:15px;
+        opacity:.9;
+    }
+    to{
+        width:240px;
+        height:65px;
+        opacity:0;
+    }
+}
+
+
+/* HUMO */
+
+.crash-smoke{
+    position:absolute;
+    left:50%;
+    bottom:35px;
+    width:70px;
+    height:120px;
+    transform:translateX(-50%);
+}
+
+.crash-smoke i{
+    position:absolute;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#46453d;
+    opacity:.55;
+    filter:blur(4px);
+    animation:crashSmoke 3.5s ease-out infinite;
+}
+
+.crash-smoke i:nth-child(1){
+    left:23px;
+    bottom:0;
+    animation-delay:0s;
+}
+
+.crash-smoke i:nth-child(2){
+    left:5px;
+    bottom:12px;
+    width:30px;
+    height:30px;
+    animation-delay:.5s;
+}
+
+.crash-smoke i:nth-child(3){
+    left:35px;
+    bottom:25px;
+    width:34px;
+    height:34px;
+    animation-delay:1s;
+}
+
+.crash-smoke i:nth-child(4){
+    left:15px;
+    bottom:45px;
+    width:28px;
+    height:28px;
+    animation-delay:1.5s;
+}
+
+.crash-smoke i:nth-child(5){
+    left:38px;
+    bottom:60px;
+    width:22px;
+    height:22px;
+    animation-delay:2s;
+}
+
+@keyframes crashSmoke{
+    0%{
+        transform:translate(0,0) scale(.55);
+        opacity:.15;
+    }
+    30%{
+        opacity:.6;
+    }
+    100%{
+        transform:translate(
+            calc((var(--smoke-x, 1)) * 18px),
+            -100px
+        ) scale(2);
+        opacity:0;
+    }
+}
+
+
+/* RESTOS */
+
+.crash-debris{
+    position:absolute;
+    left:50%;
+    bottom:10px;
+    width:220px;
+    height:80px;
+    transform:translateX(-50%);
+}
+
+.crash-debris i{
+    position:absolute;
+    display:block;
+    background:#34372f;
+    border:1px solid #1f211c;
+    box-shadow:1px 2px 0 #1f211c55;
+    transform-origin:center;
+    animation:debrisSettle .45s ease-out forwards;
+}
+
+.crash-debris i:nth-child(1){
+    left:12px;
+    bottom:18px;
+    width:18px;
+    height:8px;
+    transform:rotate(28deg) translateY(-20px);
+}
+
+.crash-debris i:nth-child(2){
+    left:43px;
+    bottom:8px;
+    width:11px;
+    height:7px;
+    transform:rotate(-35deg) translateY(-30px);
+}
+
+.crash-debris i:nth-child(3){
+    left:76px;
+    bottom:23px;
+    width:24px;
+    height:9px;
+    transform:rotate(12deg) translateY(-25px);
+}
+
+.crash-debris i:nth-child(4){
+    right:55px;
+    bottom:13px;
+    width:15px;
+    height:8px;
+    transform:rotate(-20deg) translateY(-35px);
+}
+
+.crash-debris i:nth-child(5){
+    right:20px;
+    bottom:25px;
+    width:21px;
+    height:7px;
+    transform:rotate(35deg) translateY(-22px);
+}
+
+.crash-debris i:nth-child(6){
+    right:5px;
+    bottom:5px;
+    width:9px;
+    height:9px;
+    transform:rotate(55deg) translateY(-28px);
+}
+
+@keyframes debrisSettle{
+    to{
+        transform:translateY(0) rotate(var(--rotation,0deg));
+    }
+}
+
+
+/* CHISPAS */
+
+.crash-sparks{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    width:10px;
+    height:10px;
+}
+
+.crash-sparks i{
+    position:absolute;
+    width:3px;
+    height:18px;
+    border-radius:50%;
+    background:#d7c991;
+    box-shadow:0 0 7px #d7c991;
+    transform-origin:bottom center;
+    animation:crashSpark .65s ease-out forwards;
+}
+
+.crash-sparks i:nth-child(1){
+    transform:rotate(-75deg);
+}
+
+.crash-sparks i:nth-child(2){
+    transform:rotate(-45deg);
+    animation-delay:.04s;
+}
+
+.crash-sparks i:nth-child(3){
+    transform:rotate(-15deg);
+    animation-delay:.08s;
+}
+
+.crash-sparks i:nth-child(4){
+    transform:rotate(25deg);
+    animation-delay:.12s;
+}
+
+.crash-sparks i:nth-child(5){
+    transform:rotate(55deg);
+    animation-delay:.16s;
+}
+
+.crash-sparks i:nth-child(6){
+    transform:rotate(80deg);
+    animation-delay:.2s;
+}
+
+@keyframes crashSpark{
+    0%{
+        transform:translate(0,0) rotate(var(--angle,0deg)) scale(.5);
+        opacity:1;
+    }
+    100%{
+        transform:translate(
+            calc(cos(var(--angle,0deg)) * 70px),
+            calc(sin(var(--angle,0deg)) * 45px)
+        ) rotate(var(--angle,0deg)) scale(.1);
+        opacity:0;
+    }
+}
+
+
+/* OVNI DAÑADO */
+
+.ufo.crashed .ufo-body{
+    background:#393b34;
+    filter:brightness(.72) saturate(.65);
+}
+
+.ufo.crashed .ufo-dome{
+    background:#666659;
+    filter:brightness(.7);
+}
+
+.ufo.crashed .ufo-body:after{
+    content:"";
+    position:absolute;
+    left:35px;
+    top:8px;
+    width:58px;
+    height:22px;
+    background:#1d1e1a;
+    clip-path:polygon(
+        0 20%,
+        28% 0,
+        45% 35%,
+        70% 8%,
+        100% 28%,
+        75% 55%,
+        88% 100%,
+        50% 72%,
+        25% 100%,
+        35% 55%,
+        0 70%
+    );
+    opacity:.75;
+}
+
+.ufo.crashed .ufo-light{
+    animation:damagedLight .35s steps(2,end) infinite;
+}
+
+@keyframes damagedLight{
+    0%,100%{opacity:.1}
+    50%{opacity:1}
+}
 
 /* ARCHIVO DE ANIMACIONES */
 
@@ -171,19 +566,16 @@ to{opacity:1}
 .archive-grid{position:relative;z-index:5;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:110px 70px}
 .animation-card{position:relative;z-index:2}
 .animation-card:nth-child(even){margin-top:120px}
-
 .animation-scene{position:relative;height:500px;overflow:hidden;background:#7d826d;border:1px solid #302d2459;cursor:pointer;box-shadow:12px 14px 0 #3a34271f}
 .animation-scene:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(#fff1,transparent 30%,#221f171f)}
 .animation-scene video{position:absolute;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.75) contrast(.95);opacity:.8;transition:.8s}
 .animation-card:hover .animation-scene video{transform:scale(1.025);opacity:1;filter:saturate(.9) contrast(1)}
 .scene-number{position:absolute;z-index:10;top:20px;left:20px;font-size:8px;letter-spacing:2px;color:#eee5c9}
 .scene-play{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:65px;height:65px;border:1px solid #eee5c9bf;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#eee5c9;font-size:12px;opacity:.85}
-
 .card-info{padding:20px 4px 0;display:flex;justify-content:space-between;gap:20px}
 .card-title{font-family:Georgia,serif;font-size:27px;font-weight:400;color:#332f26}
 .card-meta{text-align:right;font-size:7px;line-height:1.8;letter-spacing:1.3px;color:#6a6252}
 .card-description{margin-top:13px;max-width:430px;font-size:8px;line-height:1.8;letter-spacing:1px;color:#6a6252}
-
 
 /* SECCIÓN STORY Y FOOTER */
 
@@ -195,10 +587,8 @@ to{opacity:1}
 .story-planet{position:absolute;z-index:1;right:8%;top:15%;width:390px;height:390px;border-radius:50%;background:#8a8064;box-shadow:-35px 25px 0 #423c2d29;overflow:hidden}
 .story-planet:before{content:"";position:absolute;width:140%;height:50%;left:-20%;top:20%;background:#686650;border-radius:50%;transform:rotate(-15deg)}
 .story-planet:after{content:"";position:absolute;width:90px;height:90px;right:20%;bottom:18%;background:#b4a77f;border-radius:50%;box-shadow:-120px -80px 0 -25px #b4a77f,50px -130px 0 -30px #b4a77f}
-
 .design-footer{position:relative;z-index:2;padding:45px 8vw;display:flex;justify-content:space-between;align-items:center;background:#29271f;color:#aaa187;font-size:7px;letter-spacing:2px}
 .design-footer a{color:#d8cfae;text-decoration:none}
-
 
 /* VISOR DE VIDEO */
 
@@ -223,31 +613,21 @@ to{opacity:1}
 .viewer-nav{position:absolute;bottom:-45px;right:0;display:flex;gap:20px}
 .viewer-nav button{font-size:7px;letter-spacing:2px}
 
-
 /* CURSOR PERSONALIZADO */
 
 .cursor-flash{position:fixed;width:8px;height:8px;transform:translate(-50%,-50%) scale(0);border:1px solid #4f5d43;border-radius:50%;pointer-events:none;z-index:6000;opacity:0}
 .cursor-flash.active{animation:flash .45s ease-out}
-
 @keyframes flash{
 0%{transform:translate(-50%,-50%) scale(0);opacity:1}
 100%{transform:translate(-50%,-50%) scale(5);opacity:0}
 }
-
 *{cursor:none!important}
-
 .custom-cursor{position:fixed;left:0;top:0;width:34px;height:34px;pointer-events:none;z-index:99999;transform:none;filter:drop-shadow(1px 1px 0 #d8cfae)}
-/* Copa */
 .custom-cursor:before{content:"";position:absolute;width:15px;height:13px;left:-7px;top:-10px;background:#a65d38;border-radius:3px 3px 1px 1px;transform:skewX(-5deg)}
-/* Ala */
 .custom-cursor:after{content:"";position:absolute;width:29px;height:7px;left:-13px;top:1px;background:#a65d38;border-radius:50%;transform:rotate(-5deg)}
-/* Cinta */
 .custom-cursor .hat-band{position:absolute;width:15px;height:3px;left:-7px;top:-2px;background:#000000;z-index:2}
-/* Centro real del cursor */
 .cursor-center{position:absolute;width:4px;height:4px;left:-2px;top:-2px;background:#000000;border:1px solid #000000;border-radius:50%;z-index:10}
-/* Click */
 .custom-cursor.click{transform:scale(.8) rotate(-8deg)}
-
 
 /* RESPONSIVE */
 
@@ -315,12 +695,10 @@ to{opacity:1}
 *{cursor:auto!important}
 .custom-cursor{display:none}
 }
-
 </style>
 </head>
 
 <body>
-
 <div class="page">
 <div class="grain"></div>
 
@@ -340,13 +718,11 @@ to{opacity:1}
 
 <div class="menu-container">
 <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
 <label for="menu-toggle" class="menu-icon" aria-label="Abrir menú">
 <span></span>
 <span></span>
 <span></span>
 </label>
-
 <ul class="menu-list">
 <li><span class="menu-number">001</span><a href="graphicdesign.html">GRAPHIC DESIGN</a></li>
 <li><span class="menu-number">002</span><a href="3d.html">3D MODELING</a></li>
@@ -355,7 +731,6 @@ to{opacity:1}
 <li><span class="menu-number">005</span><a href="index.html">INDEX</a></li>
 </ul>
 </div>
-
 
 <!-- HERO -->
 
@@ -382,23 +757,32 @@ to{opacity:1}
 <div class="leaf c"></div>
 </div>
 
+<!-- CRIATURA 1 -->
+
 <div class="creature one">
-<div class="creature-body">
-<div class="eye"></div>
-<div class="horn"></div>
-<div class="horn b"></div>
-<div class="leg a"></div>
-<div class="leg b"></div>
-</div>
+<div class="creature-head"></div>
+<div class="hat"></div>
+<div class="creature-torso"></div>
+<div class="creature-arm arm-a"></div>
+<div class="creature-arm arm-b"></div>
+<div class="creature-leg leg-a"></div>
+<div class="creature-leg leg-b"></div>
+<div class="creature-eye eye-a"></div>
+<div class="creature-eye eye-b"></div>
 </div>
 
+<!-- CRIATURA 2 -->
+
 <div class="creature two" id="abductionTarget">
-<div class="creature-body">
-<div class="eye"></div>
-<div class="antenna"></div>
-<div class="leg a"></div>
-<div class="leg b"></div>
-</div>
+<div class="creature-head"></div>
+<div class="creature-torso"></div>
+<div class="creature-arm arm-a"></div>
+<div class="creature-arm arm-b"></div>
+<div class="creature-leg leg-a"></div>
+<div class="creature-leg leg-b"></div>
+<div class="creature-eye eye-a"></div>
+<div class="creature-eye eye-b"></div>
+<div class="hat2"></div>
 </div>
 
 <div class="bird a"></div>
@@ -412,7 +796,6 @@ to{opacity:1}
 <div class="ufo-light l3"></div>
 <div class="ufo-light l4"></div>
 <div class="ufo-beam" id="ufoBeam"></div>
-
 <div class="abduction-particles">
 <i></i>
 <i></i>
@@ -437,7 +820,6 @@ to{opacity:1}
 <div class="scroll-indicator">SCROLL TO EXPLORE ↓</div>
 </section>
 
-
 <!-- ARCHIVO DE ANIMACIONES -->
 
 <section class="archive" id="archive">
@@ -446,27 +828,23 @@ to{opacity:1}
 <small>THE ANIMATION ARCHIVE</small>
 <h2>STRANGE<br>THINGS MOVE.</h2>
 </div>
-
 <div class="archive-counter">
 <span id="animationCount">02</span> OBJECTS / ARCHIVED
 </div>
 </div>
 
 <div class="archive-grid">
-
 <article class="animation-card" data-id="0" data-title="THE CAROUSEL" data-number="001" data-video="animations/animation001_web.mp4" data-type="SHORT ANIMATION" data-technique="GREASE PENCIL / STROKE" data-duration="01:24" data-year="2026" data-description="AN EXPERIMENTAL DRAWING SET IN A STRANGE DESERT LANDSCAPE.">
 <div class="animation-scene">
 <video muted loop playsinline preload="metadata" src="animations/animation001_web.mp4"></video>
 <div class="scene-number">001 / ARCHIVE</div>
 <div class="scene-play">▶</div>
 </div>
-
 <div class="card-info">
 <div>
 <h3 class="card-title">PLANET BENUS INTRO</h3>
 <p class="card-description">AN EXPERIMENTAL DRAWING SET IN A STRANGE DESERT LANDSCAPE.</p>
 </div>
-
 <div class="card-meta">
 LONG ANIMATION<br>
 GREASE PENCIL<br>
@@ -481,13 +859,11 @@ GREASE PENCIL<br>
 <div class="scene-number">002 / ARCHIVE</div>
 <div class="scene-play">▶</div>
 </div>
-
 <div class="card-info">
 <div>
 <h3 class="card-title">MURN'S THOUGHTS</h3>
 <p class="card-description">MURN MOVING THROUGH AN UNFAMILIAR WORLD.</p>
 </div>
-
 <div class="card-meta">
 CHARACTER ANIMATION<br>
 GREASE PENCIL<br>
@@ -495,10 +871,8 @@ GREASE PENCIL<br>
 </div>
 </div>
 </article>
-
 </div>
 </section>
-
 
 <!-- HISTORIA -->
 
@@ -508,10 +882,8 @@ GREASE PENCIL<br>
 <h2>DRAWINGS<br>THAT MOVE.</h2>
 <p>THESE ANIMATIONS ARE CREATED FRAME BY FRAME USING BLENDER'S GREASE PENCIL AND STROKE-BASED DRAWING TOOLS. SOME ARE STORIES. SOME ARE EXPERIMENTS. OTHERS ARE SIMPLY THINGS THAT NEEDED TO MOVE.</p>
 </div>
-
 <div class="story-planet"></div>
 </section>
-
 
 <!-- FOOTER -->
 
@@ -519,25 +891,19 @@ GREASE PENCIL<br>
 <span><a href="index.html">BACK TO INDEX 00</a></span>
 <span><a href="graphicdesign.html">NEXT FILE → 001</a></span>
 </footer>
-
 </div>
-
 
 <!-- VISOR -->
 
 <div class="viewer" id="viewer">
 <div class="viewer-inner">
-
 <button class="viewer-close" id="viewerClose" aria-label="Cerrar visor">CLOSE ×</button>
-
 <div class="viewer-video-wrap">
 <video class="viewer-video" id="viewerVideo" controls playsinline></video>
-
 <div class="viewer-overlay">
 <span id="viewerNumber">001 / ARCHIVE</span>
 <span id="viewerStatus">PLAYBACK</span>
 </div>
-
 <div class="viewer-controls">
 <button class="viewer-button" id="viewerPlay">PLAY / PAUSE</button>
 <div class="progress" id="progress">
@@ -546,48 +912,38 @@ GREASE PENCIL<br>
 <span id="viewerTime">00:00</span>
 </div>
 </div>
-
 <div class="viewer-info">
 <small id="viewerType">SHORT ANIMATION</small>
 <h2 id="viewerTitle">THE CAROUSEL</h2>
 <p id="viewerDescription">AN EXPERIMENTAL DRAWING SET IN A STRANGE DESERT LANDSCAPE.</p>
-
 <div class="viewer-data">
 <div>
 <span>TECHNIQUE</span>
 <span id="viewerTechnique">GREASE PENCIL / STROKE</span>
 </div>
-
 <div>
 <span>DURATION</span>
 <span id="viewerDuration">01:24</span>
 </div>
-
 <div>
 <span>YEAR</span>
 <span id="viewerYear">2026</span>
 </div>
 </div>
 </div>
-
 <div class="viewer-nav">
 <button id="viewerPrev">← PREVIOUS</button>
 <button id="viewerNext">NEXT →</button>
 </div>
-
 </div>
 </div>
 
 <div class="cursor-flash"></div>
 <div class="custom-cursor">
-  <div class="hat-band"></div>
+<div class="hat-band"></div>
 </div>
 
-
 <script>
-
-/* ELEMENTOS PRINCIPALES */
-
 const cards=[...document.querySelectorAll(".animation-card")];
 const viewer=document.getElementById("viewer");
 const viewerVideo=document.getElementById("viewerVideo");
@@ -595,31 +951,18 @@ const menuToggle=document.getElementById("menu-toggle");
 const progress=document.getElementById("progress");
 const progressBar=document.getElementById("progressBar");
 const viewerTime=document.getElementById("viewerTime");
-
 let currentIndex=0;
 
 document.getElementById("animationCount").textContent=String(cards.length).padStart(2,"0");
 
-
-/* FUNCIONES DEL VISOR */
-
 function openViewer(i){
 currentIndex=i;
-
 const c=cards[i];
-
 viewerVideo.src=c.dataset.video;
-
 ["Number","Type","Title","Description","Technique","Duration","Year"].forEach(k=>{
 const e=document.getElementById("viewer"+k);
-
-if(e){
-e.textContent=k==="Number"
-?c.dataset.number+" / ARCHIVE"
-:c.dataset[k.toLowerCase()]||"";
-}
+if(e)e.textContent=k==="Number"?c.dataset.number+" / ARCHIVE":c.dataset[k.toLowerCase()]||"";
 });
-
 progressBar.style.width="0";
 viewerTime.textContent="00:00";
 viewer.classList.add("open");
@@ -640,53 +983,30 @@ function changeViewer(n){
 openViewer((currentIndex+n+cards.length)%cards.length);
 }
 
-
-/* TARJETAS DE ANIMACIÓN */
-
 cards.forEach((card,i)=>{
 const scene=card.querySelector(".animation-scene");
 const video=card.querySelector("video");
-
-scene.addEventListener("mouseenter",()=>{
-video.play().catch(()=>{});
-});
-
+scene.addEventListener("mouseenter",()=>video.play().catch(()=>{}));
 scene.addEventListener("mouseleave",()=>{
 video.pause();
 video.currentTime=0;
 });
-
-scene.addEventListener("click",()=>{
-openViewer(i);
-});
-
-video.addEventListener("error",()=>{
-console.error("No se pudo cargar:",video.src);
-});
-
+scene.addEventListener("click",()=>openViewer(i));
+video.addEventListener("error",()=>console.error("No se pudo cargar:",video.src));
 video.addEventListener("loadedmetadata",()=>{
 const d=video.duration;
-
 if(d&&isFinite(d)){
-card.dataset.duration=[
-Math.floor(d/60),
-Math.floor(d%60)
-].map(v=>String(v).padStart(2,"0")).join(":");
+card.dataset.duration=[Math.floor(d/60),Math.floor(d%60)].map(v=>String(v).padStart(2,"0")).join(":");
 }
 });
 });
-
-
-/* CONTROLES DEL VISOR */
 
 document.getElementById("viewerClose").addEventListener("click",closeViewer);
 document.getElementById("viewerNext").addEventListener("click",()=>changeViewer(1));
 document.getElementById("viewerPrev").addEventListener("click",()=>changeViewer(-1));
 
 document.getElementById("viewerPlay").addEventListener("click",()=>{
-viewerVideo.paused
-?viewerVideo.play()
-:viewerVideo.pause();
+viewerVideo.paused?viewerVideo.play():viewerVideo.pause();
 });
 
 viewer.addEventListener("click",e=>{
@@ -695,14 +1015,9 @@ if(e.target===viewer)closeViewer();
 
 viewerVideo.addEventListener("timeupdate",()=>{
 if(!viewerVideo.duration)return;
-
 progressBar.style.width=viewerVideo.currentTime/viewerVideo.duration*100+"%";
-
 const s=Math.floor(viewerVideo.currentTime);
-
-viewerTime.textContent=
-String(Math.floor(s/60)).padStart(2,"0")+":"+
-String(s%60).padStart(2,"0");
+viewerTime.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
 });
 
 progress.addEventListener("click",e=>{
@@ -712,32 +1027,20 @@ viewerVideo.currentTime=(e.clientX-r.left)/r.width*viewerVideo.duration;
 }
 });
 
-
-/* MENÚ Y TECLADO */
-
 document.querySelectorAll(".menu-list a").forEach(a=>{
-a.addEventListener("click",()=>{
-menuToggle.checked=false;
-});
+a.addEventListener("click",()=>menuToggle.checked=false);
 });
 
 document.addEventListener("keydown",e=>{
 if(!viewer.classList.contains("open"))return;
-
 if(e.key==="Escape")closeViewer();
 if(e.key==="ArrowRight")changeViewer(1);
 if(e.key==="ArrowLeft")changeViewer(-1);
-
 if(e.key===" "){
 e.preventDefault();
-viewerVideo.paused
-?viewerVideo.play()
-:viewerVideo.pause();
+viewerVideo.paused?viewerVideo.play():viewerVideo.pause();
 }
 });
-
-
-/* ANIMACIÓN DE LAS TARJETAS */
 
 const observer=new IntersectionObserver(es=>{
 es.forEach(e=>{
@@ -755,96 +1058,348 @@ c.style.transition="transform .8s ease,opacity .8s ease";
 observer.observe(c);
 });
 
-
-/* ANIMACIÓN DEL OVNI */
+/* OVNI */
 
 const ufo=document.getElementById("ufo");
 const beam=document.getElementById("ufoBeam");
 const target=document.getElementById("abductionTarget");
-
-let ufoCycle=0;
+const hero=document.querySelector(".hero");
 let ufoBusy=false;
-
+let crashActive=false;
+let ufoClickable=false;
+let creatureAbducted=false;
+let ufoAnimationId=null;
+let crashEffects=null;
+let crashX=0;
+let crashY=0;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+let creatureHome={
+left:target.offsetLeft,
+top:target.offsetTop,
+bottom:getComputedStyle(target).bottom
+};
 
 function targetPosition(){
 const r=target.getBoundingClientRect();
-const h=document.querySelector(".hero").getBoundingClientRect();
-
+const h=hero.getBoundingClientRect();
 return{
 x:r.left+r.width/2-75,
 y:r.top-95-h.top
 };
 }
 
-async function ufoCycleRun(){
-if(ufoBusy)return;
-
-ufoBusy=true;
-
-const hero=document.querySelector(".hero");
-const p=targetPosition();
-const abduct=ufoCycle%2===0;
-
-ufo.style.opacity=1;
-ufo.style.top=Math.max(45,p.y-35)+"px";
-ufo.style.left="-190px";
-
-await sleep(250);
-
-ufo.style.transition="left 4.5s cubic-bezier(.25,.65,.25,1),top 1.2s";
-ufo.style.left=p.x+"px";
-
-await sleep(4700);
-
-ufo.style.transition="left 1.2s,top 1.2s";
-ufo.style.top=Math.max(35,p.y-30)+"px";
-
-await sleep(1100);
-
-beam.classList.add("active");
-
-await sleep(900);
-
-if(abduct){
+async function restoreCreature(){
 target.style.animation="none";
-target.style.opacity=0;
+target.style.transition="none";
+target.style.opacity="0";
 target.style.transform="translateY(-150px) scale(.82)";
-
-await sleep(1500);
-}else{
-target.style.transition="transform 1.8s,opacity 1.8s";
-target.style.opacity=1;
+target.offsetHeight;
+target.style.transition="transform 2.2s cubic-bezier(.25,.6,.35,1),opacity 2.2s ease";
 target.style.transform="translateY(0) scale(1)";
-
-await sleep(1900);
-
-target.style.animation="";
-target.style.transition="";
-target.style.transform="";
+target.style.opacity="1";
+await sleep(2200);
+creatureAbducted=false;
+target.style.transition="none";
+target.style.transform="translateY(0) scale(1)";
+target.style.animation="float 5s ease-in-out infinite";
 }
 
+async function abductCreature(){
+if(creatureAbducted)return;
+creatureAbducted=true;
+target.style.animation="none";
+target.style.transition="none";
+target.style.opacity="1";
+target.style.transform="translateY(0) scale(1)";
+target.offsetHeight;
+target.style.transition="transform 2.2s cubic-bezier(.25,.6,.35,1),opacity 2.2s ease";
+target.style.transform="translateY(-150px) scale(.82)";
+target.style.opacity="0";
+await sleep(2200);
+}
+
+function resetUfo(){
+ufo.classList.remove("abducting","crashed","rescue");
+ufo.style.transition="none";
+ufo.style.transform="rotate(0deg) scale(1)";
+ufo.style.opacity="0";
+ufo.style.left="-190px";
+ufo.style.top="50px";
 beam.classList.remove("active");
+ufoClickable=false;
+}
 
+async function ufoCycleRun(){
+if(ufoBusy||crashActive)return;
+ufoBusy=true;
+ufoClickable=false;
+ufo.style.transition="none";
+ufo.style.transform="rotate(0deg) scale(1)";
+ufo.style.opacity="1";
+const p=targetPosition();
+ufo.style.left="-190px";
+ufo.style.top=Math.max(45,p.y-35)+"px";
+ufoClickable=true;
+await sleep(250);
+if(crashActive){
+ufoBusy=false;
+return;
+}
+ufo.style.transition="left 4.5s cubic-bezier(.25,.65,.25,1),top 1.2s";
+ufo.style.left=p.x+"px";
+await sleep(4700);
+if(crashActive){
+ufoBusy=false;
+return;
+}
+ufo.style.transition="left 1.2s,top 1.2s";
+ufo.style.top=Math.max(35,p.y-30)+"px";
+await sleep(1100);
+if(crashActive){
+ufoBusy=false;
+return;
+}
+beam.classList.add("active");
+await sleep(900);
+if(crashActive){
+beam.classList.remove("active");
+ufoBusy=false;
+return;
+}
+if(!creatureAbducted){
+await abductCreature();
+}else{
+restoreCreature();
+await sleep(2200);
+}
+beam.classList.remove("active");
 await sleep(500);
-
+if(crashActive){
+ufoBusy=false;
+return;
+}
+ufoClickable=false;
 ufo.style.transition="left 4s cubic-bezier(.6,.05,.9,.2),top 1.5s";
 ufo.style.left=hero.clientWidth+220+"px";
 ufo.style.top=Math.max(20,p.y-100)+"px";
-
 await sleep(4100);
-
-ufo.style.opacity=0;
-ufo.style.transition="none";
-
-ufoCycle++;
+if(crashActive){
 ufoBusy=false;
-
-setTimeout(ufoCycleRun,3500);
+return;
+}
+ufo.style.opacity="0";
+ufo.style.transition="none";
+ufo.style.transform="rotate(0deg) scale(1)";
+ufoBusy=false;
+setTimeout(ufoCycleRun,10000);
 }
 
-setTimeout(ufoCycleRun,2500);
+function createCrashEffects(x,y){
 
+    const crash=document.createElement("div");
+    crash.className="crash-site";
+
+    crash.style.left=x+"px";
+    crash.style.top=y+"px";
+
+    crash.innerHTML=`
+        <div class="crash-mark"></div>
+        <div class="crash-flash"></div>
+        <div class="crash-shockwave"></div>
+
+        <div class="crash-smoke">
+            <i style="--smoke-x:-1"></i>
+            <i style="--smoke-x:1"></i>
+            <i style="--smoke-x:-1"></i>
+            <i style="--smoke-x:1"></i>
+            <i style="--smoke-x:-1"></i>
+        </div>
+
+        <div class="crash-debris">
+            <i style="--rotation:28deg"></i>
+            <i style="--rotation:-35deg"></i>
+            <i style="--rotation:12deg"></i>
+            <i style="--rotation:-20deg"></i>
+            <i style="--rotation:35deg"></i>
+            <i style="--rotation:55deg"></i>
+        </div>
+
+        <div class="crash-sparks">
+            <i style="--angle:-75deg"></i>
+            <i style="--angle:-45deg"></i>
+            <i style="--angle:-15deg"></i>
+            <i style="--angle:25deg"></i>
+            <i style="--angle:55deg"></i>
+            <i style="--angle:80deg"></i>
+        </div>
+    `;
+
+    hero.appendChild(crash);
+
+    crashEffects=crash;
+
+    return crash;
+}
+
+async function crashUfo(){
+if(!ufoClickable||crashActive)return;
+crashActive=true;
+ufoClickable=false;
+if(ufoAnimationId){
+cancelAnimationFrame(ufoAnimationId);
+ufoAnimationId=null;
+}
+beam.classList.remove("active");
+const r=ufo.getBoundingClientRect();
+const h=hero.getBoundingClientRect();
+let x=r.left-h.left;
+let y=r.top-h.top;
+crashX=x+r.width/2;
+crashY=y+r.height/2;
+let vx=180;
+let vy=35;
+const gravity=170;
+const rotationSpeed=190;
+let rotation=0;
+let lastTime=performance.now();
+ufo.style.transition="none";
+ufo.style.left=x+"px";
+ufo.style.top=y+"px";
+ufo.style.transform="rotate(0deg) scale(1)";
+ufo.style.opacity="1";
+ufo.classList.remove("abducting","returning");
+ufo.classList.add("crashed");
+const groundY=hero.clientHeight-125;
+
+await new Promise(resolve=>{
+function fall(now){
+const dt=Math.min((now-lastTime)/1000,.035);
+lastTime=now;
+x+=vx*dt;
+y+=vy*dt;
+vy+=gravity*dt;
+rotation+=rotationSpeed*dt;
+ufo.style.left=x+"px";
+ufo.style.top=y+"px";
+ufo.style.transform=`rotate(${rotation}deg) scale(.82)`;
+if(y>=groundY){
+    y=groundY;
+    ufo.style.left=x+"px";
+    ufo.style.top=y+"px";
+    ufo.style.transform=
+        `rotate(${rotation}deg) scale(.82)`;
+
+    /* ACTIVAR ESTADO DAÑADO */
+    ufo.classList.add("crashed");
+    /* CREAR EFECTOS EN EL PUNTO EXACTO DEL IMPACTO */
+    createCrashEffects(
+        x+r.width/2,
+        y+r.height
+    );
+    ufoAnimationId=null;
+    resolve();
+    return;
+    }
+ufoAnimationId=requestAnimationFrame(fall);
+}
+ufoAnimationId=requestAnimationFrame(fall);
+});
+
+ufo.style.transition="transform .15s ease-out";
+ufo.style.transform=`rotate(${rotation+8}deg) scale(.78)`;
+await sleep(150);
+ufo.style.transition="transform .2s ease-in-out";
+ufo.style.transform=`rotate(${rotation-4}deg) scale(.82)`;
+await sleep(200);
+const finalR=ufo.getBoundingClientRect();
+crashX=finalR.left-h.left+finalR.width/2;
+crashY=finalR.top-h.top+finalR.height/2;
+await sleep(500);
+await rescueUfo();
+}
+
+async function rescueUfo(){
+const rescue=document.createElement("div");
+rescue.className="ufo rescue-ufo";
+rescue.innerHTML=`
+<div class="rescue-ring"></div>
+<div class="rescue-body"></div>
+<div class="rescue-dome"></div>
+<div class="rescue-light r1"></div>
+<div class="rescue-light r2"></div>
+<div class="rescue-light r3"></div>
+<div class="rescue-light r4"></div>
+<div class="rescue-light r5"></div>
+<div class="rescue-beam"></div>
+`;
+hero.appendChild(rescue);
+
+const rescueWidth=230;
+const rescueHeight=135;
+let rescueX=hero.clientWidth+rescueWidth;
+let rescueY=Math.max(30,crashY-260);
+rescue.style.opacity=1;
+rescue.style.left=rescueX+"px";
+rescue.style.top=rescueY+"px";
+rescue.style.transform="scale(1.35)";
+const targetX=crashX-rescueWidth/2;
+const targetY=crashY-rescueHeight-500;
+await sleep(200);
+rescue.style.transition="left 4s cubic-bezier(.25,.65,.25,1),top 2.5s cubic-bezier(.25,.65,.25,1)";
+rescue.style.left=targetX+"px";
+rescue.style.top=targetY+"px";
+await sleep(4100);
+rescue.style.transition="left .8s ease-out,top .8s ease-out";
+rescue.style.left=targetX+"px";
+rescue.style.top=targetY+"px";
+await sleep(800);
+const rescueBeam=rescue.querySelector(".rescue-beam");
+rescueBeam.style.height="300px";
+rescueBeam.style.opacity=1;
+await sleep(800);
+const rescueCenterX=targetX+rescueWidth/2;
+const rescueCenterY=targetY+rescueHeight/2;
+const pickupX=rescueCenterX-75;
+const pickupY=rescueCenterY+15;
+ufo.style.transition="left 1.8s cubic-bezier(.25,.65,.25,1),top 1.8s cubic-bezier(.25,.65,.25,1),transform 1.8s ease";
+ufo.style.left=pickupX+"px";
+ufo.style.top=pickupY+"px";
+ufo.style.transform="rotate(0deg) scale(.65)";
+await sleep(1600);
+ufo.style.opacity=0;
+if(crashEffects){
+    const effects=crashEffects;
+    effects.style.transition="opacity .5s ease";
+    effects.style.opacity="0";
+    await sleep(500);
+    effects.remove();
+    crashEffects=null;
+}
+await sleep(500);
+rescueBeam.style.height="0";
+rescueBeam.style.opacity=0;
+await sleep(600);
+const exitX=hero.clientWidth+rescueWidth+100;
+const exitY=Math.max(50,targetY-100);
+rescue.style.transition="left 5s cubic-bezier(.35,.05,.85,.25),top 2.5s cubic-bezier(.35,.05,.85,.25)";
+rescue.style.left=exitX+"px";
+rescue.style.top=exitY+"px";
+await sleep(5100);
+rescue.remove();
+resetUfo();
+crashActive=false;
+ufoBusy=false;
+setTimeout(ufoCycleRun,6000);
+}
+
+ufo.addEventListener("click",e=>{
+e.stopPropagation();
+crashUfo();
+});
+
+ufo.style.pointerEvents="auto";
+setTimeout(ufoCycleRun,2500);
 
 /* CURSOR PERSONALIZADO */
 
@@ -862,7 +1417,6 @@ customCursor.classList.add("click");
 document.addEventListener("mouseup",()=>{
 customCursor.classList.remove("click");
 });
-
 </script>
 </body>
 </html>
