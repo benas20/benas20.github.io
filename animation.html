@@ -235,11 +235,18 @@ to{opacity:1}
 }
 
 *{cursor:none!important}
-.custom-cursor{position:fixed;left:0;top:0;width:34px;height:34px;pointer-events:none;z-index:99999;transform:translate(-4px,-3px);filter:drop-shadow(1px 1px 0 #d8cfae)}
-.custom-cursor:before{content:"";position:absolute;width:15px;height:13px;left:10px;top:4px;background:#29271f;border-radius:3px 3px 1px 1px;transform:skewX(-5deg)}
-.custom-cursor:after{content:"";position:absolute;width:29px;height:7px;left:3px;top:15px;background:#29271f;border-radius:50%;transform:rotate(-5deg)}
-.custom-cursor .hat-band{position:absolute;width:15px;height:3px;left:10px;top:12px;background:#77705e;z-index:2}
-.custom-cursor.click{transform:translate(-4px,-3px) scale(.8) rotate(-8deg)}
+
+.custom-cursor{position:fixed;left:0;top:0;width:34px;height:34px;pointer-events:none;z-index:99999;transform:none;filter:drop-shadow(1px 1px 0 #d8cfae)}
+/* Copa */
+.custom-cursor:before{content:"";position:absolute;width:15px;height:13px;left:-7px;top:-10px;background:#a65d38;border-radius:3px 3px 1px 1px;transform:skewX(-5deg)}
+/* Ala */
+.custom-cursor:after{content:"";position:absolute;width:29px;height:7px;left:-13px;top:1px;background:#a65d38;border-radius:50%;transform:rotate(-5deg)}
+/* Cinta */
+.custom-cursor .hat-band{position:absolute;width:15px;height:3px;left:-7px;top:-2px;background:#000000;z-index:2}
+/* Centro real del cursor */
+.cursor-center{position:absolute;width:4px;height:4px;left:-2px;top:-2px;background:#000000;border:1px solid #000000;border-radius:50%;z-index:10}
+/* Click */
+.custom-cursor.click{transform:scale(.8) rotate(-8deg)}
 
 
 /* RESPONSIVE */
@@ -573,7 +580,7 @@ GREASE PENCIL<br>
 
 <div class="cursor-flash"></div>
 <div class="custom-cursor">
-<div class="hat-band"></div>
+  <div class="hat-band"></div>
 </div>
 
 
