@@ -311,20 +311,32 @@ body{
     });
     
     const titleWall = document.getElementById("titleWall");
+
+    const words = [
+        "dontfollowmecauseimlosttoo",
+        "imsoLOST",
+        "DON'T FOLLOW ME"
+    ];
+
     const totalTitles = 100;
+
     for(let i = 0; i < totalTitles; i++){
-    
+
         const title = document.createElement("span");
-        title.textContent = "dontfollowmecauseimlosttoo";
+
+        title.textContent = words[Math.floor(Math.random() * words.length)];
+
         const x = Math.random() * 100;
         const y = Math.random() * 100;
-        const rotation = -1 + Math.random() * 3;
+
+        const rotation = -8 + Math.random() * 16;
         const size = 2.2 + Math.random() * 1.8;
-    
+
         title.style.left = `${x}%`;
         title.style.top = `${y}%`;
         title.style.setProperty("--rotation", `${rotation}deg`);
         title.style.fontSize = `${size}vh`;
+
         titleWall.appendChild(title);
     }
     
