@@ -22,10 +22,37 @@ body{
     min-height:100%;
     background-color:#650015;
     overflow-x:hidden;
+    overflow-y:auto;
+    position:relative;
+    font-family:"Courier New",monospace;
 }
 
 body{
     font-family:"Courier New",monospace;
+}
+
+.title-wall{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.title-wall span{
+    position:absolute;
+
+    font-size:clamp(16px, 3vh, 32px);
+    font-weight:normal;
+    letter-spacing:1px;
+    white-space:nowrap;
+
+    opacity:.25;
+
+    transform:translate(-50%,-50%) rotate(var(--rotation));
 }
 
 /* =========================
@@ -36,7 +63,8 @@ body{
     position:relative;
     width:100%;
     height:900px;
-    margin-bottom:1000px;
+    margin-bottom:850px;
+    overflow:visible;
 }
 
 /* =========================
@@ -85,6 +113,7 @@ body{
 
 <body>
 
+<div class="title-wall" id="titleWall"></div>
 
 <!-- =====================================================
      BLOQUE 1
@@ -130,17 +159,17 @@ body{
     <!-- FOTO 09 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book9.jpg" class="card"
-        style="--x:15%; --y:145%; --w:300px; --r:-deg; z-index:4;">
+        style="--x:15%; --y:145%; --w:300px; --r:0deg; z-index:4;">
 
     <!-- FOTO 10 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book10.jpg" class="card"
-        style="--x:50%; --y:137%; --w:290px; --r:deg; z-index:3;">
+        style="--x:50%; --y:137%; --w:290px; --r:0deg; z-index:3;">
 
     <!-- FOTO 11 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book11.jpg" class="card"
-        style=" --x:42%; --y:200%; --w:300px; --r:-4deg; z-index:4;">
+        style=" --x:42%; --y:200%; --w:300px; --r:0deg; z-index:4;">
 
 </div>
 
@@ -152,28 +181,28 @@ body{
 
     <!-- FOTO 01 -->
     <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book1.jpg" class="card"
-         style="--x:15%; --y:55%; --w:300px; --r:0deg; z-index:2;">
+         style="--x:28%; --y:55%; --w:300px; --r:0deg; z-index:2;">
 
     <!-- FOTO 02 -->
     <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book2.jpg" class="card"
-        style="--x:28%; --y:37%; --w:300px; --r:0deg; z-index:1;">
+        style="--x:15%; --y:37%; --w:300px; --r:0deg; z-index:1;">
 
     <!-- FOTO 03 -->
     <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book3.jpg" class="card"
-        style="--x:43%; --y:50%; --w:320px; --r:0deg; z-index:2;">
+        style="--x:43%; --y:63%; --w:320px; --r:0deg; z-index:2;">
 
     <!-- FOTO 04 -->
     <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book4.jpg" class="card"
-        style="--x:58%; --y:63%; --w:300px; --r:0deg; z-index:3;">
+        style="--x:58%; --y:46%; --w:300px; --r:0deg; z-index:3;">
 
     <!-- FOTO 05 -->
     <img src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book5.jpg" class="card"
-        style="--x:72%; --y:35%; --w:290px; --r:0deg; z-index:2;">
+        style="--x:72%; --y:60%; --w:290px; --r:0deg; z-index:2;">
 
     <!-- FOTO 06 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book6.jpg" class="card"
-        style="--x:87%; --y:50%; --w:300px; --r:0deg; z-index:3;">
+        style="--x:87%; --y:39%; --w:300px; --r:0deg; z-index:3;">
 
     <!-- FOTO 07 -->
     <img
@@ -246,41 +275,49 @@ body{
     <!-- FOTO 09 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book9.jpg" class="card"
-        style="--x:15%; --y:145%; --w:300px; --r:-deg; z-index:4;">
+        style="--x:15%; --y:145%; --w:300px; --r:0deg; z-index:4;">
 
     <!-- FOTO 10 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book10.jpg" class="card"
-        style="--x:50%; --y:137%; --w:290px; --r:deg; z-index:3;">
+        style="--x:50%; --y:137%; --w:290px; --r:0deg; z-index:3;">
 
     <!-- FOTO 11 -->
     <img
         src="https://uploads.onecompiler.io/44sv5n3j2/44y7zcw96/book11.jpg" class="card"
-        style=" --x:42%; --y:200%; --w:300px; --r:-4deg; z-index:4;">
-        
+        style=" --x:42%; --y:200%; --w:300px; --r:0deg; z-index:4;">
 </div>
 
-<script>
-
-const cards=document.querySelectorAll(".card");
-
-cards.forEach(card=>{
-
-    card.addEventListener("mouseenter",()=>{
-
-        card.style.zIndex=9999;
-
+    <script>
+        
+    const cards=document.querySelectorAll(".card");
+    cards.forEach(card=>{
+        card.addEventListener("mouseenter",()=>{
+            card.style.zIndex=9999;
+        });
+        card.addEventListener("mouseleave",()=>{
+            card.style.zIndex=1;
+        });
     });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.zIndex=1;
-
-    });
-
-});
-
-</script>
-
+    
+    const titleWall = document.getElementById("titleWall");
+    const totalTitles = 100;
+    for(let i = 0; i < totalTitles; i++){
+    
+        const title = document.createElement("span");
+        title.textContent = "dontfollowmecauseimlosttoo";
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const rotation = -1 + Math.random() * 3;
+        const size = 2.2 + Math.random() * 1.8;
+    
+        title.style.left = `${x}%`;
+        title.style.top = `${y}%`;
+        title.style.setProperty("--rotation", `${rotation}deg`);
+        title.style.fontSize = `${size}vh`;
+        titleWall.appendChild(title);
+    }
+    
+    </script>
 </body>
 </html>
