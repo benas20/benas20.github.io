@@ -315,10 +315,12 @@ const t=ox/HALF_WIDTH;
 const curve=Math.sin(t*Math.PI)*bend*.55;
 const localAngle=angle*t*.24;
 
-const x=ox*Math.cos(localAngle)-oz*Math.sin(localAngle);
-const z=ox*Math.sin(localAngle)+oz*Math.cos(localAngle)+curve;
-
-position.setXYZ(i,x,oy,z);
+position.setXYZ(
+i,
+ox*Math.cos(localAngle)-oz*Math.sin(localAngle),
+oy,
+ox*Math.sin(localAngle)+oz*Math.cos(localAngle)+curve
+);
 }
 
 position.needsUpdate=true;
@@ -433,6 +435,22 @@ current.userData.leftPage.visible=true;
 current.userData.rightPage.visible=true;
 }
 
+function showSheetBehind(sheet,order){
+if(!sheet)return;
+
+sheet.visible=true;
+sheet.position.z=0;
+
+const right=sheet.userData.rightPage;
+const left=sheet.userData.leftPage;
+
+right.visible=true;
+left.visible=true;
+
+setPageLayer(left,order);
+setPageLayer(right,order+1);
+}
+
 function preparePageTurn(direction){
 hideAllPages();
 
@@ -449,24 +467,14 @@ const next=sheets[currentSheet+1];
 setPageLayer(current.userData.leftPage,1);
 setPageLayer(current.userData.rightPage,20);
 
-if(next){
-next.visible=true;
-next.position.z=0;
-next.userData.leftPage.visible=true;
-setPageLayer(next.userData.leftPage,5);
-}
+showSheetBehind(next,5);
 }else{
 const previous=sheets[currentSheet-1];
 
 setPageLayer(current.userData.rightPage,1);
 setPageLayer(current.userData.leftPage,20);
 
-if(previous){
-previous.visible=true;
-previous.position.z=0;
-previous.userData.rightPage.visible=true;
-setPageLayer(previous.userData.rightPage,5);
-}
+showSheetBehind(previous,5);
 }
 }
 
