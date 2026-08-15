@@ -1028,51 +1028,62 @@ function createSheet(index){
     const group=new THREE.Group();
 
     /*
-        Cada página física tiene:
+        HOJA 0
+        izquierda  = page1
+        derecha    = page2
+        reverso de derecha = page3
 
-        rightPage:
-        frente = página impar
-        reverso = página siguiente
+        HOJA 1
+        izquierda  = page3
+        derecha    = page4
+        reverso de derecha = page5
 
-        leftPage:
-        frente = página par
-        reverso = página siguiente
+        HOJA 2
+        izquierda  = page5
+        derecha    = page6
+        reverso de derecha = page7
+
+        HOJA 3
+        izquierda  = page7
+        derecha    = page8
     */
 
-    const rightIndex=index*2;
-    const leftIndex=index*2+1;
+
+    const leftIndex=
+        index*2;
+
+    const rightIndex=
+        index*2+1;
 
 
     /* =====================================================
-       PÁGINA DERECHA
-       ===================================================== */
+       PÁGINA IZQUIERDA
+    ===================================================== */
 
-    const rightFrontIndex=
-        rightIndex;
-
-    const rightBackIndex=
-        Math.min(7,rightIndex+1);
-
-
-    const rightPage=
+    const leftPage=
         new THREE.Mesh(
             createPageGeometry(),
             [
                 /*
-                    Página visible.
-                    SIN espejo.
+                    Cara visible de la página izquierda.
+
+                    Para la primera hoja:
+                    page1
+
+                    Para las siguientes:
+                    page3, page5, page7
                 */
                 createFaceMaterial(
-                    rightFrontIndex,
+                    leftIndex,
                     false
                 ),
 
                 /*
-                    Parte trasera de la página.
-                    Es la siguiente página del libro.
+                    La cara posterior de las páginas izquierdas
+                    no necesita utilizarse durante el giro normal.
                 */
                 createFaceMaterial(
-                    rightBackIndex,
+                    leftIndex,
                     true
                 ),
 
@@ -1082,35 +1093,39 @@ function createSheet(index){
 
 
     /* =====================================================
-       PÁGINA IZQUIERDA
-       ===================================================== */
+       PÁGINA DERECHA
+    ===================================================== */
 
-    const leftFrontIndex=
-        leftIndex;
-
-    const leftBackIndex=
-        Math.min(7,leftIndex+1);
-
-
-    const leftPage=
+    const rightPage=
         new THREE.Mesh(
             createPageGeometry(),
             [
                 /*
-                    Página visible.
-                    SIN espejo.
+                    Cara visible:
+
+                    hoja 0 → page2
+                    hoja 1 → page4
+                    hoja 2 → page6
+                    hoja 3 → page8
                 */
                 createFaceMaterial(
-                    leftFrontIndex,
+                    rightIndex,
                     false
                 ),
 
                 /*
-                    Al girar esta página,
-                    detrás aparece la siguiente.
+                    Cara posterior:
+
+                    hoja 0 → page3
+                    hoja 1 → page5
+                    hoja 2 → page7
+                    hoja 3 → page8
                 */
                 createFaceMaterial(
-                    leftBackIndex,
+                    Math.min(
+                        7,
+                        rightIndex+1
+                    ),
                     true
                 ),
 
@@ -1120,8 +1135,8 @@ function createSheet(index){
 
 
     /*
-        La página izquierda gira 180°
-        para quedar al otro lado del lomo.
+        La página izquierda está al otro lado
+        del lomo.
     */
 
     leftPage.rotation.y=Math.PI;
@@ -2445,6 +2460,7 @@ window.addEventListener(
     }
 );
 
+
 /* =========================================================
    ANIMACION
 ========================================================= */
@@ -2454,13 +2470,18 @@ function animate(){
     requestAnimationFrame(
         animate
     );
-   
+
+
     updateAxisGizmo();
+
+
     renderer.render(
         scene,
         camera
     );
+
 }
+
 
 animate();
 
