@@ -63,7 +63,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 
 .grain{z-index:10;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");mix-blend-mode:screen}
 
-
 /* BOTONES DEL LIBRO */
 
 .open-book-button,.exit-reading-button{position:absolute;left:50%;transform:translateX(-50%);display:none;align-items:center;justify-content:center;padding:12px 18px;color:#650015;background:#ffffffd9;border:1px solid #650015;text-decoration:none;font-size:9px;font-weight:bold;letter-spacing:2px;pointer-events:auto;backdrop-filter:blur(5px);cursor:pointer;transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease}
@@ -78,7 +77,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 
 .open-book-button:hover,.exit-reading-button:hover{transform:translateX(-50%) translateY(-2px)}
 
-
 /* MODO LECTURA */
 
 .reading-ui{position:fixed;inset:0;z-index:8;display:none;pointer-events:none}
@@ -91,7 +89,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 
 .page-counter{position:absolute;right:28px;bottom:30px;color:#650015;font-size:7px;letter-spacing:2px}
 
-
 /* RESPONSIVE PARA TABLETAS */
 
 @media(max-width:768px){
@@ -103,7 +100,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     .buy-button{top:86%;padding:11px 15px;font-size:8px;letter-spacing:1.5px}
     .open-book-button,.exit-reading-button{padding:11px 15px;font-size:8px;letter-spacing:1.5px}
 }
-
 
 /* RESPONSIVE PARA MOVILES */
 
@@ -125,7 +121,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
     .reading-hint{bottom:4%;font-size:6px;letter-spacing:1px}
     .page-counter{right:10px;bottom:72px;font-size:6px}
 }
-
 
 /* AJUSTES PARA MOVILES EN ORIENTACION HORIZONTAL */
 
@@ -173,7 +168,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 <div class="reading-ui" id="readingUI">
     <div class="reading-label">PHOTOBOOK / READING MODE</div>
     <div class="reading-hint">DRAG FROM THE UPPER CORNERS TO TURN THE PAGE</div>
-    <div class="page-counter" id="pageCounter">01 / 05</div>
+    <div class="page-counter" id="pageCounter">01 / 04</div>
 </div>
 
 <div class="grain"></div>
@@ -186,7 +181,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 import * as THREE from "three";
 import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
 
-
 /* ELEMENTOS ORIGINALES */
 
 const container=document.getElementById("scene");
@@ -197,7 +191,6 @@ const openBookButton=document.getElementById("openBookButton");
 const exitReadingButton=document.getElementById("exitReadingButton");
 const readingUI=document.getElementById("readingUI");
 const pageCounter=document.getElementById("pageCounter");
-
 
 /* ESCENA */
 
@@ -211,7 +204,6 @@ renderer.setSize(window.innerWidth,window.innerHeight);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
-
 /* LUCES */
 
 scene.add(new THREE.AmbientLight(0xffffff,2));
@@ -223,7 +215,6 @@ scene.add(keyLight);
 const fillLight=new THREE.DirectionalLight(0x9fa99b,1.5);
 fillLight.position.set(-4,2,-3);
 scene.add(fillLight);
-
 
 /* LIBRO FBX */
 
@@ -253,7 +244,6 @@ loader.load("models/book.fbx",object=>{
     console.error("Error cargando FBX:",error);
 });
 
-
 /* ROTACION ORIGINAL */
 
 let dragging=false;
@@ -282,7 +272,6 @@ window.addEventListener("pointermove",e=>{
     previousY=e.clientY;
 });
 
-
 /* ZOOM ORIGINAL */
 
 window.addEventListener("wheel",e=>{
@@ -291,7 +280,6 @@ window.addEventListener("wheel",e=>{
     camera.position.z+=e.deltaY*.003;
     camera.position.z=Math.max(7,Math.min(10,camera.position.z));
 });
-
 
 /* SISTEMA DE PAGINAS */
 
@@ -304,13 +292,11 @@ let dragStartY=0;
 let dragProgress=0;
 let pageAnimating=false;
 
-
 /* GRUPO DEL LIBRO */
 
 const readingBook=new THREE.Group();
 readingBook.visible=false;
 scene.add(readingBook);
-
 
 /* DIMENSIONES */
 
@@ -320,16 +306,23 @@ const HALF_WIDTH=BOOK_WIDTH/2;
 const SEGMENTS=24;
 const PAGE_THICKNESS=.02;
 
+/* MATERIALES DE PAGINA */
 
-/* MATERIAL DE PAGINA */
+const textureLoader=new THREE.TextureLoader();
+const pageMaterials=[];
 
-const pageMaterial=new THREE.MeshStandardMaterial({
-    color:0xe5dfc9,
-    roughness:.9,
-    metalness:0,
-    side:THREE.DoubleSide
-});
+for(let i=1;i<=8;i++){
+    const texture=textureLoader.load(`img/book/page${i}.jpg`);
+    texture.colorSpace=THREE.SRGBColorSpace;
+    texture.anisotropy=renderer.capabilities.getMaxAnisotropy();
 
+    pageMaterials.push(new THREE.MeshStandardMaterial({
+        map:texture,
+        roughness:.9,
+        metalness:0,
+        side:THREE.DoubleSide
+    }));
+}
 
 /* MATERIAL DEL BORDE */
 
@@ -339,7 +332,6 @@ const pageEdgeMaterial=new THREE.MeshStandardMaterial({
     metalness:0,
     side:THREE.DoubleSide
 });
-
 
 /* CREAR GEOMETRIA DE PAGINA CON GROSOR */
 
@@ -425,7 +417,6 @@ function createPageGeometry(){
     return geometry;
 }
 
-
 /* GUARDAR POSICIONES ORIGINALES */
 
 function storeOriginalGeometry(geometry){
@@ -440,7 +431,6 @@ function storeOriginalGeometry(geometry){
         ]);
     }
 }
-
 
 /* ACTUALIZAR CURVATURA */
 
@@ -473,7 +463,6 @@ function updatePageGeometry(mesh,angle,side){
     geometry.computeVertexNormals();
 }
 
-
 /* RESETAR GEOMETRIA */
 
 function resetPageGeometry(mesh){
@@ -491,17 +480,26 @@ function resetPageGeometry(mesh){
     geometry.computeVertexNormals();
 }
 
-
 /* CREAR HOJA */
 
 function createSheet(index){
     const group=new THREE.Group();
+    const rightPageNumber=index*2+1;
+    const leftPageNumber=index*2+2;
 
-    const rightPage=new THREE.Mesh(createPageGeometry(),pageMaterial);
+    const rightPage=new THREE.Mesh(
+        createPageGeometry(),
+        pageMaterials[rightPageNumber-1]
+    );
+
     rightPage.position.set(0,0,0);
     rightPage.rotation.y=0;
 
-    const leftPage=new THREE.Mesh(createPageGeometry(),pageMaterial);
+    const leftPage=new THREE.Mesh(
+        createPageGeometry(),
+        pageMaterials[leftPageNumber-1]
+    );
+
     leftPage.position.set(0,0,0);
     leftPage.rotation.y=Math.PI;
 
@@ -510,14 +508,8 @@ function createSheet(index){
     group.userData.rightPage=rightPage;
     group.userData.leftPage=leftPage;
 
-    if(index===TOTAL_SHEETS-1){
-        rightPage.visible=true;
-        leftPage.visible=false;
-    }
-
     return group;
 }
-
 
 /* CREAR LAS HOJAS */
 
@@ -528,7 +520,6 @@ for(let i=0;i<TOTAL_SHEETS;i++){
     sheets.push(sheet);
     readingBook.add(sheet);
 }
-
 
 /* PREPARAR LIBRO */
 
@@ -554,14 +545,12 @@ function resetBook(){
         left.position.set(0,0,0);
         right.rotation.y=0;
         left.rotation.y=Math.PI;
-
-        left.visible=index!==TOTAL_SHEETS-1;
+        left.visible=true;
     });
 
     updatePageVisibility();
     updatePageCounter();
 }
-
 
 /* VISIBILIDAD Y APILADO */
 
@@ -574,13 +563,8 @@ function updatePageVisibility(){
             sheet.position.x=.008*index;
             sheet.position.z=.006*index;
         }
-
-        if(index===TOTAL_SHEETS-1){
-            sheet.userData.leftPage.visible=false;
-        }
     });
 }
-
 
 /* CONTADOR */
 
@@ -589,14 +573,12 @@ function updatePageCounter(){
     pageCounter.textContent=String(page).padStart(2,"0")+" / "+String(TOTAL_SHEETS).padStart(2,"0");
 }
 
-
 /* ENCONTRAR HOJA ACTIVA */
 
 function getNextSheet(){
     if(currentSheet>=TOTAL_SHEETS)return null;
     return sheets[currentSheet];
 }
-
 
 /* COMENZAR PASO DE PAGINA */
 
@@ -638,7 +620,6 @@ function startPageDrag(event){
     event.preventDefault();
 }
 
-
 /* ARRASTRAR PAGINA */
 
 function movePageDrag(event){
@@ -657,7 +638,6 @@ function movePageDrag(event){
     updateDraggedPage(dragProgress,direction);
     event.preventDefault();
 }
-
 
 /* ACTUALIZAR PAGINA DURANTE DRAG */
 
@@ -683,7 +663,6 @@ function updateDraggedPage(progress,direction){
     }
 }
 
-
 /* SOLTAR PAGINA */
 
 function endPageDrag(){
@@ -698,7 +677,6 @@ function endPageDrag(){
 
     animatePage(sheet,direction,progress>.5);
 }
-
 
 /* ANIMACION COMPLETA */
 
@@ -742,7 +720,6 @@ function animatePage(sheet,direction,complete){
     requestAnimationFrame(animationFrame);
 }
 
-
 /* RESTAURAR DESPUES DEL GIRO */
 
 function resetAfterTurn(){
@@ -766,9 +743,7 @@ function resetAfterTurn(){
             left.rotation.y=Math.PI;
         }
 
-        if(index===TOTAL_SHEETS-1){
-            left.visible=false;
-        }
+        left.visible=true;
     });
 
     updatePageVisibility();
@@ -776,13 +751,11 @@ function resetAfterTurn(){
     pageAnimating=false;
 }
 
-
 /* EVENTOS DEL LIBRO */
 
 renderer.domElement.addEventListener("pointerdown",startPageDrag);
 window.addEventListener("pointermove",movePageDrag);
 window.addEventListener("pointerup",endPageDrag);
-
 
 /* ABRIR LIBRO */
 
@@ -808,7 +781,6 @@ openBookButton.addEventListener("click",()=>{
     resetBook();
 });
 
-
 /* SALIR DE LECTURA */
 
 exitReadingButton.addEventListener("click",()=>{
@@ -829,12 +801,10 @@ exitReadingButton.addEventListener("click",()=>{
     readingUI.style.display="none";
 });
 
-
 /* BOTON OPEN BOOK */
 
 openBookButton.style.display="flex";
 exitReadingButton.style.display="none";
-
 
 /* GIZMO ORIGINAL */
 
@@ -862,7 +832,6 @@ function updateAxisGizmo(){
     axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
 }
 
-
 /* RESIZE */
 
 window.addEventListener("resize",()=>{
@@ -870,7 +839,6 @@ window.addEventListener("resize",()=>{
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth,window.innerHeight);
 });
-
 
 /* ANIMACION */
 
