@@ -1025,124 +1025,106 @@ function createPageGeometry(){
 
 function createSheet(index){
 
-    const group=
-        new THREE.Group();
-
+    const group=new THREE.Group();
 
     /*
-        =====================================================
-        PAGINACION REAL
-        =====================================================
+        Cada página física tiene:
 
-        HOJA 0:
-        page1 / page2
+        rightPage:
+        frente = página impar
+        reverso = página siguiente
 
-        HOJA 1:
-        page3 / page4
-
-        HOJA 2:
-        page5 / page6
-
-        HOJA 3:
-        page7 / page8
+        leftPage:
+        frente = página par
+        reverso = página siguiente
     */
 
-    const frontIndex=
-        index*2;
-
-    const backIndex=
-        index*2+1;
+    const rightIndex=index*2;
+    const leftIndex=index*2+1;
 
 
-    /*
-        -----------------------------------------------------
-        PAGINA IZQUIERDA
-        -----------------------------------------------------
+    /* =====================================================
+       PÁGINA DERECHA
+       ===================================================== */
 
-        Cuando el libro está abierto,
-        esta cara muestra page2.
+    const rightFrontIndex=
+        rightIndex;
 
-        Al girar hacia la derecha,
-        acaba mostrando page1.
-    */
+    const rightBackIndex=
+        Math.min(7,rightIndex+1);
 
-    const leftPage=
-        new THREE.Mesh(
-
-            createPageGeometry(),
-
-            [
-
-                createFaceMaterial(
-                    frontIndex,
-                    true
-                ),
-
-                createFaceMaterial(
-                    backIndex,
-                    false
-                ),
-
-                sideMaterial
-
-            ]
-
-        );
-
-
-    /*
-        -----------------------------------------------------
-        PAGINA DERECHA
-        -----------------------------------------------------
-
-        Cuando el libro está abierto,
-        esta cara muestra page1.
-
-        Al girarla hacia la izquierda,
-        muestra page2.
-    */
 
     const rightPage=
         new THREE.Mesh(
-
             createPageGeometry(),
-
             [
-
+                /*
+                    Página visible.
+                    SIN espejo.
+                */
                 createFaceMaterial(
-                    frontIndex,
+                    rightFrontIndex,
                     false
                 ),
 
+                /*
+                    Parte trasera de la página.
+                    Es la siguiente página del libro.
+                */
                 createFaceMaterial(
-                    backIndex,
+                    rightBackIndex,
                     true
                 ),
 
                 sideMaterial
-
             ]
+        );
 
+
+    /* =====================================================
+       PÁGINA IZQUIERDA
+       ===================================================== */
+
+    const leftFrontIndex=
+        leftIndex;
+
+    const leftBackIndex=
+        Math.min(7,leftIndex+1);
+
+
+    const leftPage=
+        new THREE.Mesh(
+            createPageGeometry(),
+            [
+                /*
+                    Página visible.
+                    SIN espejo.
+                */
+                createFaceMaterial(
+                    leftFrontIndex,
+                    false
+                ),
+
+                /*
+                    Al girar esta página,
+                    detrás aparece la siguiente.
+                */
+                createFaceMaterial(
+                    leftBackIndex,
+                    true
+                ),
+
+                sideMaterial
+            ]
         );
 
 
     /*
-        SOMBRAS REALES
+        La página izquierda gira 180°
+        para quedar al otro lado del lomo.
     */
 
-    leftPage.castShadow=true;
-    leftPage.receiveShadow=true;
-
-    rightPage.castShadow=true;
-    rightPage.receiveShadow=true;
-
-
-    /*
-        CONFIGURACION INICIAL
-    */
-
-    leftPage.rotation.y=
-        Math.PI;
+    leftPage.rotation.y=Math.PI;
 
 
     group.add(
@@ -1151,13 +1133,10 @@ function createSheet(index){
     );
 
 
-    group.userData.index=
-        index;
-
+    group.userData.index=index;
 
     group.userData.rightPage=
         rightPage;
-
 
     group.userData.leftPage=
         leftPage;
@@ -1166,7 +1145,6 @@ function createSheet(index){
     return group;
 
 }
-
 
 /* =========================================================
    CREAR TODAS LAS HOJAS
@@ -2467,7 +2445,6 @@ window.addEventListener(
     }
 );
 
-
 /* =========================================================
    ANIMACION
 ========================================================= */
@@ -2477,18 +2454,13 @@ function animate(){
     requestAnimationFrame(
         animate
     );
-
-
+   
     updateAxisGizmo();
-
-
     renderer.render(
         scene,
         camera
     );
-
 }
-
 
 animate();
 
