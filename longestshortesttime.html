@@ -1,478 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>longestshortesttime</title>
 <link rel="icon" type="image/jpeg" href="img/book/iconoDFMCILT.png">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;caret-color:transparent}
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    user-select:none;
-    -webkit-user-select:none;
-    caret-color:transparent;
+html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfae;font-family:"Courier New",monospace}
+
+#background{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.75) contrast(.95)}
+
+#scene{position:fixed;inset:0;z-index:2}
+
+.overlay,.grain{position:fixed;inset:0;pointer-events:none}
+
+.overlay{z-index:3}
+
+.system-header{position:absolute;top:0;left:0;width:100%;height:34px;padding:0 24px;display:flex;justify-content:space-between;align-items:center;color:#650015;font-size:11px;letter-spacing:2px;border-bottom:1px solid #d8cfae33;background:#1f1d1780;backdrop-filter:blur(5px)}
+
+.axis-gizmo{position:absolute;top:58px;right:30px;width:90px;height:90px;color:#650015;opacity:.8}
+
+.axis-center{position:absolute;left:39px;top:39px;width:7px;height:7px;border-radius:50%;background:#650015}
+
+.axis-line{position:absolute;left:42px;top:42px;height:1px;background:#650015;transform-origin:left center}
+
+.axis-line span{position:absolute;font-size:8px;font-weight:bold;letter-spacing:1px}
+
+.axis-x{width:36px}
+
+.axis-x span{right:-11px;top:-5px}
+
+.axis-y{width:34px}
+
+.axis-y span{right:-9px;top:-5px}
+
+.axis-z{width:30px}
+
+.axis-z span{right:-10px;top:-5px}
+
+.axis-caption{position:absolute;left:0;bottom:-4px;width:100%;text-align:center;font-size:6px;letter-spacing:1.5px;opacity:.65}
+
+.model-label,.rotate-label{position:absolute;bottom:30px;font-size:9px;letter-spacing:2px;color:#650015}
+
+.model-label{left:28px}
+
+.rotate-label{right:28px}
+
+.buy-button{position:absolute;left:50%;top:90%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:12px;padding:12px 18px;color:#650015;background:#ffffffd9;border:1px solid #650015;text-decoration:none;font-size:9px;font-weight:bold;letter-spacing:2px;pointer-events:auto;backdrop-filter:blur(5px);transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease}
+
+.buy-button::after{content:"→";transition:transform .25s ease}
+
+.buy-button:hover,.open-book-button:hover,.exit-reading-button:hover{color:#fff;background:#650015;box-shadow:4px 5px 0 #65001533}
+
+.buy-button:hover{transform:translate(-50%,-50%) translateY(-2px)}
+
+.buy-button:hover::after{transform:translateX(4px)}
+
+.back{position:absolute;left:28px;top:55px;color:#650015;text-decoration:none;font-size:7px;letter-spacing:2px;pointer-events:auto}
+
+.grain{z-index:10;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");mix-blend-mode:screen}
+
+
+/* BOTONES DEL LIBRO */
+
+.open-book-button,.exit-reading-button{position:absolute;left:50%;transform:translateX(-50%);display:none;align-items:center;justify-content:center;padding:12px 18px;color:#650015;background:#ffffffd9;border:1px solid #650015;text-decoration:none;font-size:9px;font-weight:bold;letter-spacing:2px;pointer-events:auto;backdrop-filter:blur(5px);cursor:pointer;transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease}
+
+.open-book-button{top:82%}
+
+.exit-reading-button{top:90%}
+
+.open-book-button::after{content:"→";margin-left:12px}
+
+.exit-reading-button::before{content:"←";margin-right:12px}
+
+.open-book-button:hover,.exit-reading-button:hover{transform:translateX(-50%) translateY(-2px)}
+
+
+/* MODO LECTURA */
+
+.reading-ui{position:fixed;inset:0;z-index:8;display:none;pointer-events:none}
+
+.reading-label,.reading-hint{position:absolute;left:50%;transform:translateX(-50%);color:#650015;white-space:nowrap}
+
+.reading-label{top:7%;font-size:8px;letter-spacing:2px}
+
+.reading-hint{bottom:5%;font-size:7px;letter-spacing:1.5px;opacity:.75}
+
+.page-counter{position:absolute;right:28px;bottom:30px;color:#650015;font-size:7px;letter-spacing:2px}
+
+
+/* RESPONSIVE PARA TABLETAS */
+
+@media(max-width:768px){
+    .system-header{height:32px;padding:0 16px;font-size:9px;letter-spacing:1.5px}
+    .back{left:16px;top:48px;font-size:7px}
+    .axis-gizmo{top:48px;right:16px;transform:scale(.85);transform-origin:top right}
+    .model-label{left:16px;bottom:22px;font-size:8px;letter-spacing:1.5px}
+    .rotate-label{right:16px;bottom:22px;font-size:8px;letter-spacing:1.5px}
+    .buy-button{top:86%;padding:11px 15px;font-size:8px;letter-spacing:1.5px}
+    .open-book-button,.exit-reading-button{padding:11px 15px;font-size:8px;letter-spacing:1.5px}
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#1f1d17;
-    color:#d8cfae;
-    font-family:"Courier New",monospace;
+
+/* RESPONSIVE PARA MOVILES */
+
+@media(max-width:480px){
+    html,body{overflow:hidden;height:100%;touch-action:none}
+    #scene{touch-action:none}
+    .system-header{padding:0 10px;font-size:7px;letter-spacing:1px}
+    .system-header span:first-child{max-width:48%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .system-header span:nth-child(2){font-size:7px}
+    .back{left:12px;top:45px;font-size:6px;letter-spacing:1.5px}
+    .axis-gizmo{top:45px;right:10px;transform:scale(.7)}
+    .model-label,.rotate-label{bottom:72px;font-size:6px;letter-spacing:1px}
+    .model-label{left:10px;max-width:42%}
+    .rotate-label{right:10px;max-width:42%;text-align:right}
+    .buy-button{top:91%;padding:10px 13px;gap:8px;font-size:7px;letter-spacing:1px;white-space:nowrap}
+    .open-book-button{top:84%;padding:10px 13px;font-size:7px;letter-spacing:1px}
+    .exit-reading-button{top:91%;padding:10px 13px;font-size:7px;letter-spacing:1px}
+    .reading-label{top:8%;font-size:6px;letter-spacing:1px}
+    .reading-hint{bottom:4%;font-size:6px;letter-spacing:1px}
+    .page-counter{right:10px;bottom:72px;font-size:6px}
 }
 
-#background{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:0;
-    filter:saturate(.75) contrast(.95);
+
+/* AJUSTES PARA MOVILES EN ORIENTACION HORIZONTAL */
+
+@media(max-width:768px) and (orientation:landscape){
+    .buy-button{top:82%}
+    .open-book-button{top:78%}
+    .exit-reading-button{top:88%}
+    .model-label,.rotate-label{bottom:16px}
+    .axis-gizmo{top:42px}
 }
-
-#scene{
-    position:fixed;
-    inset:0;
-    z-index:2;
-    touch-action:none;
-}
-
-.overlay{
-    position:fixed;
-    inset:0;
-    z-index:20;
-    pointer-events:none;
-}
-
-.system-header{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:34px;
-    padding:0 24px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    color:#650015;
-    font-size:11px;
-    letter-spacing:2px;
-
-    border-bottom:1px solid #d8cfae33;
-    background:#1f1d1780;
-
-    backdrop-filter:blur(5px);
-}
-
-.axis-gizmo{
-    position:absolute;
-    top:58px;
-    right:30px;
-    width:90px;
-    height:90px;
-    color:#650015;
-    opacity:.8;
-}
-
-.axis-center{
-    position:absolute;
-    left:39px;
-    top:39px;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#650015;
-}
-
-.axis-line{
-    position:absolute;
-    left:42px;
-    top:42px;
-    height:1px;
-    background:#650015;
-    transform-origin:left center;
-}
-
-.axis-line span{
-    position:absolute;
-    font-size:8px;
-    font-weight:bold;
-    letter-spacing:1px;
-}
-
-.axis-x{
-    width:36px;
-}
-
-.axis-x span{
-    right:-11px;
-    top:-5px;
-}
-
-.axis-y{
-    width:34px;
-}
-
-.axis-y span{
-    right:-9px;
-    top:-5px;
-}
-
-.axis-z{
-    width:30px;
-}
-
-.axis-z span{
-    right:-10px;
-    top:-5px;
-}
-
-.axis-caption{
-    position:absolute;
-    left:0;
-    bottom:-4px;
-    width:100%;
-    text-align:center;
-    font-size:6px;
-    letter-spacing:1.5px;
-    opacity:.65;
-}
-
-.model-label{
-    position:absolute;
-    left:28px;
-    bottom:30px;
-    font-size:9px;
-    letter-spacing:2px;
-    color:#650015;
-}
-
-.rotate-label{
-    position:absolute;
-    right:28px;
-    bottom:30px;
-    font-size:9px;
-    letter-spacing:2px;
-    color:#650015;
-}
-
-.buy-button,
-.read-button,
-.exit-reading{
-    position:absolute;
-
-    left:50%;
-    transform:translateX(-50%);
-
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-
-    padding:12px 18px;
-
-    color:#650015;
-    background:#ffffffd9;
-
-    border:1px solid #650015;
-
-    text-decoration:none;
-
-    font-size:9px;
-    font-weight:bold;
-    letter-spacing:2px;
-
-    pointer-events:auto;
-
-    backdrop-filter:blur(5px);
-
-    cursor:pointer;
-
-    transition:
-        background .25s ease,
-        color .25s ease,
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.buy-button{
-    top:90%;
-}
-
-.read-button{
-    top:82%;
-}
-
-.exit-reading{
-    top:90%;
-    display:none;
-}
-
-.buy-button::after,
-.read-button::after{
-    content:"→";
-    transition:transform .25s ease;
-}
-
-.buy-button:hover,
-.read-button:hover,
-.exit-reading:hover{
-    color:#fff;
-    background:#650015;
-    box-shadow:4px 5px 0 #65001533;
-}
-
-.buy-button:hover::after,
-.read-button:hover::after{
-    transform:translateX(4px);
-}
-
-.back{
-    position:absolute;
-    left:28px;
-    top:55px;
-
-    color:#650015;
-    text-decoration:none;
-
-    font-size:7px;
-    letter-spacing:2px;
-
-    pointer-events:auto;
-}
-
-.grain{
-    position:fixed;
-    inset:0;
-    z-index:30;
-
-    pointer-events:none;
-
-    opacity:.08;
-
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-
-    mix-blend-mode:screen;
-}
-
-/* =========================
-   MODO LECTURA
-========================= */
-
-body.reading #background{
-    filter:saturate(.65) contrast(.9) brightness(.7);
-}
-
-body.reading .model-label,
-body.reading .rotate-label,
-body.reading .axis-gizmo,
-body.reading .read-button,
-body.reading .buy-button{
-    display:none;
-}
-
-body.reading .exit-reading{
-    display:inline-flex;
-}
-
-body.reading .back{
-    display:none;
-}
-
-body.reading #scene{
-    cursor:grab;
-}
-
-body.reading #scene:active{
-    cursor:grabbing;
-}
-
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width:768px){
-
-    .system-header{
-        height:32px;
-        padding:0 16px;
-        font-size:9px;
-        letter-spacing:1.5px;
-    }
-
-    .back{
-        left:16px;
-        top:48px;
-        font-size:7px;
-    }
-
-    .axis-gizmo{
-        top:48px;
-        right:16px;
-        transform:scale(.85);
-        transform-origin:top right;
-    }
-
-    .model-label{
-        left:16px;
-        bottom:22px;
-        font-size:8px;
-        letter-spacing:1.5px;
-    }
-
-    .rotate-label{
-        right:16px;
-        bottom:22px;
-        font-size:8px;
-        letter-spacing:1.5px;
-    }
-
-    .buy-button,
-    .read-button,
-    .exit-reading{
-        padding:11px 15px;
-        font-size:8px;
-        letter-spacing:1.5px;
-    }
-
-    .buy-button{
-        top:86%;
-    }
-
-    .read-button{
-        top:79%;
-    }
-
-    .exit-reading{
-        top:86%;
-    }
-}
-
-/* =========================
-   MOVIL
-========================= */
-
-@media (max-width:480px){
-
-    html,
-    body{
-        overflow:hidden;
-        height:100%;
-        touch-action:none;
-    }
-
-    #scene{
-        touch-action:none;
-    }
-
-    .system-header{
-        padding:0 10px;
-        font-size:7px;
-        letter-spacing:1px;
-    }
-
-    .system-header span:first-child{
-        max-width:70%;
-        overflow:hidden;
-        white-space:nowrap;
-        text-overflow:ellipsis;
-    }
-
-    .back{
-        left:12px;
-        top:45px;
-        font-size:6px;
-        letter-spacing:1.5px;
-    }
-
-    .axis-gizmo{
-        top:45px;
-        right:10px;
-        transform:scale(.7);
-    }
-
-    .model-label,
-    .rotate-label{
-        bottom:72px;
-        font-size:6px;
-        letter-spacing:1px;
-    }
-
-    .model-label{
-        left:10px;
-        max-width:42%;
-    }
-
-    .rotate-label{
-        right:10px;
-        max-width:42%;
-        text-align:right;
-    }
-
-    .buy-button,
-    .read-button,
-    .exit-reading{
-        padding:10px 13px;
-        gap:8px;
-        font-size:7px;
-        letter-spacing:1px;
-        white-space:nowrap;
-    }
-
-    .buy-button{
-        top:91%;
-    }
-
-    .read-button{
-        top:83%;
-    }
-
-    .exit-reading{
-        top:91%;
-    }
-}
-
-/* =========================
-   LANDSCAPE MOVIL
-========================= */
-
-@media (max-width:768px) and (orientation:landscape){
-
-    .buy-button{
-        top:82%;
-    }
-
-    .read-button{
-        top:73%;
-    }
-
-    .exit-reading{
-        top:82%;
-    }
-
-    .model-label,
-    .rotate-label{
-        bottom:16px;
-    }
-
-    .axis-gizmo{
-        top:42px;
-    }
-}
-
 </style>
 </head>
 
 <body>
-
 <video id="background" autoplay muted loop playsinline>
     <source src="videos/sphereroom.mp4" type="video/mp4">
 </video>
@@ -480,1068 +147,752 @@ body.reading #scene:active{
 <div id="scene"></div>
 
 <div class="overlay">
-
     <div class="system-header">
         <span>dontfollowmecauseimlosttoo</span>
-        <span>VISUAL ARCHIVE</span>
     </div>
 
-    <a class="back" href="dontfollowmecauseimlosttoo.html">
-        ← BACK TO GALERY
-    </a>
+    <a class="back" href="dontfollowmecauseimlosttoo.html">← BACK TO GALERY</a>
 
     <div class="axis-gizmo">
-
         <div class="axis-center"></div>
-
-        <div class="axis-line axis-x">
-            <span>X</span>
-        </div>
-
-        <div class="axis-line axis-y">
-            <span>Y</span>
-        </div>
-
-        <div class="axis-line axis-z">
-            <span>Z</span>
-        </div>
-
-        <div class="axis-caption">
-            360° OBJECT
-        </div>
-
+        <div class="axis-line axis-x"><span>X</span></div>
+        <div class="axis-line axis-y"><span>Y</span></div>
+        <div class="axis-line axis-z"><span>Z</span></div>
+        <div class="axis-caption">360° OBJECT</div>
     </div>
 
-    <div class="model-label">
-        FILE 001 / BOOK 3D MODEL
-    </div>
+    <div class="model-label">FILE 001 / BOOK 3D MODEL</div>
+    <div class="rotate-label">DRAG TO ROTATE · SCROLL TO ZOOM</div>
 
-    <div class="rotate-label">
-        DRAG TO ROTATE · SCROLL TO ZOOM
-    </div>
+    <a class="buy-button" href="#" target="_blank">BUY PHOTOBOOK</a>
 
-    <button class="read-button" id="readButton">
-        READ PHOTOBOOK
-    </button>
+    <button class="open-book-button" id="openBookButton">OPEN BOOK</button>
+    <button class="exit-reading-button" id="exitReadingButton">EXIT READING</button>
+</div>
 
-    <button class="exit-reading" id="exitReading">
-        EXIT READING
-    </button>
-
-    <a class="buy-button"
-       href="#"
-       target="_blank">
-        BUY PHOTOBOOK
-    </a>
-
+<div class="reading-ui" id="readingUI">
+    <div class="reading-label">PHOTOBOOK / READING MODE</div>
+    <div class="reading-hint">DRAG FROM THE UPPER CORNERS TO TURN THE PAGE</div>
+    <div class="page-counter" id="pageCounter">01 / 05</div>
 </div>
 
 <div class="grain"></div>
 
-
 <script type="importmap">
-{
-    "imports":{
-        "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-}
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
 </script>
 
-
 <script type="module">
-
 import * as THREE from "three";
 import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/* ELEMENTOS ORIGINALES */
 
 const container=document.getElementById("scene");
-
 const axisX=document.querySelector(".axis-x");
 const axisY=document.querySelector(".axis-y");
 const axisZ=document.querySelector(".axis-z");
+const openBookButton=document.getElementById("openBookButton");
+const exitReadingButton=document.getElementById("exitReadingButton");
+const readingUI=document.getElementById("readingUI");
+const pageCounter=document.getElementById("pageCounter");
 
-const readButton=document.getElementById("readButton");
-const exitReading=document.getElementById("exitReading");
 
-
-/* =====================================================
-   THREE.JS
-===================================================== */
+/* ESCENA */
 
 const scene=new THREE.Scene();
-
-const camera=new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth/window.innerHeight,
-    .1,
-    1000
-);
-
+const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,.1,1000);
 camera.position.set(0,1.2,11);
 
-
-const renderer=new THREE.WebGLRenderer({
-    antialias:true,
-    alpha:true
-});
-
-renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,2)
-);
-
-renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-);
-
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
-
 container.appendChild(renderer.domElement);
 
 
-/* =====================================================
-   LUCES
-===================================================== */
+/* LUCES */
 
-scene.add(
-    new THREE.AmbientLight(
-        0xffffff,
-        2
-    )
-);
+scene.add(new THREE.AmbientLight(0xffffff,2));
 
-const keyLight=new THREE.DirectionalLight(
-    0xffffff,
-    3
-);
-
-keyLight.position.set(
-    4,
-    6,
-    5
-);
-
+const keyLight=new THREE.DirectionalLight(0xffffff,3);
+keyLight.position.set(4,6,5);
 scene.add(keyLight);
 
-
-const fillLight=new THREE.DirectionalLight(
-    0x9fa99b,
-    1.5
-);
-
-fillLight.position.set(
-    -4,
-    2,
-    -3
-);
-
+const fillLight=new THREE.DirectionalLight(0x9fa99b,1.5);
+fillLight.position.set(-4,2,-3);
 scene.add(fillLight);
 
 
-/* =====================================================
-   LIBRO 3D CERRADO
-===================================================== */
+/* LIBRO FBX */
 
 const loader=new FBXLoader();
 
-let bookModel=null;
-
-loader.load(
-    "models/book.fbx",
-
-    object=>{
-
-        object.traverse(child=>{
-
-            if(child.isMesh){
-
-                child.castShadow=true;
-                child.receiveShadow=true;
-
-            }
-
-        });
-
-
-        const box=new THREE.Box3()
-            .setFromObject(object);
-
-
-        const center=box.getCenter(
-            new THREE.Vector3()
-        );
-
-
-        const size=box.getSize(
-            new THREE.Vector3()
-        );
-
-
-        object.position.sub(center);
-
-        object.position.y+=1;
-
-
-        const maxSize=Math.max(
-            size.x,
-            size.y,
-            size.z
-        );
-
-
-        const scale=3/maxSize;
-
-        object.scale.setScalar(scale);
-
-
-        scene.add(object);
-
-        bookModel=object;
-
-        window.model=object;
-
-    },
-
-    undefined,
-
-    error=>{
-
-        console.error(
-            "Error cargando FBX:",
-            error
-        );
-
-    }
-);
-
-
-/* =====================================================
-   SISTEMA DE PÁGINAS
-===================================================== */
-
-const pageGroup=new THREE.Group();
-
-pageGroup.visible=false;
-
-scene.add(pageGroup);
-
-
-/*
-   DIMENSIONES DEL LIBRO
-
-   Las páginas forman una doble página
-   abierta delante del lector.
-*/
-
-const pageWidth=2.7;
-const pageHeight=3.7;
-
-const pageThickness=.018;
-
-const pageY=1;
-
-
-/* =====================================================
-   TEXTURAS
-===================================================== */
-
-const textureLoader=new THREE.TextureLoader();
-
-function loadPageTexture(number){
-
-    const texture=textureLoader.load(
-        `img/book/page${number}.jpg`
-    );
-
-    texture.colorSpace=THREE.SRGBColorSpace;
-
-    texture.anisotropy=
-        renderer.capabilities.getMaxAnisotropy();
-
-    return texture;
-}
-
-
-/* =====================================================
-   CREAR UNA HOJA
-===================================================== */
-
-function createSheet(
-    frontNumber,
-    backNumber,
-    index
-){
-
-    const sheet=new THREE.Group();
-
-    /*
-       Cada hoja tiene el eje de giro
-       en el centro del libro.
-    */
-
-    sheet.position.x=0;
-    sheet.position.y=pageY;
-    sheet.position.z=index*pageThickness;
-
-
-    /*
-       CARA DELANTERA
-    */
-
-    const frontTexture=
-        loadPageTexture(frontNumber);
-
-    const frontMaterial=
-        new THREE.MeshBasicMaterial({
-            map:frontTexture,
-            side:THREE.FrontSide
-        });
-
-
-    const frontGeometry=
-        new THREE.PlaneGeometry(
-            pageWidth,
-            pageHeight
-        );
-
-
-    const frontPage=
-        new THREE.Mesh(
-            frontGeometry,
-            frontMaterial
-        );
-
-
-    /*
-       El punto de giro está en el borde
-       izquierdo de la página.
-    */
-
-    frontPage.position.x=
-        pageWidth/2;
-
-    frontPage.position.z=
-        pageThickness/2;
-
-
-    /*
-       CARA TRASERA
-    */
-
-    const backTexture=
-        loadPageTexture(backNumber);
-
-    const backMaterial=
-        new THREE.MeshBasicMaterial({
-            map:backTexture,
-            side:THREE.FrontSide
-        });
-
-
-    const backGeometry=
-        new THREE.PlaneGeometry(
-            pageWidth,
-            pageHeight
-        );
-
-
-    const backPage=
-        new THREE.Mesh(
-            backGeometry,
-            backMaterial
-        );
-
-
-    /*
-       La cara trasera mira en dirección opuesta.
-    */
-
-    backPage.rotation.y=Math.PI;
-
-    backPage.position.x=
-        pageWidth/2;
-
-    backPage.position.z=
-        -pageThickness/2;
-
-
-    sheet.add(
-        frontPage,
-        backPage
-    );
-
-
-    sheet.userData={
-        index:index,
-        flipped:false,
-        frontNumber:frontNumber,
-        backNumber:backNumber
-    };
-
-
-    pageGroup.add(sheet);
-
-    return sheet;
-}
-
-
-/* =====================================================
-   CREAR LAS 5 HOJAS
-===================================================== */
-
-/*
-   Hoja 1:
-   página 1 / página 2
-
-   Hoja 2:
-   página 3 / página 4
-
-   ...
-
-   Hoja 5:
-   página 9 / página 10
-*/
-
-const sheets=[];
-
-for(let i=0;i<5;i++){
-
-    const front=i*2+1;
-    const back=i*2+2;
-
-    const sheet=createSheet(
-        front,
-        back,
-        i
-    );
-
-    sheets.push(sheet);
-}
-
-
-/* =====================================================
-   POSICIÓN INICIAL
-===================================================== */
-
-function resetPages(){
-
-    sheets.forEach((sheet,index)=>{
-
-        sheet.rotation.y=0;
-
-        sheet.userData.flipped=false;
-
-        sheet.position.x=0;
-        sheet.position.z=
-            index*pageThickness;
-
+loader.load("models/book.fbx",object=>{
+    object.traverse(child=>{
+        if(child.isMesh){
+            child.castShadow=true;
+            child.receiveShadow=true;
+        }
     });
 
-}
+    const box=new THREE.Box3().setFromObject(object);
+    const center=box.getCenter(new THREE.Vector3());
+    const size=box.getSize(new THREE.Vector3());
 
+    object.position.sub(center);
+    object.position.y+=1;
 
-/* =====================================================
-   PASAR UNA PÁGINA
-===================================================== */
+    const maxSize=Math.max(size.x,size.y,size.z);
+    object.scale.setScalar(3/maxSize);
 
-let currentPage=0;
+    scene.add(object);
+    window.model=object;
+},undefined,error=>{
+    console.error("Error cargando FBX:",error);
+});
 
-function flipNext(){
 
-    if(currentPage>=sheets.length)
-        return;
-
-
-    const sheet=
-        sheets[currentPage];
-
-
-    sheet.userData.flipped=true;
-
-
-    /*
-       Giramos la hoja 180º alrededor
-       del lomo.
-    */
-
-    sheet.rotation.y=-Math.PI;
-
-
-    currentPage++;
-
-}
-
-
-function flipPrevious(){
-
-    if(currentPage<=0)
-        return;
-
-
-    currentPage--;
-
-    const sheet=
-        sheets[currentPage];
-
-
-    sheet.userData.flipped=false;
-
-    sheet.rotation.y=0;
-
-}
-
-
-/* =====================================================
-   DRAG DESDE LAS ESQUINAS
-===================================================== */
-
-let pageDragging=false;
-
-let dragStartX=0;
-let dragStartY=0;
-
-let dragDirection=null;
-
-const cornerSize=180;
-
-
-container.addEventListener(
-    "pointerdown",
-    e=>{
-
-        if(!document.body.classList.contains("reading"))
-            return;
-
-
-        const x=e.clientX;
-        const y=e.clientY;
-
-
-        const width=window.innerWidth;
-
-
-        /*
-           Solo permitimos comenzar
-           desde las esquinas superiores.
-        */
-
-        const leftCorner=
-            x<cornerSize &&
-            y<cornerSize;
-
-
-        const rightCorner=
-            x>width-cornerSize &&
-            y<cornerSize;
-
-
-        if(!leftCorner && !rightCorner)
-            return;
-
-
-        pageDragging=true;
-
-        dragStartX=x;
-        dragStartY=y;
-
-
-        if(rightCorner){
-
-            dragDirection="next";
-
-        }else{
-
-            dragDirection="previous";
-
-        }
-
-
-        container.setPointerCapture(
-            e.pointerId
-        );
-
-    }
-);
-
-
-/* =====================================================
-   ARRASTRAR PÁGINA
-===================================================== */
-
-container.addEventListener(
-    "pointermove",
-    e=>{
-
-        if(!pageDragging)
-            return;
-
-
-        const dx=
-            e.clientX-dragStartX;
-
-
-        let progress=
-            Math.abs(dx)/window.innerWidth;
-
-
-        progress=
-            Math.min(1,progress);
-
-
-        /*
-           Página actual que se está arrastrando.
-        */
-
-        if(
-            dragDirection==="next" &&
-            currentPage<sheets.length
-        ){
-
-            const sheet=
-                sheets[currentPage];
-
-
-            sheet.rotation.y=
-                -Math.PI*progress;
-
-        }
-
-
-        if(
-            dragDirection==="previous" &&
-            currentPage>0
-        ){
-
-            const sheet=
-                sheets[currentPage-1];
-
-
-            sheet.rotation.y=
-                -Math.PI+
-                Math.PI*progress;
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SOLTAR PÁGINA
-===================================================== */
-
-container.addEventListener(
-    "pointerup",
-    e=>{
-
-        if(!pageDragging)
-            return;
-
-
-        pageDragging=false;
-
-
-        const dx=
-            e.clientX-dragStartX;
-
-
-        const threshold=
-            window.innerWidth*.20;
-
-
-        if(
-            dragDirection==="next" &&
-            dx<-threshold
-        ){
-
-            flipNext();
-
-        }
-
-        else if(
-            dragDirection==="previous" &&
-            dx>threshold
-        ){
-
-            flipPrevious();
-
-        }
-
-        else{
-
-            /*
-               Si no se ha arrastrado suficiente,
-               devolvemos la hoja a su posición.
-            */
-
-            if(
-                dragDirection==="next" &&
-                currentPage<sheets.length
-            ){
-
-                sheets[currentPage]
-                    .rotation.y=0;
-
-            }
-
-
-            if(
-                dragDirection==="previous" &&
-                currentPage>0
-            ){
-
-                sheets[currentPage-1]
-                    .rotation.y=-Math.PI;
-
-            }
-
-        }
-
-
-        dragDirection=null;
-
-    }
-);
-
-
-/* =====================================================
-   ENTRAR EN LECTURA
-===================================================== */
-
-readButton.addEventListener(
-    "click",
-    ()=>{
-
-        document.body.classList.add(
-            "reading"
-        );
-
-
-        /*
-           Ocultamos el modelo cerrado.
-        */
-
-        if(bookModel)
-            bookModel.visible=false;
-
-
-        /*
-           Mostramos las páginas.
-        */
-
-        pageGroup.visible=true;
-
-
-        /*
-           Colocamos el libro de frente.
-        */
-
-        pageGroup.rotation.set(
-            0,
-            0,
-            0
-        );
-
-
-        pageGroup.position.set(
-            0,
-            0,
-            0
-        );
-
-
-        /*
-           Comenzamos desde la portada.
-        */
-
-        currentPage=0;
-
-        resetPages();
-
-    }
-);
-
-
-/* =====================================================
-   SALIR DE LECTURA
-===================================================== */
-
-exitReading.addEventListener(
-    "click",
-    ()=>{
-
-        document.body.classList.remove(
-            "reading"
-        );
-
-
-        pageGroup.visible=false;
-
-
-        if(bookModel)
-            bookModel.visible=true;
-
-    }
-);
-
-
-/* =====================================================
-   ROTACIÓN DEL MODELO CERRADO
-===================================================== */
+/* ROTACION ORIGINAL */
 
 let dragging=false;
-
 let previousX=0;
 let previousY=0;
 
+container.addEventListener("pointerdown",e=>{
+    if(window.readingMode)return;
+    dragging=true;
+    previousX=e.clientX;
+    previousY=e.clientY;
+});
 
-container.addEventListener(
-    "pointerdown",
-    e=>{
+window.addEventListener("pointerup",()=>{dragging=false});
 
-        if(
-            document.body.classList.contains(
-                "reading"
-            )
-        )
+window.addEventListener("pointermove",e=>{
+    if(!dragging||!window.model||window.readingMode)return;
+
+    const dx=e.clientX-previousX;
+    const dy=e.clientY-previousY;
+
+    window.model.rotation.y+=dx*.01;
+    window.model.rotation.x+=dy*.01;
+
+    previousX=e.clientX;
+    previousY=e.clientY;
+});
+
+
+/* ZOOM ORIGINAL */
+
+window.addEventListener("wheel",e=>{
+    if(window.readingMode)return;
+
+    camera.position.z+=e.deltaY*.003;
+    camera.position.z=Math.max(7,Math.min(10,camera.position.z));
+});
+
+
+/* SISTEMA DE PAGINAS */
+
+const TOTAL_SHEETS=4;
+let currentSheet=0;
+let pageDragging=false;
+let draggedSheet=null;
+let dragStartX=0;
+let dragStartY=0;
+let dragProgress=0;
+let pageAnimating=false;
+
+
+/* GRUPO DEL LIBRO */
+
+const readingBook=new THREE.Group();
+readingBook.visible=false;
+scene.add(readingBook);
+
+
+/* DIMENSIONES */
+
+const BOOK_WIDTH=7.2;
+const BOOK_HEIGHT=5;
+const HALF_WIDTH=BOOK_WIDTH/2;
+const SEGMENTS=24;
+const PAGE_THICKNESS=.02;
+
+
+/* MATERIAL DE PAGINA */
+
+const pageMaterial=new THREE.MeshStandardMaterial({
+    color:0xe5dfc9,
+    roughness:.9,
+    metalness:0,
+    side:THREE.DoubleSide
+});
+
+
+/* MATERIAL DEL BORDE */
+
+const pageEdgeMaterial=new THREE.MeshStandardMaterial({
+    color:0xc8c0a7,
+    roughness:1,
+    metalness:0,
+    side:THREE.DoubleSide
+});
+
+
+/* CREAR GEOMETRIA DE PAGINA CON GROSOR */
+
+function createPageGeometry(){
+    const width=HALF_WIDTH;
+    const height=BOOK_HEIGHT;
+    const depth=PAGE_THICKNESS;
+    const vertices=[];
+    const indices=[];
+    const rows=8;
+    const cols=SEGMENTS;
+
+    for(let side=0;side<2;side++){
+        const z=side===0?-depth/2:depth/2;
+
+        for(let y=0;y<=rows;y++){
+            const py=-height/2+height*(y/rows);
+
+            for(let x=0;x<=cols;x++){
+                vertices.push(width*(x/cols),py,z);
+            }
+        }
+    }
+
+    const layerSize=(cols+1)*(rows+1);
+
+    for(let y=0;y<rows;y++){
+        for(let x=0;x<cols;x++){
+            const a=y*(cols+1)+x;
+            const b=a+1;
+            const c=a+(cols+1);
+            const d=c+1;
+
+            indices.push(a,b,d,a,d,c);
+
+            const aa=layerSize+a;
+            const bb=layerSize+b;
+            const cc=layerSize+c;
+            const dd=layerSize+d;
+
+            indices.push(aa,dd,bb,aa,cc,dd);
+        }
+    }
+
+    for(let y=0;y<rows;y++){
+        const f1=y*(cols+1);
+        const f2=(y+1)*(cols+1);
+        const b1=layerSize+f1;
+        const b2=layerSize+f2;
+        indices.push(f1,b1,b2,f1,b2,f2);
+    }
+
+    for(let y=0;y<rows;y++){
+        const f1=y*(cols+1)+cols;
+        const f2=(y+1)*(cols+1)+cols;
+        const b1=layerSize+f1;
+        const b2=layerSize+f2;
+        indices.push(f1,f2,b2,f1,b2,b1);
+    }
+
+    for(let x=0;x<cols;x++){
+        const f1=x;
+        const f2=x+1;
+        const b1=layerSize+f1;
+        const b2=layerSize+f2;
+        indices.push(f1,f2,b2,f1,b2,b1);
+    }
+
+    for(let x=0;x<cols;x++){
+        const f1=rows*(cols+1)+x;
+        const f2=f1+1;
+        const b1=layerSize+f1;
+        const b2=layerSize+f2;
+        indices.push(f1,b1,b2,f1,b2,f2);
+    }
+
+    const geometry=new THREE.BufferGeometry();
+    geometry.setAttribute("position",new THREE.Float32BufferAttribute(vertices,3));
+    geometry.setIndex(indices);
+    geometry.computeVertexNormals();
+    storeOriginalGeometry(geometry);
+
+    return geometry;
+}
+
+
+/* GUARDAR POSICIONES ORIGINALES */
+
+function storeOriginalGeometry(geometry){
+    const position=geometry.attributes.position;
+    geometry.userData.originalPositions=[];
+
+    for(let i=0;i<position.count;i++){
+        geometry.userData.originalPositions.push([
+            position.getX(i),
+            position.getY(i),
+            position.getZ(i)
+        ]);
+    }
+}
+
+
+/* ACTUALIZAR CURVATURA */
+
+function updatePageGeometry(mesh,angle,side){
+    const geometry=mesh.geometry;
+    const position=geometry.attributes.position;
+    const original=geometry.userData.originalPositions;
+
+    if(!original)return;
+
+    const width=HALF_WIDTH;
+    const bend=Math.sin(Math.abs(angle));
+
+    for(let i=0;i<position.count;i++){
+        const ox=original[i][0];
+        const oy=original[i][1];
+        const oz=original[i][2];
+        const t=ox/width;
+
+        const curve=Math.sin(t*Math.PI)*bend*.55;
+        const localAngle=angle*t*.24;
+
+        const x=ox*Math.cos(localAngle)-oz*Math.sin(localAngle);
+        const z=ox*Math.sin(localAngle)+oz*Math.cos(localAngle)+curve;
+
+        position.setXYZ(i,x,oy,z);
+    }
+
+    position.needsUpdate=true;
+    geometry.computeVertexNormals();
+}
+
+
+/* RESETAR GEOMETRIA */
+
+function resetPageGeometry(mesh){
+    const geometry=mesh.geometry;
+    const position=geometry.attributes.position;
+    const original=geometry.userData.originalPositions;
+
+    if(!original)return;
+
+    for(let i=0;i<position.count;i++){
+        position.setXYZ(i,original[i][0],original[i][1],original[i][2]);
+    }
+
+    position.needsUpdate=true;
+    geometry.computeVertexNormals();
+}
+
+
+/* CREAR HOJA */
+
+function createSheet(index){
+    const group=new THREE.Group();
+
+    const rightPage=new THREE.Mesh(createPageGeometry(),pageMaterial);
+    rightPage.position.set(0,0,0);
+    rightPage.rotation.y=0;
+
+    const leftPage=new THREE.Mesh(createPageGeometry(),pageMaterial);
+    leftPage.position.set(0,0,0);
+    leftPage.rotation.y=Math.PI;
+
+    group.add(rightPage,leftPage);
+    group.userData.index=index;
+    group.userData.rightPage=rightPage;
+    group.userData.leftPage=leftPage;
+
+    if(index===TOTAL_SHEETS-1){
+        rightPage.visible=true;
+        leftPage.visible=false;
+    }
+
+    return group;
+}
+
+
+/* CREAR LAS HOJAS */
+
+const sheets=[];
+
+for(let i=0;i<TOTAL_SHEETS;i++){
+    const sheet=createSheet(i);
+    sheets.push(sheet);
+    readingBook.add(sheet);
+}
+
+
+/* PREPARAR LIBRO */
+
+function resetBook(){
+    currentSheet=0;
+    pageDragging=false;
+    draggedSheet=null;
+    dragProgress=0;
+    pageAnimating=false;
+
+    sheets.forEach((sheet,index)=>{
+        sheet.visible=true;
+        sheet.position.set(0,1,0);
+        sheet.rotation.set(0,0,0);
+
+        const right=sheet.userData.rightPage;
+        const left=sheet.userData.leftPage;
+
+        resetPageGeometry(right);
+        resetPageGeometry(left);
+
+        right.position.set(0,0,0);
+        left.position.set(0,0,0);
+        right.rotation.y=0;
+        left.rotation.y=Math.PI;
+
+        left.visible=index!==TOTAL_SHEETS-1;
+    });
+
+    updatePageVisibility();
+    updatePageCounter();
+}
+
+
+/* VISIBILIDAD Y APILADO */
+
+function updatePageVisibility(){
+    sheets.forEach((sheet,index)=>{
+        if(index<currentSheet){
+            sheet.position.x=-.008*index;
+            sheet.position.z=-.006*index;
+        }else{
+            sheet.position.x=.008*index;
+            sheet.position.z=.006*index;
+        }
+
+        if(index===TOTAL_SHEETS-1){
+            sheet.userData.leftPage.visible=false;
+        }
+    });
+}
+
+
+/* CONTADOR */
+
+function updatePageCounter(){
+    const page=currentSheet+1;
+    pageCounter.textContent=String(page).padStart(2,"0")+" / "+String(TOTAL_SHEETS).padStart(2,"0");
+}
+
+
+/* ENCONTRAR HOJA ACTIVA */
+
+function getNextSheet(){
+    if(currentSheet>=TOTAL_SHEETS)return null;
+    return sheets[currentSheet];
+}
+
+
+/* COMENZAR PASO DE PAGINA */
+
+function startPageDrag(event){
+    if(!window.readingMode||pageAnimating||pageDragging)return;
+
+    const rect=renderer.domElement.getBoundingClientRect();
+    const x=event.clientX-rect.left;
+    const y=event.clientY-rect.top;
+
+    if(y>=rect.height*.38)return;
+
+    const fromRight=x>rect.width*.58;
+    const fromLeft=x<rect.width*.42;
+
+    if(!fromRight&&!fromLeft)return;
+
+    if(fromLeft){
+        if(currentSheet<=0)return;
+
+        draggedSheet=sheets[currentSheet-1];
+        dragStartX=x;
+        dragStartY=y;
+        pageDragging=true;
+        dragProgress=0;
+        draggedSheet.renderOrder=100;
+        event.preventDefault();
+        return;
+    }
+
+    if(currentSheet>=TOTAL_SHEETS-1)return;
+
+    draggedSheet=sheets[currentSheet];
+    dragStartX=x;
+    dragStartY=y;
+    pageDragging=true;
+    dragProgress=0;
+    draggedSheet.renderOrder=100;
+    event.preventDefault();
+}
+
+
+/* ARRASTRAR PAGINA */
+
+function movePageDrag(event){
+    if(!pageDragging||!draggedSheet)return;
+
+    const rect=renderer.domElement.getBoundingClientRect();
+    const x=event.clientX-rect.left;
+    const width=rect.width;
+    const direction=dragStartX>width*.5?1:-1;
+    const maxMovement=width*.65;
+
+    let movement=(dragStartX-x)*direction;
+    movement=Math.max(0,Math.min(maxMovement,movement));
+    dragProgress=movement/maxMovement;
+
+    updateDraggedPage(dragProgress,direction);
+    event.preventDefault();
+}
+
+
+/* ACTUALIZAR PAGINA DURANTE DRAG */
+
+function updateDraggedPage(progress,direction){
+    if(!draggedSheet)return;
+
+    progress=Math.max(0,Math.min(1,progress));
+
+    const angle=progress*Math.PI;
+    const right=draggedSheet.userData.rightPage;
+    const left=draggedSheet.userData.leftPage;
+
+    if(direction===1){
+        right.position.set(0,0,0);
+        right.rotation.y=-angle;
+        updatePageGeometry(right,angle,1);
+    }else{
+        if(draggedSheet.userData.index===TOTAL_SHEETS-1)return;
+
+        left.position.set(0,0,0);
+        left.rotation.y=Math.PI+angle;
+        updatePageGeometry(left,angle,-1);
+    }
+}
+
+
+/* SOLTAR PAGINA */
+
+function endPageDrag(){
+    if(!pageDragging||!draggedSheet)return;
+
+    const sheet=draggedSheet;
+    const progress=dragProgress;
+    const direction=dragStartX>renderer.domElement.clientWidth*.5?1:-1;
+
+    pageDragging=false;
+    draggedSheet=null;
+
+    animatePage(sheet,direction,progress>.5);
+}
+
+
+/* ANIMACION COMPLETA */
+
+function animatePage(sheet,direction,complete){
+    pageAnimating=true;
+
+    const start=dragProgress;
+    const target=complete?1:0;
+    const duration=complete?460:300;
+    const startTime=performance.now();
+
+    function animationFrame(now){
+        const elapsed=now-startTime;
+        const raw=Math.min(1,elapsed/duration);
+        const eased=1-Math.pow(1-raw,3);
+        const progress=start+(target-start)*eased;
+
+        draggedSheet=sheet;
+        updateDraggedPage(progress,direction);
+
+        if(raw<1){
+            requestAnimationFrame(animationFrame);
             return;
+        }
 
+        draggedSheet=sheet;
+        updateDraggedPage(target,direction);
+        draggedSheet=null;
 
-        dragging=true;
+        if(complete&&direction===1){
+            currentSheet=Math.min(TOTAL_SHEETS-1,currentSheet+1);
+        }
 
-        previousX=e.clientX;
-        previousY=e.clientY;
+        if(complete&&direction===-1){
+            currentSheet=Math.max(0,currentSheet-1);
+        }
 
+        resetAfterTurn();
     }
-);
+
+    requestAnimationFrame(animationFrame);
+}
 
 
-window.addEventListener(
-    "pointerup",
-    ()=>{
-        dragging=false;
+/* RESTAURAR DESPUES DEL GIRO */
+
+function resetAfterTurn(){
+    sheets.forEach((sheet,index)=>{
+        sheet.renderOrder=0;
+
+        const right=sheet.userData.rightPage;
+        const left=sheet.userData.leftPage;
+
+        resetPageGeometry(right);
+        resetPageGeometry(left);
+
+        right.position.set(0,0,0);
+        left.position.set(0,0,0);
+
+        if(index<currentSheet){
+            right.rotation.y=-Math.PI;
+            left.rotation.y=Math.PI;
+        }else{
+            right.rotation.y=0;
+            left.rotation.y=Math.PI;
+        }
+
+        if(index===TOTAL_SHEETS-1){
+            left.visible=false;
+        }
+    });
+
+    updatePageVisibility();
+    updatePageCounter();
+    pageAnimating=false;
+}
+
+
+/* EVENTOS DEL LIBRO */
+
+renderer.domElement.addEventListener("pointerdown",startPageDrag);
+window.addEventListener("pointermove",movePageDrag);
+window.addEventListener("pointerup",endPageDrag);
+
+
+/* ABRIR LIBRO */
+
+openBookButton.addEventListener("click",()=>{
+    if(window.readingMode)return;
+
+    window.readingMode=true;
+
+    if(window.model){
+        window.model.visible=false;
     }
-);
+
+    document.querySelector(".axis-gizmo").style.display="none";
+    document.querySelector(".model-label").style.display="none";
+    document.querySelector(".rotate-label").style.display="none";
+    document.querySelector(".buy-button").style.display="none";
+
+    openBookButton.style.display="none";
+    exitReadingButton.style.display="flex";
+    readingUI.style.display="block";
+    readingBook.visible=true;
+
+    resetBook();
+});
 
 
-window.addEventListener(
-    "pointermove",
-    e=>{
+/* SALIR DE LECTURA */
 
-        if(
-            !dragging ||
-            !window.model ||
-            document.body.classList.contains(
-                "reading"
-            )
-        )
-            return;
+exitReadingButton.addEventListener("click",()=>{
+    window.readingMode=false;
+    readingBook.visible=false;
 
-
-        const dx=
-            e.clientX-previousX;
-
-        const dy=
-            e.clientY-previousY;
-
-
-        window.model.rotation.y+=
-            dx*.01;
-
-        window.model.rotation.x+=
-            dy*.01;
-
-
-        previousX=e.clientX;
-        previousY=e.clientY;
-
+    if(window.model){
+        window.model.visible=true;
     }
-);
+
+    document.querySelector(".axis-gizmo").style.display="block";
+    document.querySelector(".model-label").style.display="block";
+    document.querySelector(".rotate-label").style.display="block";
+    document.querySelector(".buy-button").style.display="inline-flex";
+
+    exitReadingButton.style.display="none";
+    openBookButton.style.display="flex";
+    readingUI.style.display="none";
+});
 
 
-/* =====================================================
-   ZOOM DEL MODELO
-===================================================== */
+/* BOTON OPEN BOOK */
 
-window.addEventListener(
-    "wheel",
-    e=>{
-
-        if(
-            document.body.classList.contains(
-                "reading"
-            )
-        )
-            return;
+openBookButton.style.display="flex";
+exitReadingButton.style.display="none";
 
 
-        camera.position.z+=
-            e.deltaY*.003;
-
-
-        camera.position.z=
-            Math.max(
-                7,
-                Math.min(
-                    10,
-                    camera.position.z
-                )
-            );
-
-    }
-);
-
-
-/* =====================================================
-   AXIS GIZMO
-===================================================== */
+/* GIZMO ORIGINAL */
 
 function updateAxisGizmo(){
-
-    if(
-        !window.model ||
-        document.body.classList.contains(
-            "reading"
-        )
-    )
-        return;
-
+    if(!window.model)return;
 
     const axes={
-
         x:new THREE.Vector3(1,0,0),
         y:new THREE.Vector3(0,1,0),
         z:new THREE.Vector3(0,0,1)
-
     };
 
-
-    const quaternion=
-        window.model.quaternion;
-
+    const quaternion=window.model.quaternion;
 
     axes.x.applyQuaternion(quaternion);
     axes.y.applyQuaternion(quaternion);
     axes.z.applyQuaternion(quaternion);
 
-
     function getAngle(vector){
-
-        return Math.atan2(
-            vector.y,
-            vector.x
-        )*180/Math.PI;
-
+        return Math.atan2(vector.y,vector.x)*180/Math.PI;
     }
 
-
-    axisX.style.transform=
-        `rotate(${getAngle(axes.x)}deg)`;
-
-    axisY.style.transform=
-        `rotate(${getAngle(axes.y)}deg)`;
-
-    axisZ.style.transform=
-        `rotate(${getAngle(axes.z)}deg)`;
-
+    axisX.style.transform=`rotate(${getAngle(axes.x)}deg)`;
+    axisY.style.transform=`rotate(${getAngle(axes.y)}deg)`;
+    axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
 }
 
 
-/* =====================================================
-   RESIZE
-===================================================== */
+/* RESIZE */
 
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        camera.aspect=
-            window.innerWidth/
-            window.innerHeight;
+window.addEventListener("resize",()=>{
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+});
 
 
-        camera.updateProjectionMatrix();
-
-
-        renderer.setSize(
-            window.innerWidth,
-            window.innerHeight
-        );
-
-    }
-);
-
-
-/* =====================================================
-   ANIMACIÓN
-===================================================== */
+/* ANIMACION */
 
 function animate(){
-
-    requestAnimationFrame(
-        animate
-    );
-
-
+    requestAnimationFrame(animate);
     updateAxisGizmo();
-
-
-    renderer.render(
-        scene,
-        camera
-    );
-
+    renderer.render(scene,camera);
 }
 
-
 animate();
-
 </script>
-
 
 <script>
+document.addEventListener("wheel",e=>{
+    if(e.ctrlKey)e.preventDefault();
+},{passive:false});
 
-/* =====================================================
-   BLOQUEAR ZOOM DEL NAVEGADOR
-===================================================== */
-
-document.addEventListener(
-    "wheel",
-    e=>{
-
-        if(e.ctrlKey){
-
-            e.preventDefault();
-
-        }
-
-    },
-    {passive:false}
-);
-
-
-document.addEventListener(
-    "keydown",
-    e=>{
-
-        if(
-            e.ctrlKey &&
-            ["+","-","=","0"].includes(e.key)
-        ){
-
-            e.preventDefault();
-
-        }
-
+document.addEventListener("keydown",e=>{
+    if(e.ctrlKey&&["+","-","=","0"].includes(e.key)){
+        e.preventDefault();
     }
-);
-
+});
 </script>
-
 </body>
 </html>
