@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -7,7 +8,15 @@
 <link rel="icon" type="image/jpeg" href="img/book/iconoDFMCILT.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;caret-color:transparent}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+    caret-color:transparent;
+}
 
 html,body{
     width:100%;
@@ -15,7 +24,7 @@ html,body{
     overflow:hidden;
     background:#1f1d17;
     color:#d8cfae;
-    font-family:"Courier New",monospace
+    font-family:"Courier New",monospace;
 }
 
 #background{
@@ -32,12 +41,13 @@ html,body{
     position:fixed;
     inset:0;
     z-index:2;
+    touch-action:none;
 }
 
 .overlay{
     position:fixed;
     inset:0;
-    z-index:3;
+    z-index:20;
     pointer-events:none;
 }
 
@@ -48,14 +58,18 @@ html,body{
     width:100%;
     height:34px;
     padding:0 24px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     color:#650015;
     font-size:11px;
     letter-spacing:2px;
+
     border-bottom:1px solid #d8cfae33;
     background:#1f1d1780;
+
     backdrop-filter:blur(5px);
 }
 
@@ -95,21 +109,27 @@ html,body{
     letter-spacing:1px;
 }
 
-.axis-x{width:36px}
+.axis-x{
+    width:36px;
+}
 
 .axis-x span{
     right:-11px;
     top:-5px;
 }
 
-.axis-y{width:34px}
+.axis-y{
+    width:34px;
+}
 
 .axis-y span{
     right:-9px;
     top:-5px;
 }
 
-.axis-z{width:30px}
+.axis-z{
+    width:30px;
+}
 
 .axis-z span{
     right:-10px;
@@ -145,24 +165,37 @@ html,body{
     color:#650015;
 }
 
-.buy-button{
+.buy-button,
+.read-button,
+.exit-reading{
     position:absolute;
+
     left:50%;
-    top:90%;
-    transform:translate(-50%,-50%);
+    transform:translateX(-50%);
+
     display:inline-flex;
     align-items:center;
     gap:12px;
+
     padding:12px 18px;
+
     color:#650015;
     background:#ffffffd9;
+
     border:1px solid #650015;
+
     text-decoration:none;
+
     font-size:9px;
     font-weight:bold;
     letter-spacing:2px;
+
     pointer-events:auto;
+
     backdrop-filter:blur(5px);
+
+    cursor:pointer;
+
     transition:
         background .25s ease,
         color .25s ease,
@@ -170,19 +203,35 @@ html,body{
         box-shadow .25s ease;
 }
 
-.buy-button::after{
+.buy-button{
+    top:90%;
+}
+
+.read-button{
+    top:82%;
+}
+
+.exit-reading{
+    top:90%;
+    display:none;
+}
+
+.buy-button::after,
+.read-button::after{
     content:"→";
     transition:transform .25s ease;
 }
 
-.buy-button:hover{
+.buy-button:hover,
+.read-button:hover,
+.exit-reading:hover{
     color:#fff;
     background:#650015;
-    transform:translate(-50%,-50%) translateY(-2px);
     box-shadow:4px 5px 0 #65001533;
 }
 
-.buy-button:hover::after{
+.buy-button:hover::after,
+.read-button:hover::after{
     transform:translateX(4px);
 }
 
@@ -190,25 +239,68 @@ html,body{
     position:absolute;
     left:28px;
     top:55px;
+
     color:#650015;
     text-decoration:none;
+
     font-size:7px;
     letter-spacing:2px;
+
     pointer-events:auto;
 }
 
 .grain{
     position:fixed;
     inset:0;
-    z-index:10;
+    z-index:30;
+
     pointer-events:none;
+
     opacity:.08;
+
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+
     mix-blend-mode:screen;
 }
 
-/* Responsive para tabletas */
-@media (max-width: 768px){
+/* =========================
+   MODO LECTURA
+========================= */
+
+body.reading #background{
+    filter:saturate(.65) contrast(.9) brightness(.7);
+}
+
+body.reading .model-label,
+body.reading .rotate-label,
+body.reading .axis-gizmo,
+body.reading .read-button,
+body.reading .buy-button{
+    display:none;
+}
+
+body.reading .exit-reading{
+    display:inline-flex;
+}
+
+body.reading .back{
+    display:none;
+}
+
+body.reading #scene{
+    cursor:grab;
+}
+
+body.reading #scene:active{
+    cursor:grabbing;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:768px){
+
     .system-header{
         height:32px;
         padding:0 16px;
@@ -243,16 +335,32 @@ html,body{
         letter-spacing:1.5px;
     }
 
-    .buy-button{
-        top:86%;
+    .buy-button,
+    .read-button,
+    .exit-reading{
         padding:11px 15px;
         font-size:8px;
         letter-spacing:1.5px;
     }
+
+    .buy-button{
+        top:86%;
+    }
+
+    .read-button{
+        top:79%;
+    }
+
+    .exit-reading{
+        top:86%;
+    }
 }
 
-/* Responsive para móviles */
-@media (max-width: 480px){
+/* =========================
+   MOVIL
+========================= */
+
+@media (max-width:480px){
 
     html,
     body{
@@ -264,7 +372,7 @@ html,body{
     #scene{
         touch-action:none;
     }
-    
+
     .system-header{
         padding:0 10px;
         font-size:7px;
@@ -272,14 +380,10 @@ html,body{
     }
 
     .system-header span:first-child{
-        max-width:48%;
+        max-width:70%;
         overflow:hidden;
         white-space:nowrap;
         text-overflow:ellipsis;
-    }
-
-    .system-header span:nth-child(2){
-        font-size:7px;
     }
 
     .back{
@@ -313,19 +417,44 @@ html,body{
         text-align:right;
     }
 
-    .buy-button{
-        top:91%;
+    .buy-button,
+    .read-button,
+    .exit-reading{
         padding:10px 13px;
         gap:8px;
         font-size:7px;
         letter-spacing:1px;
         white-space:nowrap;
     }
+
+    .buy-button{
+        top:91%;
+    }
+
+    .read-button{
+        top:83%;
+    }
+
+    .exit-reading{
+        top:91%;
+    }
 }
 
-/* Ajustes para móviles en orientación horizontal */
-@media (max-width: 768px) and (orientation: landscape){
+/* =========================
+   LANDSCAPE MOVIL
+========================= */
+
+@media (max-width:768px) and (orientation:landscape){
+
     .buy-button{
+        top:82%;
+    }
+
+    .read-button{
+        top:73%;
+    }
+
+    .exit-reading{
         top:82%;
     }
 
@@ -338,10 +467,12 @@ html,body{
         top:42px;
     }
 }
+
 </style>
 </head>
 
 <body>
+
 <video id="background" autoplay muted loop playsinline>
     <source src="videos/sphereroom.mp4" type="video/mp4">
 </video>
@@ -349,8 +480,10 @@ html,body{
 <div id="scene"></div>
 
 <div class="overlay">
+
     <div class="system-header">
-        <span>dontfollowmecauseimlosttoo</span<>
+        <span>dontfollowmecauseimlosttoo</span>
+        <span>VISUAL ARCHIVE</span>
     </div>
 
     <a class="back" href="dontfollowmecauseimlosttoo.html">
@@ -358,6 +491,7 @@ html,body{
     </a>
 
     <div class="axis-gizmo">
+
         <div class="axis-center"></div>
 
         <div class="axis-line axis-x">
@@ -375,6 +509,7 @@ html,body{
         <div class="axis-caption">
             360° OBJECT
         </div>
+
     </div>
 
     <div class="model-label">
@@ -385,14 +520,24 @@ html,body{
         DRAG TO ROTATE · SCROLL TO ZOOM
     </div>
 
+    <button class="read-button" id="readButton">
+        READ PHOTOBOOK
+    </button>
+
+    <button class="exit-reading" id="exitReading">
+        EXIT READING
+    </button>
+
     <a class="buy-button"
        href="#"
        target="_blank">
         BUY PHOTOBOOK
     </a>
+
 </div>
 
 <div class="grain"></div>
+
 
 <script type="importmap">
 {
@@ -403,14 +548,30 @@ html,body{
 }
 </script>
 
+
 <script type="module">
+
 import * as THREE from "three";
 import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
 
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
 const container=document.getElementById("scene");
+
 const axisX=document.querySelector(".axis-x");
 const axisY=document.querySelector(".axis-y");
 const axisZ=document.querySelector(".axis-z");
+
+const readButton=document.getElementById("readButton");
+const exitReading=document.getElementById("exitReading");
+
+
+/* =====================================================
+   THREE.JS
+===================================================== */
 
 const scene=new THREE.Scene();
 
@@ -422,6 +583,7 @@ const camera=new THREE.PerspectiveCamera(
 );
 
 camera.position.set(0,1.2,11);
+
 
 const renderer=new THREE.WebGLRenderer({
     antialias:true,
@@ -438,7 +600,13 @@ renderer.setSize(
 );
 
 renderer.outputColorSpace=THREE.SRGBColorSpace;
+
 container.appendChild(renderer.domElement);
+
+
+/* =====================================================
+   LUCES
+===================================================== */
 
 scene.add(
     new THREE.AmbientLight(
@@ -460,6 +628,7 @@ keyLight.position.set(
 
 scene.add(keyLight);
 
+
 const fillLight=new THREE.DirectionalLight(
     0x9fa99b,
     1.5
@@ -473,32 +642,50 @@ fillLight.position.set(
 
 scene.add(fillLight);
 
+
+/* =====================================================
+   LIBRO 3D CERRADO
+===================================================== */
+
 const loader=new FBXLoader();
+
+let bookModel=null;
 
 loader.load(
     "models/book.fbx",
 
     object=>{
+
         object.traverse(child=>{
+
             if(child.isMesh){
+
                 child.castShadow=true;
                 child.receiveShadow=true;
+
             }
+
         });
+
 
         const box=new THREE.Box3()
             .setFromObject(object);
+
 
         const center=box.getCenter(
             new THREE.Vector3()
         );
 
+
         const size=box.getSize(
             new THREE.Vector3()
         );
 
+
         object.position.sub(center);
+
         object.position.y+=1;
+
 
         const maxSize=Math.max(
             size.x,
@@ -506,35 +693,633 @@ loader.load(
             size.z
         );
 
+
         const scale=3/maxSize;
+
         object.scale.setScalar(scale);
 
+
         scene.add(object);
+
+        bookModel=object;
+
         window.model=object;
+
     },
 
     undefined,
 
     error=>{
+
         console.error(
             "Error cargando FBX:",
             error
         );
+
     }
 );
 
-let dragging=false;
-let previousX=0;
-let previousY=0;
+
+/* =====================================================
+   SISTEMA DE PÁGINAS
+===================================================== */
+
+const pageGroup=new THREE.Group();
+
+pageGroup.visible=false;
+
+scene.add(pageGroup);
+
+
+/*
+   DIMENSIONES DEL LIBRO
+
+   Las páginas forman una doble página
+   abierta delante del lector.
+*/
+
+const pageWidth=2.7;
+const pageHeight=3.7;
+
+const pageThickness=.018;
+
+const pageY=1;
+
+
+/* =====================================================
+   TEXTURAS
+===================================================== */
+
+const textureLoader=new THREE.TextureLoader();
+
+function loadPageTexture(number){
+
+    const texture=textureLoader.load(
+        `img/book/page${number}.jpg`
+    );
+
+    texture.colorSpace=THREE.SRGBColorSpace;
+
+    texture.anisotropy=
+        renderer.capabilities.getMaxAnisotropy();
+
+    return texture;
+}
+
+
+/* =====================================================
+   CREAR UNA HOJA
+===================================================== */
+
+function createSheet(
+    frontNumber,
+    backNumber,
+    index
+){
+
+    const sheet=new THREE.Group();
+
+    /*
+       Cada hoja tiene el eje de giro
+       en el centro del libro.
+    */
+
+    sheet.position.x=0;
+    sheet.position.y=pageY;
+    sheet.position.z=index*pageThickness;
+
+
+    /*
+       CARA DELANTERA
+    */
+
+    const frontTexture=
+        loadPageTexture(frontNumber);
+
+    const frontMaterial=
+        new THREE.MeshBasicMaterial({
+            map:frontTexture,
+            side:THREE.FrontSide
+        });
+
+
+    const frontGeometry=
+        new THREE.PlaneGeometry(
+            pageWidth,
+            pageHeight
+        );
+
+
+    const frontPage=
+        new THREE.Mesh(
+            frontGeometry,
+            frontMaterial
+        );
+
+
+    /*
+       El punto de giro está en el borde
+       izquierdo de la página.
+    */
+
+    frontPage.position.x=
+        pageWidth/2;
+
+    frontPage.position.z=
+        pageThickness/2;
+
+
+    /*
+       CARA TRASERA
+    */
+
+    const backTexture=
+        loadPageTexture(backNumber);
+
+    const backMaterial=
+        new THREE.MeshBasicMaterial({
+            map:backTexture,
+            side:THREE.FrontSide
+        });
+
+
+    const backGeometry=
+        new THREE.PlaneGeometry(
+            pageWidth,
+            pageHeight
+        );
+
+
+    const backPage=
+        new THREE.Mesh(
+            backGeometry,
+            backMaterial
+        );
+
+
+    /*
+       La cara trasera mira en dirección opuesta.
+    */
+
+    backPage.rotation.y=Math.PI;
+
+    backPage.position.x=
+        pageWidth/2;
+
+    backPage.position.z=
+        -pageThickness/2;
+
+
+    sheet.add(
+        frontPage,
+        backPage
+    );
+
+
+    sheet.userData={
+        index:index,
+        flipped:false,
+        frontNumber:frontNumber,
+        backNumber:backNumber
+    };
+
+
+    pageGroup.add(sheet);
+
+    return sheet;
+}
+
+
+/* =====================================================
+   CREAR LAS 5 HOJAS
+===================================================== */
+
+/*
+   Hoja 1:
+   página 1 / página 2
+
+   Hoja 2:
+   página 3 / página 4
+
+   ...
+
+   Hoja 5:
+   página 9 / página 10
+*/
+
+const sheets=[];
+
+for(let i=0;i<5;i++){
+
+    const front=i*2+1;
+    const back=i*2+2;
+
+    const sheet=createSheet(
+        front,
+        back,
+        i
+    );
+
+    sheets.push(sheet);
+}
+
+
+/* =====================================================
+   POSICIÓN INICIAL
+===================================================== */
+
+function resetPages(){
+
+    sheets.forEach((sheet,index)=>{
+
+        sheet.rotation.y=0;
+
+        sheet.userData.flipped=false;
+
+        sheet.position.x=0;
+        sheet.position.z=
+            index*pageThickness;
+
+    });
+
+}
+
+
+/* =====================================================
+   PASAR UNA PÁGINA
+===================================================== */
+
+let currentPage=0;
+
+function flipNext(){
+
+    if(currentPage>=sheets.length)
+        return;
+
+
+    const sheet=
+        sheets[currentPage];
+
+
+    sheet.userData.flipped=true;
+
+
+    /*
+       Giramos la hoja 180º alrededor
+       del lomo.
+    */
+
+    sheet.rotation.y=-Math.PI;
+
+
+    currentPage++;
+
+}
+
+
+function flipPrevious(){
+
+    if(currentPage<=0)
+        return;
+
+
+    currentPage--;
+
+    const sheet=
+        sheets[currentPage];
+
+
+    sheet.userData.flipped=false;
+
+    sheet.rotation.y=0;
+
+}
+
+
+/* =====================================================
+   DRAG DESDE LAS ESQUINAS
+===================================================== */
+
+let pageDragging=false;
+
+let dragStartX=0;
+let dragStartY=0;
+
+let dragDirection=null;
+
+const cornerSize=180;
+
 
 container.addEventListener(
     "pointerdown",
     e=>{
-        dragging=true;
-        previousX=e.clientX;
-        previousY=e.clientY;
+
+        if(!document.body.classList.contains("reading"))
+            return;
+
+
+        const x=e.clientX;
+        const y=e.clientY;
+
+
+        const width=window.innerWidth;
+
+
+        /*
+           Solo permitimos comenzar
+           desde las esquinas superiores.
+        */
+
+        const leftCorner=
+            x<cornerSize &&
+            y<cornerSize;
+
+
+        const rightCorner=
+            x>width-cornerSize &&
+            y<cornerSize;
+
+
+        if(!leftCorner && !rightCorner)
+            return;
+
+
+        pageDragging=true;
+
+        dragStartX=x;
+        dragStartY=y;
+
+
+        if(rightCorner){
+
+            dragDirection="next";
+
+        }else{
+
+            dragDirection="previous";
+
+        }
+
+
+        container.setPointerCapture(
+            e.pointerId
+        );
+
     }
 );
+
+
+/* =====================================================
+   ARRASTRAR PÁGINA
+===================================================== */
+
+container.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(!pageDragging)
+            return;
+
+
+        const dx=
+            e.clientX-dragStartX;
+
+
+        let progress=
+            Math.abs(dx)/window.innerWidth;
+
+
+        progress=
+            Math.min(1,progress);
+
+
+        /*
+           Página actual que se está arrastrando.
+        */
+
+        if(
+            dragDirection==="next" &&
+            currentPage<sheets.length
+        ){
+
+            const sheet=
+                sheets[currentPage];
+
+
+            sheet.rotation.y=
+                -Math.PI*progress;
+
+        }
+
+
+        if(
+            dragDirection==="previous" &&
+            currentPage>0
+        ){
+
+            const sheet=
+                sheets[currentPage-1];
+
+
+            sheet.rotation.y=
+                -Math.PI+
+                Math.PI*progress;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SOLTAR PÁGINA
+===================================================== */
+
+container.addEventListener(
+    "pointerup",
+    e=>{
+
+        if(!pageDragging)
+            return;
+
+
+        pageDragging=false;
+
+
+        const dx=
+            e.clientX-dragStartX;
+
+
+        const threshold=
+            window.innerWidth*.20;
+
+
+        if(
+            dragDirection==="next" &&
+            dx<-threshold
+        ){
+
+            flipNext();
+
+        }
+
+        else if(
+            dragDirection==="previous" &&
+            dx>threshold
+        ){
+
+            flipPrevious();
+
+        }
+
+        else{
+
+            /*
+               Si no se ha arrastrado suficiente,
+               devolvemos la hoja a su posición.
+            */
+
+            if(
+                dragDirection==="next" &&
+                currentPage<sheets.length
+            ){
+
+                sheets[currentPage]
+                    .rotation.y=0;
+
+            }
+
+
+            if(
+                dragDirection==="previous" &&
+                currentPage>0
+            ){
+
+                sheets[currentPage-1]
+                    .rotation.y=-Math.PI;
+
+            }
+
+        }
+
+
+        dragDirection=null;
+
+    }
+);
+
+
+/* =====================================================
+   ENTRAR EN LECTURA
+===================================================== */
+
+readButton.addEventListener(
+    "click",
+    ()=>{
+
+        document.body.classList.add(
+            "reading"
+        );
+
+
+        /*
+           Ocultamos el modelo cerrado.
+        */
+
+        if(bookModel)
+            bookModel.visible=false;
+
+
+        /*
+           Mostramos las páginas.
+        */
+
+        pageGroup.visible=true;
+
+
+        /*
+           Colocamos el libro de frente.
+        */
+
+        pageGroup.rotation.set(
+            0,
+            0,
+            0
+        );
+
+
+        pageGroup.position.set(
+            0,
+            0,
+            0
+        );
+
+
+        /*
+           Comenzamos desde la portada.
+        */
+
+        currentPage=0;
+
+        resetPages();
+
+    }
+);
+
+
+/* =====================================================
+   SALIR DE LECTURA
+===================================================== */
+
+exitReading.addEventListener(
+    "click",
+    ()=>{
+
+        document.body.classList.remove(
+            "reading"
+        );
+
+
+        pageGroup.visible=false;
+
+
+        if(bookModel)
+            bookModel.visible=true;
+
+    }
+);
+
+
+/* =====================================================
+   ROTACIÓN DEL MODELO CERRADO
+===================================================== */
+
+let dragging=false;
+
+let previousX=0;
+let previousY=0;
+
+
+container.addEventListener(
+    "pointerdown",
+    e=>{
+
+        if(
+            document.body.classList.contains(
+                "reading"
+            )
+        )
+            return;
+
+
+        dragging=true;
+
+        previousX=e.clientX;
+        previousY=e.clientY;
+
+    }
+);
+
 
 window.addEventListener(
     "pointerup",
@@ -543,105 +1328,220 @@ window.addEventListener(
     }
 );
 
+
 window.addEventListener(
     "pointermove",
     e=>{
+
         if(
             !dragging ||
-            !window.model
-        ) return;
+            !window.model ||
+            document.body.classList.contains(
+                "reading"
+            )
+        )
+            return;
 
-        const dx=e.clientX-previousX;
-        const dy=e.clientY-previousY;
 
-        window.model.rotation.y+=dx*.01;
-        window.model.rotation.x+=dy*.01;
+        const dx=
+            e.clientX-previousX;
+
+        const dy=
+            e.clientY-previousY;
+
+
+        window.model.rotation.y+=
+            dx*.01;
+
+        window.model.rotation.x+=
+            dy*.01;
+
 
         previousX=e.clientX;
         previousY=e.clientY;
+
     }
 );
+
+
+/* =====================================================
+   ZOOM DEL MODELO
+===================================================== */
 
 window.addEventListener(
     "wheel",
     e=>{
-        camera.position.z+=e.deltaY*.003;
 
-        camera.position.z=Math.max(
-            7,
-            Math.min(
-                10,
-                camera.position.z
+        if(
+            document.body.classList.contains(
+                "reading"
             )
-        );
+        )
+            return;
+
+
+        camera.position.z+=
+            e.deltaY*.003;
+
+
+        camera.position.z=
+            Math.max(
+                7,
+                Math.min(
+                    10,
+                    camera.position.z
+                )
+            );
+
     }
 );
 
+
+/* =====================================================
+   AXIS GIZMO
+===================================================== */
+
 function updateAxisGizmo(){
-    if(!window.model) return;
+
+    if(
+        !window.model ||
+        document.body.classList.contains(
+            "reading"
+        )
+    )
+        return;
+
 
     const axes={
+
         x:new THREE.Vector3(1,0,0),
         y:new THREE.Vector3(0,1,0),
         z:new THREE.Vector3(0,0,1)
+
     };
 
-    const quaternion=window.model.quaternion;
+
+    const quaternion=
+        window.model.quaternion;
+
 
     axes.x.applyQuaternion(quaternion);
     axes.y.applyQuaternion(quaternion);
     axes.z.applyQuaternion(quaternion);
 
+
     function getAngle(vector){
+
         return Math.atan2(
             vector.y,
             vector.x
         )*180/Math.PI;
+
     }
 
-    axisX.style.transform=`rotate(${getAngle(axes.x)}deg)`;
-    axisY.style.transform=`rotate(${getAngle(axes.y)}deg)`;
-    axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
+
+    axisX.style.transform=
+        `rotate(${getAngle(axes.x)}deg)`;
+
+    axisY.style.transform=
+        `rotate(${getAngle(axes.y)}deg)`;
+
+    axisZ.style.transform=
+        `rotate(${getAngle(axes.z)}deg)`;
+
 }
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
 
 window.addEventListener(
     "resize",
     ()=>{
+
         camera.aspect=
             window.innerWidth/
             window.innerHeight;
 
+
         camera.updateProjectionMatrix();
+
 
         renderer.setSize(
             window.innerWidth,
             window.innerHeight
         );
+
     }
 );
 
+
+/* =====================================================
+   ANIMACIÓN
+===================================================== */
+
 function animate(){
-    requestAnimationFrame(animate);
+
+    requestAnimationFrame(
+        animate
+    );
+
+
     updateAxisGizmo();
-    renderer.render(scene,camera);
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
 }
 
+
 animate();
+
 </script>
 
+
 <script>
-    document.addEventListener("wheel",e=>{
+
+/* =====================================================
+   BLOQUEAR ZOOM DEL NAVEGADOR
+===================================================== */
+
+document.addEventListener(
+    "wheel",
+    e=>{
+
         if(e.ctrlKey){
+
             e.preventDefault();
+
         }
-    },{passive:false});
-    
-    document.addEventListener("keydown",e=>{
-        if(e.ctrlKey && ["+","-","=","0"].includes(e.key)){
+
+    },
+    {passive:false}
+);
+
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(
+            e.ctrlKey &&
+            ["+","-","=","0"].includes(e.key)
+        ){
+
             e.preventDefault();
+
         }
-    });
+
+    }
+);
+
 </script>
-    
+
 </body>
 </html>
