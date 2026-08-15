@@ -195,7 +195,6 @@ const BOOK_HEIGHT=5;
 const HALF_WIDTH=BOOK_WIDTH/2;
 const SEGMENTS=24;
 const PAGE_THICKNESS=.02;
-
 const textureLoader=new THREE.TextureLoader();
 const pageMaterials=[];
 
@@ -285,11 +284,20 @@ const geometry=new THREE.BufferGeometry();
 geometry.setAttribute("position",new THREE.Float32BufferAttribute(vertices,3));
 geometry.setAttribute("uv",new THREE.Float32BufferAttribute(uvs,2));
 geometry.setIndex(indices);
+
+const frontCount=SEGMENTS*rows*6;
+const backCount=frontCount;
+const sideCount=indices.length-frontCount-backCount;
+
+geometry.clearGroups();
+geometry.addGroup(0,frontCount,0);
+geometry.addGroup(frontCount,backCount,1);
+geometry.addGroup(frontCount+backCount,sideCount,2);
+
 geometry.computeVertexNormals();
-
 geometry.userData.originalPositions=[];
-const position=geometry.attributes.position;
 
+const position=geometry.attributes.position;
 for(let i=0;i<position.count;i++){
 geometry.userData.originalPositions.push([
 position.getX(i),
@@ -299,6 +307,63 @@ position.getZ(i)
 }
 
 return geometry;
+}
+
+function cloneMaterial(index,mirror=false){
+const material=pageMaterials[index].clone();
+material.map=pageMaterials[index].map.clone();
+material.map.wrapS=THREE.RepeatWrapping;
+
+if(mirror){
+material.map.repeat.x=-1;
+material.map.offset.x=1;
+}
+
+material.map.needsUpdate=true;
+return material;
+}
+
+function createSheet(index){
+const group=new THREE.Group();
+const leftIndex=index*2;
+const rightIndex=index*2+1;
+
+const leftBackIndex=Math.max(0,rightIndex-1);
+const rightBackIndex=Math.min(7,rightIndex+1);
+
+const leftPage=new THREE.Mesh(
+createPageGeometry(),
+[
+cloneMaterial(leftIndex,true),
+cloneMaterial(leftBackIndex,false),
+cloneMaterial(leftIndex,true)
+]
+);
+
+const rightPage=new THREE.Mesh(
+createPageGeometry(),
+[
+cloneMaterial(rightIndex,false),
+cloneMaterial(rightBackIndex,true),
+cloneMaterial(rightIndex,false)
+]
+);
+
+leftPage.rotation.y=Math.PI;
+group.add(rightPage,leftPage);
+group.userData.index=index;
+group.userData.rightPage=rightPage;
+group.userData.leftPage=leftPage;
+
+return group;
+}
+
+const sheets=[];
+
+for(let i=0;i<TOTAL_SHEETS;i++){
+const sheet=createSheet(i);
+sheets.push(sheet);
+readingBook.add(sheet);
 }
 
 function updatePageGeometry(mesh,angle){
@@ -339,51 +404,12 @@ position.needsUpdate=true;
 mesh.geometry.computeVertexNormals();
 }
 
-function createLeftMaterial(pageIndex){
-const material=pageMaterials[pageIndex].clone();
-material.map=pageMaterials[pageIndex].map.clone();
-material.map.wrapS=THREE.RepeatWrapping;
-material.map.repeat.x=-1;
-material.map.offset.x=1;
-material.map.needsUpdate=true;
-return material;
-}
-
-function createSheet(index){
-const group=new THREE.Group();
-
-const leftPage=new THREE.Mesh(
-createPageGeometry(),
-createLeftMaterial(index*2)
-);
-
-const rightPage=new THREE.Mesh(
-createPageGeometry(),
-pageMaterials[index*2+1]
-);
-
-leftPage.rotation.y=Math.PI;
-
-group.add(rightPage,leftPage);
-group.userData.index=index;
-group.userData.rightPage=rightPage;
-group.userData.leftPage=leftPage;
-
-return group;
-}
-
-const sheets=[];
-
-for(let i=0;i<TOTAL_SHEETS;i++){
-const sheet=createSheet(i);
-sheets.push(sheet);
-readingBook.add(sheet);
-}
-
 function setPageLayer(mesh,order){
 mesh.renderOrder=order;
-mesh.material.depthTest=true;
-mesh.material.depthWrite=true;
+mesh.material.forEach(material=>{
+material.depthTest=true;
+material.depthWrite=true;
+});
 }
 
 function hideAllPages(){
@@ -411,7 +437,6 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
-
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 right.rotation.y=0;
@@ -429,7 +454,6 @@ function updatePageVisibility(){
 hideAllPages();
 
 const current=sheets[currentSheet];
-
 current.visible=true;
 current.userData.leftPage.visible=true;
 current.userData.rightPage.visible=true;
@@ -446,7 +470,6 @@ const left=sheet.userData.leftPage;
 
 right.visible=true;
 left.visible=true;
-
 setPageLayer(left,order);
 setPageLayer(right,order+1);
 }
@@ -455,7 +478,6 @@ function preparePageTurn(direction){
 hideAllPages();
 
 const current=sheets[currentSheet];
-
 current.visible=true;
 current.position.z=.08;
 current.userData.leftPage.visible=true;
@@ -466,14 +488,12 @@ const next=sheets[currentSheet+1];
 
 setPageLayer(current.userData.leftPage,1);
 setPageLayer(current.userData.rightPage,20);
-
 showSheetBehind(next,5);
 }else{
 const previous=sheets[currentSheet-1];
 
 setPageLayer(current.userData.rightPage,1);
 setPageLayer(current.userData.leftPage,20);
-
 showSheetBehind(previous,5);
 }
 }
@@ -509,7 +529,6 @@ draggedSheet=sheets[currentSheet];
 }
 
 preparePageTurn(direction);
-
 dragStartX=x;
 pageDragging=true;
 dragProgress=0;
@@ -608,7 +627,6 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
-
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 right.rotation.y=0;
