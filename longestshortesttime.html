@@ -69,11 +69,15 @@ html,body{touch-action:none}.system-header{padding:0 10px;font-size:7px}.back{le
 <div class="overlay">
 <div class="system-header"><span>dontfollowmecauseimlosttoo</span></div>
 <a class="back" href="dontfollowmecauseimlosttoo.html">← BACK TO GALERY</a>
+
 <div class="axis-gizmo">
-<div class="axis-center"></div><div class="axis-line axis-x"><span>X</span></div>
-<div class="axis-line axis-y"><span>Y</span></div><div class="axis-line axis-z"><span>Z</span></div>
+<div class="axis-center"></div>
+<div class="axis-line axis-x"><span>X</span></div>
+<div class="axis-line axis-y"><span>Y</span></div>
+<div class="axis-line axis-z"><span>Z</span></div>
 <div class="axis-caption">360° OBJECT</div>
 </div>
+
 <div class="model-label">FILE 001 / BOOK 3D MODEL</div>
 <div class="rotate-label">DRAG TO ROTATE · SCROLL TO ZOOM</div>
 <a class="buy-button" href="#" target="_blank">BUY PHOTOBOOK</a>
@@ -130,11 +134,16 @@ const fbxLoader=new FBXLoader();
 
 fbxLoader.load("models/book.fbx",object=>{
 object.traverse(child=>{
-if(child.isMesh){child.castShadow=true;child.receiveShadow=true}
+if(child.isMesh){
+child.castShadow=true;
+child.receiveShadow=true;
+}
 });
+
 const box=new THREE.Box3().setFromObject(object);
 const center=box.getCenter(new THREE.Vector3());
 const size=box.getSize(new THREE.Vector3());
+
 object.position.sub(center);
 object.position.y+=1;
 object.scale.setScalar(3/Math.max(size.x,size.y,size.z));
@@ -142,7 +151,9 @@ scene.add(object);
 window.model=object;
 },undefined,error=>console.error("Error cargando FBX:",error));
 
-let dragging=false,previousX=0,previousY=0;
+let dragging=false;
+let previousX=0;
+let previousY=0;
 
 container.addEventListener("pointerdown",e=>{
 if(window.readingMode)return;
@@ -155,6 +166,7 @@ window.addEventListener("pointerup",()=>dragging=false);
 
 window.addEventListener("pointermove",e=>{
 if(!dragging||!window.model||window.readingMode)return;
+
 window.model.rotation.y+=(e.clientX-previousX)*.01;
 window.model.rotation.x+=(e.clientY-previousY)*.01;
 previousX=e.clientX;
@@ -302,6 +314,7 @@ const oz=original[i][2];
 const t=ox/HALF_WIDTH;
 const curve=Math.sin(t*Math.PI)*bend*.55;
 const localAngle=angle*t*.24;
+
 const x=ox*Math.cos(localAngle)-oz*Math.sin(localAngle);
 const z=ox*Math.sin(localAngle)+oz*Math.cos(localAngle)+curve;
 
@@ -347,6 +360,12 @@ sheets.push(sheet);
 readingBook.add(sheet);
 }
 
+function setPageLayer(mesh,order){
+mesh.renderOrder=order;
+mesh.material.depthTest=true;
+mesh.material.depthWrite=true;
+}
+
 function hideAllPages(){
 sheets.forEach(sheet=>{
 sheet.visible=false;
@@ -372,10 +391,14 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
+
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 right.rotation.y=0;
 left.rotation.y=Math.PI;
+
+setPageLayer(right,0);
+setPageLayer(left,0);
 });
 
 updatePageVisibility();
@@ -387,6 +410,7 @@ hideAllPages();
 
 if(currentSheet===0){
 const first=sheets[0];
+
 first.visible=true;
 first.userData.rightPage.visible=true;
 first.userData.leftPage.visible=true;
@@ -411,24 +435,36 @@ const current=sheets[currentSheet];
 const next=sheets[currentSheet+1];
 
 current.visible=true;
+current.position.z=.08;
 current.userData.rightPage.visible=true;
 current.userData.leftPage.visible=true;
 
+setPageLayer(current.userData.leftPage,1);
+setPageLayer(current.userData.rightPage,20);
+
 if(next){
 next.visible=true;
+next.position.z=0;
 next.userData.rightPage.visible=true;
+setPageLayer(next.userData.rightPage,5);
 }
 }else{
 const current=sheets[currentSheet];
 const previous=sheets[currentSheet-1];
 
 current.visible=true;
+current.position.z=0;
 current.userData.rightPage.visible=true;
+setPageLayer(current.userData.rightPage,5);
 
 if(previous){
 previous.visible=true;
+previous.position.z=.08;
 previous.userData.rightPage.visible=true;
 previous.userData.leftPage.visible=true;
+
+setPageLayer(previous.userData.rightPage,1);
+setPageLayer(previous.userData.leftPage,20);
 }
 }
 }
@@ -555,6 +591,7 @@ requestAnimationFrame(animationFrame);
 
 function resetAfterTurn(){
 sheets.forEach((sheet,index)=>{
+sheet.position.z=0;
 sheet.renderOrder=0;
 
 const right=sheet.userData.rightPage;
@@ -562,11 +599,15 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
+
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 
 right.rotation.y=index<currentSheet?-Math.PI:0;
 left.rotation.y=Math.PI;
+
+setPageLayer(right,0);
+setPageLayer(left,0);
 });
 
 updatePageVisibility();
