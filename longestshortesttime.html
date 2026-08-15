@@ -586,10 +586,16 @@ const angle=Math.max(0,Math.min(1,progress))*Math.PI;
 const right=draggedSheet.userData.rightPage;
 const left=draggedSheet.userData.leftPage;
 
+/* La hoja cambia de capa al superar la mitad del giro,
+   evitando que reaparezca bruscamente al finalizar. */
+const turningLayer=progress<.5?20:2;
+
 if(direction===1){
+setPageLayer(right,turningLayer);
 right.rotation.y=-angle;
 updatePageGeometry(right,angle);
 }else{
+setPageLayer(left,turningLayer);
 left.rotation.y=Math.PI+angle;
 updatePageGeometry(left,angle);
 }
@@ -729,7 +735,7 @@ const getAngle=vector=>Math.atan2(vector.y,vector.x)*180/Math.PI;
 
 axisX.style.transform=`rotate(${getAngle(axes.x)}deg)`;
 axisY.style.transform=`rotate(${getAngle(axes.y)}deg)`;
-axisZ.style.transform=`rotate(${getAngle(axes.z)}deg`;
+axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
 }
 
 window.addEventListener("resize",()=>{
