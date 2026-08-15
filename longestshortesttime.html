@@ -572,69 +572,49 @@ const sideMaterial=
    MATERIAL DE CARA
 ========================================================= */
 
-function createFaceMaterial(
-    index,
-    mirror=false
-){
+function createFaceMaterial(index,flipX=false){
 
-    const map=
+    const texture=
         pageTextures[
             Math.max(
                 0,
-                Math.min(
-                    7,
-                    index
-                )
+                Math.min(7,index)
             )
         ].clone();
 
-
-    map.colorSpace=
+    texture.colorSpace=
         THREE.SRGBColorSpace;
 
-
-    map.wrapS=
-        THREE.RepeatWrapping;
-
-
-    map.wrapT=
+    texture.wrapS=
         THREE.ClampToEdgeWrapping;
 
+    texture.wrapT=
+        THREE.ClampToEdgeWrapping;
 
-    if(mirror){
+    texture.anisotropy=
+        renderer.capabilities.getMaxAnisotropy();
 
-        map.repeat.set(
-            -1,
-            1
-        );
 
-        map.offset.set(
-            1,
-            0
-        );
+    if(flipX){
+
+        texture.repeat.set(-1,1);
+        texture.offset.set(1,0);
 
     }
     else{
 
-        map.repeat.set(
-            1,
-            1
-        );
-
-        map.offset.set(
-            0,
-            0
-        );
+        texture.repeat.set(1,1);
+        texture.offset.set(0,0);
 
     }
 
 
-    map.needsUpdate=true;
+    texture.needsUpdate=true;
 
 
     return new THREE.MeshStandardMaterial({
 
-        map:map,
+        map:texture,
 
         roughness:.9,
 
@@ -1025,121 +1005,143 @@ function createPageGeometry(){
 
 function createSheet(index){
 
-    const group=new THREE.Group();
+    const group=
+        new THREE.Group();
+
 
     /*
+        =====================================================
+        MAPA REAL DEL LIBRO
+        =====================================================
+
         HOJA 0
-        izquierda  = page1
-        derecha    = page2
-        reverso de derecha = page3
+        izquierda  = PAGE 1
+        derecha    = PAGE 2
+        reverso    = PAGE 3
 
         HOJA 1
-        izquierda  = page3
-        derecha    = page4
-        reverso de derecha = page5
+        izquierda  = PAGE 3
+        derecha    = PAGE 4
+        reverso    = PAGE 5
 
         HOJA 2
-        izquierda  = page5
-        derecha    = page6
-        reverso de derecha = page7
+        izquierda  = PAGE 5
+        derecha    = PAGE 6
+        reverso    = PAGE 7
 
         HOJA 3
-        izquierda  = page7
-        derecha    = page8
+        izquierda  = PAGE 7
+        derecha    = PAGE 8
     */
 
 
     const leftIndex=
         index*2;
 
+
     const rightIndex=
         index*2+1;
 
 
     /* =====================================================
-       PÁGINA IZQUIERDA
+       IZQUIERDA
     ===================================================== */
 
     const leftPage=
         new THREE.Mesh(
+
             createPageGeometry(),
+
             [
+
                 /*
-                    Cara visible de la página izquierda.
+                    Cara visible izquierda.
 
-                    Para la primera hoja:
-                    page1
-
-                    Para las siguientes:
-                    page3, page5, page7
+                    PAGE 1
+                    PAGE 3
+                    PAGE 5
+                    PAGE 7
                 */
+
                 createFaceMaterial(
                     leftIndex,
                     false
                 ),
 
                 /*
-                    La cara posterior de las páginas izquierdas
-                    no necesita utilizarse durante el giro normal.
+                    Cara posterior.
                 */
+
                 createFaceMaterial(
                     leftIndex,
                     true
                 ),
 
                 sideMaterial
+
             ]
+
         );
 
 
     /* =====================================================
-       PÁGINA DERECHA
+       DERECHA
     ===================================================== */
 
     const rightPage=
         new THREE.Mesh(
-            createPageGeometry(),
-            [
-                /*
-                    Cara visible:
 
-                    hoja 0 → page2
-                    hoja 1 → page4
-                    hoja 2 → page6
-                    hoja 3 → page8
+            createPageGeometry(),
+
+            [
+
+                /*
+                    Cara visible derecha.
+
+                    PAGE 2
+                    PAGE 4
+                    PAGE 6
+                    PAGE 8
                 */
+
                 createFaceMaterial(
                     rightIndex,
                     false
                 ),
 
                 /*
-                    Cara posterior:
+                    Cara posterior de la hoja.
 
-                    hoja 0 → page3
-                    hoja 1 → page5
-                    hoja 2 → page7
-                    hoja 3 → page8
+                    PAGE 3
+                    PAGE 5
+                    PAGE 7
+
+                    La última hoja no necesita
+                    una página 9.
                 */
+
                 createFaceMaterial(
                     Math.min(
                         7,
                         rightIndex+1
                     ),
-                    true
+                    false
                 ),
 
                 sideMaterial
+
             ]
+
         );
 
 
     /*
-        La página izquierda está al otro lado
-        del lomo.
+        La izquierda está orientada
+        hacia el lado contrario.
     */
 
-    leftPage.rotation.y=Math.PI;
+    leftPage.rotation.y=
+        Math.PI;
 
 
     group.add(
@@ -1148,7 +1150,8 @@ function createSheet(index){
     );
 
 
-    group.userData.index=index;
+    group.userData.index=
+        index;
 
     group.userData.rightPage=
         rightPage;
