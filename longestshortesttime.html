@@ -337,10 +337,28 @@ position.needsUpdate=true;
 mesh.geometry.computeVertexNormals();
 }
 
+function createLeftMaterial(pageIndex){
+const material=pageMaterials[pageIndex].clone();
+material.map=pageMaterials[pageIndex].map.clone();
+material.map.wrapS=THREE.RepeatWrapping;
+material.map.repeat.x=-1;
+material.map.offset.x=1;
+material.map.needsUpdate=true;
+return material;
+}
+
 function createSheet(index){
 const group=new THREE.Group();
-const rightPage=new THREE.Mesh(createPageGeometry(),pageMaterials[index*2]);
-const leftPage=new THREE.Mesh(createPageGeometry(),pageMaterials[index*2+1]);
+
+const leftPage=new THREE.Mesh(
+createPageGeometry(),
+createLeftMaterial(index*2)
+);
+
+const rightPage=new THREE.Mesh(
+createPageGeometry(),
+pageMaterials[index*2+1]
+);
 
 leftPage.rotation.y=Math.PI;
 
@@ -408,36 +426,25 @@ updatePageCounter();
 function updatePageVisibility(){
 hideAllPages();
 
-if(currentSheet===0){
-const first=sheets[0];
-
-first.visible=true;
-first.userData.rightPage.visible=true;
-first.userData.leftPage.visible=true;
-return;
-}
-
-const previous=sheets[currentSheet-1];
 const current=sheets[currentSheet];
 
-previous.visible=true;
-previous.userData.leftPage.visible=true;
-
 current.visible=true;
+current.userData.leftPage.visible=true;
 current.userData.rightPage.visible=true;
 }
 
 function preparePageTurn(direction){
 hideAllPages();
 
-if(direction===1){
 const current=sheets[currentSheet];
-const next=sheets[currentSheet+1];
 
 current.visible=true;
 current.position.z=.08;
-current.userData.rightPage.visible=true;
 current.userData.leftPage.visible=true;
+current.userData.rightPage.visible=true;
+
+if(direction===1){
+const next=sheets[currentSheet+1];
 
 setPageLayer(current.userData.leftPage,1);
 setPageLayer(current.userData.rightPage,20);
@@ -445,26 +452,20 @@ setPageLayer(current.userData.rightPage,20);
 if(next){
 next.visible=true;
 next.position.z=0;
-next.userData.rightPage.visible=true;
-setPageLayer(next.userData.rightPage,5);
+next.userData.leftPage.visible=true;
+setPageLayer(next.userData.leftPage,5);
 }
 }else{
-const current=sheets[currentSheet];
 const previous=sheets[currentSheet-1];
 
-current.visible=true;
-current.position.z=0;
-current.userData.rightPage.visible=true;
-setPageLayer(current.userData.rightPage,5);
+setPageLayer(current.userData.rightPage,1);
+setPageLayer(current.userData.leftPage,20);
 
 if(previous){
 previous.visible=true;
-previous.position.z=.08;
+previous.position.z=0;
 previous.userData.rightPage.visible=true;
-previous.userData.leftPage.visible=true;
-
-setPageLayer(previous.userData.rightPage,1);
-setPageLayer(previous.userData.leftPage,20);
+setPageLayer(previous.userData.rightPage,5);
 }
 }
 }
@@ -492,7 +493,7 @@ let direction;
 if(fromLeft){
 if(currentSheet<=0)return;
 direction=-1;
-draggedSheet=sheets[currentSheet-1];
+draggedSheet=sheets[currentSheet];
 }else{
 if(currentSheet>=TOTAL_SHEETS-1)return;
 direction=1;
@@ -590,7 +591,7 @@ requestAnimationFrame(animationFrame);
 }
 
 function resetAfterTurn(){
-sheets.forEach((sheet,index)=>{
+sheets.forEach(sheet=>{
 sheet.position.z=0;
 sheet.renderOrder=0;
 
@@ -602,8 +603,7 @@ resetPageGeometry(left);
 
 right.position.set(0,0,0);
 left.position.set(0,0,0);
-
-right.rotation.y=index<currentSheet?-Math.PI:0;
+right.rotation.y=0;
 left.rotation.y=Math.PI;
 
 setPageLayer(right,0);
