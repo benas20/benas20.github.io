@@ -262,23 +262,32 @@ uvs.push(x/cols,y/rows);
 
 const layerSize=(cols+1)*(rows+1);
 
+function addFrontIndices(){
 for(let y=0;y<rows;y++){
 for(let x=0;x<cols;x++){
 const a=y*(cols+1)+x;
 const b=a+1;
 const c=a+cols+1;
 const d=c+1;
-
 indices.push(a,b,d,a,d,c);
-
-const aa=layerSize+a;
-const bb=layerSize+b;
-const cc=layerSize+c;
-const dd=layerSize+d;
-
-indices.push(aa,dd,bb,aa,cc,dd);
 }
 }
+}
+
+function addBackIndices(){
+for(let y=0;y<rows;y++){
+for(let x=0;x<cols;x++){
+const a=layerSize+y*(cols+1)+x;
+const b=a+1;
+const c=a+cols+1;
+const d=c+1;
+indices.push(a,d,b,a,c,d);
+}
+}
+}
+
+addFrontIndices();
+addBackIndices();
 
 for(let y=0;y<rows;y++){
 const f1=y*(cols+1);
@@ -720,7 +729,7 @@ const getAngle=vector=>Math.atan2(vector.y,vector.x)*180/Math.PI;
 
 axisX.style.transform=`rotate(${getAngle(axes.x)}deg)`;
 axisY.style.transform=`rotate(${getAngle(axes.y)}deg)`;
-axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
+axisZ.style.transform=`rotate(${getAngle(axes.z)}deg`;
 }
 
 window.addEventListener("resize",()=>{
