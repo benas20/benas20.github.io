@@ -12,7 +12,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1f1d17;color:#d8cfa
 #scene{position:fixed;inset:0;z-index:2}
 .overlay,.grain{position:fixed;inset:0;pointer-events:none}
 .overlay{z-index:3}
-.system-header{position:absolute;top:0;left:0;width:100%;height:34px;padding:0 24px;display:flex;justify-content:space-between;align-items:center;color:#650015;font-size:11px;letter-spacing:2px;border-bottom:1px solid #d8cfae33;background:#1f1d1780;backdrop-filter:blur(5px)}
+.system-header{position:absolute;top:0;left:0;width:100%;height:34px;padding:0 24px;display:flex;align-items:center;color:#650015;font-size:11px;letter-spacing:2px;border-bottom:1px solid #d8cfae33;background:#1f1d1780;backdrop-filter:blur(5px)}
 .axis-gizmo{position:absolute;top:58px;right:30px;width:90px;height:90px;color:#650015;opacity:.8}
 .axis-center{position:absolute;left:39px;top:39px;width:7px;height:7px;border-radius:50%;background:#650015}
 .axis-line{position:absolute;left:42px;top:42px;height:1px;background:#650015;transform-origin:left center}
@@ -111,12 +111,12 @@ const readingUI=document.getElementById("readingUI");
 const pageCounter=document.getElementById("pageCounter");
 
 const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,.1,1000);
+const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,1000);
 camera.position.set(0,1.2,11);
 
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
@@ -155,27 +155,27 @@ let dragging=false;
 let previousX=0;
 let previousY=0;
 
-container.addEventListener("pointerdown",e=>{
+container.addEventListener("pointerdown",event=>{
 if(window.readingMode)return;
 dragging=true;
-previousX=e.clientX;
-previousY=e.clientY;
+previousX=event.clientX;
+previousY=event.clientY;
 });
 
 window.addEventListener("pointerup",()=>dragging=false);
 
-window.addEventListener("pointermove",e=>{
+window.addEventListener("pointermove",event=>{
 if(!dragging||!window.model||window.readingMode)return;
 
-window.model.rotation.y+=(e.clientX-previousX)*.01;
-window.model.rotation.x+=(e.clientY-previousY)*.01;
-previousX=e.clientX;
-previousY=e.clientY;
+window.model.rotation.y+=(event.clientX-previousX)*.01;
+window.model.rotation.x+=(event.clientY-previousY)*.01;
+previousX=event.clientX;
+previousY=event.clientY;
 });
 
-window.addEventListener("wheel",e=>{
+window.addEventListener("wheel",event=>{
 if(window.readingMode)return;
-camera.position.z=Math.max(7,Math.min(10,camera.position.z+e.deltaY*.003));
+camera.position.z=Math.max(7,Math.min(10,camera.position.z+event.deltaY*.003));
 });
 
 const TOTAL_SHEETS=4;
@@ -196,19 +196,47 @@ const HALF_WIDTH=BOOK_WIDTH/2;
 const SEGMENTS=24;
 const PAGE_THICKNESS=.02;
 const textureLoader=new THREE.TextureLoader();
-const pageMaterials=[];
+const pageTextures=[];
 
 for(let i=0;i<8;i++){
 const texture=textureLoader.load(`img/book/page${i+1}.jpg`);
 texture.colorSpace=THREE.SRGBColorSpace;
 texture.anisotropy=renderer.capabilities.getMaxAnisotropy();
+texture.wrapS=THREE.ClampToEdgeWrapping;
+texture.wrapT=THREE.ClampToEdgeWrapping;
+pageTextures.push(texture);
+}
 
-pageMaterials.push(new THREE.MeshStandardMaterial({
-map:texture,
+const sideMaterial=new THREE.MeshStandardMaterial({
+color:0xe3dbc3,
+roughness:1,
+metalness:0,
+side:THREE.DoubleSide
+});
+
+function createFaceMaterial(index,mirror=false){
+const map=pageTextures[Math.max(0,Math.min(7,index))].clone();
+
+map.colorSpace=THREE.SRGBColorSpace;
+map.wrapS=THREE.RepeatWrapping;
+map.wrapT=THREE.ClampToEdgeWrapping;
+
+if(mirror){
+map.repeat.set(-1,1);
+map.offset.set(1,0);
+}else{
+map.repeat.set(1,1);
+map.offset.set(0,0);
+}
+
+map.needsUpdate=true;
+
+return new THREE.MeshStandardMaterial({
+map,
 roughness:.9,
 metalness:0,
 side:THREE.DoubleSide
-}));
+});
 }
 
 function createPageGeometry(){
@@ -226,7 +254,7 @@ const z=side===0?-depth/2:depth/2;
 
 for(let y=0;y<=rows;y++){
 for(let x=0;x<=cols;x++){
-vertices.push(width*(x/cols),-height/2+height*(y/rows),z);
+vertices.push(width*x/cols,-height/2+height*y/rows,z);
 uvs.push(x/cols,y/rows);
 }
 }
@@ -298,6 +326,7 @@ geometry.computeVertexNormals();
 geometry.userData.originalPositions=[];
 
 const position=geometry.attributes.position;
+
 for(let i=0;i<position.count;i++){
 geometry.userData.originalPositions.push([
 position.getX(i),
@@ -309,47 +338,35 @@ position.getZ(i)
 return geometry;
 }
 
-function cloneMaterial(index,mirror=false){
-const material=pageMaterials[index].clone();
-material.map=pageMaterials[index].map.clone();
-material.map.wrapS=THREE.RepeatWrapping;
-
-if(mirror){
-material.map.repeat.x=-1;
-material.map.offset.x=1;
-}
-
-material.map.needsUpdate=true;
-return material;
-}
-
 function createSheet(index){
 const group=new THREE.Group();
+
 const leftIndex=index*2;
 const rightIndex=index*2+1;
 
-const leftBackIndex=Math.max(0,rightIndex-1);
+const leftBackIndex=Math.min(7,leftIndex+1);
 const rightBackIndex=Math.min(7,rightIndex+1);
 
 const leftPage=new THREE.Mesh(
 createPageGeometry(),
 [
-cloneMaterial(leftIndex,true),
-cloneMaterial(leftBackIndex,false),
-cloneMaterial(leftIndex,true)
+createFaceMaterial(leftIndex,true),
+createFaceMaterial(leftBackIndex,false),
+sideMaterial
 ]
 );
 
 const rightPage=new THREE.Mesh(
 createPageGeometry(),
 [
-cloneMaterial(rightIndex,false),
-cloneMaterial(rightBackIndex,true),
-cloneMaterial(rightIndex,false)
+createFaceMaterial(rightIndex,false),
+createFaceMaterial(rightBackIndex,true),
+sideMaterial
 ]
 );
 
 leftPage.rotation.y=Math.PI;
+
 group.add(rightPage,leftPage);
 group.userData.index=index;
 group.userData.rightPage=rightPage;
@@ -406,6 +423,7 @@ mesh.geometry.computeVertexNormals();
 
 function setPageLayer(mesh,order){
 mesh.renderOrder=order;
+
 mesh.material.forEach(material=>{
 material.depthTest=true;
 material.depthWrite=true;
@@ -437,6 +455,7 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
+
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 right.rotation.y=0;
@@ -470,6 +489,7 @@ const left=sheet.userData.leftPage;
 
 right.visible=true;
 left.visible=true;
+
 setPageLayer(left,order);
 setPageLayer(right,order+1);
 }
@@ -521,18 +541,16 @@ let direction;
 if(fromLeft){
 if(currentSheet<=0)return;
 direction=-1;
-draggedSheet=sheets[currentSheet];
 }else{
 if(currentSheet>=TOTAL_SHEETS-1)return;
 direction=1;
-draggedSheet=sheets[currentSheet];
 }
 
 preparePageTurn(direction);
+draggedSheet=sheets[currentSheet];
 dragStartX=x;
 pageDragging=true;
 dragProgress=0;
-draggedSheet.renderOrder=100;
 event.preventDefault();
 }
 
@@ -627,6 +645,7 @@ const left=sheet.userData.leftPage;
 
 resetPageGeometry(right);
 resetPageGeometry(left);
+
 right.position.set(0,0,0);
 left.position.set(0,0,0);
 right.rotation.y=0;
@@ -660,6 +679,7 @@ openBookButton.style.display="none";
 exitReadingButton.style.display="flex";
 readingUI.style.display="block";
 readingBook.visible=true;
+
 resetBook();
 });
 
@@ -691,6 +711,7 @@ z:new THREE.Vector3(0,0,1)
 };
 
 const quaternion=window.model.quaternion;
+
 axes.x.applyQuaternion(quaternion);
 axes.y.applyQuaternion(quaternion);
 axes.z.applyQuaternion(quaternion);
@@ -703,9 +724,9 @@ axisZ.style.transform=`rotate(${getAngle(axes.z)}deg)`;
 }
 
 window.addEventListener("resize",()=>{
-camera.aspect=window.innerWidth/window.innerHeight;
+camera.aspect=innerWidth/innerHeight;
 camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setSize(innerWidth,innerHeight);
 });
 
 function animate(){
@@ -718,12 +739,12 @@ animate();
 </script>
 
 <script>
-document.addEventListener("wheel",e=>{
-if(e.ctrlKey)e.preventDefault();
+document.addEventListener("wheel",event=>{
+if(event.ctrlKey)event.preventDefault();
 },{passive:false});
 
-document.addEventListener("keydown",e=>{
-if(e.ctrlKey&&["+","-","=","0"].includes(e.key))e.preventDefault();
+document.addEventListener("keydown",event=>{
+if(event.ctrlKey&&["+","-","=","0"].includes(event.key))event.preventDefault();
 });
 </script>
 </body>
