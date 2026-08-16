@@ -445,7 +445,6 @@ window.addEventListener(
     }
 );
 
-
 /* =========================================================
    SISTEMA DE PAGINAS
 ========================================================= */
@@ -453,15 +452,10 @@ window.addEventListener(
 const TOTAL_SHEETS=4;
 
 let currentSheet=0;
-
 let pageDragging=false;
-
 let draggedSheet=null;
-
 let dragStartX=0;
-
 let dragProgress=0;
-
 let pageAnimating=false;
 
 
@@ -472,13 +466,9 @@ let pageAnimating=false;
 const readingBook=
     new THREE.Group();
 
-
 readingBook.visible=false;
 
-
-scene.add(
-    readingBook
-);
+scene.add(readingBook);
 
 
 /* =========================================================
@@ -486,7 +476,6 @@ scene.add(
 ========================================================= */
 
 const BOOK_WIDTH=7.2;
-
 const BOOK_HEIGHT=5;
 
 const HALF_WIDTH=
@@ -494,12 +483,7 @@ const HALF_WIDTH=
 
 const SEGMENTS=24;
 
-
-/*
-    GROSOR ACTUAL
-*/
-
-const PAGE_THICKNESS=.02;
+const PAGE_THICKNESS=.025;
 
 
 /* =========================================================
@@ -509,49 +493,35 @@ const PAGE_THICKNESS=.02;
 const textureLoader=
     new THREE.TextureLoader();
 
-
 const pageTextures=[];
 
 
-for(
-    let i=0;
-    i<8;
-    i++
-){
+for(let i=0;i<8;i++){
 
     const texture=
         textureLoader.load(
             `img/book/page${i+1}.jpg`
         );
 
-
     texture.colorSpace=
         THREE.SRGBColorSpace;
 
-
     texture.anisotropy=
-        renderer
-            .capabilities
-            .getMaxAnisotropy();
-
+        renderer.capabilities.getMaxAnisotropy();
 
     texture.wrapS=
         THREE.ClampToEdgeWrapping;
 
-
     texture.wrapT=
         THREE.ClampToEdgeWrapping;
 
-
-    pageTextures.push(
-        texture
-    );
+    pageTextures.push(texture);
 
 }
 
 
 /* =========================================================
-   MATERIAL LATERAL
+   MATERIAL DEL CANTO
 ========================================================= */
 
 const sideMaterial=
@@ -561,26 +531,19 @@ const sideMaterial=
 
         roughness:1,
 
-        metalness:0,
-
-        side:THREE.DoubleSide
+        metalness:0
 
     });
 
 
 /* =========================================================
-   MATERIAL DE CARA
+   MATERIAL DE UNA CARA
 ========================================================= */
 
-function createFaceMaterial(index,flipX=false){
+function createFaceMaterial(index){
 
     const texture=
-        pageTextures[
-            Math.max(
-                0,
-                Math.min(7,index)
-            )
-        ].clone();
+        pageTextures[index].clone();
 
     texture.colorSpace=
         THREE.SRGBColorSpace;
@@ -594,20 +557,9 @@ function createFaceMaterial(index,flipX=false){
     texture.anisotropy=
         renderer.capabilities.getMaxAnisotropy();
 
+    texture.repeat.set(1,1);
 
-    if(flipX){
-
-        texture.repeat.set(-1,1);
-        texture.offset.set(1,0);
-
-    }
-    else{
-
-        texture.repeat.set(1,1);
-        texture.offset.set(0,0);
-
-    }
-
+    texture.offset.set(0,0);
 
     texture.needsUpdate=true;
 
@@ -620,7 +572,7 @@ function createFaceMaterial(index,flipX=false){
 
         metalness:0,
 
-        side:THREE.DoubleSide
+        side:THREE.FrontSide
 
     });
 
@@ -628,7 +580,7 @@ function createFaceMaterial(index,flipX=false){
 
 
 /* =========================================================
-   GEOMETRIA DE PAGINA
+   GEOMETRIA DE HOJA FISICA
 ========================================================= */
 
 function createPageGeometry(){
@@ -642,32 +594,22 @@ function createPageGeometry(){
     const depth=
         PAGE_THICKNESS;
 
+    const rows=8;
+    const cols=SEGMENTS;
 
     const vertices=[];
-
     const uvs=[];
-
     const indices=[];
 
 
-    const rows=8;
+    /* =====================================================
+       DOS CAPAS
 
-    const cols=
-        SEGMENTS;
+       0 = DELANTE
+       1 = DETRAS
+    ===================================================== */
 
-
-    /*
-        DOS SUPERFICIES:
-
-        frente
-        verso
-    */
-
-    for(
-        let side=0;
-        side<2;
-        side++
-    ){
+    for(let side=0;side<2;side++){
 
         const z=
             side===0
@@ -675,17 +617,9 @@ function createPageGeometry(){
             : depth/2;
 
 
-        for(
-            let y=0;
-            y<=rows;
-            y++
-        ){
+        for(let y=0;y<=rows;y++){
 
-            for(
-                let x=0;
-                x<=cols;
-                x++
-            ){
+            for(let x=0;x<=cols;x++){
 
                 vertices.push(
 
@@ -697,7 +631,6 @@ function createPageGeometry(){
                     z
 
                 );
-
 
                 uvs.push(
 
@@ -715,103 +648,85 @@ function createPageGeometry(){
 
 
     const layerSize=
-        (cols+1)*
-        (rows+1);
+        (cols+1)*(rows+1);
 
 
-    function addFrontIndices(){
+    /* =====================================================
+       DELANTE
+    ===================================================== */
 
-        for(
-            let y=0;
-            y<rows;
-            y++
-        ){
+    for(let y=0;y<rows;y++){
 
-            for(
-                let x=0;
-                x<cols;
-                x++
-            ){
+        for(let x=0;x<cols;x++){
 
-                const a=
-                    y*(cols+1)+x;
+            const a=
+                y*(cols+1)+x;
 
-                const b=
-                    a+1;
+            const b=
+                a+1;
 
-                const c=
-                    a+cols+1;
+            const c=
+                a+cols+1;
 
-                const d=
-                    c+1;
+            const d=
+                c+1;
 
 
-                indices.push(
-                    a,b,d,
-                    a,d,c
-                );
-
-            }
+            indices.push(
+                a,b,d,
+                a,d,c
+            );
 
         }
 
     }
 
 
-    function addBackIndices(){
-
-        for(
-            let y=0;
-            y<rows;
-            y++
-        ){
-
-            for(
-                let x=0;
-                x<cols;
-                x++
-            ){
-
-                const a=
-                    layerSize+
-                    y*(cols+1)+x;
-
-                const b=
-                    a+1;
-
-                const c=
-                    a+cols+1;
-
-                const d=
-                    c+1;
+    const frontCount=
+        indices.length;
 
 
-                indices.push(
-                    a,d,b,
-                    a,c,d
-                );
+    /* =====================================================
+       DETRAS
+    ===================================================== */
 
-            }
+    for(let y=0;y<rows;y++){
+
+        for(let x=0;x<cols;x++){
+
+            const a=
+                layerSize+
+                y*(cols+1)+x;
+
+            const b=
+                a+1;
+
+            const c=
+                a+cols+1;
+
+            const d=
+                c+1;
+
+
+            indices.push(
+                a,d,b,
+                a,c,d
+            );
 
         }
 
     }
 
 
-    addFrontIndices();
+    const backCount=
+        indices.length-frontCount;
 
-    addBackIndices();
 
+    /* =====================================================
+       CANTOS LATERALES
+    ===================================================== */
 
-    /*
-        BORDE IZQUIERDO Y DERECHO
-    */
-
-    for(
-        let y=0;
-        y<rows;
-        y++
-    ){
+    for(let y=0;y<rows;y++){
 
         const f1=
             y*(cols+1);
@@ -853,18 +768,9 @@ function createPageGeometry(){
     }
 
 
-    /*
-        BORDE INFERIOR Y SUPERIOR
-    */
-
-    for(
-        let x=0;
-        x<cols;
-        x++
-    ){
+    for(let x=0;x<cols;x++){
 
         const f1=x;
-
         const f2=x+1;
 
         const b1=
@@ -923,21 +829,7 @@ function createPageGeometry(){
     );
 
 
-    geometry.setIndex(
-        indices
-    );
-
-
-    const frontCount=
-        SEGMENTS*rows*6;
-
-    const backCount=
-        frontCount;
-
-    const sideCount=
-        indices.length-
-        frontCount-
-        backCount;
+    geometry.setIndex(indices);
 
 
     geometry.clearGroups();
@@ -958,9 +850,8 @@ function createPageGeometry(){
 
 
     geometry.addGroup(
-        frontCount+
-        backCount,
-        sideCount,
+        frontCount+backCount,
+        indices.length-frontCount-backCount,
         2
     );
 
@@ -984,9 +875,7 @@ function createPageGeometry(){
         geometry.userData.originalPositions.push([
 
             position.getX(i),
-
             position.getY(i),
-
             position.getZ(i)
 
         ]);
@@ -1000,7 +889,7 @@ function createPageGeometry(){
 
 
 /* =========================================================
-   CREAR HOJA
+   CREAR UNA HOJA FISICA
 ========================================================= */
 
 function createSheet(index){
@@ -1010,71 +899,50 @@ function createSheet(index){
 
 
     /*
-        =====================================================
-        MAPA REAL DEL LIBRO
-        =====================================================
+        Cada hoja física tiene DOS caras:
 
         HOJA 0
-        izquierda  = PAGE 1
-        derecha    = PAGE 2
-        reverso    = PAGE 3
+        delante = PAGE 2
+        detrás  = PAGE 3
 
         HOJA 1
-        izquierda  = PAGE 3
-        derecha    = PAGE 4
-        reverso    = PAGE 5
+        delante = PAGE 4
+        detrás  = PAGE 5
 
         HOJA 2
-        izquierda  = PAGE 5
-        derecha    = PAGE 6
-        reverso    = PAGE 7
+        delante = PAGE 6
+        detrás  = PAGE 7
 
         HOJA 3
-        izquierda  = PAGE 7
-        derecha    = PAGE 8
+        delante = PAGE 8
+        detrás  = PAGE 8
     */
 
 
-    const leftIndex=
-        index*2;
-
-
-    const rightIndex=
+    const frontIndex=
         index*2+1;
 
 
-    /* =====================================================
-       IZQUIERDA
-    ===================================================== */
+    const backIndex=
+        Math.min(
+            7,
+            frontIndex+1
+        );
 
-    const leftPage=
+
+    const page=
         new THREE.Mesh(
 
             createPageGeometry(),
 
             [
 
-                /*
-                    Cara visible izquierda.
-
-                    PAGE 1
-                    PAGE 3
-                    PAGE 5
-                    PAGE 7
-                */
-
                 createFaceMaterial(
-                    leftIndex,
-                    false
+                    frontIndex
                 ),
 
-                /*
-                    Cara posterior.
-                */
-
                 createFaceMaterial(
-                    leftIndex,
-                    true
+                    backIndex
                 ),
 
                 sideMaterial
@@ -1084,88 +952,37 @@ function createSheet(index){
         );
 
 
-    /* =====================================================
-       DERECHA
-    ===================================================== */
-
-    const rightPage=
-        new THREE.Mesh(
-
-            createPageGeometry(),
-
-            [
-
-                /*
-                    Cara visible derecha.
-
-                    PAGE 2
-                    PAGE 4
-                    PAGE 6
-                    PAGE 8
-                */
-
-                createFaceMaterial(
-                    rightIndex,
-                    false
-                ),
-
-                /*
-                    Cara posterior de la hoja.
-
-                    PAGE 3
-                    PAGE 5
-                    PAGE 7
-
-                    La última hoja no necesita
-                    una página 9.
-                */
-
-                createFaceMaterial(
-                    Math.min(
-                        7,
-                        rightIndex+1
-                    ),
-                    false
-                ),
-
-                sideMaterial
-
-            ]
-
-        );
-
-
-    /*
-        La izquierda está orientada
-        hacia el lado contrario.
-    */
-
-    leftPage.rotation.y=
-        Math.PI;
-
-
-    group.add(
-        rightPage,
-        leftPage
+    page.position.set(
+        0,
+        0,
+        0
     );
+
+
+    page.rotation.y=0;
+
+
+    page.castShadow=true;
+    page.receiveShadow=true;
+
+
+    group.add(page);
 
 
     group.userData.index=
         index;
 
-    group.userData.rightPage=
-        rightPage;
-
-    group.userData.leftPage=
-        leftPage;
+    group.userData.page=
+        page;
 
 
     return group;
 
 }
 
+
 /* =========================================================
-   CREAR TODAS LAS HOJAS
+   CREAR LAS HOJAS
 ========================================================= */
 
 const sheets=[];
@@ -1180,21 +997,54 @@ for(
     const sheet=
         createSheet(i);
 
+    sheets.push(sheet);
 
-    sheets.push(
-        sheet
-    );
-
-
-    readingBook.add(
-        sheet
-    );
+    readingBook.add(sheet);
 
 }
 
 
 /* =========================================================
-   CURVATURA DE PAGINA
+   PAGINA 1 FIJA
+========================================================= */
+
+const firstPage=
+    new THREE.Mesh(
+
+        createPageGeometry(),
+
+        [
+
+            createFaceMaterial(0),
+
+            createFaceMaterial(0),
+
+            sideMaterial
+
+        ]
+
+    );
+
+
+firstPage.rotation.y=
+    Math.PI;
+
+firstPage.position.set(
+    0,
+    0,
+    0
+);
+
+firstPage.castShadow=true;
+firstPage.receiveShadow=true;
+
+readingBook.add(
+    firstPage
+);
+
+
+/* =========================================================
+   CURVATURA
 ========================================================= */
 
 function updatePageGeometry(
@@ -1254,26 +1104,29 @@ function updatePageGeometry(
             .00;
 
 
-        position.setXYZ(
-
-            i,
-
+        const x=
             ox*
             Math.cos(localAngle)
             -
             oz*
-            Math.sin(localAngle),
+            Math.sin(localAngle);
 
-            oy,
 
+        const z=
             ox*
             Math.sin(localAngle)
             +
             oz*
             Math.cos(localAngle)
             +
-            curve
+            curve;
 
+
+        position.setXYZ(
+            i,
+            x,
+            oy,
+            z
         );
 
     }
@@ -1290,9 +1143,7 @@ function updatePageGeometry(
    RESET GEOMETRIA
 ========================================================= */
 
-function resetPageGeometry(
-    mesh
-){
+function resetPageGeometry(mesh){
 
     const position=
         mesh.geometry.attributes.position;
@@ -1312,9 +1163,7 @@ function resetPageGeometry(
             i,
 
             original[i][0],
-
             original[i][1],
-
             original[i][2]
 
         );
@@ -1330,70 +1179,23 @@ function resetPageGeometry(
 
 
 /* =========================================================
-   CAPAS DE PAGINAS
+   CAPAS
 ========================================================= */
-
-/*
-    IMPORTANTE:
-
-    Las páginas estáticas utilizan
-    depthTest/depthWrite normales.
-
-    La página que está siendo girada
-    utiliza una capa independiente.
-
-    Esto evita que las dos superficies
-    que se cruzan durante el giro
-    produzcan interferencias visuales.
-*/
 
 function setPageLayer(
     mesh,
-    order,
-    turning=false
+    order
 ){
 
     mesh.renderOrder=
         order;
 
-
     mesh.material.forEach(
         material=>{
 
-            material.depthTest=
-                !turning;
+            material.depthTest=true;
 
-            material.depthWrite=
-                !turning;
-
-
-            /*
-                Solo la página que está
-                girando necesita esta capa.
-            */
-
-            material.polygonOffset=
-                turning;
-
-
-            if(turning){
-
-                material.polygonOffsetFactor=
-                    -1;
-
-                material.polygonOffsetUnits=
-                    -1;
-
-            }
-            else{
-
-                material.polygonOffsetFactor=
-                    0;
-
-                material.polygonOffsetUnits=
-                    0;
-
-            }
+            material.depthWrite=true;
 
         }
     );
@@ -1402,28 +1204,26 @@ function setPageLayer(
 
 
 /* =========================================================
-   OCULTAR TODAS LAS PAGINAS
+   OCULTAR PAGINAS
 ========================================================= */
 
 function hideAllPages(){
 
-    sheets.forEach(
-        sheet=>{
+    sheets.forEach(sheet=>{
 
-            sheet.visible=false;
+        sheet.visible=false;
 
-            sheet.userData.rightPage.visible=false;
+        sheet.userData.page.visible=false;
 
-            sheet.userData.leftPage.visible=false;
+    });
 
-        }
-    );
+    firstPage.visible=false;
 
 }
 
 
 /* =========================================================
-   RESET LIBRO
+   RESET DEL LIBRO
 ========================================================= */
 
 function resetBook(){
@@ -1442,12 +1242,13 @@ function resetBook(){
     sheets.forEach(
         sheet=>{
 
+            sheet.visible=true;
+
             sheet.position.set(
                 0,
                 1,
                 0
             );
-
 
             sheet.rotation.set(
                 0,
@@ -1455,59 +1256,51 @@ function resetBook(){
                 0
             );
 
-
             sheet.renderOrder=0;
 
 
-            const right=
-                sheet.userData.rightPage;
-
-            const left=
-                sheet.userData.leftPage;
+            const page=
+                sheet.userData.page;
 
 
             resetPageGeometry(
-                right
-            );
-
-            resetPageGeometry(
-                left
+                page
             );
 
 
-            right.position.set(
+            page.position.set(
                 0,
                 0,
                 0
             );
 
 
-            left.position.set(
-                0,
-                0,
+            page.rotation.y=0;
+
+
+            setPageLayer(
+                page,
                 0
-            );
-
-
-            right.rotation.y=0;
-
-            left.rotation.y=
-                Math.PI;
-
-
-            setPageLayer(
-                right,
-                0,
-                false
-            );
-
-            setPageLayer(
-                left,
-                0,
-                false
             );
 
         }
+    );
+
+
+    firstPage.position.set(
+        0,
+        1,
+        0
+    );
+
+    firstPage.rotation.y=
+        Math.PI;
+
+    firstPage.visible=true;
+
+    setPageLayer(
+        firstPage,
+        0
     );
 
 
@@ -1527,62 +1320,70 @@ function updatePageVisibility(){
     hideAllPages();
 
 
+    /*
+        La página izquierda visible
+        siempre es la cara posterior
+        de la hoja anterior.
+
+        Al principio es PAGE 1.
+    */
+
+    if(currentSheet===0){
+
+        firstPage.visible=true;
+
+    }
+    else{
+
+        const previous=
+            sheets[currentSheet-1];
+
+        previous.visible=true;
+
+        previous.userData.page.visible=true;
+
+        previous.userData.page.rotation.y=
+            Math.PI;
+
+    }
+
+
+    /*
+        La página derecha es la hoja actual.
+    */
+
     const current=
         sheets[currentSheet];
 
 
-    current.visible=true;
+    if(current){
 
+        current.visible=true;
 
-    current.userData.leftPage.visible=true;
+        current.userData.page.visible=true;
 
-    current.userData.rightPage.visible=true;
+        current.userData.page.rotation.y=0;
+
+    }
 
 }
 
 
 /* =========================================================
-   MOSTRAR HOJA DE FONDO
+   CONTADOR
 ========================================================= */
 
-function showSheetBehind(
-    sheet,
-    order
-){
+function updatePageCounter(){
 
-    if(!sheet)
-        return;
-
-
-    sheet.visible=true;
-
-    sheet.position.z=0;
-
-
-    const right=
-        sheet.userData.rightPage;
-
-    const left=
-        sheet.userData.leftPage;
-
-
-    right.visible=true;
-
-    left.visible=true;
-
-
-    setPageLayer(
-        left,
-        order,
-        false
-    );
-
-
-    setPageLayer(
-        right,
-        order+1,
-        false
-    );
+    pageCounter.textContent=
+        String(
+            currentSheet+1
+        ).padStart(2,"0")
+        +" / "
+        +
+        String(
+            TOTAL_SHEETS
+        ).padStart(2,"0");
 
 }
 
@@ -1604,93 +1405,93 @@ function preparePageTurn(
 
     current.visible=true;
 
+    current.userData.page.visible=true;
 
     current.position.z=.08;
 
 
-    current.userData.leftPage.visible=true;
-
-    current.userData.rightPage.visible=true;
-
-
     if(direction===1){
+
+        /*
+            Hoja actual a la derecha.
+        */
+
+        current.userData.page.rotation.y=0;
+
+        setPageLayer(
+            current.userData.page,
+            20
+        );
+
+
+        /*
+            La hoja siguiente queda
+            detrás de ella.
+        */
 
         const next=
             sheets[currentSheet+1];
 
 
-        setPageLayer(
-            current.userData.leftPage,
-            1,
-            false
-        );
+        if(next){
 
+            next.visible=true;
 
-        setPageLayer(
-            current.userData.rightPage,
-            20,
-            true
-        );
+            next.userData.page.visible=true;
 
+            next.userData.page.rotation.y=0;
 
-        showSheetBehind(
-            next,
-            5
-        );
+            next.position.z=0;
+
+            setPageLayer(
+                next.userData.page,
+                5
+            );
+
+        }
 
     }
     else{
+
+        /*
+            Volvemos hacia atrás.
+
+            La hoja anterior está
+            sobre la izquierda.
+        */
 
         const previous=
             sheets[currentSheet-1];
 
 
+        if(previous){
+
+            previous.visible=true;
+
+            previous.userData.page.visible=true;
+
+            previous.userData.page.rotation.y=
+                Math.PI;
+
+            previous.position.z=0;
+
+            setPageLayer(
+                previous.userData.page,
+                5
+            );
+
+        }
+
+
+        current.userData.page.rotation.y=
+            Math.PI;
+
         setPageLayer(
-            current.userData.rightPage,
-            1,
-            false
-        );
-
-
-        setPageLayer(
-            current.userData.leftPage,
-            20,
-            true
-        );
-
-
-        showSheetBehind(
-            previous,
-            5
+            current.userData.page,
+            20
         );
 
     }
-
-}
-
-
-/* =========================================================
-   CONTADOR
-========================================================= */
-
-function updatePageCounter(){
-
-    pageCounter.textContent=
-        String(
-            currentSheet+1
-        ).padStart(
-            2,
-            "0"
-        )
-        +
-        " / "
-        +
-        String(
-            TOTAL_SHEETS
-        ).padStart(
-            2,
-            "0"
-        );
 
 }
 
@@ -1699,9 +1500,7 @@ function updatePageCounter(){
    COMENZAR GIRO
 ========================================================= */
 
-function startPageDrag(
-    event
-){
+function startPageDrag(event){
 
     if(
         !window.readingMode ||
@@ -1713,7 +1512,7 @@ function startPageDrag(
 
     const rect=
         renderer.domElement
-            .getBoundingClientRect();
+        .getBoundingClientRect();
 
 
     const x=
@@ -1733,13 +1532,11 @@ function startPageDrag(
 
 
     const fromRight=
-        x>
-        rect.width*.58;
+        x>rect.width*.58;
 
 
     const fromLeft=
-        x<
-        rect.width*.42;
+        x<rect.width*.42;
 
 
     if(
@@ -1759,18 +1556,15 @@ function startPageDrag(
         )
             return;
 
-
         direction=-1;
 
     }
     else{
 
         if(
-            currentSheet>=
-            TOTAL_SHEETS-1
+            currentSheet>=TOTAL_SHEETS-1
         )
             return;
-
 
         direction=1;
 
@@ -1799,12 +1593,10 @@ function startPageDrag(
 
 
 /* =========================================================
-   ARRASTRAR PAGINA
+   ARRASTRAR
 ========================================================= */
 
-function movePageDrag(
-    event
-){
+function movePageDrag(event){
 
     if(
         !pageDragging ||
@@ -1815,7 +1607,7 @@ function movePageDrag(
 
     const rect=
         renderer.domElement
-            .getBoundingClientRect();
+        .getBoundingClientRect();
 
 
     const x=
@@ -1835,11 +1627,7 @@ function movePageDrag(
 
 
     let movement=
-        (
-            dragStartX-
-            x
-        )
-        *
+        (dragStartX-x)*
         direction;
 
 
@@ -1870,7 +1658,7 @@ function movePageDrag(
 
 
 /* =========================================================
-   ACTUALIZAR PAGINA GIRANDO
+   ACTUALIZAR HOJA DURANTE GIRO
 ========================================================= */
 
 function updateDraggedPage(
@@ -1897,29 +1685,39 @@ function updateDraggedPage(
         Math.PI;
 
 
-    const right=
-        draggedSheet
-            .userData
-            .rightPage;
-
-
-    const left=
-        draggedSheet
-            .userData
-            .leftPage;
+    const page=
+        draggedSheet.userData.page;
 
 
     /*
-        Antes de la mitad:
-
-        la página está encima.
-
-
-        Después de la mitad:
-
-        la página queda debajo
-        de la nueva hoja.
+        La hoja gira físicamente.
     */
+
+    if(direction===1){
+
+        page.rotation.y=
+            -angle;
+
+    }
+    else{
+
+        page.rotation.y=
+            Math.PI+angle;
+
+    }
+
+
+    /*
+        La curvatura sigue siendo
+        exactamente la del sistema
+        que ya tenías.
+    */
+
+    updatePageGeometry(
+        page,
+        angle
+    );
+
 
     const turningLayer=
         progress<.5
@@ -1927,51 +1725,16 @@ function updateDraggedPage(
         :2;
 
 
-    if(direction===1){
-
-        setPageLayer(
-            right,
-            turningLayer,
-            true
-        );
-
-
-        right.rotation.y=
-            -angle;
-
-
-        updatePageGeometry(
-            right,
-            angle
-        );
-
-    }
-    else{
-
-        setPageLayer(
-            left,
-            turningLayer,
-            true
-        );
-
-
-        left.rotation.y=
-            Math.PI+
-            angle;
-
-
-        updatePageGeometry(
-            left,
-            angle
-        );
-
-    }
+    setPageLayer(
+        page,
+        turningLayer
+    );
 
 }
 
 
 /* =========================================================
-   SOLTAR PAGINA
+   SOLTAR
 ========================================================= */
 
 function endPageDrag(){
@@ -1986,7 +1749,6 @@ function endPageDrag(){
     const sheet=
         draggedSheet;
 
-
     const progress=
         dragProgress;
 
@@ -1994,7 +1756,7 @@ function endPageDrag(){
     const direction=
         dragStartX>
         renderer.domElement
-            .clientWidth*.5
+        .clientWidth*.5
         ?1
         :-1;
 
@@ -2014,7 +1776,7 @@ function endPageDrag(){
 
 
 /* =========================================================
-   ANIMACION DE PAGINA
+   ANIMACION
 ========================================================= */
 
 function animatePage(
@@ -2046,17 +1808,12 @@ function animatePage(
         performance.now();
 
 
-    function animationFrame(
-        now
-    ){
+    function animationFrame(now){
 
         const raw=
             Math.min(
                 1,
-                (
-                    now-
-                    startTime
-                )/
+                (now-startTime)/
                 duration
             );
 
@@ -2072,8 +1829,7 @@ function animatePage(
         const progress=
             start+
             (
-                target-
-                start
+                target-start
             )*
             eased;
 
@@ -2143,7 +1899,7 @@ function animatePage(
 
 
 /* =========================================================
-   RESTAURAR DESPUES DEL GIRO
+   RESTAURAR
 ========================================================= */
 
 function resetAfterTurn(){
@@ -2156,58 +1912,42 @@ function resetAfterTurn(){
             sheet.renderOrder=0;
 
 
-            const right=
-                sheet.userData.rightPage;
-
-            const left=
-                sheet.userData.leftPage;
+            const page=
+                sheet.userData.page;
 
 
             resetPageGeometry(
-                right
+                page
             );
 
 
-            resetPageGeometry(
-                left
-            );
-
-
-            right.position.set(
+            page.position.set(
                 0,
                 0,
                 0
             );
 
 
-            left.position.set(
-                0,
-                0,
+            page.rotation.y=0;
+
+
+            setPageLayer(
+                page,
                 0
-            );
-
-
-            right.rotation.y=0;
-
-            left.rotation.y=
-                Math.PI;
-
-
-            setPageLayer(
-                right,
-                0,
-                false
-            );
-
-
-            setPageLayer(
-                left,
-                0,
-                false
             );
 
         }
     );
+
+
+    firstPage.position.set(
+        0,
+        1,
+        0
+    );
+
+    firstPage.rotation.y=
+        Math.PI;
 
 
     updatePageVisibility();
@@ -2221,7 +1961,7 @@ function resetAfterTurn(){
 
 
 /* =========================================================
-   EVENTOS PAGINAS
+   EVENTOS
 ========================================================= */
 
 renderer.domElement.addEventListener(
@@ -2229,18 +1969,15 @@ renderer.domElement.addEventListener(
     startPageDrag
 );
 
-
 window.addEventListener(
     "pointermove",
     movePageDrag
 );
 
-
 window.addEventListener(
     "pointerup",
     endPageDrag
 );
-
 
 /* =========================================================
    ABRIR LIBRO
