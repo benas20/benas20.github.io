@@ -150,11 +150,13 @@ camera.position.set(
    RENDERER
 ========================================================= */
 
-const renderer=
-    new THREE.WebGLRenderer({
-        antialias:true,
-        alpha:true
-    });
+const renderer=new THREE.WebGLRenderer({
+    antialias:true,
+    alpha:true
+});
+
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 
 
 renderer.setPixelRatio(
@@ -208,12 +210,25 @@ const keyLight=
         3
     );
 
-
 keyLight.position.set(
     4,
     6,
     5
 );
+
+keyLight.castShadow=true;
+
+keyLight.shadow.mapSize.set(
+    2048,
+    2048
+);
+
+keyLight.shadow.camera.left=-8;
+keyLight.shadow.camera.right=8;
+keyLight.shadow.camera.top=8;
+keyLight.shadow.camera.bottom=-8;
+
+scene.add(keyLight);
 
 
 /*
