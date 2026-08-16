@@ -1640,6 +1640,14 @@ function updatePageVisibility(){
 
 }
 
+function updatePageCounter(){
+
+    pageCounter.textContent =
+        String(currentSheet + 1).padStart(2,"0")
+        + " / "
+        + String(TOTAL_SHEETS).padStart(2,"0");
+
+}
 
 /* =========================================================
    MOSTRAR HOJA DEBAJO
