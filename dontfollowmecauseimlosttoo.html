@@ -1092,5 +1092,31 @@ document.addEventListener("keydown",e=>{
 
 </script>
 
+<script>
+    
+    if(window.innerWidth <= 480){
+    
+        const mobileCards=document.querySelectorAll(".card-link");
+    
+        mobileCards.forEach(card=>{
+    
+            let lastTap=0;
+    
+            card.addEventListener("click",e=>{
+    
+                const now=Date.now();
+                if(now-lastTap<350){
+    
+                    lastTap=0;
+                    window.location.href=card.href;
+                    return;
+                }
+                e.preventDefault();
+                lastTap=now;
+            });
+        });
+    }
+</script>
+    
 </body>
 </html>
