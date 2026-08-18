@@ -220,54 +220,270 @@ body::-webkit-scrollbar{
     }
 }
 
-@media (max-width: 480px){  
+@media (max-width: 480px){
 
-    .info-header{         
-        
-        width:calc(100% - 20px);         
-        margin-top:12px;         
-        padding:12px 8px;         
-        font-size:7px;         
-        line-height:1.6;         
-        letter-spacing:.5px;     
-    }     
+    .info-header{
+        width:calc(100% - 20px);
+        margin-top:12px;
+        padding:12px 8px;
+        font-size:7px;
+        line-height:1.6;
+        letter-spacing:.5px;
+    }
 
     .info-header .main{
-            
-        font-size:9px;         
-        margin-bottom:5px;     
-    }    
+        font-size:9px;
+        margin-bottom:5px;
+    }
 
     .info-header .instruction{
+        margin-top:8px;
+    }
 
-        margin-top:8px;     
-    }      
+    /* =========================
+       FOTOS
+    ========================= */
 
-    .card-link{         
+    .card-link{
+        width:55vw;
+    }
 
-        width:min(var(--w), 38vw);     
-    }      
-    
-    .photo-block{         
-        height:700px;         
-        margin-bottom:620px;     
-    }      
+    .card-link:hover{
+        transform:
+            translate(-50%,-50%)
+            scale(1.04)
+            rotate(var(--r));
+    }
 
-.photo-block-last{         
-        height:700px;         
-        margin-bottom:620px;     
-    }  
+    /* =========================
+       BLOQUES
+    ========================= */
 
-    .card-link:hover{         
-        transform:             
-        translate(-50%,-50%)             
-        scale(1.04)             
-        rotate(var(--r));     
-    }      
-    .title-wall span{   
+    .photo-block{
+        height:620px;
+        margin-bottom:280px;
+    }
 
-        font-size:clamp(11px, 2.8vh, 20px);     
-    } 
+    .photo-block-last{
+        height:600px;
+        margin-bottom:120px;
+    }
+
+    /* =========================
+       FONDO
+    ========================= */
+
+    .title-wall span{
+        font-size:clamp(11px,2.8vh,20px);
+        letter-spacing:0;
+    }
+
+    /* =========================
+       AJUSTE GENERAL DE
+       POSICIONES EN MÓVIL
+    ========================= */
+
+    .photo-block .card-link{
+        transform:
+            translate(-50%,-50%)
+            rotate(var(--r));
+    }
+
+    /* =========================
+       BLOQUE 1
+    ========================= */
+
+    .photo-block:nth-child(1) .card-link:nth-child(1){
+        left:25%;
+        top:130px;
+        width:55vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(2){
+        left:72%;
+        top:80px;
+        width:58vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(3){
+        left:35%;
+        top:280px;
+        width:58vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(4){
+        left:72%;
+        top:380px;
+        width:52vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(5){
+        left:30%;
+        top:430px;
+        width:60vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(6){
+        left:78%;
+        top:250px;
+        width:58vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(7){
+        left:42%;
+        top:540px;
+        width:55vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(8){
+        left:72%;
+        top:620px;
+        width:58vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(9){
+        left:27%;
+        top:690px;
+        width:62vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(10){
+        left:70%;
+        top:760px;
+        width:58vw;
+    }
+
+    .photo-block:nth-child(1) .card-link:nth-child(11){
+        left:42%;
+        top:870px;
+        width:65vw;
+    }
+
+    /* =========================
+       BLOQUES RESTANTES
+       
+       Mantienen las posiciones
+       originales pero las fotos
+       se hacen grandes y el
+       espacio vertical se reduce.
+    ========================= */
+
+    .photo-block:nth-child(n+2) .card-link{
+        width:55vw;
+    }
+
+    /* Evita que las posiciones
+       porcentuales originales
+       se alejen demasiado */
+    .photo-block:nth-child(n+2) .card-link:nth-child(1){
+        left:25%;
+        top:130px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(2){
+        left:72%;
+        top:80px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(3){
+        left:38%;
+        top:270px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(4){
+        left:72%;
+        top:350px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(5){
+        left:28%;
+        top:430px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(6){
+        left:78%;
+        top:240px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(7){
+        left:42%;
+        top:530px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(8){
+        left:70%;
+        top:620px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(9){
+        left:27%;
+        top:700px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(10){
+        left:72%;
+        top:780px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(11){
+        left:43%;
+        top:880px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(12){
+        left:25%;
+        top:980px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(13){
+        left:72%;
+        top:1080px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(14){
+        left:40%;
+        top:1180px;
+    }
+
+    .photo-block:nth-child(n+2) .card-link:nth-child(15){
+        left:70%;
+        top:1280px;
+    }
+
+    /* =========================
+       ÚLTIMO BLOQUE
+    ========================= */
+
+    .photo-block-last .card-link:nth-child(1){
+        left:28%;
+        top:130px;
+        width:58vw;
+    }
+
+    .photo-block-last .card-link:nth-child(2){
+        left:72%;
+        top:80px;
+        width:52vw;
+    }
+
+    .photo-block-last .card-link:nth-child(3){
+        left:40%;
+        top:280px;
+        width:62vw;
+    }
+
+    .photo-block-last .card-link:nth-child(4){
+        left:72%;
+        top:390px;
+        width:60vw;
+    }
+
+    .photo-block-last .card-link:nth-child(5){
+        left:30%;
+        top:500px;
+        width:58vw;
+    }
+
 }
 
 </style>
@@ -529,7 +745,7 @@ body::-webkit-scrollbar{
 
     <!-- FOTO 01 -->
     <a href="longestshortesttime.html" class="card-link"
-       style="--x:13%; --y:60%; --w:320px; --r:0deg; --z:2;">
+       style="--x:13%; --y:57%; --w:320px; --r:0deg; --z:2;">
         <img src="img/book/book23.JPEG" class="card">
     </a>
 
@@ -595,7 +811,7 @@ body::-webkit-scrollbar{
 
     <!-- FOTO 03 -->
     <a href="longestshortesttime.html" class="card-link"
-       style="--x:43%; --y:160%; --w:250px; --r:0deg; --z:2;">
+       style="--x:45%; --y:160%; --w:250px; --r:0deg; --z:2;">
        <img src="img/book/book40.JPEG" class="card">
     </a>
     
@@ -701,7 +917,7 @@ body::-webkit-scrollbar{
 
     <!-- FOTO 02 -->
     <a href="longestshortesttime.html" class="card-link"
-       style="--x:28%; --y:35%; --w:290px; --r:0deg; --z:1;">
+       style="--x:29%; --y:35%; --w:290px; --r:0deg; --z:1;">
         <img src="img/book/book49.JPEG" class="card">
     </a>
 
