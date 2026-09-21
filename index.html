@@ -139,7 +139,7 @@
       </div>
 
       <!-- FILE 003 -->
-      <div class="scanned-file">
+      <div class="scanned-filean">
         <div class="scan-label top-left">FILE 003</div>
         <div class="scan-label top-right">SCAN / 003</div>
         <div class="scan-label bottom-left">BAV / AN-003</div>
@@ -1130,13 +1130,21 @@ body p {
   background: rgba(41, 37, 31, 0.88);
 }
 
+.scanned-filean > img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top;
+}
+
 .scanned-file > img {
   display: block;
   width: 100%;
   height: 300px;
   object-fit: cover;
 }
-
+          
 .scan-label {
   position: absolute;
   z-index: 2;
