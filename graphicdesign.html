@@ -2,28 +2,23 @@
 <html lang="es">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>FILE 001 / GRAPHIC DESIGN</title>
-
   <link rel="stylesheet" href="css/stylegd.css">
 
     <script>
       
-      if (sessionStorage.getItem("accessGranted") !== "true") {
-          window.location.replace("password.html");
+      if(localStorage.getItem("accessGranted")!=="true"){
+      sessionStorage.setItem("returnTo",window.location.href);
+      window.location.replace("password.html");
       }
       
     </script>
-  
+
 </head>
 
-
 <body>
-
 
   <!-- ========================================
        SYSTEM HEADER
