@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Been a Vision</title>
-  <link rel="stylesheet" href="css/index.css">
-    
-    <script>
-      
-    if (sessionStorage.getItem("accessGranted") !== "true") {
-        window.location.replace("password.html");
-    }
-      
-    </script>
+  <link rel="stylesheet" href="index.css">
 
-  </head>
-  
-  <body>
+ 
+</head>
 
-  
-  <!-- Línea de escaneo decorativa -->
+<body>
+
+  <!-- Scan lines -->
   <div class="scan-line"></div>
   <div class="scan-line-reverse"></div>
   <div class="scan-line-horizontal"></div>
   <div class="scan-line-horizontal-reverse"></div>
-
   <div class="cursor-flash"></div>
-    
-  <!-- Cabecera del sistema -->
+
+  <!-- System header -->
   <div class="system-header">
     <span>SYSTEM (INDEX) 00</span>
     <span>VISUAL ARCHIVE</span>
     <span class="system-online"><i></i> ONLINE</span>
   </div>
 
-  <!-- Ubicación / referencia del archivo -->
+  <!-- Archive location -->
   <div class="archive-location">
     <div>BAV / INDEX</div>
     <div>VISUAL ARCHIVE</div>
     <div>UNIT 01</div>
   </div>
 
-  <!-- Números guía horizontales -->
+  <!-- Measurements -->
   <div class="measurement-x">
     <span>000</span><span>250</span><span>500</span><span>750</span><span>1000</span>
   </div>
 
-  <!-- Números guía verticales -->
   <div class="measurement-y">
     <span>000</span><span>250</span><span>500</span><span>750</span><span>1000</span>
   </div>
 
-  <!-- Líneas guía que siguen al cursor -->
   <div class="cursor-measure-x"></div>
   <div class="cursor-measure-y"></div>
 
-  <!-- Menú hamburguesa principal -->
+  <!-- Main menu -->
   <div class="menu-container">
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
     <label for="menu-toggle" class="menu-icon" aria-label="Open menu">
       <span></span>
       <span></span>
       <span></span>
     </label>
 
-    <!-- Lista desplegable del menú -->
     <ul class="menu-list">
-      <li><span class="menu-number">001</span><a href="graphicdesign.html">GRAPHIC DESIGN</a></li>
-      <li><span class="menu-number">002</span><a href="3d.html">3D MODELING</a></li>
-      <li><span class="menu-number">003</span><a href="animation.html">ANIMATIONS</a></li>
-      <li><span class="menu-number">004</span><a href="dontfollowmecauseimlosttoo.html">PHOTOGRAPHY</a></li>
+      <li>
+        <span class="menu-number">001</span>
+        <a href="graphicdesign.html">GRAPHIC DESIGN</a>
+      </li>
+      <li>
+        <span class="menu-number">002</span>
+        <a href="3d.html">3D MODELING</a>
+      </li>
+      <li>
+        <span class="menu-number">003</span>
+        <a href="animation.html">ANIMATIONS</a>
+      </li>
+      <li>
+        <span class="menu-number">004</span>
+        <a href="dontfollowmecauseimlosttoo.html">PHOTOGRAPHY</a>
+      </li>
     </ul>
   </div>
 
-  <!-- Título principal de la portada -->
-  <div class="section1">
+  <!-- Main title -->
+  <section class="section1">
     <h1 class="typing-title">
       <span>B</span><span>e</span><span>e</span><span>n</span>
       <span>&nbsp;</span>
@@ -84,83 +84,112 @@
       <span>V</span><span>i</span><span>s</span><span>i</span><span>o</span><span>n</span>
     </h1>
 
-    <!-- Enlaces rápidos a cada archivo -->
     <ul class="menu-list2">
       <li><a href="graphicdesign.html">FILE 001</a></li>
       <li><a href="3d.html">FILE 002</a></li>
       <li><a href="animation.html">FILE 003</a></li>
       <li><a href="photography.html">FILE 004</a></li>
     </ul>
-  </div>
+  </section>
 
-  <!-- Sección de tarjetas / proyectos -->
-  <div class="section2">
+  <!-- Project files -->
+  <section class="section2">
     <div class="content-wrapper">
-      <div class="card">
+
+      <!-- FILE 001 -->
+      <div class="file-module">
         <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
-        <div class="card-info">
-          <h2>FILE 001</h2>
-          <p>"01 GRAPHIC DESIGN"</p>
-          <p>"02 ART DIRECTION"</p>
-          <br><hr><br>
-          <a href="graphicdesign.html">ENTER</a>
+
+        <div class="file-module-info">
+          <span>FILE 001</span>
+          <h2>GRAPHIC DESIGN</h2>
+          <p>01 GRAPHIC DESIGN</p>
+          <p>02 ART DIRECTION</p>
+          <a href="graphicdesign.html">ACCESS →</a>
         </div>
       </div>
 
-      <div class="card">
-        <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
-        <div class="card-info">
-          <h2>FILE 002</h2>
-          <p>"01 3D MODELING"</p>
-          <p>"02 ENVIROMENTS"</p>
-          <br><hr><br>
-          <a href="3d.html">ENTER</a>
+      <!-- FILE 002 -->
+      <div class="archive-specimen">
+        <div class="archive-specimen-image">
+          <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
+        </div>
+
+        <div class="archive-specimen-data">
+          <span>002 / SPECIMEN</span>
+          <h2>3D MODELING</h2>
+          <div>TYPE / 3D</div>
+          <div>FIELD / ENVIRONMENTS</div>
+          <div>STATUS / ARCHIVED</div>
+          <a href="3d.html">OPEN FILE →</a>
         </div>
       </div>
 
-      <div class="card">
+      <!-- FILE 003 -->
+      <div class="scanned-file">
+        <div class="scan-label top-left">FILE 003</div>
+        <div class="scan-label top-right">SCAN / 003</div>
+        <div class="scan-label bottom-left">BAV / AN-003</div>
+        <div class="scan-label bottom-right">UNIT / 01</div>
+
+        <div class="scan-cross cross-1">+</div>
+        <div class="scan-cross cross-2">+</div>
+
         <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
-        <div class="card-info">
-          <h2>FILE 003</h2>
-          <p>"01 2D ANIMATION"</p>
-          <br><hr><br>
-          <a href="animation.html">ENTER</a>
+
+        <div class="scanned-file-info">
+          <h2>ANIMATIONS</h2>
+          <span>01 2D ANIMATION</span>
+          <a href="animation.html">OPEN →</a>
         </div>
       </div>
 
-      <div class="card">
+      <!-- FILE 004 -->
+      <div class="archive-window">
+        <div class="archive-window-header">
+          <span>FILE 004</span>
+          <span>●</span>
+        </div>
+
         <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
-        <div class="card-info">
-          <h2>FILE 004</h2>
-          <p>"01 DIGITAL PHOTOGRAPHY"</p>
-          <p>"02 VISUAL STORIES"</p>
-          <br><hr><br>
-          <a href="photography.html">ENTER</a>
+
+        <div class="archive-window-info">
+          <h2>PHOTOGRAPHY</h2>
+          <p>01 DIGITAL PHOTOGRAPHY</p>
+          <p>02 VISUAL STORIES</p>
+          <a href="photography.html">OPEN FILE</a>
         </div>
       </div>
+
+      <!-- FILE 005 -->
+      <div class="image-data">
+        <span class="image-data-number">005</span>
+
+        <img src="img/PuffyOvni.jpg" alt="Ovni Puffy">
+
+        <div class="image-data-info">
+          <h2>VISUAL ARCHIVE</h2>
+          <span>01 / EXPERIMENTAL</span>
+          <span>02 / VISUAL RESEARCH</span>
+          <a href="#">ACCESS →</a>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
 
-   <!-- ======================================
-         END OF FILE
-    ====================================== -->
+  <!-- Footer -->
+  <footer class="design-footer">
+    <span>
+      <a href="index.html">BACK TO INDEX 00</a>
+    </span>
 
-    <footer class="design-footer">
+    <span>
+      <a href="graphicdesign.html">NEXT FILE → 001</a>
+    </span>
+  </footer>
 
-
-      <span><a  href="index.html">
-        BACK TO INDEX 00
-      </a></span>
-
-
-      <span><a  href="graphicdesign.html">
-        NEXT FILE → 001
-      </a></span>
-
-
-    </footer>
-
-  <!-- Cursor personalizado -->
+  <!-- Custom cursor -->
   <div class="custom-cursor">
     <div class="cursor-horizontal"></div>
     <div class="cursor-vertical"></div>
@@ -175,7 +204,7 @@
     <div class="tick tick-diagonal-4"></div>
   </div>
 
-  <!-- Panel de información del cursor -->
+  <!-- Cursor information -->
   <div class="cursor-info">
     <div class="observation-title">OBSERVATION / 00</div>
 
@@ -195,306 +224,1491 @@
     </div>
   </div>
 
-  <!-- Script para movimiento del cursor e información dinámica -->
-          <script>
-        
-        const cursor =
-          document.querySelector('.custom-cursor');
-        
-        const cursorX =
-          document.getElementById('cursor-x');
-        
-        const cursorY =
-          document.getElementById('cursor-y');
-        
-        const cursorVector =
-          document.getElementById('cursor-vector');
-        
-        const cursorSpeed =
-          document.getElementById('cursor-speed');
-        
-        const cursorSector =
-          document.getElementById('cursor-sector');
-        
-        const cursorStatus =
-          document.getElementById('cursor-status');
-        
-        const measureX =
-          document.querySelector('.cursor-measure-x');
-        
-        const measureY =
-          document.querySelector('.cursor-measure-y');
-        
-        
-        /* ========================================
-           CURSOR FLASH
-        ======================================== */
-        
-        const cursorFlash =
-          document.querySelector('.cursor-flash');
-        
-        
-        /* ========================================
-           SECTORS
-        ======================================== */
-        
-        const letters =
-          ['A', 'B', 'C', 'D', 'E', 'F'];
-        
-        
-        /* ========================================
-           MOUSE DATA
-        ======================================== */
-        
-        let previousX = 0;
-        let previousY = 0;
-        
-        let previousTime =
-          performance.now();
-        
-        let idleTimer;
-        
-        
-        /* ========================================
-           MOUSE MOVEMENT
-        ======================================== */
-        
-        document.addEventListener(
-          'mousemove',
-          (event) => {
-        
-            const x = event.clientX;
-            const y = event.clientY;
-        
-            const currentTime =
-              performance.now();
-        
-        
-            /* CURSOR */
-        
-            measureX.style.left =
-              `${x}px`;
-        
-            measureY.style.top =
-              `${y}px`;
-        
-            cursor.style.left =
-              `${x}px`;
-        
-            cursor.style.top =
-              `${y}px`;
-        
-        
-            /* COORDINATES */
-        
-            cursorX.textContent =
-              x
-                .toFixed(2)
-                .padStart(7, '0');
-        
-            cursorY.textContent =
-              y
-                .toFixed(2)
-                .padStart(7, '0');
-        
-        
-            /* DISTANCE */
-        
-            const deltaX =
-              x - previousX;
-        
-            const deltaY =
-              y - previousY;
-        
-            const distance =
-              Math.hypot(
-                deltaX,
-                deltaY
-              );
-        
-        
-            /* TIME */
-        
-            const deltaTime =
-              currentTime -
-              previousTime;
-        
-        
-            /* SPEED */
-        
-            const speed =
-              Math.min(
-                deltaTime > 0
-                  ? (distance / deltaTime) * 10
-                  : 0,
-                99.99
-              );
-        
-            cursorSpeed.textContent =
-              speed
-                .toFixed(2)
-                .padStart(5, '0');
-        
-        
-            /* VECTOR */
-        
-            if (distance > 0.5) {
-        
-              const angle =
-                (
-                  Math.atan2(
-                    deltaY,
-                    deltaX
-                  ) *
-                  180 /
-                  Math.PI +
-                  360
-                ) % 360;
-        
-              cursorVector.textContent =
-                Math.round(angle)
-                  .toString()
-                  .padStart(3, '0') +
-                '°';
-            }
-        
-        
-            /* SECTOR */
-        
-            const column =
-              Math.min(
-                5,
-                Math.floor(
-                  (x / window.innerWidth) * 6
-                )
-              );
-        
-            const row =
-              Math.min(
-                3,
-                Math.floor(
-                  (y / window.innerHeight) * 4
-                )
-              );
-        
-            cursorSector.textContent =
-              `${letters[column]}-${String(row + 1).padStart(2, '0')}`;
-        
-        
-            /* STATUS */
-        
-            cursorStatus.textContent =
-              'TRACKING';
-        
-        
-            clearTimeout(
-              idleTimer
-            );
-        
-        
-            idleTimer =
-              setTimeout(
-                () => {
-        
-                  cursorStatus.textContent =
-                    'IDLE';
-        
-                },
-                400
-              );
-        
-        
-            /* UPDATE */
-        
-            previousX = x;
-            previousY = y;
-            previousTime = currentTime;
-        
-          }
-        );
-        
-        
-        /* ========================================
-           CLICK FLASH
-        ======================================== */
-        
-        document.addEventListener(
-          'click',
-          function(event) {
-        
-            /* Posición del click */
-        
-            cursorFlash.style.left =
-              event.clientX + 'px';
-        
-            cursorFlash.style.top =
-              event.clientY + 'px';
-        
-        
-            /* Reiniciar animación */
-        
-            cursorFlash.classList.remove(
-              'active'
-            );
-        
-        
-            /* Forzar reinicio */
-        
-            void cursorFlash.offsetWidth;
-        
-        
-            /* Activar flash */
-        
-            cursorFlash.classList.add(
-              'active'
-            );
-        
-          }
-        );
-        
-        
-        /* ========================================
-           MOUSE LEAVES WINDOW
-        ======================================== */
-        
-        document.addEventListener(
-          'mouseleave',
-          () => {
-        
-            cursor.style.opacity =
-              '0';
-        
-            cursorFlash.style.opacity =
-              '0';
-        
-            cursorStatus.textContent =
-              'LOST';
-        
-          }
-        );
-        
-        
-        /* ========================================
-           MOUSE ENTERS WINDOW
-        ======================================== */
-        
-        document.addEventListener(
-          'mouseenter',
-          () => {
-        
-            cursor.style.opacity =
-              '1';
-        
-            cursorFlash.style.opacity =
-              '0';
-        
-            cursorStatus.textContent =
-              'TRACKING';
-        
-          }
-        );
-        
-        </script>
-    
-  </body>
+
+  <style>
+
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  caret-color: transparent;
+}
+
+/* =========================
+   BASE
+========================= */
+
+html, body {
+  width: 100%;
+  min-height: 2160px;
+  overflow-x: hidden;
+  background-image: url("img/IndexBGPrueba.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2080px;
+  color: #48535c;
+  cursor: none;
+  user-select: none;
+}
+
+body { margin: 0; }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(32, 27, 21, 0.08),
+    rgba(32, 27, 21, 0.18)
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1 { color: #29251F !important; }
+h2 { color: #E8D9B8 !important; }
+h3 { color: #e3dfd6 !important; }
+p { color: #91A49A !important; }
+
+a, a:hover {
+  cursor: none !important;
+}
+
+/* =========================
+   SCAN LINES
+========================= */
+
+.scan-line,
+.scan-line-reverse,
+.scan-line-horizontal,
+.scan-line-horizontal-reverse {
+  position: fixed;
+  pointer-events: none;
+  z-index: 3;
+  background: #7CFF6B;
+  opacity: 0.05;
+}
+
+.scan-line,
+.scan-line-reverse {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.scan-line {
+  animation: scanMove 12s ease-in-out infinite alternate;
+}
+
+.scan-line-reverse {
+  animation: scanMoveReverse 6s ease-in-out infinite alternate;
+}
+
+@keyframes scanMove {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes scanMoveReverse {
+  0% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.scan-line-horizontal,
+.scan-line-horizontal-reverse {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  animation: scanMoveHorizontal 6s linear infinite alternate;
+}
+
+.scan-line-horizontal-reverse {
+  right: 0;
+  left: auto;
+  animation: scanMoveHorizontalReverse 6s linear infinite alternate;
+}
+
+@keyframes scanMoveHorizontal {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+
+@keyframes scanMoveHorizontalReverse {
+  0% { left: 100%; }
+  100% { left: 0%; }
+}
+
+/* =========================
+   CURSOR FLASH
+========================= */
+
+.cursor-flash {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #7CFF6B;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  box-shadow: 0 0 5px #7CFF6B, 0 0 14px rgba(124, 255, 107, 0.7);
+}
+
+.cursor-flash.active {
+  animation: cursorFlash 0.35s ease-out;
+}
+
+@keyframes cursorFlash {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
+}
+
+/* =========================
+   TRANSPARENT BLOCKS
+========================= */
+
+.system-header,
+.archive-location,
+.measurement-x,
+.measurement-y,
+.menu-container,
+.menu-list,
+.menu-list2,
+.section1,
+.section2,
+.footer,
+.footer-container,
+.footer-content,
+.footer-links,
+.content-wrapper,
+.file-module,
+.file-module-info,
+.archive-specimen,
+.archive-specimen-data,
+.scanned-file,
+.scanned-file-info,
+.archive-window,
+.archive-window-info,
+.image-data,
+.image-data-info,
+.cursor-info {
+  background: transparent;
+}
+
+.system-header,
+.archive-location,
+.measurement-x,
+.measurement-y {
+  font-family: Arial, sans-serif;
+}
+
+/* =========================
+   SYSTEM HEADER
+========================= */
+
+.system-header {
+  position: fixed;
+  top: 90px;
+  left: 30px;
+  right: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9990;
+  color: #29251F;
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: 0.78;
+  pointer-events: none;
+  text-shadow: 0 1px 8px rgba(232, 217, 184, 0.35);
+}
+
+.system-online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.system-online i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #145c0b;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(128, 152, 138, 0.7);
+  animation: systemPulse 3s infinite ease-in-out;
+}
+
+@keyframes systemPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/* =========================
+   ARCHIVE LOCATION
+========================= */
+
+.archive-location {
+  position: fixed;
+  top: 145px;
+  left: 30px;
+  z-index: 9990;
+  font-size: 8px;
+  line-height: 1.9;
+  letter-spacing: 1.8px;
+  color: #29251F;
+  opacity: 0.65;
+  pointer-events: none;
+  text-shadow: 0 1px 6px rgba(232, 217, 184, 0.3);
+}
+
+/* =========================
+   MEASUREMENTS
+========================= */
+
+.measurement-x {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  color: #48535c;
+  font-size: 7px;
+  letter-spacing: 1px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.measurement-y {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #48535c;
+  font-size: 7px;
+  letter-spacing: 1px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* =========================
+   CURSOR GUIDES
+========================= */
+
+.cursor-measure-x {
+  position: fixed;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: #7CFF6B;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+.cursor-measure-y {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 1px;
+  background: #7CFF6B;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+body h1 {
+  font-family: black, Arial;
+  text-align: center;
+  font-size: 200px;
+  filter: blur(5px);
+  margin-top: 0;
+  color: #E8D9B8;
+}
+
+body p {
+  text-align: center;
+  filter: blur(0.7px);
+  margin-top: 20px;
+  font-size: 15px;
+  background-color: transparent;
+  color: #48535c;
+}
+
+.copirait {
+  color: #48535c;
+  margin-top: 500px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-container {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  z-index: 10000;
+}
+
+.menu-toggle { display: none; }
+
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: none;
+}
+
+.menu-icon span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: #48535c;
+  transition: transform 0.35s ease, width 0.35s ease, opacity 0.35s ease;
+}
+
+.menu-icon:hover span:nth-child(1),
+.menu-icon:hover span:nth-child(3) {
+  width: 16px;
+}
+
+.menu-icon:hover span:nth-child(2) {
+  width: 22px;
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.menu-list {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  width: 230px;
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+  background: rgba(41, 37, 31, 0.90);
+  border: 1px solid rgba(141, 112, 72, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-toggle:checked + .menu-icon + .menu-list {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-list li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(141, 112, 72, 0.35);
+}
+
+.menu-list li:last-child { border-bottom: none; }
+
+.menu-number {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #7CFF6B;
+  opacity: 0.75;
+}
+
+.menu-list li a {
+  display: block;
+  width: 100%;
+  color: #E8D9B8;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 2px;
+  filter: blur(0.35px);
+  transition: letter-spacing 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+.menu-list li:hover a {
+  filter: blur(0);
+  letter-spacing: 2.5px;
+  transform: translateX(4px);
+  color: #80988A;
+  background: transparent;
+}
+
+.menu-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: #7CFF6B;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-list li:hover::before { transform: scaleY(1); }
+
+/* =========================
+   SECTION 1
+========================= */
+
+.section1 {
+  min-height: 250px;
+  width: 100%;
+  max-width: 100%;
+  font-family: black, Arial;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.section1 h1 {
+  font-size: 150px;
+  filter: blur(1px);
+  color: #48535c;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.typing-title {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.typing-title span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: letterReveal 1.4s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+.typing-title span:nth-child(1) { animation-delay: 0s; }
+.typing-title span:nth-child(2) { animation-delay: .08s; }
+.typing-title span:nth-child(3) { animation-delay: .16s; }
+.typing-title span:nth-child(4) { animation-delay: .24s; }
+.typing-title span:nth-child(5) { animation-delay: .32s; }
+.typing-title span:nth-child(6) { animation-delay: .40s; }
+.typing-title span:nth-child(7) { animation-delay: .48s; }
+.typing-title span:nth-child(8) { animation-delay: .56s; }
+.typing-title span:nth-child(9) { animation-delay: .64s; }
+.typing-title span:nth-child(10) { animation-delay: .72s; }
+.typing-title span:nth-child(11) { animation-delay: .80s; }
+.typing-title span:nth-child(12) { animation-delay: .88s; }
+.typing-title span:nth-child(13) { animation-delay: .96s; }
+
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-list2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 25px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-list2 li { position: relative; }
+
+.menu-list2 li:not(:last-child)::after {
+  content: "/";
+  position: absolute;
+  right: -12px;
+  color: #48535c;
+}
+
+.menu-list2 a {
+  color: #29251F;
+  text-decoration: none;
+  font-family: "Cormorant Garamond", serif;
+  font-size: .95rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: .3s ease;
+}
+
+.menu-list2 a:hover {
+  color: #48535c;
+  letter-spacing: 5px;
+}
+
+/* =========================
+   SECTION 2
+========================= */
+
+.section2 {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0 50px 50px;
+}
+
+.content-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =========================
+   FILE 001
+========================= */
+
+.file-module {
+  width: 550px;
+  min-height: 260px;
+  display: flex;
+  background: rgba(41, 37, 31, 0.92);
+  border: 1px solid rgba(141, 112, 72, 0.5);
+  overflow: hidden;
+  margin: 95px 0 20px;
+  padding: 15px;
+  color: #E8D9B8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.28);
+  transition: .35s;
+}
+
+.file-module:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.file-module > img {
+  width: 42%;
+  object-fit: cover;
+  display: block;
+}
+
+.file-module-info {
+  width: 58%;
+  padding: 25px 25px 20px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.file-module-info > span,
+.archive-specimen-data > span {
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: .7;
+}
+
+.file-module-info h2 {
+  margin: 10px 0 25px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.file-module-info p {
+  margin: 4px 0;
+  text-align: left;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.file-module-info a,
+.archive-window-info a,
+.scanned-file-info a,
+.image-data-info a {
+  color: #E8D9B8;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.file-module-info a {
+  align-self: flex-start;
+  margin-top: 25px;
+  font-size: 10px;
+}
+
+.file-module-info a:hover,
+.archive-specimen-data a:hover,
+.scanned-file-info a:hover,
+.archive-window-info a:hover,
+.image-data-info a:hover {
+  color: #7CFF6B;
+}
+
+/* =========================
+   FILE 002
+========================= */
+
+.archive-specimen {
+  width: 550px;
+  margin: 95px 0 20px;
+  color: #E8D9B8;
+}
+
+.archive-specimen-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border: 1px solid rgba(141, 112, 72, 0.5);
+}
+
+.archive-specimen-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.archive-specimen-data {
+  position: relative;
+  padding: 15px 5px 20px;
+  border-bottom: 1px solid rgba(141, 112, 72, 0.45);
+}
+
+.archive-specimen-data > span {
+  display: block;
+  font-size: 7px;
+  margin-bottom: 8px;
+}
+
+.archive-specimen-data h2 {
+  margin-bottom: 15px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.archive-specimen-data div {
+  color: #91A49A;
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+}
+
+.archive-specimen-data a {
+  position: absolute;
+  right: 5px;
+  bottom: 20px;
+}
+
+/* =========================
+   FILE 003
+========================= */
+
+.scanned-file {
+  position: relative;
+  width: 550px;
+  margin: 95px 0 20px;
+  padding: 25px;
+  border: 1px solid rgba(141, 112, 72, 0.45);
+  background: rgba(41, 37, 31, 0.88);
+}
+
+.scanned-file > img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.scan-label {
+  position: absolute;
+  z-index: 2;
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  opacity: .7;
+}
+
+.top-left { top: 8px; left: 10px; }
+.top-right { top: 8px; right: 10px; }
+.bottom-left { bottom: 8px; left: 10px; }
+.bottom-right { bottom: 8px; right: 10px; }
+
+.scan-cross {
+  position: absolute;
+  z-index: 3;
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  opacity: .7;
+}
+
+.cross-1 {
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+}
+
+.cross-2 {
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+}
+
+.scanned-file-info { padding-top: 18px; }
+
+.scanned-file-info h2 {
+  margin-bottom: 10px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.scanned-file-info span {
+  display: block;
+  color: #91A49A;
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+}
+
+.scanned-file-info a {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+/* =========================
+   FILE 004
+========================= */
+
+.archive-window {
+  width: 550px;
+  margin: 95px 0 20px;
+  background: rgba(41, 37, 31, 0.92);
+  border: 1px solid rgba(141, 112, 72, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.archive-window-header {
+  height: 30px;
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(20, 18, 15, .7);
+  border-bottom: 1px solid rgba(141, 112, 72, .4);
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 2px;
+}
+
+.archive-window-header span:last-child {
+  font-size: 6px;
+  opacity: .6;
+}
+
+.archive-window > img {
+  width: 100%;
+  height: 300px;
+  display: block;
+  object-fit: cover;
+}
+
+.archive-window-info { padding: 20px; }
+
+.archive-window-info h2 {
+  margin-bottom: 15px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.archive-window-info p {
+  margin: 4px 0;
+  text-align: left;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14px;
+}
+
+.archive-window-info a {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+/* =========================
+   FILE 005
+========================= */
+
+.image-data {
+  position: relative;
+  width: 550px;
+  margin: 95px 0 20px;
+  padding-bottom: 20px;
+  color: #E8D9B8;
+}
+
+.image-data-number {
+  position: absolute;
+  top: -20px;
+  left: -25px;
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: .7;
+}
+
+.image-data > img {
+  width: 100%;
+  height: 330px;
+  display: block;
+  object-fit: cover;
+}
+
+.image-data-info {
+  position: relative;
+  padding: 18px 5px 0;
+  border-top: 1px solid rgba(141, 112, 72, .45);
+}
+
+.image-data-info h2 {
+  margin-bottom: 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.image-data-info span {
+  display: block;
+  color: #91A49A;
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+}
+
+.image-data-info a {
+  position: absolute;
+  right: 5px;
+  top: 22px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.design-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 150px;
+  padding: 10px 70px;
+  border-top: 1px solid rgba(41, 37, 31, .25);
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #29251F;
+  opacity: .6;
+}
+
+.design-footer span,
+.design-footer a {
+  text-decoration: none !important;
+  color: #E8D9B8;
+  font-size: 12px;
+}
+
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+.custom-cursor {
+  position: fixed;
+  width: 42px;
+  height: 42px;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  color: #7CFF6B;
+  transition: opacity .3s ease;
+}
+
+.cursor-horizontal,
+.cursor-vertical {
+  position: absolute;
+  background: #7CFF6B;
+}
+
+.cursor-horizontal {
+  width: 34px;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-vertical {
+  width: 1px;
+  height: 34px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-circle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #7CFF6B;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tick {
+  position: absolute;
+  width: 5px;
+  height: 1px;
+  background: #7CFF6B;
+}
+
+.tick-top {
+  left: 50%;
+  top: 2px;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.tick-bottom {
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.tick-left {
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tick-right {
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tick-diagonal-1 {
+  left: 7px;
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+.tick-diagonal-2 {
+  right: 7px;
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+.tick-diagonal-3 {
+  left: 7px;
+  bottom: 7px;
+  transform: rotate(-45deg);
+}
+
+.tick-diagonal-4 {
+  right: 7px;
+  bottom: 7px;
+  transform: rotate(45deg);
+}
+
+/* =========================
+   CURSOR INFO
+========================= */
+
+.cursor-info {
+  position: fixed;
+  left: 50px;
+  bottom: 75px;
+  z-index: 99998;
+  pointer-events: none;
+  user-select: none;
+  width: 190px;
+  padding: 14px 16px 13px;
+  color: #7CFF6B;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  line-height: 1.8;
+  text-transform: uppercase;
+  background: rgba(5, 8, 6, .72);
+  border: 1px solid rgba(124, 255, 107, .22);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 0 18px rgba(0, 0, 0, .25);
+  opacity: .75;
+}
+
+.cursor-info::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 45px;
+  height: 1px;
+  background: #7CFF6B;
+  opacity: .8;
+}
+
+.cursor-info::after {
+  content: "SYS";
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-size: 7px;
+  letter-spacing: 2px;
+  opacity: .35;
+}
+
+.observation-title {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin-bottom: 10px;
+  opacity: .95;
+}
+
+.observation-coordinates,
+.observation-data {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(124, 255, 107, .12);
+}
+
+.observation-coordinates { opacity: .9; }
+.observation-data { opacity: .65; }
+.observation-system { opacity: .5; }
+
+#cursor-x,
+#cursor-y,
+#cursor-vector,
+#cursor-speed,
+#cursor-sector {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+  .section1 h1 {
+    font-size: clamp(96px, 10vw, 150px);
+  }
+
+  .file-module,
+  .archive-specimen,
+  .scanned-file,
+  .archive-window,
+  .image-data {
+    width: 92vw;
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 900px) {
+  html, body {
+    min-height: auto;
+    background-size: cover;
+  }
+
+  .system-header {
+    top: 20px;
+    left: 16px;
+    right: 16px;
+    font-size: 7px;
+  }
+
+  .archive-location {
+    top: 58px;
+    left: 16px;
+    font-size: 7px;
+  }
+
+  .measurement-x,
+  .measurement-y {
+    display: none;
+  }
+
+  .menu-container {
+    top: 16px;
+    right: 16px;
+  }
+
+  .section1 { padding-top: 10px; }
+
+  .section1 h1 {
+    font-size: clamp(64px, 11vw, 120px);
+    margin-top: 70px;
+    margin-bottom: 70px;
+    filter: blur(1px);
+    line-height: .95;
+    padding: 0 16px;
+    word-break: break-word;
+  }
+
+  .menu-list2 {
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 0 16px;
+  }
+
+  .section2 {
+    padding: 30px 16px 40px;
+  }
+
+  .content-wrapper,
+  .section2 {
+    width: 100%;
+  }
+
+  .file-module,
+  .archive-specimen,
+  .scanned-file,
+  .archive-window,
+  .image-data {
+    width: 100%;
+    max-width: 100%;
+    margin: 24px 0;
+  }
+
+  .file-module { flex-direction: column; }
+
+  .file-module > img {
+    width: 100%;
+    height: auto;
+  }
+
+  .file-module-info {
+    width: 100%;
+    padding: 18px 14px 14px;
+  }
+
+  .archive-specimen-image {
+    height: auto;
+  }
+
+  .archive-specimen-image img {
+    height: auto;
+  }
+
+  .scanned-file > img,
+  .archive-window > img,
+  .image-data > img {
+    height: auto;
+  }
+
+  .design-footer {
+    padding: 10px 16px;
+    margin-top: 80px;
+  }
+
+  .cursor-info {
+    left: 16px;
+    bottom: 16px;
+    width: 170px;
+  }
+}
+
+@media (max-width: 520px) {
+  .system-header,
+  .archive-location {
+    display: none;
+  }
+
+  .menu-list {
+    width: min(86vw, 230px);
+  }
+
+  .section1 h1 {
+    font-size: clamp(42px, 15vw, 78px);
+    margin-top: 56px;
+    margin-bottom: 40px;
+    padding: 0 10px;
+    filter: blur(.7px);
+  }
+
+  .typing-title {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  .menu-list2 {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .menu-list2 a {
+    font-size: .8rem;
+    letter-spacing: 2px;
+  }
+
+  .section2 {
+    padding: 20px 12px 30px;
+  }
+
+  .file-module,
+  .archive-specimen,
+  .scanned-file,
+  .archive-window,
+  .image-data {
+    margin: 20px 0;
+  }
+
+  .file-module {
+    padding: 10px;
+  }
+
+  .file-module-info {
+    padding: 12px 8px 8px;
+  }
+
+  .file-module-info h2,
+  .archive-specimen-data h2,
+  .scanned-file-info h2,
+  .archive-window-info h2,
+  .image-data-info h2 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .file-module-info p,
+  .archive-window-info p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .archive-specimen-data {
+    padding: 12px 5px 18px;
+  }
+
+  .archive-specimen-data a {
+    position: static;
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  .scanned-file {
+    padding: 18px;
+  }
+
+  .scanned-file-info {
+    padding-top: 14px;
+  }
+
+  .image-data-number {
+    left: 0;
+  }
+
+  .image-data-info a {
+    position: static;
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  .design-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cursor-info,
+  .custom-cursor,
+  .cursor-flash,
+  .cursor-measure-x,
+  .cursor-measure-y {
+    display: none;
+  }
+
+  body { cursor: auto; }
+
+  a,
+  a:hover,
+  .menu-icon {
+    cursor: pointer !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .cursor-info {
+    display: none;
+  }
+}
+
+  </style>
+
+
+  <!-- Cursor script -->
+  <script>
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorX = document.getElementById('cursor-x');
+    const cursorY = document.getElementById('cursor-y');
+    const cursorVector = document.getElementById('cursor-vector');
+    const cursorSpeed = document.getElementById('cursor-speed');
+    const cursorSector = document.getElementById('cursor-sector');
+    const cursorStatus = document.getElementById('cursor-status');
+    const measureX = document.querySelector('.cursor-measure-x');
+    const measureY = document.querySelector('.cursor-measure-y');
+    const cursorFlash = document.querySelector('.cursor-flash');
+
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+    let previousX = 0;
+    let previousY = 0;
+    let previousTime = performance.now();
+    let idleTimer;
+
+    document.addEventListener('mousemove', event => {
+      const x = event.clientX;
+      const y = event.clientY;
+      const currentTime = performance.now();
+
+      measureX.style.left = `${x}px`;
+      measureY.style.top = `${y}px`;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+
+      cursorX.textContent = x.toFixed(2).padStart(7, '0');
+      cursorY.textContent = y.toFixed(2).padStart(7, '0');
+
+      const deltaX = x - previousX;
+      const deltaY = y - previousY;
+      const distance = Math.hypot(deltaX, deltaY);
+      const deltaTime = currentTime - previousTime;
+
+      const speed = Math.min(
+        deltaTime > 0 ? (distance / deltaTime) * 10 : 0,
+        99.99
+      );
+
+      cursorSpeed.textContent = speed.toFixed(2).padStart(5, '0');
+
+      if (distance > 0.5) {
+        const angle = (
+          Math.atan2(deltaY, deltaX) * 180 / Math.PI + 360
+        ) % 360;
+
+        cursorVector.textContent =
+          Math.round(angle).toString().padStart(3, '0') + '°';
+      }
+
+      const column = Math.min(
+        5,
+        Math.floor((x / window.innerWidth) * 6)
+      );
+
+      const row = Math.min(
+        3,
+        Math.floor((y / window.innerHeight) * 4)
+      );
+
+      cursorSector.textContent =
+        `${letters[column]}-${String(row + 1).padStart(2, '0')}`;
+
+      cursorStatus.textContent = 'TRACKING';
+
+      clearTimeout(idleTimer);
+
+      idleTimer = setTimeout(() => {
+        cursorStatus.textContent = 'IDLE';
+      }, 400);
+
+      previousX = x;
+      previousY = y;
+      previousTime = currentTime;
+    });
+
+    document.addEventListener('click', event => {
+      cursorFlash.style.left = `${event.clientX}px`;
+      cursorFlash.style.top = `${event.clientY}px`;
+
+      cursorFlash.classList.remove('active');
+      void cursorFlash.offsetWidth;
+      cursorFlash.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+      cursorFlash.style.opacity = '0';
+      cursorStatus.textContent = 'LOST';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursor.style.opacity = '1';
+      cursorFlash.style.opacity = '0';
+      cursorStatus.textContent = 'TRACKING';
+    });
+  </script>
+
+</body>
 </html>
