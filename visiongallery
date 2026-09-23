@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAMERA CLUB / CONTACT SHEET</title>
+  <link rel="icon" type="image/jpeg" href="img/BAVIcon.png">
+
+  <style>
+    :root {
+      --paper: #d6d0c4;
+      --ink: #3e4140;
+      --line: rgba(62, 65, 64, .34);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Courier New", Courier, monospace;
+      user-select: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      background:
+        linear-gradient(rgba(62, 65, 64, .08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62, 65, 64, .08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      z-index: 5;
+    }
+
+    .space {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      perspective: 850px;
+      perspective-origin: 50% 50%;
+      background:
+        radial-gradient(ellipse at center, rgba(255,255,255,.17), transparent 62%),
+        var(--paper);
+    }
+
+    .space::before,
+    .space::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .space::before {
+      inset: 9vh 3vw;
+      border: 1px solid var(--line);
+    }
+
+    .space::after {
+      width: 18px;
+      height: 18px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(62,65,64,.48);
+      border-radius: 50%;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      transform-style: preserve-3d;
+      pointer-events: auto;
+      cursor: default;
+    }
+
+    .photo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: clamp(150px, 17vw, 330px);
+      aspect-ratio: 4 / 5;
+      margin: 0;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      pointer-events: none;
+      cursor: default;
+      transition: filter .35s ease, opacity .35s ease;
+    }
+
+    .scene .photo {
+      pointer-events: auto;
+    }
+
+    .photo img {
+      display: block;
+      pointer-events: auto;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 8px;
+      background: rgba(214,208,196,.78);
+      border: 1px solid rgba(62,65,64,.55);
+      box-shadow: 0 18px 35px rgba(62,65,64,.13);
+      filter: saturate(.84) contrast(.96);
+    }
+
+    .photo::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      bottom: -24px;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+      opacity: .68;
+    }
+
+    .interface {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      padding: 28px 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 1.5px;
+    }
+
+    .brand { display: flex; flex-direction: column; gap: 7px; }
+    .brand strong { font-size: 21px; font-weight: normal; letter-spacing: 4px; }
+    .muted { opacity: .62; }
+
+    .right { text-align: right; }
+
+    .hint {
+      position: fixed;
+      left: 50%;
+      bottom: 30px;
+      z-index: 10;
+      transform: translateX(-50%);
+      font-size: 9px;
+      letter-spacing: 2px;
+      opacity: .62;
+      pointer-events: none;
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+
+    .detail {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 80px 24px;
+      background: rgba(214,208,196,.72);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+
+    .detail.is-open {
+      display: grid;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .detail-card {
+      display: grid;
+      grid-template-columns: minmax(220px, 430px) minmax(190px, 260px);
+      gap: 28px;
+      align-items: end;
+      max-width: 760px;
+      width: 100%;
+      transform: translateY(18px) scale(.96);
+      transition: transform .35s ease;
+    }
+
+    .detail.is-open .detail-card { transform: translateY(0) scale(1); }
+
+    .detail-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      padding: 10px;
+      background: var(--paper);
+      border: 1px solid rgba(62,65,64,.65);
+      box-shadow: 0 25px 50px rgba(62,65,64,.22);
+    }
+
+    .detail-info {
+      padding-bottom: 8px;
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 1.2px;
+    }
+
+    .detail-info h2 {
+      margin: 0 0 18px;
+      font-size: 16px;
+      font-weight: normal;
+      letter-spacing: 2px;
+    }
+
+    .detail-info p { margin: 0 0 8px; }
+    .detail-label { opacity: .58; }
+
+    .detail-close {
+      margin-top: 22px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 9px;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .detail { padding: 70px 20px 35px; }
+      .detail-card { grid-template-columns: 1fr; gap: 18px; max-width: 330px; }
+      .detail-info { padding: 0; }
+      .detail-info h2 { margin-bottom: 10px; }
+      .detail-close { margin-top: 14px; }
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: .38; }
+      50% { opacity: .82; }
+    }
+
+    @media (max-width: 600px) {
+      .interface { padding: 20px 18px; font-size: 8px; }
+      .brand strong { font-size: 16px; letter-spacing: 3px; }
+      .right { max-width: 130px; }
+      .space::before { inset: 7vh 18px; }
+      .photo { width: clamp(135px, 42vw, 220px); }
+      .hint { bottom: 20px; font-size: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="space" aria-label="Archivo fotográfico en movimiento">
+    <div class="scene" id="scene"></div>
+  </main>
+
+  <header class="interface">
+    <div class="brand">
+      <span class="muted">BAV / PHOTOGRAPHIC ARCHIVE</span>
+      <strong>CAMERA CLUB</strong>
+    </div>
+    <div class="right muted">
+      CONTACT SHEET / 3D SPACE<br>
+      SCROLL TO TRAVEL<br>
+      UNIT 05
+    </div>
+  </header>
+
+  <div class="hint">SCROLL / MOVE THROUGH THE ARCHIVE</div>
+
+  <script>
+    const scene = document.querySelector('#scene');
+
+    // Añade aquí los datos reales de cada fotografía.
+    const images = [
+      {
+        src: '/img/book/book37H.JPEG',
+        description: 'Fragmento de un archivo fotográfico en tránsito.',
+        location: 'Madrid, ES',
+        date: '1987'
+      },
+      {
+        src: '/img/vigotapes.jpg',
+        description: 'Registro visual de una memoria suspendida.',
+        location: 'Barcelona, ES',
+        date: '1992'
+      },
+      {
+        src: 'https://uploads.onecompiler.io/44sv5n3j2/1789987291161/PuffyOvni.jpg',
+        description: 'Una presencia suspendida entre lo cotidiano y lo desconocido.',
+        location: 'Archivo BAV',
+        date: '2026'
+      }
+    ];
+
+    const totalPhotos = 24;
+    const depth = 6200;
+    const cards = [];
+    let travel = 0;
+    let targetTravel = 0;
+    let viewportWidth = innerWidth;
+    let viewportHeight = innerHeight;
+
+    function randomBetween(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function createPosition() {
+      // Corredor central amplio: las fotos solo se generan fuera de esta zona.
+      // Se amplían los límites para que también puedan quedar fuera del marco.
+      let x;
+      let y;
+      do {
+        x = randomBetween(-.9, .9);
+        y = randomBetween(-.7, .7);
+      } while (Math.abs(x) < .52 && Math.abs(y) < .4);
+
+      return { x, y };
+    }
+
+    function createPhotos() {
+      for (let i = 0; i < totalPhotos; i++) {
+        const figure = document.createElement('figure');
+        const image = document.createElement('img');
+        const photoData = images[i % images.length];
+
+        image.src = photoData.src;
+        image.alt = `Fotografía de archivo ${String(i + 1).padStart(3, '0')}`;
+        figure.className = 'photo';
+        figure.dataset.label = `FRAME ${String(i + 1).padStart(3, '0')} / ARCHIVE`;
+        figure.appendChild(image);
+        scene.appendChild(figure);
+
+        const position = createPosition();
+
+        const card = {
+          element: figure,
+          image: photoData,
+          x: position.x,
+          y: position.y,
+          z: (i / totalPhotos) * depth,
+          rotation: randomBetween(-8, 8),
+          drift: randomBetween(-16, 16)
+        };
+
+        cards.push(card);
+      }
+    }
+
+    function resize() {
+      viewportWidth = innerWidth;
+      viewportHeight = innerHeight;
+    }
+
+    function render() {
+      const time = performance.now() * .00035;
+
+      cards.forEach(card => {
+        // El módulo convierte el recorrido en un bucle infinito.
+        const distance = ((card.z - travel) % depth + depth) % depth;
+        const proximity = 1 - distance / depth;
+        const x = card.x * viewportWidth + Math.sin(time + card.z) * card.drift;
+        const y = card.y * viewportHeight + Math.cos(time + card.z) * card.drift * .45;
+        const scale = .22 + proximity * 1.58;
+        const opacity = Math.min(1, Math.max(0, (depth - distance) / 760));
+        const zIndex = Math.round(proximity * 1000);
+
+        card.element.style.pointerEvents = opacity > 0.04 ? 'auto' : 'none';
+        card.element.style.visibility = opacity > 0.04 ? 'visible' : 'hidden';
+
+        card.element.style.transform =
+          `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${-distance}px) ` +
+          `scale(${scale}) rotate(${card.rotation}deg)`;
+        card.element.style.opacity = opacity;
+        card.element.style.zIndex = zIndex;
+      });
+
+      travel += (targetTravel - travel) * .075;
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('wheel', event => {
+      event.preventDefault();
+      targetTravel -= event.deltaY * 1.05;
+    }, { passive: false });
+
+    window.addEventListener('resize', resize);
+    createPhotos();
+    resize();
+    render();
+  </script>
+</body>
+</html>
