@@ -238,16 +238,27 @@ margin-right:20px;
 position:relative;
 z-index:2;
 padding:0 42px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),400px));
+gap:100px 48px;
+justify-content:center;
 }
 
 .project{
 position:relative;
-display:grid;
-grid-template-columns:repeat(12,1fr);
-column-gap:24px;
-grid-template-rows:auto auto;
-min-height:850px;
-margin-bottom:180px;
+display:block;
+width:100%;
+max-width:400px;
+min-height:auto;
+margin:0;
+}
+
+.project-image{
+width:100%;
+}
+
+.project-image img{
+aspect-ratio:4 / 5;
 }
 
 /* =========================
@@ -295,34 +306,14 @@ z-index:3;
    PROJECT 001
 ========================= */
 
-.project-001 .project-image{
-grid-column:4 / 11;
-grid-row:1;
-}
-
-.project-001 .project-info{
-grid-column:4 / 8;
-grid-row:2;
-align-self:start;
+.project-001 .project-info,
+.project-002 .project-info{
 padding-top:28px;
 }
 
 /* =========================
    PROJECT 002
 ========================= */
-
-.project-002 .project-image{
-grid-column:2 / 8;
-grid-row:1;
-align-self:start;
-}
-
-.project-002 .project-info{
-grid-column:8 / 11;
-grid-row:1;
-align-self:center;
-padding-left:10px;
-}
 
 /* =========================
    PROJECT INFORMATION
@@ -741,7 +732,7 @@ A photographic study exploring place,
 light, atmosphere and visual memory.
 </div>
 
-<a class="project-button" href="https://benas20.github.io/dontfollowmecauseimlosttoo.html">VIEW PROJECT</a>
+<a class="project-button" href="dontfollowmecauseimlosttoo.html">VIEW PROJECT</a>
 
 </div>
 
@@ -823,11 +814,11 @@ to keep the archive asymmetrical.
 
 <div>
 BEEN A VISION<br>
-PHOTOGRAPHIC ARCHIVE
+PHOTOGRAPHY GALLERY
 </div>
 
 <div class="footer-right">
-PH-001 — PH-∞<br>
+PH-001 — ∞<br>
 OPEN ARCHIVE / 2026
 </div>
 
