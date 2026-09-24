@@ -379,7 +379,6 @@
       background:
         radial-gradient(ellipse at center, rgba(255,255,255,.17), transparent 62%),
         var(--paper);
-
       opacity: 0;
       visibility: hidden;
       transition:
@@ -428,7 +427,7 @@
       left: 50%;
       top: 50%;
       z-index: 1;
-      width: clamp(140px, 15vw, 290px);
+      width: clamp(250px, 20vw, 450px);
       aspect-ratio: 4 / 5;
       margin: 0;
       transform-style: preserve-3d;
@@ -550,7 +549,6 @@
       font-size: 10px;
       line-height: 16px;
       letter-spacing: 1.5px;
-
       opacity: 0;
       visibility: hidden;
       transition:
@@ -617,7 +615,6 @@
       opacity: .62;
       pointer-events: none;
       animation: breathe 2.8s ease-in-out infinite;
-
       visibility: hidden;
       opacity: 0;
       transition:
@@ -806,17 +803,11 @@
         bottom: 20px;
       }
 
-      .map-container {
-        width: 80vw;
-      }
+      .map-container {width: 80vw;}
 
-      .map-selection {
-        top: 76%;
-      }
+      .map-selection {top: 76%;}
 
-      .location-label {
-        font-size: 8px;
-      }
+      .location-label {font-size: 8px;}
 
       .location-spain {
         left: 46%;
@@ -833,17 +824,11 @@
         top: 27.3%;
       }
 
-      .right {
-        max-width: 150px;
-      }
+      .right {max-width: 150px;}
 
-      .space::before {
-        inset: 7vh 18px;
-      }
+      .space::before {inset: 7vh 18px;}
 
-      .photo {
-        width: clamp(135px, 42vw, 220px);
-      }
+      .photo {width: clamp(135px, 42vw, 220px);}
 
       .hint {
         bottom: 20px;
@@ -886,49 +871,26 @@
 
     <div class="map-container">
 
-      <img
-        class="map-image"
-        src="img/mapamundi.svg"
-        alt="Mapa mundial"
-        draggable="false"
-      >
+      <img class="map-image" src="img/mapamundi.svg" alt="Mapa mundial" draggable="false">
 
       <!-- ESPAÑA -->
-      <button
-        class="location location-spain"
-        id="locationSpain"
-        type="button"
-        aria-label="España"
-      >
+      <button class="location location-spain" id="locationSpain" type="button" aria-label="España">
         <span class="location-dot"></span>
-        <span class="location-label">
-          SPAIN <span class="location-code">ES</span>
+        <span class="location-label">SPAIN <span class="location-code">ES</span>
         </span>
       </button>
 
       <!-- TAILANDIA -->
-      <button
-        class="location location-thailand"
-        id="locationThailand"
-        type="button"
-        aria-label="Tailandia"
-      >
+      <button class="location location-thailand" id="locationThailand" type="button" aria-label="Tailandia">
         <span class="location-dot"></span>
-        <span class="location-label">
-          THAILAND <span class="location-code">TH</span>
+        <span class="location-label">THAILAND <span class="location-code">TH</span>
         </span>
       </button>
 
       <!-- JAPÓN -->
-      <button
-        class="location location-japan"
-        id="locationJapan"
-        type="button"
-        aria-label="Japón — entrar al archivo"
-      >
+      <button class="location location-japan" id="locationJapan" type="button" aria-label="Japón — entrar al archivo">
         <span class="location-dot"></span>
-        <span class="location-label">
-          JAPAN <span class="location-code">JP</span>
+        <span class="location-label">JAPAN <span class="location-code">JP</span>
         </span>
       </button>
 
@@ -952,14 +914,9 @@
        ESPACIO 3D
   ========================= -->
 
-  <main
-    class="space"
-    id="space"
-    aria-label="Archivo fotográfico en movimiento"
-  >
+  <main class="space" id="space" aria-label="Archivo fotográfico en movimiento">
     <div class="scene" id="scene"></div>
   </main>
-
 
   <!-- =========================
        INTERFAZ 3D
@@ -986,12 +943,10 @@
       <button class="toggle-btn" id="goBackButton" type="button">
         GO BACK
       </button>
-
-
+      
     </div>
 
   </header>
-
 
   <div class="hint" id="hint">
     SCROLL / DRAG TO TRAVEL
@@ -1002,47 +957,26 @@
        VENTANA MODAL
   ========================= -->
 
-  <div
-    class="modal"
-    id="photoModal"
-    aria-hidden="true"
-  >
+  <div class="modal" id="photoModal" aria-hidden="true">
 
-    <div
-      class="modal-overlay"
-      id="modalOverlay"
-    ></div>
-
+    <div class="modal-overlay" id="modalOverlay"></div>
     <div class="modal-card">
 
-      <button
-        class="modal-close"
-        id="modalClose"
-      >
+      <button class="modal-close" id="modalClose">
         &times;
       </button>
 
       <div class="modal-img-container">
-        <img
-          id="modalImg"
-          src=""
-          alt="Fotografía ampliada"
-        >
+        <img id="modalImg" src="" alt="Fotografía ampliada">
       </div>
 
-      <div
-        class="modal-title"
-        id="modalTitle"
-      >
+      <div class="modal-title" id="modalTitle">
         FRAME 000
       </div>
 
       <div class="photo-meta-block">
 
-        <p
-          class="photo-phrase"
-          id="modalPhrase"
-        >
+        <p class="photo-phrase" id="modalPhrase">
           "Frase descriptiva..."
         </p>
 
@@ -1050,40 +984,30 @@
 
           <div class="photo-spec-item">
             <span class="photo-spec-label">LOC</span>
-            <span
-              class="photo-spec-value"
-              id="modalLoc"
-            >
+            <span class="photo-spec-value" id="modalLoc">
               --
             </span>
           </div>
 
           <div class="photo-spec-item">
             <span class="photo-spec-label">DATE</span>
-            <span
-              class="photo-spec-value"
-              id="modalDate"
-            >
+            <span class="photo-spec-value" id="modalDate">
               --
             </span>
           </div>
 
           <div class="photo-spec-item">
             <span class="photo-spec-label">CAM</span>
-            <span
-              class="photo-spec-value"
-              id="modalCam"
-            >
+            <span class="photo-spec-value" id="modalCam">
               --
             </span>
           </div>
-
+          
         </div>
       </div>
-
+      
     </div>
   </div>
-
 
   <script>
 
@@ -1149,7 +1073,6 @@
     locationJapan.addEventListener('click', () => {
       enterArchive('JAPAN', '01', japanPhotos);
     });
-
 
     /* =========================
        FOTOGRAFÍAS
@@ -1369,7 +1292,463 @@
         src: 'img/japan/canon01.JPG',
         phrase: '#',
         location: 'TOKYO, JAPAN',
-        date: '25 AUG 2026',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-028',
+        src: 'img/japan/canon02.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-029',
+        src: 'img/japan/canon03.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-030',
+        src: 'img/japan/canon04.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-031',
+        src: 'img/japan/canon05.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-032',
+        src: 'img/japan/canon06.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-033',
+        src: 'img/japan/canon07.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-034',
+        src: 'img/japan/canon08.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-035',
+        src: 'img/japan/canon09.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-036',
+        src: 'img/japan/canon10.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-037',
+        src: 'img/japan/canon11.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-038',
+        src: 'img/japan/canon12.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-039',
+        src: 'img/japan/canon13.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-040',
+        src: 'img/japan/canon14.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-041',
+        src: 'img/japan/canon15.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-042',
+        src: 'img/japan/canon16.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-043',
+        src: 'img/japan/canon17.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-044',
+        src: 'img/japan/canon18.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-045',
+        src: 'img/japan/canon19.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-046',
+        src: 'img/japan/canon20.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-047',
+        src: 'img/japan/canon21.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-048',
+        src: 'img/japan/canon22.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-049',
+        src: 'img/japan/canon23.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-050',
+        src: 'img/japan/canon24.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-051',
+        src: 'img/japan/canon25.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-052',
+        src: 'img/japan/canon26.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-053',
+        src: 'img/japan/canon27.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-054',
+        src: 'img/japan/canon28.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-055',
+        src: 'img/japan/canon29.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-056',
+        src: 'img/japan/canon30.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-057',
+        src: 'img/japan/canon31.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-058',
+        src: 'img/japan/canon32.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-059',
+        src: 'img/japan/canon33.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-060',
+        src: 'img/japan/canon34.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-061',
+        src: 'img/japan/canon35.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-062',
+        src: 'img/japan/canon36.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-063',
+        src: 'img/japan/canon37.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-064',
+        src: 'img/japan/canon38.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-065',
+        src: 'img/japan/canon39.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-066',
+        src: 'img/japan/canon40.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-067',
+        src: 'img/japan/canon41.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-068',
+        src: 'img/japan/canon42.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-069',
+        src: 'img/japan/canon43.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-070',
+        src: 'img/japan/canon44.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-071',
+        src: 'img/japan/canon45.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-072',
+        src: 'img/japan/canon46.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-073',
+        src: 'img/japan/canon47.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-074',
+        src: 'img/japan/canon48.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-075',
+        src: 'img/japan/canon49.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-076',
+        src: 'img/japan/canon50.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-077',
+        src: 'img/japan/canon51.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-078',
+        src: 'img/japan/canon52.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-079',
+        src: 'img/japan/canon53.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-080',
+        src: 'img/japan/canon54.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-081',
+        src: 'img/japan/canon55.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-082',
+        src: 'img/japan/canon56.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-083',
+        src: 'img/japan/canon57.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
+        camera: 'CANON 2000D · 36MM'
+      },
+      {
+        id: 'JP-084',
+        src: 'img/japan/canon58.JPG',
+        phrase: '#',
+        location: 'TOKYO, JAPAN',
+        date: '24 AUG 2026',
         camera: 'CANON 2000D · 36MM'
       }
     ];
@@ -1377,19 +1756,19 @@
     const thailandPhotos = [
       {
         id: 'TH-001',
-        src: 'img/thailand/thailand1.jpg',
-        phrase: 'Luz cálida sobre el mercado al amanecer.',
+        src: 'img/thailand/#',
+        phrase: '#',
         location: 'BANGKOK',
-        date: '06 MAR 2026',
-        camera: 'NIKON F3 · 50MM'
+        date: '24 AUG 2026',
+        camera: 'KODAK C713 · 18MM'
       },
       {
-        id: 'TH-002',
-        src: 'img/thailand/thailand2.jpg',
-        phrase: 'Silencio azul en la costa.',
-        location: 'PHUKET',
-        date: '09 MAR 2026',
-        camera: 'PENTAX 67'
+        id: 'TH-001',
+        src: 'img/thailand/#',
+        phrase: '#',
+        location: 'BANGKOK',
+        date: '24 AUG 2026',
+        camera: 'KODAK C713 · 18MM'
       },
       {
         id: 'TH-003',
@@ -1422,6 +1801,14 @@
         location: 'AYUTTHAYA',
         date: '21 MAR 2026',
         camera: 'OLYMPUS OM-1'
+      },
+      {
+        id: 'TH-007',
+        src: 'img/thailand/thailand1.jpg',
+        phrase: 'Luz sobre la ciudad.',
+        location: 'BANGKOK',
+        date: '24 MAR 2026',
+        camera: 'NIKON F3 · 50MM'
       }
     ];
 
@@ -1690,13 +2077,12 @@
     function getFixedPosition(index) {
 
       // Usa la misma distribución de seis posiciones que Tailandia.
-      const layoutIndex = index % 6;
+      const layoutIndex = index % 10;
       const angle =
-        (layoutIndex / 6) * Math.PI * 2;
+        (layoutIndex / 10) * Math.PI * 2;
 
-      const isJapanArchive = activePhotos === japanPhotos;
-      const radiusX = isJapanArchive ? 0.64 : 0.55;
-      const radiusY = isJapanArchive ? 0.42 : 0.35;
+      const radiusX = 0.55;
+      const radiusY = 0.35;
 
       const x =
         Math.cos(angle * 2.5) * radiusX;
@@ -1954,7 +2340,7 @@
 
 
           const scale =
-            (.22 + proximity * 1.35) * 1.2;
+            (.22 + proximity * 1.35) * 1.4;
 
 
           const zIndex =
