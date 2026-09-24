@@ -142,6 +142,7 @@
       transform-origin: center center;
       transition: transform .25s ease;
       cursor: grab;
+      touch-action: none;
     }
 
     .map-container.dragging {
@@ -431,7 +432,6 @@
       aspect-ratio: 4 / 5;
       margin: 0;
       transform-style: preserve-3d;
-      will-change: transform, opacity;
       transition: filter .35s ease;
     }
 
@@ -845,6 +845,58 @@
         gap: 8px;
       }
     }
+
+    /* =========================
+       MODAL / MÓVIL
+    ========================= */
+
+    @media (max-width: 600px) {
+      .modal-card {
+        width: 94vw;
+        max-width: 94vw;
+        max-height: 94vh;
+        padding: 12px;
+      }
+
+      .modal-img-container {
+        width: 100%;
+        max-height: 72vh;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      .modal-img-container img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 68vh;
+      }
+
+      .modal-title {
+        font-size: 10px;
+        margin-bottom: 6px;
+        letter-spacing: 1.5px;
+      }
+
+      .photo-phrase {
+        font-size: 10px;
+        line-height: 14px;
+        margin-bottom: 9px;
+      }
+
+      .photo-spec-grid {
+        font-size: 8px;
+        gap: 6px;
+        padding-top: 8px;
+      }
+
+      .photo-spec-label {
+        font-size: 7px;
+      }
+
+      .photo-spec-value {
+        font-size: 8px;
+      }
+    }
   </style>
 </head>
 
@@ -949,7 +1001,7 @@
   </header>
 
   <div class="hint" id="hint">
-    SCROLL / DRAG TO TRAVEL
+    SCROLL / DRAG UP TO TRAVEL
   </div>
 
 
@@ -2069,6 +2121,43 @@
 
     let touchStartY = 0;
 
+    let renderRunning = false;
+    let renderFrame = null;
+    const preloadDistance = 14000;
+    const unloadDistance = 26000;
+
+    function requestRender() {
+      if (renderRunning) return;
+      renderRunning = true;
+      renderFrame = requestAnimationFrame(render);
+    }
+
+    function loadCardImage(card) {
+      if (card.imageLoaded || card.imageLoading) return;
+
+      const image = card.element.querySelector('img');
+      if (!image) return;
+
+      card.imageLoading = true;
+      image.src = card.image.src;
+
+      image.decode?.().catch(() => {}).finally(() => {
+        card.imageLoaded = true;
+        card.imageLoading = false;
+      });
+    }
+
+    function unloadCardImage(card) {
+      if (!card.imageLoaded || card.element.classList.contains('clickable')) return;
+
+      const image = card.element.querySelector('img');
+      if (!image) return;
+
+      image.removeAttribute('src');
+      card.imageLoaded = false;
+      card.imageLoading = false;
+    }
+
 
     /* =========================
        POSICIÓN DE LAS FOTOS
@@ -2112,71 +2201,51 @@
       travel = 0;
       targetTravel = 0;
       createPhotos();
+      requestRender();
     }
 
     function createPhotos() {
-
-      const fragment =
-        document.createDocumentFragment();
+      const fragment = document.createDocumentFragment();
 
       activePhotos.forEach((photoData, i) => {
+        const figure = document.createElement('figure');
+        const image = document.createElement('img');
 
-        const figure =
-          document.createElement('figure');
-
-        const image =
-          document.createElement('img');
-
-        image.src = photoData.src;
-
-        image.alt =
-          `Fotografía de archivo ${photoData.id}`;
+        image.alt = `Fotografía de archivo ${photoData.id}`;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.draggable = false;
 
         image.onerror = () => {
-
           image.onerror = null;
-          image.src =
-            `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
-              `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750"><rect width="600" height="750" fill="#3e4140"/><text x="300" y="375" fill="#d6d0c4" font-family="Courier New, monospace" font-size="32" text-anchor="middle">FRAME ${photoData.id}</text></svg>`
-            )}`;
-
+          image.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750"><rect width="600" height="750" fill="#3e4140"/><text x="300" y="375" fill="#d6d0c4" font-family="Courier New, monospace" font-size="32" text-anchor="middle">FRAME ${photoData.id}</text></svg>`
+          )}`;
+          const card = cards.find(c => c.image === photoData);
+          if (card) {
+            card.imageLoaded = true;
+            card.imageLoading = false;
+          }
         };
 
         figure.className = 'photo';
-
-        figure.dataset.label =
-          `FRAME ${photoData.id} / ARCHIVE`;
-
+        figure.dataset.label = `FRAME ${photoData.id} / ARCHIVE`;
         figure.appendChild(image);
-
         fragment.appendChild(figure);
 
-
-        figure.addEventListener(
-          'mouseenter',
-          () => {
-
-            if (
-              figure.classList.contains('clickable')
-            ) {
-              isHoveringCard = true;
-            }
-
+        figure.addEventListener('mouseenter', () => {
+          if (figure.classList.contains('clickable')) {
+            isHoveringCard = true;
+            requestRender();
           }
-        );
+        });
 
+        figure.addEventListener('mouseleave', () => {
+          isHoveringCard = false;
+          requestRender();
+        });
 
-        figure.addEventListener(
-          'mouseleave',
-          () => {
-            isHoveringCard = false;
-          }
-        );
-
-
-                const pos =
-          getFixedPosition(i);
-
+        const pos = getFixedPosition(i);
 
         cards.push({
           element: figure,
@@ -2184,9 +2253,10 @@
           x: pos.x,
           y: pos.y,
           z: (i / activePhotos.length) * depth,
-          rotation: pos.rotation
+          rotation: pos.rotation,
+          imageLoaded: false,
+          imageLoading: false
         });
-
       });
 
       scene.appendChild(fragment);
@@ -2198,179 +2268,82 @@
     ========================= */
 
     function resize() {
-
-      viewportWidth =
-        window.innerWidth;
-
-      viewportHeight =
-        window.innerHeight;
+      viewportWidth = window.innerWidth;
+      viewportHeight = window.innerHeight;
+      limitMapPan();
+      requestRender();
     }
 
 
     /* =========================
-       RENDER 3D
+       RENDER 3D OPTIMIZADO
     ========================= */
 
     function render() {
+      renderRunning = false;
+      renderFrame = null;
 
-      if (!isGridView) {
+      if (isGridView) return;
 
-        travel +=
-          (targetTravel - travel) * .075;
+      const travelDelta = targetTravel - travel;
+      const tiltTargetX = isHoveringCard ? 0 : targetTiltX;
+      const tiltTargetY = isHoveringCard ? 0 : targetTiltY;
 
+      travel += travelDelta * .075;
+      tiltX += (tiltTargetX - tiltX) * .08;
+      tiltY += (tiltTargetY - tiltY) * .08;
 
-        const activeTargetTiltX =
-          isHoveringCard
-            ? 0
-            : targetTiltX;
+      scene.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 
-        const activeTargetTiltY =
-          isHoveringCard
-            ? 0
-            : targetTiltY;
+      let moving = Math.abs(travelDelta) > .08;
+      moving ||= Math.abs(tiltTargetX - tiltX) > .02;
+      moving ||= Math.abs(tiltTargetY - tiltY) > .02;
 
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        const distance = ((card.z - travel) % depth + depth) % depth;
+        const proximity = 1 - distance / depth;
 
-        tiltX +=
-          (activeTargetTiltX - tiltX) * 0.08;
-
-        tiltY +=
-          (activeTargetTiltY - tiltY) * 0.08;
-
-
-        scene.style.transform =
-          `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-
-
-        for (
-          let i = 0;
-          i < cards.length;
-          i++
-        ) {
-
-          const card = cards[i];
-
-
-          const distance =
-            ((card.z - travel) % depth + depth) % depth;
-
-
-          const proximity =
-            1 - distance / depth;
-
-
-          let opacity =
-            Math.min(
-              1,
-              Math.max(
-                0,
-                (depth - distance) / 760
-              )
-            );
-
-
-          if (proximity > 0.35) {
-
-            opacity =
-              Math.max(
-                0,
-                (1 - proximity) / 0.03
-              );
-          }
-
-
-          const isVisible =
-            opacity > 0.01;
-
-
-          if (!isVisible) {
-
-            if (
-              card.element.style.visibility !== 'hidden'
-            ) {
-
-              card.element.style.visibility =
-                'hidden';
-
-              card.element.style.pointerEvents =
-                'none';
-
-              card.element.classList.remove(
-                'clickable'
-              );
-            }
-
-            continue;
-          }
-
-
-          const isClickable =
-            proximity > 0.3 &&
-            proximity < 0.88;
-
-
-          if (isClickable) {
-
-            card.element.classList.add(
-              'clickable'
-            );
-
-          } else {
-
-            card.element.classList.remove(
-              'clickable'
-            );
-          }
-
-
-          const convergence =
-            1 -
-            Math.pow(proximity, 1.5) * 0.42;
-
-
-          const x =
-            card.x *
-            viewportWidth *
-            convergence;
-
-
-          const y =
-            card.y *
-            viewportHeight *
-            convergence;
-
-
-          const scale =
-            (.22 + proximity * 1.35) * 1.4;
-
-
-          const zIndex =
-            Math.round(proximity * 1000);
-
-
-          card.element.style.visibility =
-            'visible';
-
-          card.element.style.pointerEvents =
-            isClickable
-              ? 'auto'
-              : 'none';
-
-
-          card.element.style.transform =
-            `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${-distance}px) ` +
-            `scale(${scale}) rotate(${card.rotation}deg)`;
-
-
-          card.element.style.opacity =
-            opacity;
-
-          card.element.style.zIndex =
-            zIndex;
+        let opacity = Math.min(1, Math.max(0, (depth - distance) / 760));
+        if (proximity > 0.35) {
+          opacity = Math.max(0, (1 - proximity) / 0.03);
         }
+
+        if (distance < preloadDistance) {
+          loadCardImage(card);
+        } else if (distance > unloadDistance) {
+          unloadCardImage(card);
+        }
+
+        const isVisible = opacity > 0.01;
+
+        if (!isVisible) {
+          if (card.element.style.visibility !== 'hidden') {
+            card.element.style.visibility = 'hidden';
+            card.element.style.pointerEvents = 'none';
+            card.element.classList.remove('clickable');
+          }
+          continue;
+        }
+
+        const isClickable = proximity > 0.3 && proximity < 0.88;
+        card.element.classList.toggle('clickable', isClickable);
+
+        const convergence = 1 - Math.pow(proximity, 1.5) * 0.42;
+        const x = card.x * viewportWidth * convergence;
+        const y = card.y * viewportHeight * convergence;
+        const scale = (.22 + proximity * 1.35) * 1.4;
+
+        card.element.style.visibility = 'visible';
+        card.element.style.pointerEvents = isClickable ? 'auto' : 'none';
+        card.element.style.transform =
+          `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${-distance}px) ` +
+          `scale(${scale}) rotate(${card.rotation}deg)`;
+        card.element.style.opacity = opacity;
+        card.element.style.zIndex = Math.round(proximity * 1000);
       }
 
-
-      requestAnimationFrame(render);
+      if (moving) requestRender();
     }
 
 
@@ -2507,6 +2480,8 @@
 
         targetTiltY =
           x * 3.5;
+
+        requestRender();
       }
     );
 
@@ -2553,6 +2528,8 @@
         targetTravel +=
           deltaY * 5;
 
+        requestRender();
+
       },
       {
         passive: true
@@ -2593,6 +2570,8 @@
             10
           ) * -0.3;
 
+        requestRender();
+
       },
       true
     );
@@ -2617,6 +2596,8 @@
 
         targetTravel -=
           event.deltaY * 1.05;
+
+        requestRender();
 
       },
       {
@@ -2643,6 +2624,8 @@
 
 
         if (isGridView) {
+
+          cards.forEach(loadCardImage);
 
           const sortedCards =
             [...cards].sort(
@@ -2710,6 +2693,7 @@
             'block';
         }
 
+        requestRender();
       }
     );
 
@@ -2727,7 +2711,7 @@
 
     resize();
 
-    render();
+    requestRender();
 
   </script>
 
