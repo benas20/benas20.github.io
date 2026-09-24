@@ -979,9 +979,15 @@
         UNIT 05
       </div>
 
-      <button class="toggle-btn" id="modeToggle">
+      <button class="toggle-btn" id="modeToggle" type="button">
         MODE: 3D SPACE
       </button>
+
+      <button class="toggle-btn" id="goBackButton" type="button">
+        GO BACK
+      </button>
+
+
     </div>
 
   </header>
@@ -1420,6 +1426,7 @@
 
     const scene = document.querySelector('#scene');
     const modeToggle = document.querySelector('#modeToggle');
+    const goBackButton = document.querySelector('#goBackButton');
     const hint = document.querySelector('#hint');
 
     const photoModal = document.querySelector('#photoModal');
@@ -1672,10 +1679,12 @@
        POSICIÓN DE LAS FOTOS
     ========================= */
 
-    function getFixedPosition(index, total) {
+    function getFixedPosition(index) {
 
+      // Usa la misma distribución de seis posiciones que Tailandia.
+      const layoutIndex = index % 6;
       const angle =
-        (index / total) * Math.PI * 2;
+        (layoutIndex / 6) * Math.PI * 2;
 
       const radiusX = 0.55;
       const radiusY = 0.35;
@@ -1687,7 +1696,7 @@
         Math.sin(angle * 1.8) * radiusY;
 
       const rotation =
-        ((index % 5) - 2) * 2.5;
+        ((layoutIndex % 5) - 2) * 2.5;
 
       return {
         x,
@@ -1771,7 +1780,7 @@
 
 
                 const pos =
-          getFixedPosition(i, activePhotos.length);
+          getFixedPosition(i);
 
 
         cards.push({
@@ -2225,6 +2234,11 @@
     /* =========================
        3D / GRID
     ========================= */
+
+    goBackButton.addEventListener('click', () => {
+      window.location.href = 'visiongallery.html';
+    });
+
 
     modeToggle.addEventListener(
       'click',
