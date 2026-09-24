@@ -781,6 +781,136 @@
       text-overflow: ellipsis;
     }
 
+
+    /* =========================
+       MENÚ HAMBURGUESA
+    ========================= */
+
+    .menu-container {
+      position: fixed;
+      left: 28px;
+      bottom: 28px;
+      z-index: 50;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .menu-icon {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--line);
+      background: rgba(214,208,196,.78);
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .menu-icon span {
+      display: block;
+      width: 15px;
+      height: 1px;
+      background: var(--ink);
+      transition:
+        transform .25s ease,
+        opacity .2s ease;
+    }
+
+    .menu-icon:hover {
+      background: var(--ink);
+    }
+
+    .menu-icon:hover span {
+      background: var(--paper);
+    }
+
+    .menu-list {
+      position: absolute;
+      left: 0;
+      bottom: 43px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 190px;
+      background: rgba(214,208,196,.96);
+      border: 1px solid var(--line);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility .25s ease;
+    }
+
+    .menu-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(62,65,64,.15);
+    }
+
+    .menu-list li:last-child {
+      border-bottom: none;
+    }
+
+    .menu-number {
+      font-size: 8px;
+      letter-spacing: 1px;
+      opacity: .45;
+    }
+
+    .menu-list a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      white-space: nowrap;
+    }
+
+    .menu-list li:hover {
+      background: rgba(62,65,64,.08);
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .menu-toggle:checked ~ .menu-list {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    @media (max-width: 600px) {
+      .menu-container {
+        left: 16px;
+        bottom: 16px;
+      }
+
+      .menu-list {
+        width: 175px;
+      }
+    }
+
     /* =========================
        RESPONSIVE
     ========================= */
@@ -846,6 +976,13 @@
       }
     }
 
+    @media (max-width: 600px) {
+      body.grid-view .scene {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px 12px;
+      }
+    }
+
     /* =========================
        MODAL / MÓVIL
     ========================= */
@@ -901,6 +1038,12 @@
 </head>
 
 <body>
+
+
+  <!-- ========================================
+       MENÚ HAMBURGUESA
+  ======================================== -->
+
 
   <!-- =========================
        MAPA MUNDIAL
@@ -959,6 +1102,56 @@
       <span>03 LOCATIONS / 01 ACTIVE</span>
     </div>
 
+    <!-- MENÚ HAMBURGUESA / MAPA -->
+  <div class="menu-container">
+
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      class="menu-toggle"
+    >
+
+    <label
+      for="menu-toggle"
+      class="menu-icon"
+      aria-label="Abrir menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <ul class="menu-list">
+
+      <li>
+        <span class="menu-number">001</span>
+        <a href="graphicdesign.html">GRAPHIC DESIGN</a>
+      </li>
+
+      <li>
+        <span class="menu-number">002</span>
+        <a href="3d.html">3D MODELING</a>
+      </li>
+
+      <li>
+        <span class="menu-number">003</span>
+        <a href="animation.html">ANIMATIONS</a>
+      </li>
+
+      <li>
+        <span class="menu-number">004</span>
+        <a href="artgallery.html">CAMERA CLUB</a>
+      </li>
+
+      <li>
+        <span class="menu-number">005</span>
+        <a href="index.html">INDEX</a>
+      </li>
+
+    </ul>
+
+  </div>
+
   </section>
 
 
@@ -1001,7 +1194,7 @@
   </header>
 
   <div class="hint" id="hint">
-    SCROLL / DRAG UP TO TRAVEL
+    SCROLL / DRAG TO TRAVEL
   </div>
 
 
@@ -2306,7 +2499,7 @@
 
         let opacity = Math.min(1, Math.max(0, (depth - distance) / 760));
         if (proximity > 0.35) {
-          opacity = Math.max(0, (1 - proximity) / 0.03);
+          opacity = Math.max(0, (1 - proximity) / 0.008);
         }
 
         if (distance < preloadDistance) {
