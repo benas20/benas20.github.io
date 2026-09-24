@@ -13,9 +13,16 @@
       --line: rgba(62, 65, 64, .34);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
       margin: 0;
@@ -23,11 +30,40 @@
       background: var(--paper);
       color: var(--ink);
       font-family: "Courier New", Courier, monospace;
+      cursor: default;
     }
 
-    body::before {
-      content: "";
+    input,
+    textarea {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    /* =========================
+       MAPA MUNDIAL
+    ========================= */
+
+    .world-map {
       position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--paper);
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity .8s ease,
+        visibility .8s ease;
+    }
+
+    body.archive-open .world-map {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .world-map::before {
+      content: "";
+      position: absolute;
       inset: 0;
       pointer-events: none;
       opacity: .24;
@@ -35,8 +71,304 @@
         linear-gradient(rgba(62, 65, 64, .08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(62, 65, 64, .08) 1px, transparent 1px);
       background-size: 80px 80px;
-      z-index: 5;
+      z-index: 3;
     }
+
+    .world-map::after {
+      content: "";
+      position: absolute;
+      inset: 9vh 3vw;
+      border: 1px solid var(--line);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .map-interface {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      padding: 28px 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 1.5px;
+      pointer-events: none;
+    }
+
+    .map-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .map-brand strong {
+      font-size: 21px;
+      font-weight: normal;
+      letter-spacing: 4px;
+    }
+
+    .muted {
+      opacity: .62;
+      margin-top: 7px;
+      margin-right: 10px;
+    }
+
+    .map-status {
+      position: absolute;
+      left: 50%;
+      bottom: 31px;
+      transform: translateX(-50%);
+      font-size: 9px;
+      letter-spacing: 2px;
+      opacity: .62;
+      white-space: nowrap;
+      z-index: 20;
+      transition: opacity .2s ease;
+    }
+
+    .map-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(88vw, 1500px);
+      transform:
+        translate(
+          calc(-50% + var(--map-pan-x, 0px)),
+          calc(-50% + var(--map-pan-y, 0px))
+        )
+        scale(var(--map-zoom, 1));
+      transform-origin: center center;
+      transition: transform .25s ease;
+      cursor: grab;
+    }
+
+    .map-container.dragging {
+      cursor: grabbing;
+      transition: none;
+    }
+
+    .map-zoom-controls {
+      position: absolute;
+      right: 42px;
+      bottom: 32px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .map-zoom-controls button {
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: rgba(214,208,196,.65);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .map-zoom-controls button:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #mapZoomValue {
+      min-width: 42px;
+      text-align: center;
+      opacity: .65;
+    }
+
+    .map-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: .42;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter:
+        grayscale(1)
+        contrast(.72)
+        sepia(.12);
+    }
+
+    .location {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    .location-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 13px;
+      height: 13px;
+      transform: translate(-50%, -50%);
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--paper);
+      transition:
+        transform .25s ease,
+        background .25s ease;
+    }
+
+    .location-dot::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .location-label {
+      position: absolute;
+      left: 26px;
+      top: 1px;
+      white-space: nowrap;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-align: left;
+      pointer-events: none;
+    }
+
+    .location-code {
+      opacity: .5;
+      margin-left: 5px;
+    }
+
+    .location:hover .location-dot {
+      transform: translate(-50%, -50%) scale(1.45);
+      background: var(--ink);
+    }
+
+    .location:hover .location-dot::after {
+      background: var(--paper);
+    }
+
+    .location-thailand .location-dot,
+    .location-japan .location-dot {
+      border-color: #3f8f5f;
+      background: var(--paper);
+    }
+
+    .location-thailand .location-dot::after,
+    .location-japan .location-dot::after {
+      background: #3f8f5f;
+    }
+
+    .location-thailand:hover .location-dot,
+    .location-japan:hover .location-dot {
+      background: #3f8f5f;
+    }
+
+    .location-thailand:hover .location-dot::after,
+    .location-japan:hover .location-dot::after {
+      background: var(--paper);
+    }
+
+    .location-thailand .location-dot,
+    .location-japan .location-dot {
+      animation: locationPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes locationPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(62,65,64,.25);
+      }
+      50% {
+        box-shadow: 0 0 0 9px rgba(62,65,64,0);
+      }
+    }
+
+    /* Posiciones sobre el mapa Robinson */
+    .location-spain {
+      left: 46.4%;
+      top: 43.5%;
+    }
+
+    .location-thailand {
+      left: 72.2%;
+      top: 52.5%;
+    }
+
+    .location-japan {
+      left: 84.5%;
+      top: 42.5%;
+    }
+
+    .map-selection {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + min(26vw, 390px));
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 2px;
+      opacity: .55;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .map-selection span {
+      display: block;
+      margin-top: 5px;
+      font-size: 8px;
+      letter-spacing: 1.3px;
+    }
+
+    .map-zoom-controls {
+      position: absolute;
+      right: 42px;
+      bottom: 32px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .map-zoom-controls button {
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: rgba(214,208,196,.65);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .map-zoom-controls button:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #mapZoomValue {
+      min-width: 42px;
+      text-align: center;
+      opacity: .65;
+    }
+
+    /* =========================
+       ESPACIO 3D
+    ========================= */
 
     .space {
       position: fixed;
@@ -47,6 +379,17 @@
       background:
         radial-gradient(ellipse at center, rgba(255,255,255,.17), transparent 62%),
         var(--paper);
+
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity .8s ease,
+        visibility .8s ease;
+    }
+
+    body.archive-open .space {
+      opacity: 1;
+      visibility: visible;
     }
 
     .space::before {
@@ -103,7 +446,10 @@
       border: 1px solid rgba(62,65,64,.55);
       box-shadow: 0 18px 35px rgba(62,65,64,.13);
       filter: saturate(.84) contrast(.96);
-      transition: border .25s ease, box-shadow .25s ease, transform .25s ease;
+      transition:
+        border .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
       cursor: default;
       pointer-events: auto;
       position: relative;
@@ -132,7 +478,10 @@
       pointer-events: none;
     }
 
-    /* MODO GRILLA 2D */
+    /* =========================
+       MODO GRILLA 2D
+    ========================= */
+
     body.grid-view {
       overflow-y: auto;
     }
@@ -170,15 +519,25 @@
     }
 
     @keyframes fadeInGrid {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     body.grid-view .space::after {
       display: none;
     }
 
-    /* INTERFAZ */
+    /* =========================
+       INTERFAZ 3D
+    ========================= */
+
     .interface {
       position: fixed;
       inset: 0;
@@ -191,13 +550,36 @@
       font-size: 10px;
       line-height: 16px;
       letter-spacing: 1.5px;
+
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity .8s ease,
+        visibility .8s ease;
     }
 
-    .brand { display: flex; flex-direction: column; gap: 7px; }
-    .brand strong { font-size: 21px; font-weight: normal; letter-spacing: 4px; }
-    .muted { opacity: .62; }
+    body.archive-open .interface {
+      opacity: 1;
+      visibility: visible;
+    }
 
-    .right { text-align: right; pointer-events: auto; }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: -10px;
+    }
+
+    .brand strong {
+      font-size: 21px;
+      font-weight: normal;
+      letter-spacing: 4px;
+    }
+
+    .right {
+      text-align: right;
+      pointer-events: auto;
+    }
 
     .toggle-btn {
       background: transparent;
@@ -209,7 +591,10 @@
       letter-spacing: 1.5px;
       cursor: pointer;
       margin-top: 8px;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
     }
 
     .toggle-btn:hover {
@@ -232,14 +617,33 @@
       opacity: .62;
       pointer-events: none;
       animation: breathe 2.8s ease-in-out infinite;
+
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity .8s ease,
+        visibility .8s ease;
+    }
+
+    body.archive-open .hint {
+      visibility: visible;
+      opacity: .62;
     }
 
     @keyframes breathe {
-      0%, 100% { opacity: .38; }
-      50% { opacity: .82; }
+      0%, 100% {
+        opacity: .38;
+      }
+
+      50% {
+        opacity: .82;
+      }
     }
 
-    /* VENTANA MODAL (FICHA TÉCNICA) */
+    /* =========================
+       VENTANA MODAL
+    ========================= */
+
     .modal {
       position: fixed;
       inset: 0;
@@ -270,7 +674,7 @@
       background: var(--paper);
       border: 2px solid var(--ink);
       padding: 24px;
-      max-width: 90vw;
+      max-width: 40vw;
       max-height: 88vh;
       width: 520px;
       display: flex;
@@ -380,75 +784,374 @@
       text-overflow: ellipsis;
     }
 
-    @media (max-width: 600px) {
-      .interface { padding: 20px 18px; font-size: 8px; }
-      .brand strong { font-size: 16px; letter-spacing: 3px; }
-      .right { max-width: 150px; }
-      .space::before { inset: 7vh 18px; }
-      .photo { width: clamp(135px, 42vw, 220px); }
-      .hint { bottom: 20px; font-size: 8px; }
-      .modal-card { padding: 18px; width: 92vw; }
-      .photo-spec-grid { grid-template-columns: 1fr; gap: 8px; }
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1920px) {
+      .map-interface,
+      .interface {
+        padding: 20px 18px;
+        font-size: 8px;
+      }
+
+      .map-brand strong,
+      .brand strong {
+        font-size: 16px;
+        letter-spacing: 3px;
+      }
+
+      .map-zoom-controls {
+        right: 18px;
+        bottom: 20px;
+      }
+
+      .map-container {
+        width: 91vw;
+      }
+
+      .map-selection {
+        top: 76%;
+      }
+
+      .location-label {
+        font-size: 8px;
+      }
+
+      .location-spain {
+        left: 46%;
+        top: 23%;
+      }
+
+      .location-thailand {
+        left: 74.6%;
+        top: 41%;
+      }
+
+      .location-japan {
+        left: 83.3%;
+        top: 27.3%;
+      }
+
+      .right {
+        max-width: 150px;
+      }
+
+      .space::before {
+        inset: 7vh 18px;
+      }
+
+      .photo {
+        width: clamp(135px, 42vw, 220px);
+      }
+
+      .hint {
+        bottom: 20px;
+        font-size: 8px;
+      }
+
+      .modal-card {
+        padding: 18px;
+        width: 92vw;
+      }
+
+      .photo-spec-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <main class="space" id="space" aria-label="Archivo fotográfico en movimiento">
+
+  <!-- =========================
+       MAPA MUNDIAL
+  ========================= -->
+
+  <section class="world-map" id="worldMap">
+
+    <div class="map-interface">
+      <div class="map-brand">
+        <span class="muted">BAV / PHOTOGRAPHIC ARCHIVE</span>
+        <strong>BEEN IN FOCUS</strong>
+      </div>
+
+      <div class="muted">
+        WORLD ARCHIVE<br>
+        03 LOCATIONS<br>
+        UNIT 05
+      </div>
+    </div>
+
+    <div class="map-container">
+
+      <img
+        class="map-image"
+        src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Blank_world_map_Robinson_projection.svg"
+        alt="Mapa mundial"
+        draggable="false"
+      >
+
+      <!-- ESPAÑA -->
+      <button
+        class="location location-spain"
+        id="locationSpain"
+        type="button"
+        aria-label="España"
+      >
+        <span class="location-dot"></span>
+        <span class="location-label">
+          SPAIN <span class="location-code">ES</span>
+        </span>
+      </button>
+
+      <!-- TAILANDIA -->
+      <button
+        class="location location-thailand"
+        id="locationThailand"
+        type="button"
+        aria-label="Tailandia"
+      >
+        <span class="location-dot"></span>
+        <span class="location-label">
+          THAILAND <span class="location-code">TH</span>
+        </span>
+      </button>
+
+      <!-- JAPÓN -->
+      <button
+        class="location location-japan"
+        id="locationJapan"
+        type="button"
+        aria-label="Japón — entrar al archivo"
+      >
+        <span class="location-dot"></span>
+        <span class="location-label">
+          JAPAN <span class="location-code">JP</span>
+        </span>
+      </button>
+
+    </div>
+
+    <div class="map-zoom-controls">
+      <button id="mapZoomOut" type="button">−</button>
+      <span id="mapZoomValue">100%</span>
+      <button id="mapZoomIn" type="button">+</button>
+    </div>
+
+    <div class="map-selection" id="mapStatus">
+      SELECT ARCHIVE LOCATION
+      <span>03 LOCATIONS / 01 ACTIVE</span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ESPACIO 3D
+  ========================= -->
+
+  <main
+    class="space"
+    id="space"
+    aria-label="Archivo fotográfico en movimiento"
+  >
     <div class="scene" id="scene"></div>
   </main>
 
+
+  <!-- =========================
+       INTERFAZ 3D
+  ========================= -->
+
   <header class="interface">
+
     <div class="brand">
       <span class="muted">BAV / PHOTOGRAPHIC ARCHIVE</span>
       <strong>BEEN IN FOCUS</strong>
     </div>
+
     <div class="right">
       <div class="muted">
         CONTACT SHEET / 3D SPACE<br>
         SCROLL TO TRAVEL<br>
         UNIT 05
       </div>
-      <button class="toggle-btn" id="modeToggle">MODE: 3D SPACE</button>
+
+      <button class="toggle-btn" id="modeToggle">
+        MODE: 3D SPACE
+      </button>
     </div>
+
   </header>
 
-  <div class="hint" id="hint">SCROLL / DRAG TO TRAVEL</div>
 
-  <!-- VENTANA MODAL -->
-  <div class="modal" id="photoModal" aria-hidden="true">
-    <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="hint" id="hint">
+    SCROLL / DRAG TO TRAVEL
+  </div>
+
+
+  <!-- =========================
+       VENTANA MODAL
+  ========================= -->
+
+  <div
+    class="modal"
+    id="photoModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+    ></div>
+
     <div class="modal-card">
-      <button class="modal-close" id="modalClose">&times;</button>
+
+      <button
+        class="modal-close"
+        id="modalClose"
+      >
+        &times;
+      </button>
+
       <div class="modal-img-container">
-        <img id="modalImg" src="" alt="Fotografía ampliada">
+        <img
+          id="modalImg"
+          src=""
+          alt="Fotografía ampliada"
+        >
       </div>
-      <div class="modal-title" id="modalTitle">FRAME 000</div>
-      
+
+      <div
+        class="modal-title"
+        id="modalTitle"
+      >
+        FRAME 000
+      </div>
+
       <div class="photo-meta-block">
-        <p class="photo-phrase" id="modalPhrase">"Frase descriptiva..."</p>
+
+        <p
+          class="photo-phrase"
+          id="modalPhrase"
+        >
+          "Frase descriptiva..."
+        </p>
+
         <div class="photo-spec-grid">
+
           <div class="photo-spec-item">
             <span class="photo-spec-label">LOC</span>
-            <span class="photo-spec-value" id="modalLoc">--</span>
+            <span
+              class="photo-spec-value"
+              id="modalLoc"
+            >
+              --
+            </span>
           </div>
+
           <div class="photo-spec-item">
             <span class="photo-spec-label">DATE</span>
-            <span class="photo-spec-value" id="modalDate">--</span>
+            <span
+              class="photo-spec-value"
+              id="modalDate"
+            >
+              --
+            </span>
           </div>
+
           <div class="photo-spec-item">
             <span class="photo-spec-label">CAM</span>
-            <span class="photo-spec-value" id="modalCam">--</span>
+            <span
+              class="photo-spec-value"
+              id="modalCam"
+            >
+              --
+            </span>
           </div>
+
         </div>
       </div>
 
     </div>
   </div>
 
+
   <script>
-    const myPhotos = [
+
+    /* =========================
+       MAPA → ARCHIVO 3D
+    ========================= */
+
+    const worldMap = document.querySelector('#worldMap');
+    const locationJapan = document.querySelector('#locationJapan');
+    const locationSpain = document.querySelector('#locationSpain');
+    const locationThailand = document.querySelector('#locationThailand');
+    const mapStatus = document.querySelector('#mapStatus');
+
+    let mapStatusResetTimer;
+
+    function showDevelopmentMessage(location) {
+      clearTimeout(mapStatusResetTimer);
+
+      mapStatus.innerHTML = `
+        ${location} / ARCHIVE IN DEVELOPMENT
+        <span>LOCATION REGISTERED / NO ACTIVE FRAMES</span>
+      `;
+
+      mapStatusResetTimer = setTimeout(() => {
+        mapStatus.innerHTML = `
+          SELECT ARCHIVE LOCATION
+          <span>03 LOCATIONS / 01 ACTIVE</span>
+        `;
+      }, 1800);
+    }
+
+    function enterArchive(name, archiveNumber, photos) {
+      clearTimeout(mapStatusResetTimer);
+      document.body.classList.remove('grid-view');
+      isGridView = false;
+      modeToggle.innerText = 'MODE: 3D SPACE';
+      hint.style.display = 'block';
+      activePhotos = photos;
+      rebuildPhotoSpace();
+      document.body.classList.add('archive-open');
+
+      mapStatus.innerHTML = `
+        ${name} / ARCHIVE ${archiveNumber}
+        <span>LOADING PHOTOGRAPHIC SPACE</span>
+      `;
+
+      mapStatusResetTimer = setTimeout(() => {
+        mapStatus.innerHTML = `
+          SELECT ARCHIVE LOCATION
+          <span>03 LOCATIONS / 02 ACTIVE</span>
+        `;
+      }, 900);
+    }
+
+    locationSpain.addEventListener('click', () => {
+      showDevelopmentMessage('SPAIN');
+    });
+
+    locationThailand.addEventListener('click', () => {
+      enterArchive('THAILAND', '02', thailandPhotos);
+    });
+
+    locationJapan.addEventListener('click', () => {
+      enterArchive('JAPAN', '01', japanPhotos);
+    });
+
+
+    /* =========================
+       FOTOGRAFÍAS
+    ========================= */
+
+    const japanPhotos = [
       {
-        id: '001',
+        id: 'JP-001',
         src: 'img/book/book64.jpg',
         phrase: 'Amanecer sobre la costa vasca.',
         location: 'SAN SEBASTIÁN',
@@ -488,7 +1191,7 @@
         camera: 'CONTAX T2'
       },
       {
-        id: '005',
+        id: '006',
         src: 'img/book/book20.jpg',
         phrase: 'Luz filtrada entre edificios.',
         location: 'TOKYO',
@@ -496,38 +1199,96 @@
         camera: 'CONTAX T2'
       },
       {
-        id: '005',
+        id: '007',
         src: 'img/book/book26.JPEG',
         phrase: 'Luz filtrada entre edificios.',
         location: 'TOKYO',
         date: '19 FEB 2026',
         camera: 'CONTAX T2'
-       },
-       {
-         id: '005',
-         src: 'img/book/book51.JPEG',
-         phrase: 'Luz filtrada entre edificios.',
-         location: 'TOKYO',
-         date: '19 FEB 2026',
-         camera: 'CONTAX T2'
-        },
-        {
-          id: '005',
-          src: 'img/book/book11.jpg',
-          phrase: 'Luz filtrada entre edificios.',
-          location: 'TOKYO',
-          date: '19 FEB 2026',
-          camera: 'CONTAX T2'
-        },
-        {
-          id: '005',
-          src: 'img/book/book6.jpg',
-          phrase: 'Luz filtrada entre edificios.',
-          location: 'TOKYO',
-          date: '19 FEB 2026',
-          camera: 'CONTAX T2'
-        }
+      },
+      {
+        id: '008',
+        src: 'img/book/book51.JPEG',
+        phrase: 'Luz filtrada entre edificios.',
+        location: 'TOKYO',
+        date: '19 FEB 2026',
+        camera: 'CONTAX T2'
+      },
+      {
+        id: '009',
+        src: 'img/book/book11.jpg',
+        phrase: 'Luz filtrada entre edificios.',
+        location: 'TOKYO',
+        date: '19 FEB 2026',
+        camera: 'CONTAX T2'
+      },
+      {
+        id: 'JP-010',
+        src: 'img/book/book6.jpg',
+        phrase: 'Luz filtrada entre edificios.',
+        location: 'TOKYO',
+        date: '19 FEB 2026',
+        camera: 'CONTAX T2'
+      }
     ];
+
+    const thailandPhotos = [
+      {
+        id: 'TH-001',
+        src: 'img/thailand/thailand1.jpg',
+        phrase: 'Luz cálida sobre el mercado al amanecer.',
+        location: 'BANGKOK',
+        date: '06 MAR 2026',
+        camera: 'NIKON F3 · 50MM'
+      },
+      {
+        id: 'TH-002',
+        src: 'img/thailand/thailand2.jpg',
+        phrase: 'Silencio azul en la costa.',
+        location: 'PHUKET',
+        date: '09 MAR 2026',
+        camera: 'PENTAX 67'
+      },
+      {
+        id: 'TH-003',
+        src: 'img/thailand/thailand3.jpg',
+        phrase: 'Formas y sombras en el templo.',
+        location: 'CHIANG MAI',
+        date: '12 MAR 2026',
+        camera: 'FUJIFILM X100V'
+      },
+      {
+        id: 'TH-004',
+        src: 'img/thailand/thailand4.jpg',
+        phrase: 'Reflejos entre la lluvia tropical.',
+        location: 'BANGKOK',
+        date: '15 MAR 2026',
+        camera: 'LEICA Q2'
+      },
+      {
+        id: 'TH-005',
+        src: 'img/thailand/thailand5.jpg',
+        phrase: 'Horizonte abierto sobre el mar.',
+        location: 'KRABI',
+        date: '18 MAR 2026',
+        camera: 'CONTAX T2'
+      },
+      {
+        id: 'TH-006',
+        src: 'img/thailand/thailand6.jpg',
+        phrase: 'Una pausa en la calle.',
+        location: 'AYUTTHAYA',
+        date: '21 MAR 2026',
+        camera: 'OLYMPUS OM-1'
+      }
+    ];
+
+    const myPhotos = japanPhotos;
+
+
+    /* =========================
+       VARIABLES 3D
+    ========================= */
 
     const scene = document.querySelector('#scene');
     const modeToggle = document.querySelector('#modeToggle');
@@ -543,238 +1304,896 @@
     const modalDate = document.querySelector('#modalDate');
     const modalCam = document.querySelector('#modalCam');
 
-    const totalPhotos = myPhotos.length;
-    const depth = 1000 * Math.max(totalPhotos, 5);
-    const cards = [];
+    const mapContainer = document.querySelector('.map-container');
+    const mapZoomIn = document.querySelector('#mapZoomIn');
+    const mapZoomOut = document.querySelector('#mapZoomOut');
+    const mapZoomValue = document.querySelector('#mapZoomValue');
+
+    let mapZoom = 1;
+
+    const minMapZoom = 1;
+    const maxMapZoom = 2.5;
+    const mapZoomStep = 0.1;
+
+    let mapPanX = 0;
+    let mapPanY = 0;
+
+    let isDraggingMap = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let panStartX = 0;
+    let panStartY = 0;
+
+    function updateMapTransform() {
+      mapContainer.style.setProperty(
+        '--map-zoom',
+        mapZoom
+      );
+
+      mapContainer.style.setProperty(
+        '--map-pan-x',
+        `${mapPanX}px`
+      );
+
+      mapContainer.style.setProperty(
+        '--map-pan-y',
+        `${mapPanY}px`
+      );
+
+      mapZoomValue.textContent =
+        `${Math.round(mapZoom * 100)}%`;
+    }
+
+    function limitMapPan() {
+      const maxPanX =
+        (mapZoom - 1) * viewportWidth * 0.45;
+
+      const maxPanY =
+        (mapZoom - 1) * viewportHeight * 0.45;
+
+      mapPanX =
+        Math.max(
+          -maxPanX,
+          Math.min(maxPanX, mapPanX)
+        );
+
+      mapPanY =
+        Math.max(
+          -maxPanY,
+          Math.min(maxPanY, mapPanY)
+        );
+    }
+
+    function setMapZoom(newZoom) {
+
+      mapZoom =
+        Math.max(
+          minMapZoom,
+          Math.min(maxMapZoom, newZoom)
+        );
+
+      if (mapZoom === 1) {
+        mapPanX = 0;
+        mapPanY = 0;
+      } else {
+        limitMapPan();
+      }
+
+      updateMapTransform();
+    }
+
+
+    mapZoomIn.addEventListener('click', () => {
+      setMapZoom(mapZoom + mapZoomStep);
+    });
+
+
+    mapZoomOut.addEventListener('click', () => {
+      setMapZoom(mapZoom - mapZoomStep);
+    });
+
+
+    worldMap.addEventListener(
+      'wheel',
+      event => {
+
+        if (
+          event.target.closest('.location') ||
+          event.target.closest('.map-zoom-controls') ||
+          document.body.classList.contains('archive-open')
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        if (event.deltaY < 0) {
+          setMapZoom(mapZoom + mapZoomStep);
+        } else {
+          setMapZoom(mapZoom - mapZoomStep);
+        }
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================
+      ARRASTRAR MAPA
+    ========================= */
+
+    mapContainer.addEventListener(
+      'pointerdown',
+      event => {
+
+        if (
+          mapZoom <= 1 ||
+          event.target.closest('.location')
+        ) {
+          return;
+        }
+
+        isDraggingMap = true;
+
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
+
+        panStartX = mapPanX;
+        panStartY = mapPanY;
+
+        mapContainer.classList.add('dragging');
+
+        mapContainer.setPointerCapture(event.pointerId);
+      }
+    );
+
+
+    mapContainer.addEventListener(
+      'pointermove',
+      event => {
+
+        if (!isDraggingMap) {
+          return;
+        }
+
+        mapPanX =
+          panStartX +
+          (event.clientX - dragStartX);
+
+        mapPanY =
+          panStartY +
+          (event.clientY - dragStartY);
+
+        limitMapPan();
+        updateMapTransform();
+      }
+    );
+
+
+    function stopMapDragging(event) {
+
+      if (!isDraggingMap) {
+        return;
+      }
+
+      isDraggingMap = false;
+
+      mapContainer.classList.remove('dragging');
+
+      if (
+        event &&
+        mapContainer.hasPointerCapture(event.pointerId)
+      ) {
+        mapContainer.releasePointerCapture(event.pointerId);
+      }
+    }
+
+
+    mapContainer.addEventListener(
+      'pointerup',
+      stopMapDragging
+    );
+
+    mapContainer.addEventListener(
+      'pointercancel',
+      stopMapDragging
+    );
+
+    mapContainer.addEventListener(
+      'pointerleave',
+      event => {
+
+        if (
+          isDraggingMap &&
+          !mapContainer.hasPointerCapture(event.pointerId)
+        ) {
+          stopMapDragging(event);
+        }
+
+      }
+    );
+
+
+    updateMapTransform();
+
+    let activePhotos = japanPhotos;
+    let depth = 1000 * Math.max(activePhotos.length, 5);
+    let cards = [];
+
     let travel = 0;
     let targetTravel = 0;
+
     let viewportWidth = window.innerWidth;
     let viewportHeight = window.innerHeight;
+
     let isGridView = false;
     let isHoveringCard = false;
 
-    let targetTiltX = 0, targetTiltY = 0;
-    let tiltX = 0, tiltY = 0;
+    let targetTiltX = 0;
+    let targetTiltY = 0;
+
+    let tiltX = 0;
+    let tiltY = 0;
+
     let touchStartY = 0;
 
-    // REDUCCIÓN DEL RADIO PARA MANTENER LAS FOTOS CERCA DEL CENTRO
-    function getFixedPosition(index, total) {
-      const angle = (index / total) * Math.PI * 2;
-      const radiusX = 0.55; // Reducido de 0.65 a 0.30
-      const radiusY = 0.35; // Reducido de 0.45 a 0.22
-      
-      const x = Math.cos(angle * 2.5) * radiusX;
-      const y = Math.sin(angle * 1.8) * radiusY;
-      const rotation = ((index % 5) - 2) * 2.5;
 
-      return { x, y, rotation };
+    /* =========================
+       POSICIÓN DE LAS FOTOS
+    ========================= */
+
+    function getFixedPosition(index, total) {
+
+      const angle =
+        (index / total) * Math.PI * 2;
+
+      const radiusX = 0.55;
+      const radiusY = 0.35;
+
+      const x =
+        Math.cos(angle * 2.5) * radiusX;
+
+      const y =
+        Math.sin(angle * 1.8) * radiusY;
+
+      const rotation =
+        ((index % 5) - 2) * 2.5;
+
+      return {
+        x,
+        y,
+        rotation
+      };
+    }
+
+
+    /* =========================
+       CREAR FOTOS
+    ========================= */
+
+    function rebuildPhotoSpace() {
+      scene.replaceChildren();
+      cards = [];
+      depth = 1000 * Math.max(activePhotos.length, 5);
+      travel = 0;
+      targetTravel = 0;
+      createPhotos();
     }
 
     function createPhotos() {
-      const fragment = document.createDocumentFragment();
 
-      myPhotos.forEach((photoData, i) => {
-        const figure = document.createElement('figure');
-        const image = document.createElement('img');
+      const fragment =
+        document.createDocumentFragment();
+
+      activePhotos.forEach((photoData, i) => {
+
+        const figure =
+          document.createElement('figure');
+
+        const image =
+          document.createElement('img');
 
         image.src = photoData.src;
-        image.alt = `Fotografía de archivo ${photoData.id}`;
+
+        image.alt =
+          `Fotografía de archivo ${photoData.id}`;
+
         image.onerror = () => {
-          image.src = `https://via.placeholder.com/600x750/3e4140/d6d0c4?text=FRAME+${photoData.id}`;
+
+          image.onerror = null;
+          image.src =
+            `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+              `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750"><rect width="600" height="750" fill="#3e4140"/><text x="300" y="375" fill="#d6d0c4" font-family="Courier New, monospace" font-size="32" text-anchor="middle">FRAME ${photoData.id}</text></svg>`
+            )}`;
+
         };
 
         figure.className = 'photo';
-        figure.dataset.label = `FRAME ${photoData.id} / ARCHIVE`;
+
+        figure.dataset.label =
+          `FRAME ${photoData.id} / ARCHIVE`;
+
         figure.appendChild(image);
+
         fragment.appendChild(figure);
 
-        figure.addEventListener('mouseenter', () => {
-          if (figure.classList.contains('clickable')) {
-            isHoveringCard = true;
-          }
-        });
-        figure.addEventListener('mouseleave', () => {
-          isHoveringCard = false;
-        });
 
-        const pos = getFixedPosition(i, totalPhotos);
+        figure.addEventListener(
+          'mouseenter',
+          () => {
+
+            if (
+              figure.classList.contains('clickable')
+            ) {
+              isHoveringCard = true;
+            }
+
+          }
+        );
+
+
+        figure.addEventListener(
+          'mouseleave',
+          () => {
+            isHoveringCard = false;
+          }
+        );
+
+
+                const pos =
+          getFixedPosition(i, activePhotos.length);
+
 
         cards.push({
           element: figure,
           image: photoData,
           x: pos.x,
           y: pos.y,
-          z: (i / totalPhotos) * depth,
+          z: (i / activePhotos.length) * depth,
           rotation: pos.rotation
         });
+
       });
 
       scene.appendChild(fragment);
     }
 
+
+    /* =========================
+       RESIZE
+    ========================= */
+
     function resize() {
-      viewportWidth = window.innerWidth;
-      viewportHeight = window.innerHeight;
+
+      viewportWidth =
+        window.innerWidth;
+
+      viewportHeight =
+        window.innerHeight;
     }
 
+
+    /* =========================
+       RENDER 3D
+    ========================= */
+
     function render() {
+
       if (!isGridView) {
-        travel += (targetTravel - travel) * .075;
 
-        const activeTargetTiltX = isHoveringCard ? 0 : targetTiltX;
-        const activeTargetTiltY = isHoveringCard ? 0 : targetTiltY;
+        travel +=
+          (targetTravel - travel) * .075;
 
-        tiltX += (activeTargetTiltX - tiltX) * 0.08;
-        tiltY += (activeTargetTiltY - tiltY) * 0.08;
-        scene.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 
-        for (let i = 0; i < cards.length; i++) {
+        const activeTargetTiltX =
+          isHoveringCard
+            ? 0
+            : targetTiltX;
+
+        const activeTargetTiltY =
+          isHoveringCard
+            ? 0
+            : targetTiltY;
+
+
+        tiltX +=
+          (activeTargetTiltX - tiltX) * 0.08;
+
+        tiltY +=
+          (activeTargetTiltY - tiltY) * 0.08;
+
+
+        scene.style.transform =
+          `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+
+        for (
+          let i = 0;
+          i < cards.length;
+          i++
+        ) {
+
           const card = cards[i];
-          const distance = ((card.z - travel) % depth + depth) % depth;
-          const proximity = 1 - distance / depth;
-          
-          // CONVERGENCIA Y DESVANECIMIENTO CERCANO
-          // Las fotos se desvanecen suavemente antes de tocar los bordes de la pantalla (proximity > 0.82)
-          let opacity = Math.min(1, Math.max(0, (depth - distance) / 760));
+
+
+          const distance =
+            ((card.z - travel) % depth + depth) % depth;
+
+
+          const proximity =
+            1 - distance / depth;
+
+
+          let opacity =
+            Math.min(
+              1,
+              Math.max(
+                0,
+                (depth - distance) / 760
+              )
+            );
+
+
           if (proximity > 0.35) {
-            opacity = Math.max(0, (1 - proximity) / 0.03);
+
+            opacity =
+              Math.max(
+                0,
+                (1 - proximity) / 0.03
+              );
           }
 
-          const isVisible = opacity > 0.01;
+
+          const isVisible =
+            opacity > 0.01;
+
 
           if (!isVisible) {
-            if (card.element.style.visibility !== 'hidden') {
-              card.element.style.visibility = 'hidden';
-              card.element.style.pointerEvents = 'none';
-              card.element.classList.remove('clickable');
+
+            if (
+              card.element.style.visibility !== 'hidden'
+            ) {
+
+              card.element.style.visibility =
+                'hidden';
+
+              card.element.style.pointerEvents =
+                'none';
+
+              card.element.classList.remove(
+                'clickable'
+              );
             }
+
             continue;
           }
 
-          const isClickable = proximity > 0.3 && proximity < 0.88;
+
+          const isClickable =
+            proximity > 0.3 &&
+            proximity < 0.88;
+
+
           if (isClickable) {
-            card.element.classList.add('clickable');
+
+            card.element.classList.add(
+              'clickable'
+            );
+
           } else {
-            card.element.classList.remove('clickable');
+
+            card.element.classList.remove(
+              'clickable'
+            );
           }
 
-          // La posición X e Y se atraen hacia el centro a medida que la imagen se acerca
-          const convergence = 1 - Math.pow(proximity, 1.5) * 0.42;
-          const x = card.x * viewportWidth * convergence;
-          const y = card.y * viewportHeight * convergence;
-          
-          const scale = .22 + proximity * 1.35;
-          const zIndex = Math.round(proximity * 1000);
 
-          card.element.style.visibility = 'visible';
-          card.element.style.pointerEvents = isClickable ? 'auto' : 'none';
+          const convergence =
+            1 -
+            Math.pow(proximity, 1.5) * 0.42;
+
+
+          const x =
+            card.x *
+            viewportWidth *
+            convergence;
+
+
+          const y =
+            card.y *
+            viewportHeight *
+            convergence;
+
+
+          const scale =
+            .22 +
+            proximity * 1.35;
+
+
+          const zIndex =
+            Math.round(proximity * 1000);
+
+
+          card.element.style.visibility =
+            'visible';
+
+          card.element.style.pointerEvents =
+            isClickable
+              ? 'auto'
+              : 'none';
+
+
           card.element.style.transform =
             `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${-distance}px) ` +
             `scale(${scale}) rotate(${card.rotation}deg)`;
-          card.element.style.opacity = opacity;
-          card.element.style.zIndex = zIndex;
+
+
+          card.element.style.opacity =
+            opacity;
+
+          card.element.style.zIndex =
+            zIndex;
         }
       }
+
 
       requestAnimationFrame(render);
     }
 
-    function openModal(cardData) {
-      modalImg.src = cardData.image.src;
-      modalTitle.innerText = cardData.element.dataset.label;
-      
-      modalPhrase.innerText = cardData.image.phrase ? `"${cardData.image.phrase}"` : '';
-      modalLoc.innerText = cardData.image.location || '--';
-      modalDate.innerText = cardData.image.date || '--';
-      modalCam.innerText = cardData.image.camera || '--';
 
-      photoModal.classList.add('active');
-      photoModal.setAttribute('aria-hidden', 'false');
+    /* =========================
+       MODAL
+    ========================= */
+
+    function openModal(cardData) {
+
+      modalImg.onerror = () => {
+        modalImg.onerror = null;
+        modalImg.src =
+          `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750"><rect width="600" height="750" fill="#3e4140"/><text x="300" y="375" fill="#d6d0c4" font-family="Courier New, monospace" font-size="32" text-anchor="middle">FRAME ${cardData.image.id}</text></svg>`
+          )}`;
+      };
+
+      modalImg.src =
+        cardData.image.src;
+
+      modalTitle.innerText =
+        cardData.element.dataset.label;
+
+      modalPhrase.innerText =
+        cardData.image.phrase
+          ? `"${cardData.image.phrase}"`
+          : '';
+
+      modalLoc.innerText =
+        cardData.image.location || '--';
+
+      modalDate.innerText =
+        cardData.image.date || '--';
+
+      modalCam.innerText =
+        cardData.image.camera || '--';
+
+
+      photoModal.classList.add(
+        'active'
+      );
+
+      photoModal.setAttribute(
+        'aria-hidden',
+        'false'
+      );
     }
+
 
     function closeModal() {
-      photoModal.classList.remove('active');
-      photoModal.setAttribute('aria-hidden', 'true');
+
+      photoModal.classList.remove(
+        'active'
+      );
+
+      photoModal.setAttribute(
+        'aria-hidden',
+        'true'
+      );
     }
 
-    scene.addEventListener('click', event => {
-      const photoEl = event.target.closest('.photo');
-      if (!photoEl) return;
 
-      if (isGridView || photoEl.classList.contains('clickable')) {
-        const card = cards.find(c => c.element === photoEl);
-        if (card) openModal(card);
+    scene.addEventListener(
+      'click',
+      event => {
+
+        const photoEl =
+          event.target.closest('.photo');
+
+        if (!photoEl) return;
+
+
+        if (
+          isGridView ||
+          photoEl.classList.contains('clickable')
+        ) {
+
+          const card =
+            cards.find(
+              c => c.element === photoEl
+            );
+
+          if (card) {
+            openModal(card);
+          }
+        }
       }
-    });
+    );
 
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
-    window.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeModal();
-    });
 
-    window.addEventListener('mousemove', event => {
-      if (isGridView) return;
-      const x = (event.clientX / viewportWidth) - 0.5;
-      const y = (event.clientY / viewportHeight) - 0.5;
-      targetTiltX = y * -3.5;
-      targetTiltY = x * 3.5;
-    });
+    modalClose.addEventListener(
+      'click',
+      closeModal
+    );
 
-    window.addEventListener('touchstart', event => {
-      if (isGridView) return;
-      touchStartY = event.touches[0].clientY;
-    }, { passive: true });
+    modalOverlay.addEventListener(
+      'click',
+      closeModal
+    );
 
-    window.addEventListener('touchmove', event => {
-      if (isGridView) return;
-      const touchY = event.touches[0].clientY;
-      const deltaY = touchStartY - touchY;
-      touchStartY = touchY;
-      targetTravel += deltaY * 5;
-    }, { passive: true });
 
-    window.addEventListener('deviceorientation', event => {
-      if (isGridView || !event.gamma || !event.beta) return;
-      targetTiltY = Math.min(Math.max(event.gamma, -10), 10) * 0.3;
-      targetTiltX = Math.min(Math.max(event.beta - 45, -10), 10) * -0.3;
-    }, true);
+    window.addEventListener(
+      'keydown',
+      event => {
 
-    window.addEventListener('wheel', event => {
-      if (isGridView) return;
-      event.preventDefault();
-      targetTravel -= event.deltaY * 1.05;
-    }, { passive: false });
+        if (event.key === 'Escape') {
+          closeModal();
+        }
 
-    modeToggle.addEventListener('click', () => {
-      isGridView = !isGridView;
-
-      if (isGridView) {
-        const sortedCards = [...cards].sort((a, b) => {
-          const distA = ((a.z - travel) % depth + depth) % depth;
-          const distB = ((b.z - travel) % depth + depth) % depth;
-          return distA - distB;
-        });
-
-        const fragment = document.createDocumentFragment();
-        sortedCards.forEach(card => fragment.appendChild(card.element));
-        scene.appendChild(fragment);
-
-        document.body.classList.add('grid-view');
-        modeToggle.innerText = 'MODE: GRID 2D';
-        hint.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      } else {
-        document.body.classList.remove('grid-view');
-        modeToggle.innerText = 'MODE: 3D SPACE';
-        hint.style.display = 'block';
       }
-    });
+    );
 
-    window.addEventListener('resize', resize);
+
+    /* =========================
+       MOUSE
+    ========================= */
+
+    window.addEventListener(
+      'mousemove',
+      event => {
+
+        if (isGridView) return;
+
+
+        const x =
+          (event.clientX / viewportWidth) - 0.5;
+
+        const y =
+          (event.clientY / viewportHeight) - 0.5;
+
+
+        targetTiltX =
+          y * -3.5;
+
+        targetTiltY =
+          x * 3.5;
+      }
+    );
+
+
+    /* =========================
+       TOUCH
+    ========================= */
+
+    window.addEventListener(
+      'touchstart',
+      event => {
+
+        if (isGridView) return;
+
+        touchStartY =
+          event.touches[0].clientY;
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    window.addEventListener(
+      'touchmove',
+      event => {
+
+        if (isGridView) return;
+
+
+        const touchY =
+          event.touches[0].clientY;
+
+
+        const deltaY =
+          touchStartY - touchY;
+
+
+        touchStartY =
+          touchY;
+
+
+        targetTravel +=
+          deltaY * 5;
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    /* =========================
+       DEVICE ORIENTATION
+    ========================= */
+
+    window.addEventListener(
+      'deviceorientation',
+      event => {
+
+        if (
+          isGridView ||
+          !event.gamma ||
+          !event.beta
+        ) {
+          return;
+        }
+
+
+        targetTiltY =
+          Math.min(
+            Math.max(event.gamma, -10),
+            10
+          ) * 0.3;
+
+
+        targetTiltX =
+          Math.min(
+            Math.max(
+              event.beta - 45,
+              -10
+            ),
+            10
+          ) * -0.3;
+
+      },
+      true
+    );
+
+
+    /* =========================
+       SCROLL
+    ========================= */
+
+    window.addEventListener(
+      'wheel',
+      event => {
+
+        if (
+          isGridView ||
+          !document.body.classList.contains('archive-open')
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        targetTravel -=
+          event.deltaY * 1.05;
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================
+       3D / GRID
+    ========================= */
+
+    modeToggle.addEventListener(
+      'click',
+      () => {
+
+        isGridView =
+          !isGridView;
+
+
+        if (isGridView) {
+
+          const sortedCards =
+            [...cards].sort(
+              (a, b) => {
+
+                const distA =
+                  ((a.z - travel) % depth + depth) % depth;
+
+                const distB =
+                  ((b.z - travel) % depth + depth) % depth;
+
+                return distA - distB;
+              }
+            );
+
+
+          const fragment =
+            document.createDocumentFragment();
+
+
+          sortedCards.forEach(
+            card =>
+              fragment.appendChild(
+                card.element
+              )
+          );
+
+
+          scene.appendChild(
+            fragment
+          );
+
+
+          document.body.classList.add(
+            'grid-view'
+          );
+
+
+          modeToggle.innerText =
+            'MODE: GRID 2D';
+
+
+          hint.style.display =
+            'none';
+
+
+          window.scrollTo({
+            top: 0,
+            behavior: 'instant'
+          });
+
+
+        } else {
+
+          document.body.classList.remove(
+            'grid-view'
+          );
+
+
+          modeToggle.innerText =
+            'MODE: 3D SPACE';
+
+
+          hint.style.display =
+            'block';
+        }
+
+      }
+    );
+
+
+    /* =========================
+       INIT
+    ========================= */
+
+    window.addEventListener(
+      'resize',
+      resize
+    );
+
     createPhotos();
+
     resize();
+
     render();
+
   </script>
+
 </body>
 </html>
